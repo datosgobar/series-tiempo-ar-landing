@@ -1,0 +1,35 @@
+[
+  {
+    "id": "11.3_VIPAA_2004_M_31",
+    "title": "Nivel de actividad",
+    "download": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
+    "indicator": "EMAE",
+    "description": "Descripción del indicador",
+    "formatDate": "R/P1M",
+    "unitIndicator": "1000"
+  }, {
+    "id": "45.2_ECTDT_0_T_33",
+    "title": "Empleo e ingresos",
+    "download": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
+    "indicator": "Desempleo",
+    "description": "Descripción del indicador",
+    "formatDate": "R/P3M",
+    "unitIndicator": "%"
+  }, {
+    "id": "89.1_TIB_0_0_20",
+    "title": "Dinero y bancos",
+    "download": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
+    "indicator": "BADLAR",
+    "description": "Descripción del indicador",
+    "formatDate": "R/P1M",
+    "unitIndicator": "1"
+  }, {
+    "id": "115.3_TCRM_0_M_29",
+    "title": "Sector externo",
+    "download": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
+    "indicator": "TCRM",
+    "description": "Descripción del indicador",
+    "formatDate": "R/P1M",
+    "unitIndicator": "1"
+  }
+]

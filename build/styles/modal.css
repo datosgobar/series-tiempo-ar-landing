@@ -1,0 +1,964 @@
+/*
+  Producto: MODAL
+  Descripción: Sistema de modularización de contenido
+  Última actualización: 18.07.2017
+*/
+
+html {
+  font-size: 12px;
+
+  @media (--tablet) {
+    font-size: 14px;
+  }
+
+  @media (--large-desktop) {
+    font-size: 16px;
+  }
+}
+
+html,
+body {
+  font-family: Roboto;
+}
+
+/*
+    ----------------------------------------------- FlexBox Helpers - 07.07.2017
+*/
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-justify-between {
+  justify-content: space-between;
+}
+
+.flex-justify-around {
+  justify-content: space-around;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-align-between {
+  align-items: space-between;
+}
+
+.flex-align-around {
+  align-items: space-around;
+}
+
+.flex-align-start {
+  align-items: flex-start;
+}
+
+.flex-align-end {
+  align-items: flex-end;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/*
+    --------------------------------------------------------- Title - 06.07.2017
+*/
+
+.title {
+  color: var(--base);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+
+  @media (--tablet) {
+    text-align: left;
+  }
+}
+
+h1.title {
+  font-size: 2.5rem;
+}
+
+h2.title {
+  font-size: 2rem;
+}
+
+h3.title {
+  font-size: 1.75rem;
+}
+
+h4.title {
+  font-size: 1.5rem;
+}
+
+h5.title {
+  font-size: 1.25rem;
+}
+
+h6.title {
+  font-size: 1rem;
+}
+
+/*
+    ---------------------------------------------------- Containers - 06.07.2017
+*/
+
+.modalContainer {
+  background-color: white;
+  position: relative;
+  padding: 60px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  @media (--large-desktop) {
+    padding: 70px 0;
+  }
+}
+
+.modalResponsive {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  box-sizing: border-box;
+
+  @media (--tablet) {
+    max-width: 750px;
+  }
+
+  @media (--large-desktop) {
+    max-width: 1200px;
+  }
+}
+
+.cardContainer {
+  background: white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/*
+    ---------------------------------------------------- Paragraphs - 06.07.2017
+*/
+
+.paragraph {
+  text-align: center;
+  color: var(--base);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+
+  @media (--tablet) {
+    text-align: left;
+    font-size: 16px;
+  }
+
+  &.pSmall {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+  }
+
+  &.pBig {
+    font-size: 44px !important;
+    font-weight: 600 !important;
+  }
+
+  &.pFly {
+    text-align: center;
+    color: var(--base);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+
+    @media (--tablet) {
+      text-align: left;
+      font-size: 16px;
+    }
+  }
+}
+
+/*
+    ---------------------------------------------------- BreakLines - 06.07.2017
+*/
+
+.breakLine {
+  width: 100%;
+
+  & > hr {
+    margin: 0;
+    border: none;
+    height: 0.9rem;
+  }
+}
+
+/*
+    ----------------------------------------------------- Increment - 06.07.2017
+*/
+
+.increment {
+  text-align: center;
+  line-height: 1;
+
+  &.incrSmall {
+    font-size: 1rem;
+
+    @media (--xsmall) {
+      font-size: 1.5rem;
+    }
+
+    @media (--tablet) {
+      font-size: 2rem;
+    }
+  }
+
+  &.incrMedium {
+    font-size: 2rem;
+
+    @media (--xsmall) {
+      font-size: 3rem;
+    }
+
+    @media (--tablet) {
+      font-size: 4rem;
+    }
+  }
+
+  &.incrBig {
+    font-size: 4rem;
+
+    @media (--xsmall) {
+      font-size: 6rem;
+    }
+
+    @media (--tablet) {
+      font-size: 8rem;
+    }
+  }
+}
+
+/*
+    ----------------------------------------- Responsive Transforms - 06.07.2017
+*/
+
+.mod-line-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.mod-col-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  @media (--tablet) {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+.mod-col-line-reverse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+
+  @media (--tablet) {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+.mod-col-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  @media (--tablet) {
+    align-items: flex-start;
+  }
+}
+
+/*
+    ------------------------------------------ Container Transforms - 06.07.2017
+*/
+
+.child-1 > .subContainer,
+.child-1 > .cardContainer {
+  width: 100%;
+}
+
+.child-2 > .subContainer,
+.child-2 > .cardContainer {
+  width: 100%;
+
+  @media (--tablet) {
+    width: 45%;
+  }
+}
+
+.child-3 > .subContainer,
+.child-3 > .cardContainer {
+  width: 100%;
+
+  @media (--tablet) {
+    width: 30%;
+  }
+}
+
+.child-4 > .subContainer,
+.child-4 > .cardContainer {
+  width: 100%;
+
+  @media (--tablet) {
+    width: 22.5%;
+  }
+}
+
+/*
+    ------------------------------------------------ Others Helpers - 06.07.2017
+*/
+
+.max-width {
+  width: 100%;
+}
+
+.max-height {
+  height: 100%;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.strictCenter,
+.strictCenter > .modalResponsive {
+  align-items: center !important;
+  justify-content: center !important;
+
+  & > {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.onlyWeb {
+  display: none;
+
+  @media (--tablet) {
+    display: inherit;
+  }
+}
+
+.onlyMobile {
+  @media (--tablet) {
+    display: none;
+  }
+}
+
+/*
+    ------------------------------------------------------- Buttons - 07.07.2017
+*/
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  transition: background-color 0.25s ease-out;
+  width: 100%;
+  font-size: 14px;
+
+  @media (--xsmall) {
+    width: initial;
+  }
+
+  & > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    transition: background-color 0.25s ease-out;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.buttonBig {
+  padding: 1rem 2rem;
+}
+
+.buttonSmall {
+  padding: 0.5rem 1rem;
+}
+
+.buttonRound {
+  border-radius: 50px;
+
+  & > span {
+    border-radius: 50px;
+  }
+}
+
+.buttonSquare {
+  border-radius: 4px;
+
+  & > span {
+    border-radius: 4px;
+  }
+}
+
+.buttonCircle {
+  border-radius: 100%;
+
+  & > span {
+    border-radius: 100%;
+  }
+}
+
+.buttonCircleBig {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+}
+
+.buttonCircleSmall {
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+}
+
+/*
+    --------------------------------------------------------- Links - 07.07.2017
+*/
+
+.link {
+  outline: none;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.link-inline {
+  color: var(--gobarDark);
+  font-weight: 400;
+  margin: 0 auto 1rem;
+  transition: color 0.25s ease-out;
+
+  &:focus,
+  &:hover {
+    color: var(--gobarLigth);
+  }
+}
+
+.link-block {
+  width: 100%;
+
+  @media (--xsmall) {
+    width: initial;
+  }
+}
+
+/*
+    -------------------------------------------------- Share Module - 00.00.2017
+*/
+
+$menu-items: 3;
+
+@define-extend hamburger {
+  $width: 15px;
+  $height: 2px;
+
+  width: $width;
+  height: $height;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -$width/2;
+  margin-top: -$height/2;
+  transition: transform 200ms;
+}
+
+.modalShare {
+  $height: 50px;
+
+  width: calc(100% - 40px);
+  height: $height;
+  box-sizing: border-box;
+  text-align: right;
+  margin: 0 0 0 -80px;
+  padding: 0;
+  position: absolute;
+  top: 0 - $height - ((60 - $height) / 2);
+  right: 20px;
+  filter: url('#shadowed-goo');
+  transition: all 0.2s ease-in-out;
+
+  @media (--tablet) {
+    opacity: 0;
+  }
+
+  @media (--large-desktop) {
+    top: 0 - $height - ((70 - $height) / 2);
+  }
+
+  .share-open {
+    display: none;
+
+    &:checked {
+      & + .share-open-button {
+        transform: scale(0.5);
+
+        & .hamburger-1 {
+          transform: rotate(45deg);
+        }
+
+        & .hamburger-2 {
+          transform: scale(0.1, 1);
+        }
+
+        & .hamburger-3 {
+          transform: rotate(-45deg);
+        }
+      }
+
+      & ~ .share-item {
+        opacity: 1;
+
+        @for $i from 1 through $menu-items {
+          &:nth-child(#{$i+2}) {
+            transition-duration: 0.3s + (0.1s * $i);
+            transform: scale(0.9) translate3d(-60px * $i, 0, 0);
+          }
+        }
+      }
+    }
+  }
+
+  .share-open-button {
+    $width: 35px;
+    $height: 35px;
+
+    width: $width;
+    height: $height;
+    position: absolute;
+    top: (50 - $height) / 2;
+    margin-left: -$width;
+    line-height: $height;
+    text-align: center;
+    border-radius: 100%;
+    z-index: 2;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &.hamburger-dark {
+      border: 1px solid var(--base);
+
+      & > span {
+        background: var(--base);
+      }
+    }
+
+    &.hamburger-light {
+      border: 1px solid white;
+
+      & > span {
+        background: white;
+      }
+    }
+
+    & > .hamburger-1 {
+      @extend hamburger;
+
+      transform: translate3d(0, -5px, 0);
+    }
+
+    & > .hamburger-2 {
+      @extend hamburger;
+
+      transform: translate3d(0, 0, 0);
+    }
+
+    & > .hamburger-3 {
+      @extend hamburger;
+
+      transform: translate3d(0, 5px, 0);
+    }
+  }
+
+  .share-item {
+    $width: 35px;
+    $height: 35px;
+
+    width: $width;
+    height: $height;
+    position: absolute;
+    top: (50 - $height) / 2;
+    line-height: $height;
+    margin-left: -$width;
+    border-radius: 100%;
+    text-align: center;
+    transition: all 0.6s cubic-bezier(0.1, 0.1, 0.2, 1);
+    opacity: 0;
+
+    &:hover {
+      background-color: silver;
+      color: white;
+    }
+
+    @for $i from 1 through $menu-items {
+      &:nth-child(#{$i + 2}) {
+        transition-duration: 0.2s;
+      }
+    }
+  }
+}
+
+/*
+    ------------------------------------------ Share Embebed Module - 05.07.2017
+*/
+
+.embebedContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999999;
+  transition: all 0.2s ease-in-out;
+
+  & > input {
+    width: 320px;
+    padding: 14px;
+    border-radius: 4px;
+    border: none;
+  }
+}
+
+.embebedExit {
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    font-size: 30px;
+  }
+}
+
+/*
+    ------------------------------------------------ Charts Modules - 00.00.2017
+*/
+
+/*
+.horizontal_chart {
+  width: 100%;
+  position: relative;
+
+  & .barras {
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    margin-bottom: 5px;
+    transition: width 0.2s ease-in-out;
+    width: 0;
+  }
+
+  & .contenido {}
+}
+*/
+
+/*
+.modelo_grafico {
+  width: 100%;
+  height: 250px;
+  border: 1px solid orange;
+}
+*/
+
+/*
+.grafico_torta {
+  position: relative;
+  margin: 0 auto;
+
+  @media (--tablet) { margin: 0 0; }
+
+  .arco_fondo {
+    fill: rgba(0, 0, 0, 0.1);
+  }
+
+  .arco {
+    fill: $palette_3;
+  }
+
+  .torta_texto_contenedor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    & > span:nth-child(1) {
+      font-size: 80px;
+      line-height: 1;
+      color: $palette_3;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    & > span:nth-child(2) {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--base);
+      text-align: center;
+      width: 200px;
+      margin-top: 20px;
+    }
+  }
+}
+*/
+
+/*
+  Tipografías
+*/
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Thin-webfont.eot');
+  src: url('../fonts/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Thin-webfont.woff') format('woff'), url('../fonts/Roboto-Thin-webfont.ttf') format('truetype'), url('../fonts/Roboto-Thin-webfont.svg#Roboto') format('svg');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Thin';
+  src: url('../fonts/Roboto-Thin-webfont.eot');
+  src: url('../fonts/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Thin-webfont.woff') format('woff'), url('../fonts/Roboto-Thin-webfont.ttf') format('truetype'), url('../fonts/Roboto-Thin-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-ThinItalic-webfont.eot');
+  src: url('../fonts/Roboto-ThinItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-ThinItalic-webfont.woff') format('woff'), url('../fonts/Roboto-ThinItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-ThinItalic-webfont.svg#Roboto') format('svg');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto-ThinItalic';
+  src: url('../fonts/Roboto-ThinItalic-webfont.eot');
+  src: url('../fonts/Roboto-ThinItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-ThinItalic-webfont.woff') format('woff'), url('../fonts/Roboto-ThinItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-ThinItalic-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Light-webfont.eot');
+  src: url('../fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Light-webfont.woff') format('woff'), url('../fonts/Roboto-Light-webfont.ttf') format('truetype'), url('../fonts/Roboto-Light-webfont.svg#Roboto') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url('../fonts/Roboto-Light-webfont.eot');
+  src: url('../fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Light-webfont.woff') format('woff'), url('../fonts/Roboto-Light-webfont.ttf') format('truetype'), url('../fonts/Roboto-Light-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-LightItalic-webfont.eot');
+  src: url('../fonts/Roboto-LightItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-LightItalic-webfont.woff') format('woff'), url('../fonts/Roboto-LightItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-LightItalic-webfont.svg#Roboto') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto-LightItalic';
+  src: url('../fonts/Roboto-LightItalic-webfont.eot');
+  src: url('../fonts/Roboto-LightItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-LightItalic-webfont.woff') format('woff'), url('../fonts/Roboto-LightItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-LightItalic-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular-webfont.eot');
+  src: url('../fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Regular-webfont.woff') format('woff'), url('../fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('../fonts/Roboto-Regular-webfont.svg#Roboto') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../fonts/Roboto-Regular-webfont.eot');
+  src: url('../fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Regular-webfont.woff') format('woff'), url('../fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('../fonts/Roboto-Regular-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Italic-webfont.eot');
+  src: url('../fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Italic-webfont.woff') format('woff'), url('../fonts/Roboto-Italic-webfont.ttf') format('truetype'), url('../fonts/Roboto-Italic-webfont.svg#Roboto') format('svg');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto-RegularItalic';
+  src: url('../fonts/Roboto-Italic-webfont.eot');
+  src: url('../fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Italic-webfont.woff') format('woff'), url('../fonts/Roboto-Italic-webfont.ttf') format('truetype'), url('../fonts/Roboto-Italic-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Medium-webfont.eot');
+  src: url('../fonts/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Medium-webfont.woff') format('woff'), url('../fonts/Roboto-Medium-webfont.ttf') format('truetype'), url('../fonts/Roboto-Medium-webfont.svg#Roboto') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: url('../fonts/Roboto-Medium-webfont.eot');
+  src: url('../fonts/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Medium-webfont.woff') format('woff'), url('../fonts/Roboto-Medium-webfont.ttf') format('truetype'), url('../fonts/Roboto-Medium-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-MediumItalic-webfont.eot');
+  src: url('../fonts/Roboto-MediumItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-MediumItalic-webfont.woff') format('woff'), url('../fonts/Roboto-MediumItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-MediumItalic-webfont.svg#Roboto') format('svg');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto-MediumItalic';
+  src: url('../fonts/Roboto-MediumItalic-webfont.eot');
+  src: url('../fonts/Roboto-MediumItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-MediumItalic-webfont.woff') format('woff'), url('../fonts/Roboto-MediumItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-MediumItalic-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold-webfont.eot');
+  src: url('../fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Bold-webfont.woff') format('woff'), url('../fonts/Roboto-Bold-webfont.ttf') format('truetype'), url('../fonts/Roboto-Bold-webfont.svg#Roboto') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../fonts/Roboto-Bold-webfont.eot');
+  src: url('../fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Bold-webfont.woff') format('woff'), url('../fonts/Roboto-Bold-webfont.ttf') format('truetype'), url('../fonts/Roboto-Bold-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-BoldItalic-webfont.eot');
+  src: url('../fonts/Roboto-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-BoldItalic-webfont.woff') format('woff'), url('../fonts/Roboto-BoldItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-BoldItalic-webfont.svg#Roboto') format('svg');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto-BoldItalic';
+  src: url('../fonts/Roboto-BoldItalic-webfont.eot');
+  src: url('../fonts/Roboto-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-BoldItalic-webfont.woff') format('woff'), url('../fonts/Roboto-BoldItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-BoldItalic-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Black-webfont.eot');
+  src: url('../fonts/Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Black-webfont.woff') format('woff'), url('../fonts/Roboto-Black-webfont.ttf') format('truetype'), url('../fonts/Roboto-Black-webfont.svg#Roboto') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Black';
+  src: url('../fonts/Roboto-Black-webfont.eot');
+  src: url('../fonts/Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Black-webfont.woff') format('woff'), url('../fonts/Roboto-Black-webfont.ttf') format('truetype'), url('../fonts/Roboto-Black-webfont.svg#Roboto') format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-BlackItalic-webfont.eot');
+  src: url('../fonts/Roboto-BlackItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-BlackItalic-webfont.woff') format('woff'), url('../fonts/Roboto-BlackItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-BlackItalic-webfont.svg#Roboto') format('svg');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto-BlackItalic';
+  src: url('../fonts/Roboto-BlackItalic-webfont.eot');
+  src: url('../fonts/Roboto-BlackItalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-BlackItalic-webfont.woff') format('woff'), url('../fonts/Roboto-BlackItalic-webfont.ttf') format('truetype'), url('../fonts/Roboto-BlackItalic-webfont.svg#Roboto') format('svg');
+}

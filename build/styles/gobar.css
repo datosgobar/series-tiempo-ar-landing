@@ -1,0 +1,353 @@
+/*
+  Header and Footer styles
+*/
+
+body {
+  padding: 0;
+  position: relative;
+
+  @media (--tablet) {
+    padding: var(--headerHeight) 0 0 0;
+  }
+}
+
+a {
+  color: var(--gobarDark);
+  text-decoration: none !important;
+
+  &:focus,
+  &:hover {
+    color: var(--gobarLigth);
+  }
+}
+
+header#header {
+  background-color: white;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+  padding: 0;
+  width: 100%;
+  z-index: 10;
+
+  @media (--tablet) {
+    position: fixed;
+    top: 0;
+  }
+
+  & #header-share {
+
+    & span {
+      color: var(--gobarDark);
+      padding: 0px 10px;
+      margin: 0px;
+      font-size: 17px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 72px;
+    }
+
+    & a {
+      color: var(--gobarDark);
+      padding: 0px 0.3em;
+      margin: 0px;
+      font-size: 18px;
+      background-color: white;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 72px;
+
+      &:hover {
+        color: white;
+        background-color: var(--gobarDark);
+      }
+    }
+  }
+}
+
+footer#footer {
+  position: relative;
+  background-color: white;
+  box-shadow: 0 -2px 4px 0 rgba(220, 220, 220, 0.5);
+  padding: 0;
+  width: 100%;
+  padding: 20px 0;
+
+  @media (--tablet) {
+    padding: 50px 0;
+  }
+
+  & .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    @media (--tablet) {
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+
+    & .footer-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      @media (--tablet) {
+        align-items: flex-start;
+      }
+
+      & > div {
+        margin-bottom: 10px;
+      }
+    }
+    & .footer-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @media (--tablet) {
+        align-items: flex-start;
+        width: 200px;
+      }
+
+      & > a {
+        margin: 0 0 10px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  & .social-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px;
+    text-align: center;
+    width: 46px;
+    height: 46px;
+
+    &:hover {
+      background: var(--gobarDark);
+      color: white;
+    }
+
+    & > i {
+      font-size: 28px;
+    }
+  }
+
+
+  /*& p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  & #footer-spacer {
+    padding: 20px 0;
+
+    @media (--tablet) {
+      padding: 50px 0;
+    }
+
+    & .footer-section {
+      color: var(--gobarDark);
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+
+      @media (--tablet) {
+        text-align: left;
+      }
+
+      &.logo {
+        & img {
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
+
+        & a.social-link {
+          display: inline-block;
+          border-radius: 4px;
+          padding: 8px;
+          text-align: center;
+          width: 46px;
+          height: 46px;
+
+          &:hover {
+            background: var(--gobarDark);
+            color: white;
+          }
+
+          & i {
+            display: inline-block;
+            font-size: 28px;
+          }
+        }
+      }
+
+      &.links-internos a {
+        &:hover {
+          color: var(--gobarLigth);
+        }
+
+        &.ckan-anchor {
+          display: inline-block;
+          text-align: left;
+        }
+      }
+
+      &.links-externos {
+        & .ckan-link {
+          margin: 0;
+          color: var(--base);
+        }
+
+        & .ckan-name {
+          color: var(--gobarDark);
+
+          &:hover {
+            color: var(--gobarLigth);
+          }
+        }
+      }
+    }
+  }*/
+}
+
+footer#oldfooter {
+  background-color: white;
+  box-shadow: 0 -2px 4px 0 rgba(220, 220, 220, 0.5);
+  padding: 0;
+  width: 100%;
+  z-index: 10;
+
+  & p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  & #footer-spacer {
+    padding: 20px 0;
+
+    @media (--tablet) {
+      padding: 50px 0;
+    }
+
+    & .footer-section {
+      color: var(--gobarDark);
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+
+      @media (--tablet) {
+        text-align: left;
+      }
+
+      &.logo {
+        & img {
+          max-width: 300px;
+          margin-bottom: 20px;
+        }
+
+        & a.social-link {
+          display: inline-block;
+          border-radius: 4px;
+          padding: 8px;
+          text-align: center;
+          width: 46px;
+          height: 46px;
+
+          &:hover {
+            background: var(--gobarDark);
+            color: white;
+          }
+
+          & i {
+            display: inline-block;
+            font-size: 28px;
+          }
+        }
+      }
+
+      &.links-internos a {
+        &:hover {
+          color: var(--gobarLigth);
+        }
+
+        &.ckan-anchor {
+          display: inline-block;
+          text-align: left;
+        }
+      }
+
+      &.links-externos {
+        & .ckan-link {
+          margin: 0;
+          color: var(--base);
+        }
+
+        & .ckan-name {
+          color: var(--gobarDark);
+
+          &:hover {
+            color: var(--gobarLigth);
+          }
+        }
+      }
+    }
+  }
+}
+
+.logo-modernizacion {
+  width: 100%;
+  max-width: 300px;
+  height: 72px;
+}
+
+
+
+
+
+
+.restricted-max-width {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  @media (--tablet) {
+    max-width: 750px;
+  }
+
+  @media (--large-desktop) {
+    max-width: 1200px;
+  }
+
+  &::after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+.header-span-link {
+  color: var(--gobarDark);
+  font-size: 17px;
+  padding: 0 10px;
+  font-weight: 500;
+}
+
+.header-spacing {
+  padding: 0 20px;
+}

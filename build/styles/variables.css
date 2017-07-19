@@ -1,0 +1,19 @@
+:root {
+  --base: #767676;
+  --baseLight: #fafafa;
+  --baseDark: #444;
+  --gobarLigth: #17b2f8;
+  --gobarDark: #0695d6;
+  --palette1: #14499e;
+  --palette2: #27b5f6;
+  --palette3: #02d57a;
+  --palette4: #ff8140;
+  --palette5: #ffbb42;
+  --headerHeight: 72px;
+  --footerHeight: 230px;
+}
+
+@custom-media --xsmall (min-width: 460px);
+@custom-media --tablet (min-width: 768px);
+@custom-media --desktop (min-width: 992px);
+@custom-media --large-desktop (min-width: 1200px);
