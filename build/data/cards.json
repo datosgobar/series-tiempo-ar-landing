@@ -6,7 +6,7 @@
     "indicator": "EMAE",
     "description": "Descripción del indicador",
     "formatDate": "R/P1M",
-    "unitIndicator": "1000"
+    "unitIndicator": "%"
   }, {
     "id": "45.2_ECTDT_0_T_33",
     "title": "Empleo e ingresos",

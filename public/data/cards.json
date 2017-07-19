@@ -6,7 +6,7 @@
     "indicator": "EMAE",
     "description": "Descripción del indicador",
     "formatDate": "R/P1M",
-    "unitIndicator": "1000"
+    "unitIndicator": "%"
   }, {
     "id": "45.2_ECTDT_0_T_33",
     "title": "Empleo e ingresos",
@@ -21,7 +21,7 @@
     "download": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
     "indicator": "BADLAR",
     "description": "Descripción del indicador",
-    "formatDate": "R/P1M",
+    "formatDate": "R/P6M",
     "unitIndicator": "1"
   }, {
     "id": "115.3_TCRM_0_M_29",
