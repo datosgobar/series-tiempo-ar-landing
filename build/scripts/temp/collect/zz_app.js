@@ -132,6 +132,10 @@ const generateCharts = (element) => {
         .attr('class', 'context')
         .attr('transform', `translate(${ marginRange.left }, ${ marginRange.top })`);
 
+    console.log('hasta aca estamos sin errores');
+    console.log(chart);
+    console.log(chart.indicators.length);
+
     let data;
 
     chart.indicators.forEach((indicator) => {
@@ -140,9 +144,10 @@ const generateCharts = (element) => {
         v[0] = moment(v[0]);
         if (v[1] === null) { v[1] = 0 }
       });
-
+      console.log(data);
       drawLine(data);
     });
+
 
     function drawLine (data) {
       console.log('etapa1');

@@ -6,7 +6,13 @@
     "indicator": "EMAE",
     "description": "Descripción del indicador",
     "formatDate": "R/P1M",
-    "unitIndicator": "%"
+    "unitIndicator": "%",
+    "charts": [
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31", "11.3_VIPAA_2004_M_33"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_32"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_32"], "laps": "2"}
+    ]
   }, {
     "id": "45.2_ECTDT_0_T_33",
     "title": "Empleo e ingresos",
@@ -14,15 +20,27 @@
     "indicator": "Desempleo",
     "description": "Descripción del indicador",
     "formatDate": "R/P3M",
-    "unitIndicator": "%"
+    "unitIndicator": "%",
+    "charts": [
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"}
+    ]
   }, {
     "id": "89.1_TIB_0_0_20",
     "title": "Dinero y bancos",
     "download": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
     "indicator": "BADLAR",
     "description": "Descripción del indicador",
-    "formatDate": "R/P6M",
-    "unitIndicator": "1"
+    "formatDate": "R/P1M",
+    "unitIndicator": "1",
+    "charts": [
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"}
+    ]
   }, {
     "id": "115.3_TCRM_0_M_29",
     "title": "Sector externo",
@@ -30,6 +48,12 @@
     "indicator": "TCRM",
     "description": "Descripción del indicador",
     "formatDate": "R/P1M",
-    "unitIndicator": "1"
+    "unitIndicator": "1",
+    "charts": [
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"}
+    ]
   }
 ]
