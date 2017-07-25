@@ -3586,7 +3586,10 @@ footer#oldfooter #footer-spacer .footer-section.links-externos .ckan-name:hover 
 /*
   Producto: MODAL
   Descripción: Sistema de modularización de contenido
-  Última actualización: 18.07.2017
+  Última actualización: 24.07.2017
+  Últimas modificaciones:
+    - El tamaño tipográfico de los botones es de 1em.
+    - Se quito MAYUSCULAS en los botones.
 */
 
 html {
@@ -3627,10 +3630,8 @@ html, body {
           align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
 }
 
 .flex-column {
@@ -3936,10 +3937,8 @@ h6.title {
           align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
 }
 
 .mod-col-line {
@@ -3954,10 +3953,8 @@ h6.title {
           align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
 }
 
 @media (min-width: 768px) {
@@ -3985,10 +3982,8 @@ h6.title {
           align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: column-reverse nowrap;
+          flex-flow: column-reverse nowrap;
 }
 
 @media (min-width: 768px) {
@@ -4016,10 +4011,8 @@ h6.title {
           align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
 }
 
 @media (min-width: 768px) {
@@ -4129,7 +4122,7 @@ h6.title {
 }
 
 /*
-    ------------------------------------------------------- Buttons - 07.07.2017
+    ------------------------------------------------------- Buttons - 24.07.2017
 */
 
 .button {
@@ -4144,13 +4137,10 @@ h6.title {
           align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
   border: none;
   cursor: pointer;
-  text-transform: uppercase;
   outline: none;
   position: relative;
   margin: 0 auto;
@@ -4158,7 +4148,6 @@ h6.title {
   -webkit-transition: background-color 0.25s ease-out;
   transition: background-color 0.25s ease-out;
   width: 100%;
-  font-size: 14px;
 }
 
 @media (min-width: 460px) {
@@ -4180,10 +4169,8 @@ h6.title {
           align-items: center;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
   width: 100%;
   -webkit-transition: background-color 0.25s ease-out;
   transition: background-color 0.25s ease-out;

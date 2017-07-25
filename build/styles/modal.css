@@ -1,7 +1,10 @@
 /*
   Producto: MODAL
   Descripción: Sistema de modularización de contenido
-  Última actualización: 18.07.2017
+  Última actualización: 24.07.2017
+  Últimas modificaciones:
+    - El tamaño tipográfico de los botones es de 1em.
+    - Se quito MAYUSCULAS en los botones.
 */
 
 html {
@@ -29,8 +32,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
 }
 
 .flex-column {
@@ -268,16 +270,14 @@ h6.title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
 }
 
 .mod-col-line {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
 
   @media (--tablet) {
     justify-content: space-between;
@@ -289,8 +289,7 @@ h6.title {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column-reverse;
-  flex-wrap: nowrap;
+  flex-flow: column-reverse nowrap;
 
   @media (--tablet) {
     justify-content: space-between;
@@ -302,8 +301,7 @@ h6.title {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
 
   @media (--tablet) {
     align-items: flex-start;
@@ -396,25 +394,22 @@ h6.title {
 }
 
 /*
-    ------------------------------------------------------- Buttons - 07.07.2017
+    ------------------------------------------------------- Buttons - 24.07.2017
 */
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   border: none;
   cursor: pointer;
-  text-transform: uppercase;
   outline: none;
   position: relative;
   margin: 0 auto;
   padding: 0;
   transition: background-color 0.25s ease-out;
   width: 100%;
-  font-size: 14px;
 
   @media (--xsmall) {
     width: initial;
@@ -424,8 +419,7 @@ h6.title {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     width: 100%;
     transition: background-color 0.25s ease-out;
 

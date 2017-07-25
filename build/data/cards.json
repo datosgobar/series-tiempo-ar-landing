@@ -8,10 +8,10 @@
     "formatDate": "R/P1M",
     "unitIndicator": "%",
     "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31", "11.3_VIPAA_2004_M_33"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_32"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_32"], "laps": "2"}
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_31", "typeLine": "solid"}, {"name": "11.3_VIPAA_2004_M_33", "typeLine": "dashed"}], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_32", "typeLine": "solid"}], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_31", "typeLine": "solid"}], "laps": "2"},
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_32", "typeLine": "solid"}], "laps": "2"}
     ]
   }, {
     "id": "45.2_ECTDT_0_T_33",
@@ -22,10 +22,7 @@
     "formatDate": "R/P3M",
     "unitIndicator": "%",
     "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"}
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "45.2_ECTDT_0_T_33", "typeLine": "solid"}], "laps": "2"}
     ]
   }, {
     "id": "89.1_TIB_0_0_20",
@@ -36,10 +33,7 @@
     "formatDate": "R/P1M",
     "unitIndicator": "1",
     "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"}
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "89.1_TIB_0_0_20", "typeLine": "solid"}], "laps": "2"}
     ]
   }, {
     "id": "115.3_TCRM_0_M_29",
@@ -50,10 +44,7 @@
     "formatDate": "R/P1M",
     "unitIndicator": "1",
     "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": ["11.3_VIPAA_2004_M_31"], "laps": "2"}
+      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "115.3_TCRM_0_M_29", "typeLine": "solid"}], "laps": "2"}
     ]
   }
 ]
