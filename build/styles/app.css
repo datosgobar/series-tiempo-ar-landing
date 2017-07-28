@@ -1,0 +1,7 @@
+body {
+  background-color: var(--baseLight);
+  min-height: 100vh;
+  padding: 0;
+  max-width: 816px;
+  margin: 0 auto;
+}
