@@ -3,7 +3,7 @@
   Descripción: Sistema de modularización de contenido
   Última actualización: 24.07.2017
   Últimas modificaciones:
-    - El tamaño tipográfico de los botones es de 1em.
+    - Se modificó el tamaño tipográfico de los botones de 14px a 1rem.
     - Se quito MAYUSCULAS en los botones.
 */
 
@@ -410,6 +410,7 @@ h6.title {
   padding: 0;
   transition: background-color 0.25s ease-out;
   width: 100%;
+  font-size: 1rem;
 
   @media (--xsmall) {
     width: initial;

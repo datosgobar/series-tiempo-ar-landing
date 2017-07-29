@@ -3,48 +3,145 @@
     "id": "11.3_VIPAA_2004_M_31",
     "title": "Nivel de actividad",
     "download": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
-    "indicator": "EMAE",
-    "description": "Descripción del indicador",
-    "formatDate": "R/P1M",
-    "unitIndicator": "%",
+    "name": "EMAE",
+    "units_representation": "",
     "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_31", "typeLine": "solid"}, {"name": "11.3_VIPAA_2004_M_33", "typeLine": "dashed"}], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_32", "typeLine": "solid"}], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_31", "typeLine": "solid"}], "laps": "2"},
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "11.3_VIPAA_2004_M_32", "typeLine": "solid"}], "laps": "2"}
+      {
+        "title": "Producto Bruto Interno",
+        "type": "line",
+        "indicators": [
+          {
+            "id": "4.2_OGP_2004_T_17",
+            "name": "PBI",
+            "color": "#8b0000",
+            "type": "solid"
+          }
+        ],
+        "laps": "24"
+      },
+      {
+        "title": "Oferta y Demanda Globales por componente",
+        "type": "line",
+        "indicators": [
+          {
+            "id": "4.2_MGCP_2004_T_25",
+            "name": "Consumo Privado",
+            "color": "#8b0000",
+            "type": "solid"
+          },
+          {
+            "id": "4.2_DGCP_2004_T_30",
+            "name": "Consumo Publico",
+            "color": "#c52940",
+            "type": "dashed"
+          },
+          {
+            "id": "4.2_DGE_2004_T_26",
+            "name": "Exportaciones",
+            "color": "#ed645c",
+            "type": "solid"
+          },
+          {
+            "id": "4.2_VE_2004_T_21",
+            "name": "Variacion de Existencias",
+            "color": "#ffa474",
+            "type": "dashed"
+          },
+          {
+            "id": "4.2_DGIT_2004_T_25",
+            "name": "IBIF",
+            "color": "#ffe3af",
+            "type": "solid"
+          }
+        ],
+        "laps": "24"
+      },
+      {
+        "title": "Estimador mensual de la actividad económica",
+        "type": "line",
+        "indicators": [
+          {
+            "id": "11.3_ITC_2004_M_22",
+            "name": "EMAE Serie Tendencia Ciclo",
+            "color": "#8b0000",
+            "type": "solid"
+          },
+          {
+            "id": "11.3_ISD_2004_M_31",
+            "name": "EMAE Serie Desestacionalizada",
+            "color": "#c52940",
+            "type": "dashed"
+          }
+        ],
+        "laps": "24"
+      },
+      {
+        "title": "Actividad industrial y de la construcción",
+        "type": "line",
+        "indicators": [
+          {
+            "id": "12.3_E_2004_M_3",
+            "name": "EMI",
+            "color": "#8b0000",
+            "type": "solid"
+          },
+          {
+            "id": "33.2_I_2004_M_4",
+            "name": "ISAC",
+            "color": "#c52940",
+            "type": "dashed"
+          }
+        ],
+        "laps": "24"
+      }
     ]
-  }, {
+  },
+  {
     "id": "45.2_ECTDT_0_T_33",
     "title": "Empleo e ingresos",
     "download": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
-    "indicator": "Desempleo",
-    "description": "Descripción del indicador",
-    "formatDate": "R/P3M",
-    "unitIndicator": "%",
-    "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "45.2_ECTDT_0_T_33", "typeLine": "solid"}], "laps": "2"}
-    ]
-  }, {
-    "id": "89.1_TIB_0_0_20",
-    "title": "Dinero y bancos",
-    "download": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
-    "indicator": "BADLAR",
-    "description": "Descripción del indicador",
-    "formatDate": "R/P1M",
-    "unitIndicator": "1",
-    "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "89.1_TIB_0_0_20", "typeLine": "solid"}], "laps": "2"}
-    ]
-  }, {
+    "name": "Desempleo",
+    "units_representation": "%",
+    "charts": []
+  },
+  {
+    "id": "101.1_I2NG_2016_M_22",
+    "title": "Precios",
+    "download": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
+    "name": "IPC",
+    "units_representation": "",
+    "charts": []
+  },
+  {
     "id": "115.3_TCRM_0_M_29",
     "title": "Sector externo",
     "download": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
-    "indicator": "TCRM",
-    "description": "Descripción del indicador",
-    "formatDate": "R/P1M",
-    "unitIndicator": "1",
-    "charts": [
-      {"title": "Titulo del grafico", "type": "line", "indicators": [{"name": "115.3_TCRM_0_M_29", "typeLine": "solid"}], "laps": "2"}
-    ]
+    "name": "TCRM",
+    "units_representation": "",
+    "charts": []
+  },
+  {
+    "id": "142.3_TOTAL_2001_M_26",
+    "title": "Finanzas públicas",
+    "download": "http://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
+    "name": "Recursos tributarios",
+    "units_representation": "",
+    "charts": []
+  },
+  {
+    "id": "87.3_IGC_1980_M_27",
+    "title": "Economía Internacional",
+    "download": "http://www.mecon.gov.ar/download/infoeco/internacional_ied.xlsx",
+    "name": "Commodities",
+    "units_representation": "",
+    "charts": []
+  },
+  {
+    "id": "89.1_TIB_0_0_20",
+    "title": "Dinero y Bancos",
+    "download": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
+    "name": "BADLAR",
+    "units_representation": "%",
+    "charts": []
   }
 ]

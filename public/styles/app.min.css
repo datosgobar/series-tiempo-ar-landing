@@ -3588,7 +3588,7 @@ footer#oldfooter #footer-spacer .footer-section.links-externos .ckan-name:hover 
   Descripción: Sistema de modularización de contenido
   Última actualización: 24.07.2017
   Últimas modificaciones:
-    - El tamaño tipográfico de los botones es de 1em.
+    - Se modificó el tamaño tipográfico de los botones de 14px a 1rem.
     - Se quito MAYUSCULAS en los botones.
 */
 
@@ -4148,6 +4148,7 @@ h6.title {
   -webkit-transition: background-color 0.25s ease-out;
   transition: background-color 0.25s ease-out;
   width: 100%;
+  font-size: 1rem;
 }
 
 @media (min-width: 460px) {
@@ -4758,6 +4759,12 @@ body {
   padding: 0;
   max-width: 816px;
   margin: 0 auto;
+}
+
+#chartsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .odometer.odometer-auto-theme, .odometer.odometer-theme-minimal {

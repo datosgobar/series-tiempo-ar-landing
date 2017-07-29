@@ -32643,7 +32643,7 @@ return hooks;
 
 let gdata = {};
 
-// Global Functions
+// Esta función parsea el el formato de tipo de linea.
 ////////////////////////////////////////////////////////////////////////////////
 
 function proccessTypeLine(type) {
@@ -32654,12 +32654,14 @@ function proccessTypeLine(type) {
   }
 }
 
+// Esta renderiza los gráficos.
+////////////////////////////////////////////////////////////////////////////////
 
 function generateCharts(element) {
   // console.log('Se solicita generación de graficos ...');
 
   let id = element.getAttribute('id'),
-      chartsContainer = window.document.querySelector('#chartsContainer');
+      chartsContainer = window.document.querySelector('#chartsContainer .charts');
       chartsContainer.innerHTML = '';
 
   function downloadData(processData, renderChart) {
@@ -32672,22 +32674,29 @@ function generateCharts(element) {
         charts = card.charts;
 
         charts.forEach((chart) => {
+
           indicators = chart.indicators;
           count = 0;
           length = indicators.length - 1;
 
+          // var promises = [];
           indicators.forEach((indicator, index) => { // Se guarda información de cada indicador
-            if (!gdata[indicator.name]) {
+            // console.log(indicator);
+            if (!gdata[indicator.id]) {
               // console.log('download');
-              downloadFile(`./public/data/series/${ indicator.name }.json`, indicator.name).then(() => {
+              /*var promise = */downloadFile(`./public/data/series/${ indicator.id }.json`, indicator.id).then(() => {
                 // console.log('finish download');
-                if (length === count) { processData(chart, renderChart); } else { count++; /*console.log(count, '/', indicators.length); */}
+                // console.log(count);
+                // console.log(length);
+                if (length === count) { console.log('render');processData(chart, renderChart); } else { count++; console.log(count, '/', length);}
               });
+              // promises.push(promise)
             } else {
               // console.log('not download');
               if (length === count) { processData(chart, renderChart); } else { count++; /*console.log(count, '/', indicators.length); */}
             }
           });
+          // $.when.call(promises)
         });
       }
     });
@@ -32697,16 +32706,18 @@ function generateCharts(element) {
     // console.log('Process data ...');
     let group = {}, dataset = [], index;
 
+    console.log(chart);
     // Se agrupan indicadores
     chart.indicators.forEach((indicator) => {
-      gdata[indicator.name].forEach((value) => {
+      // console.log(indicator);
+      gdata[indicator.id].data.forEach((value) => {
+
         index = group[value[0]];
 
         if (index === undefined) {
-          group[value[0]] = { date: moment(value[0]).format('YYYYMMDD') };
+          group[value[0]] = { date: new Date(value[0]) };
         }
 
-        // group[value[0]][indicator.name] = (value[1] === null)?(0):(value[1]);
         group[value[0]][indicator.name] = value[1];
       });
     });
@@ -32720,8 +32731,6 @@ function generateCharts(element) {
   }
 
   function renderCharts(chart, data) {
-    // console.log('Draw chart ...');
-
     // Se agrega titulo
     let modulo = Modal.add.title({
       settings: {type: 'title2', text: chart.title},
@@ -32729,193 +32738,217 @@ function generateCharts(element) {
     });
     chartsContainer.appendChild(modulo);
 
-    // Se dibuja grafico
-    let marginChart = {top: 20, right: 20, bottom: 110, left: 50},
-        marginRange = {top: 430, right: 20, bottom: 30, left: 40},
-        width       = chartsContainer.getBoundingClientRect().width - marginChart.left - marginChart.right,
-        heightChart = 500 - marginChart.top - marginChart.bottom,
-        heightRange = 500 - marginRange.top - marginRange.bottom;
+    ////////////////////////////////////////////////////////////////////////////
+    // Render LineChart
+    ////////////////////////////////////////////////////////////////////////////
 
-    let parseDate = d3.timeParse("%Y%m%d");
+    // variables
+    ////////////////////////////////////////////////////////////////////////////
 
-    let xScaleChart = d3.scaleTime().range([0, width]),
-        xScaleRange = d3.scaleTime().range([0, width]),
-        yScaleChart = d3.scaleLinear().range([heightChart, 0]),
-        yScaleRange = d3.scaleLinear().range([heightRange, 0]);
+    let totalHeight = 500,
+        diffRangeY  = 1.1,
+        chartMargin = {top: 30, right: 50, bottom: 150, left: 50},
+        rangeMargin = {top: 410, right: 50, bottom: 30, left: 50};
 
-    let xAxisChart = d3.axisBottom(xScaleChart),
-        xAxisRange = d3.axisBottom(xScaleRange),
-        yAxisChart = d3.axisLeft(yScaleChart),
-        yAxisRange = d3.axisLeft(yScaleRange);
+    // parámetros
+    ////////////////////////////////////////////////////////////////////////////
 
-    // var zoom = d3.zoom()
-    //   .scaleExtent([1, Infinity])
-    //   .translateExtent([[0, 0], [width, heightChart]])
-    //   .extent([[0, 0], [width, heightChart]])
-    //   .on("zoom", zoomed);
+    let dataset = chart.indicators.map((d) => {
+      return {
+        name: d.name,
+        values: data.map((c) => {
+          return {
+            date: c.date,
+            value: (c[d.name] !== undefined) ? (+c[d.name]) : (0)
+          };
+        })
+      };
+    }),
+    totalWidth = chartsContainer.getBoundingClientRect().width,
+    minValue   = d3.min(dataset, (c) => d3.min(c.values, (v) => v.value)) * diffRangeY,
+    maxValue   = d3.max(dataset, (c) => d3.max(c.values, (v) => v.value)) * diffRangeY;
+
+
+    let indice = dataset[0].values.length - 1 - chart.laps;
+        indice = (indice < 0) ? (0) : (indice);
+
+    let date = dataset[0].values[indice].date;
+
+
+    // parámetros del gráfico
+    ////////////////////////////////////////////////////////////////////////////
+
+    let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
+        chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
+        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data, (d) => d.date)),
+        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]),
+        chartAxisX  = d3.axisBottom(chartScaleX),
+        chartAxisY  = d3.axisLeft(chartScaleY);
+
+    // parámetros del rango dinámico
+    ////////////////////////////////////////////////////////////////////////////
+
+    let rangeWidth  = totalWidth - rangeMargin.left - rangeMargin.right,
+        rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom,
+        rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain()),
+        rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain()),
+        rangeAxisX  = d3.axisBottom(rangeScaleX),
+        rangeAxisY  = d3.axisLeft(rangeScaleY);
+
+    // brush
+    ////////////////////////////////////////////////////////////////////////////
 
     let brush = d3.brushX()
-        .extent([[0, 0], [width, heightRange]])
-        .on('brush', brushed);
+      .extent([[0, 0], [rangeWidth, rangeHeight]])
+      .on('brush', brushed);
 
-    let svg = d3.select('#chartsContainer').append('svg')
-        .attr('width', width + marginChart.left + marginChart.right)
-        .attr('height', heightChart + marginChart.top + marginChart.bottom);
+    // escala de colores de lineas
+    ////////////////////////////////////////////////////////////////////////////
+
+    let colorLines = d3.scaleOrdinal()
+      .domain(chart.indicators.map((d) => d.name))
+      .range(chart.indicators.map((d) => d.color));
+
+    // se definen lineas
+    ////////////////////////////////////////////////////////////////////////////
+
+    let chartLine = d3.line()
+      .curve(d3.curveMonotoneX)
+      .x((d) => chartScaleX(d.date))
+      .y((d) => chartScaleY(d.value));
+
+    let rangeLine = d3.line()
+      .curve(d3.curveMonotoneX)
+      .x((d) => rangeScaleX(d.date))
+      .y((d) => rangeScaleY(d.value));
+
+    // se crea SVG
+    ////////////////////////////////////////////////////////////////////////////
+
+    let svg = d3.select('#chartsContainer .charts').append('svg')
+      .attr('width', chartWidth + chartMargin.left + chartMargin.right)
+      .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
 
     svg.append('defs').append('clipPath')
-        .attr('id', 'clip')
+      .attr('id', 'clip')
       .append('rect')
-        .attr('width', width)
-        .attr('height', heightChart);
+      .attr('width', chartWidth)
+      .attr('height', chartHeight);
 
-    // svg.append("rect")
-    //   .attr("class", "zoom")
-    //   .attr("width", width)
-    //   .attr("height", heightChart)
-    //   .style('fill', 'silver')
-    //   .attr("transform", "translate(" + marginChart.left + "," + marginChart.top + ")");
-      // .call(zoom);
+    svg.append('rect')
+      .attr('class', 'zoom')
+      .attr('width', chartWidth)
+      .attr('height', chartHeight)
+      .style('fill', 'silver')
+      .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
 
-    let focus = svg.append('g')
-        .attr('class', 'focus')
-        .attr('width', width)
-        .attr('transform', `translate(${ marginChart.left }, ${ marginChart.top })`);
+    // se crea contenedor del gráfico
+    ////////////////////////////////////////////////////////////////////////////
 
-    let context = svg.append('g')
-        .attr('class', 'context')
-        .attr('transform', `translate(${ marginChart.left }, ${ marginRange.top })`);
+    let chartContainer = svg.append('g')
+      .attr('class', 'chartContainer')
+      .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
 
-    // Se define escala de colores
-    let domainColor = [];
-    chart.indicators.forEach((v, k) => {domainColor.push(v.name);});
-
-    var color = d3.scaleOrdinal(d3.schemeCategory10).domain(domainColor);
-
-    data.forEach((d) => { d.date = parseDate(d.date); });
-
-    // Se normaliza data
-    var indicators = color.domain().map((name) => ({ name: name, values: data.map((d) => ({ date: d.date, value: +d[name] })) }));
-
-    // console.log(data);
-    // console.log(indicators);
-    let min = 0;
-    let max = 0;
-
-    indicators.forEach((indicator) => {
-      indicator.values.forEach((values) => {
-        min = Math.min(min, values.value);
-        max = Math.max(max, values.value);
-      });
-    });
-
-    xScaleChart.domain(d3.extent(data, (d) => d.date));
-    yScaleChart.domain([min, max]);
-    xScaleRange.domain(xScaleChart.domain());
-    yScaleRange.domain(yScaleChart.domain());
-
-    // line
-    var line = d3.line()
-      .curve(d3.curveMonotoneX)
-      .x((d) => xScaleChart(d.date))
-      .y((d) => yScaleChart(d.value));
-
-    var lines = focus.selectAll('.series')
-      .data(indicators)
-      .enter().append('g')
-      .attr('class', 'series');
-
-    lines.append('path')
-      .attr('class', 'line')
-      .attr('stroke-dasharray', (d) => { return proccessTypeLine(d.name.typeLine); })
-      .attr('d', (d) => line(d.values))
+    chartContainer.append('g')
+      .attr('class', 'line-y-0')
+      .append('line')
+      .attr('x1', 0)
+      .attr('x2', chartWidth)
+      .attr('y1', chartScaleY(0))
+      .attr('y2', chartScaleY(0))
       .style('fill', 'none')
-      .style('stroke', (d) => color(d.name));
+      .style('stroke', 'black');
 
-    var dots = focus.selectAll('.dot')
-      .data(indicators)
+    chartContainer.append('g')
+      .attr('class', 'axis axis--x')
+      .attr('transform', `translate(0, ${ chartHeight })`)
+      .call(chartAxisX);
+
+    chartContainer.append('g')
+      .attr('class', 'axis axis--y')
+      .call(chartAxisY);
+
+    let chartLines = chartContainer.selectAll('.lines')
+      .data(dataset)
+      .enter().append('g')
+      .attr('class', 'lines');
+
+    chartLines.append('path')
+      .attr('class', 'line')
+      .attr('stroke-dasharray', (d, i) => { return proccessTypeLine(chart.indicators[i].typeLine); })
+      .attr('d', (d) => chartLine(d.values))
+      .style('fill', 'none')
+      .attr('clip-path', 'url(#clip)')
+      .style('stroke', (d) => colorLines(d.name));
+
+    let dots = chartContainer.selectAll('.dot')
+      .data(dataset)
       .enter().append('g')
       .attr('class', 'dot')
-      .style('fill', (d) => color(d.name))
+      .style('fill', (d) => colorLines(d.name))
       .selectAll('circle')
       .data((d) => d.values)
       .enter().append('circle')
+      .attr('clip-path', 'url(#clip)')
       .attr('r', 2)
-      .attr('cx', (d) => xScaleChart(d.date))
-      .attr('cy', (d) => yScaleChart(d.value));
+      .attr('cx', (d) => chartScaleX(d.date))
+      .attr('cy', (d) => chartScaleY(d.value));
 
-    focus.append('g')
+    // se crea contenedor del rango dinámico
+    ////////////////////////////////////////////////////////////////////////////
+
+    let rangeConteiner = svg.append('g')
+      .attr('class', 'rangeConteiner')
+      .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
+
+    rangeConteiner.append('g')
       .attr('class', 'axis axis--x')
-      .attr('transform', `translate(0, ${ heightChart })`)
-      .call(xAxisChart);
-    focus.append('g')
-      .attr('class', 'axis axis--y')
-      .call(yAxisChart);
+      .attr('transform', `translate(0, ${ rangeHeight })`)
+      .call(rangeAxisX);
 
-    // append scatter plot to brush chart area
-    var lineMini = d3.line()
-      .x((d) => xScaleRange(d.date))
-      .y((d) => yScaleRange(d.value));
-
-    let linesMini = context.selectAll('.mini-line')
-      .data(indicators)
-      .enter().append('g')
-      .attr('class', 'mini-line');
-
-    linesMini.append('path')
-      .attr('d', (d) => lineMini(d.values))
-      .style('fill', 'none')
-      .style('stroke', (d) => color(d.name));
-
-    // console.log(chart.laps);
-    console.log('aca');
-    let lapsDate = indicators[0].values;
-    let indice = lapsDate.length - 1 - chart.laps;
-        indice = (indice < 0)?(0):(indice);
-        lapsDate = lapsDate[indice];
-
-        lapsDate = lapsDate.date;
-        
-
-    context.append('g')
-      .attr('class', 'axis axis--x')
-      .attr('transform', `translate(0, ${ heightRange })`)
-      .call(xAxisRange);
-    context.append('g')
+    rangeConteiner.append('g')
       .attr('class', 'brush')
       .call(brush)
-      .call(brush.move, [xScaleRange(lapsDate), width]);
+      .call(brush.move, [rangeScaleX(date), chartWidth]);
 
-    var legend = svg.append('g')
+    let rangeLines = rangeConteiner.selectAll('.mini-lines')
+      .data(dataset)
+      .enter().append('g')
+      .attr('class', 'mini-lines');
+
+    rangeLines.append('path')
+      .attr('d', (d) => rangeLine(d.values))
+      .style('stroke', 'black')
+      .style('fill', 'none');
+
+    // se crea contenedor del rango dinámico
+    ////////////////////////////////////////////////////////////////////////////
+
+    let legend = svg.append('g')
       .attr('class', 'legends')
-      .attr('transform', `translate(${ -width + 75 },0)`)
+      .attr('transform', `translate(${ -chartWidth + 75 }, 10)`)
       .selectAll('.legend')
-      .data(indicators)
+      .data(dataset)
       .enter().append('g')
       .attr('class', 'legend');
 
     legend.append('rect')
-      .attr('x', width - 20)
-      .attr('y', function(d, i) {
-        return i * 20;
-      })
+      .attr('x', chartWidth - 20)
+      .attr('y', (d, i) => i * 20)
       .attr('width', 10)
       .attr('height', 10)
-      .style('fill', function(d) {
-        return color(d.name);
-      });
+      .style('fill', (d) => colorLines(d.name));
 
     legend.append('text')
-      .attr('x', width - 8)
-      .attr('y', function(d, i) {
-        return (i * 20) + 9;
-      })
-      .text(function(d) {
-        return d.name;
-      });
+      .attr('x', chartWidth - 8)
+      .attr('y', (d, i) => (i * 20) + 9)
+      .text((d) => d.name);
 
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
     // Vertical Line
-    var lineHover = svg.append('g').attr('class', 'lineHover').attr("transform", "translate(" + marginChart.left + "," + marginChart.top + ")");
+    var lineHover = svg.append('g').attr('class', 'lineHover').attr("transform", "translate(" + chartMargin.left + "," + chartMargin.top + ")");
 
     lineHover.append('path') // this is the black vertical line to follow mouse
       .attr('class', 'mouse-line')
@@ -32924,37 +32957,38 @@ function generateCharts(element) {
       .style('opacity', '0');
 
     var mousePerLine = lineHover.selectAll('.mouse-per-line')
-      .data(indicators)
+      .data(dataset)
       .enter().append('g')
       .attr('class', 'mouse-per-line');
 
     mousePerLine.append('circle')
       .attr('r', 10)
       // .style('stroke', 'black')
-      .style('stroke', function(d) { return color(d.name); })
+      .style('stroke', function(d) { return colorLines(d.name); })
       .style('fill', 'none')
       .style('stroke-width', '2px')
       .style('opacity', '0');
+
     mousePerLine.append('text')
       .attr('transform', 'translate(10,3)');
 
     lineHover.append('svg:rect') // append a rect to catch mouse movements on canvas
-      .attr('width', width) // can't catch mouse events on a g element
-      .attr('height', heightChart)
+      .attr('width', chartWidth) // can't catch mouse events on a g element
+      .attr('height', chartHeight)
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
       .on('mouseover', function() { // on mouse in show line, circles and text
 
-        d3.select(this.parentNode).select('.mouse-line').style("opacity", "1");
-        d3.select(this.parentNode).selectAll(".mouse-per-line circle").style("opacity", "1");
-        d3.select(this.parentNode).selectAll(".mouse-per-line text").style("opacity", "1");
+        d3.select(this.parentNode).select('.mouse-line').style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.mouse-per-line circle').style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.mouse-per-line text').style('opacity', '1');
 
       })
       .on('mouseout', function() { // on mouse out hide line, circles and text
 
-        d3.select(this.parentNode).select(".mouse-line").style("opacity", "0");
-        d3.select(this.parentNode).selectAll(".mouse-per-line circle").style("opacity", "0");
-        d3.select(this.parentNode).selectAll(".mouse-per-line text").style("opacity", "0");
+        d3.select(this.parentNode).select('.mouse-line').style('opacity', '0');
+        d3.select(this.parentNode).selectAll('.mouse-per-line circle').style('opacity', '0');
+        d3.select(this.parentNode).selectAll('.mouse-per-line text').style('opacity', '0');
 
       })
       .on('mousemove', function() { // mouse moving over canvas
@@ -32964,7 +32998,7 @@ function generateCharts(element) {
         var mouse = d3.mouse(this);
 
         d3.select(this.parentNode).select('.mouse-line').attr('d', function() {
-          var d = 'M' + mouse[0] + ',' + heightChart;
+          var d = 'M' + mouse[0] + ',' + chartHeight;
               d += ' ' + mouse[0] + ',' + 0;
 
           return d;
@@ -32976,7 +33010,7 @@ function generateCharts(element) {
 
             // console.log(width/mouse[0]);
 
-            var xDate = xScaleChart.invert(mouse[0]),
+            var xDate = chartScaleX.invert(mouse[0]),
                 bisect = d3.bisector(function(d) { return d.date; }).right,
                 idx = bisect(d.values, xDate);
 
@@ -33001,7 +33035,7 @@ function generateCharts(element) {
 
             // update the text with y value
             d3.select(this).select('text')
-              .text(yScaleChart.invert(pos.y).toFixed(2));
+              .text(chartScaleY.invert(pos.y).toFixed(2));
 
             // return position
             return "translate(" + mouse[0] + "," + pos.y +")";
@@ -33013,227 +33047,233 @@ function generateCharts(element) {
     function brushed() {
       let selection = d3.event.selection;
 
-      xScaleChart.domain(selection.map(xScaleRange.invert, xScaleRange));
+      chartScaleX.domain(selection.map(rangeScaleX.invert, rangeScaleX));
 
-      focus.selectAll('.line')
-        .attr('d', (d) => line(d.values));
-
-      focus.selectAll('.dot circle')
-        .attr('cx', (d) => xScaleChart(d.date))
-        .attr('cy', (d) => yScaleChart(d.value));
-
-      focus.select('.axis--x').call(xAxisChart);
-      focus.select('.axis--y').call(yAxisChart);
-      // focus.selectAll('.dot').attr('cx', (d) => xScaleChart(d[0]));
+      chartContainer.selectAll('.line').attr('d', (d) => chartLine(d.values));
+      chartContainer.selectAll('.dot circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
+      chartContainer.select('.axis--x').call(chartAxisX);
+      chartContainer.select('.axis--y').call(chartAxisY);
+      // chartContainer.selectAll('.dot').attr('cx', (d) => chartScaleX(d[0]));
     }
-    // function zoomed() {
-    //   if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
-    //   var t = d3.event.transform;
-    //
-    //   xScaleChart.domain(t.rescaleX(xScaleRange).domain());
-    //
-    //   focus.selectAll('.line').attr('d', (d) => line(d.values));
-    //   focus.select(".axis--x").call(xAxisChart);
-    //   focus.select('.axis--y').call(yAxisChart);
-    //   // focus.selectAll('.dot').attr('cx', (d) => xScaleChart(d[0]));
-    //
-    //   context.select(".brush").call(brush.move, xScaleChart.range().map(t.invertX, t));
-    // }
-    // function type(d) {
-    //   d[0] = parseDate(d[0]);
-    //   d[1] = +d[1];
-    //   return d;
-    // }
   }
 
   downloadData(processData, renderCharts);
-
-  // let chartData = processData(data.indicators);
 }
 
-const animateAnchor = (target) => $('body').animate({ scrollTop: $(target).offset().top }, 500);
+// Esta función inicia la aplicación.
+////////////////////////////////////////////////////////////////////////////////
 
-const scale = () => {
-  function Domain(min, max) {
-    return function(val) {
-      return (val - min) / (max - min);
-    };
-  }
-  function Range(min, max, clamp) {
-    return function(val) {
-      val = min + (max - min) * val;
+function start() {
+  downloadFile('./public/data/cards.json', 'cards').then(() => {  // Se renderiza cardsContainer y chartsContainer
+    let modules = [
+      {name: 'cards', render: () => Modal.add.subContainer({
+        settings:  {type: 'section'},
+        attr:      {id: 'cardsContainer'},
+        styles:   {width: '100%', zIndex: 1},
+        childrens: [
+          Modal.add.title({
+            settings:  {type: 'title2', text: 'Categorías'},
+            styles:    {display: 'none'}
+          }),
+          Modal.add.subContainer({
+            settings: {type: 'default'},
+            attr:     {class: 'mod-line-line cards'},
+            styles:   {flexWrap: 'wrap', justifyContent: 'center', backgroundColor: 'white'}
+          })
+        ]
+      })},
+      {name: 'charts', render: () => Modal.add.subContainer({
+        settings: {type: 'section'},
+        attr:     {id: 'chartsContainer'},
+        styles:   {width: '100%', zIndex: 3, display: 'none'},
+        childrens: [
+          Modal.add.title({
+            settings:  {type: 'title2', text: 'Gráficos'},
+            styles:    {display: 'none'},
+          }),
+          Modal.add.link({
+            settings: {type: 'link', text: '<i class="fa fa-arrow-left" aria-hidden="true"></i> Volver'},
+            attr:     {href: '#', onclick: 'changeView("cards");'}
+          }),
+          Modal.add.subContainer({
+            settings: {type: 'default'},
+            attr:     {class: 'mod-col-col strictCenter charts'},
+            styles:   {width: '100%', backgroundColor: 'white', boxSizing: 'border-box'},
+          })
+        ]
+      })}
+    ];
 
-      return clamp ? Math.min(Math.max(val, min), max) : val;
-    };
-  }
+    modules.forEach((module) => { document.querySelector('#modal_contenido').append(module.render()); });
+  }).then(renderCards);
+}
 
-  var domain = Domain(0, 1),
-      range = Range(0, 1),
-      s = function(val) { return range(domain(val)); };
+// Esta función descarga un archivo y devuelve una promesa.
+////////////////////////////////////////////////////////////////////////////////
 
-  s.domain = function(min, max) {
-    if (!arguments.length) { return domain; }
-
-    domain = Domain(min, max);
-
-    return s;
-  };
-  s.range = function(min, max, clamp) {
-    if (!arguments.length) { return range; }
-
-    range = Range(min, max, clamp);
-
-    return s;
-  };
-
-  return s;
-};
-
-const parseFormatDate = (format, date) => {
-  switch (format) {
-    case 'R/P1Y': return moment(date).format('YYYY');
-    case 'R/P6M':
-      let semester = scale().domain(1,12).range(1,2);
-          semester = Math.round(semester(moment(date).format('M')));
-
-      return `${ semester }º semestre de ${ moment(date).format('YYYY') }`;
-    case 'R/P3M':
-      let trimester = scale().domain(1,12).range(1,4);
-          trimester = Math.round(trimester(moment(date).format('M')));
-
-      return `${ trimester }º trimestre de ${ moment(date).format('YYYY') }`;
-    case 'R/P1M': return moment(date).format('MMMM [de] YYYY');
-    case 'R/P1D': return moment(date).format('D [de] MMMM [de] YYYY');
-  }
-};
-
-const parseValueIndicator = (format, value) => {
-  value = value.toFixed(2);
-
-  if (format === '%') {
-    return `${ value }%`;
-  } else {
-    return value / format;
-  }
-
-};
-
-const downloadFile = (path, name) => {
-
-  let promise = new Promise((success) => {
+function downloadFile(path, name) {
+  return new Promise((success) => {
     d3.json(path, (data) => {
-
       gdata[name] = data;
 
       success();
     });
   });
+}
 
-  return promise;
-};
+// Esta función parsea el formato de tipo de fecha.
+////////////////////////////////////////////////////////////////////////////////
 
-const generateCardsModal = () => {
+function parseFormatDate(format, date) {
+  date = moment(date);
+
+  switch (format) {
+    case 'R/P1Y':
+      return date.format('YYYY');
+    case 'R/P6M':
+      let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
+          semester = Math.round(semester(date.format('M')));
+
+      return `${ semester }º semestre de ${ date.format('YYYY') }`;
+    case 'R/P3M':
+      let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
+          trimester = Math.round(trimester(date.format('M')));
+
+      return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+    case 'R/P1M':
+      return date.format('MMMM [de] YYYY');
+    case 'R/P1D':
+      return date.format('D [de] MMMM [de] YYYY');
+    default:
+      return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
+  }
+}
+
+// Esta función parsea el el formato de tipo de unidad.
+////////////////////////////////////////////////////////////////////////////////
+
+function parseValueIndicator(format, value) {
+  value = value.toFixed(2);
+
+  switch (format) {
+    case 'Porcentaje':
+      return `${ value }%`;
+    default:
+      return value; // TODO ##0002 - Definir valor por defecto
+  }
+}
+
+// Esta función cambia la vista a los gráficos.
+////////////////////////////////////////////////////////////////////////////////
+
+// function animateAnchor(target) {
+//   $('body').animate({ scrollTop: $(target).offset().top }, 500);
+// }
+
+function changeView(container) {
+
+  if (container === 'charts') {
+    document.getElementById('chartsContainer').style.display = 'block';
+  } else {
+    document.getElementById('chartsContainer').style.display = 'none';
+  }
+}
+
+// Esta función renderiza las tarjetas.
+////////////////////////////////////////////////////////////////////////////////
+
+function renderCards() {
   let modalComponent = [];
 
-  gdata.cards.forEach((v, k) => {
+  gdata.cards.forEach((card) => {
 
-    downloadFile(`./public/data/series/${ v.id }.json`, v.id)
-      .then(() => {
-        let dato = gdata[v.id][gdata[v.id].length - 1];
-
-        let card = Modal.add.subContainer({
-          settings: {type: 'card'},
-          attr:     {class: 'mod-col-col strictCenter'},
-          styles:   {width: '30%', minWidth: '250px', marginBottom: '20px', padding: '0px 10px'},
-          childrens: [
-            Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-            Modal.add.title({
-              settings: {type: 'title3', text: v.title},
-              styles:   {color: Modal.variables.colors.gobar_dark, textAlign: 'center'}
-            }),
-            Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-            Modal.add.link({
-              settings:   {type: 'block', text: ''},
-              attr:       {href: v.download, download: ''},
-              styles:     {width: '100%'},
-              childrens:  [
-                Modal.add.button({
-                  settings: {type: 'roundSmall', text: 'Descargar archivo excel'},
-                  styles:   {border: `1px solid ${ Modal.variables.colors.base }`, backgroundColor: 'white', color: Modal.variables.colors.base}
-                })
-              ]
-            }),
-            Modal.add.space({settings: {type: 'allways', quantity: 2}, styles: {borderBottom: `1px solid ${ Modal.variables.colors.base }`}}),
-            Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-            Modal.add.title({
-              settings: {type: 'title4', text: v.indicator},
-              styles:   {color: Modal.variables.colors.base_contraste}
-            }),
-            Modal.add.paragraph({
-              settings: {type: 'default', text: parseFormatDate(v.formatDate, dato[0])},
-              styles:   {textAlign: 'center'}
-            }),
-            Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-            Modal.add.paragraph({
-              settings: {type: 'big', text: parseValueIndicator(v.unitIndicator, dato[1])},
-              styles:   {color: Modal.variables.colors.gobar_dark}
-            }),
-            Modal.add.paragraph({
-              settings: {type: 'default', text: v.description},
-              styles:   {textAlign: 'center'}
-            }),
-            Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-            Modal.add.image({
-              styles: {height: '70px', width: '100%'}
-            }),
-            Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-            Modal.add.link({
-              settings:   {type: 'block', text: ''},
-              styles:     {width: '100%'},
-              childrens:  [
-                Modal.add.button({
-                  settings: {type: 'roundSmall', text: 'Ver más graficos'},
-                  attr:     {id: v.id, onclick: 'generateCharts(this); animateAnchor("#chartsContainer");'}
-                })
-              ]
-            }),
-            Modal.add.space({settings: {type: 'allways', quantity: 2}}),
+    let cardComponent = Modal.add.subContainer({
+      settings:  {type: 'card'},
+      attr:      {id: card.id, class: 'mod-col-col strictCenter'},
+      styles:    {width: '250px', margin: '0 10px 20px 10px', padding: '20px 20px', position: 'relative'},
+      childrens: [
+        Modal.add.title({
+          settings: {type: 'title3', text: card.title},
+          // attr:     {class: 'flex'},
+          styles:   {color: Modal.variables.colors.gobar_dark, textAlign: 'center', height: 'calc((1.75rem * 1.2) * 2)'}
+        }),
+        Modal.add.space({settings: {type: 'allways', quantity: 1}, styles: {borderBottom: `1px solid ${ Modal.variables.colors.base }`}}),
+        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
+        Modal.add.title({
+          settings: {type: 'title4', text: card.name},
+          // attr:     {class: 'flex'},
+          styles:   {color: Modal.variables.colors.base_contraste, textAlign: 'center', height: 'calc((1.5rem * 1.2) * 2)'}
+        }),
+        Modal.add.paragraph({
+          settings: {type: 'default', text: ''},
+          attr:     {id: 'frequency'},
+          styles:   {textAlign: 'center'}
+        }),
+        Modal.add.space({settings: {type: 'allways', quantity: 2}}),
+        Modal.add.paragraph({
+          settings: {type: 'big', text: ''},
+          attr:     {id: 'units_representation'},
+          styles:   {color: Modal.variables.colors.gobar_dark, lineHeight: '1'}
+        }),
+        Modal.add.paragraph({
+          settings: {type: 'default', text: ''},
+          attr:     {id: 'units'},
+          styles:   {textAlign: 'center'}
+        }),
+        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
+        Modal.add.image({
+          styles: {height: '40px', width: '50%'}
+        }),
+        Modal.add.space({settings: {type: 'allways', quantity: 2}}),
+        Modal.add.link({
+          settings:   {type: 'block', text: ''},
+          styles:     {width: '100%'},
+          childrens:  [
+            Modal.add.button({
+              settings: {type: 'roundSmall', text: 'Ver más gráficos'},
+              attr:     {id: card.id, onclick: 'generateCharts(this); changeView("charts");'},
+              styles:   {width: '100%'}
+            })
           ]
-        });
+        }),
+        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
+        Modal.add.link({
+          settings:   {type: 'link', text: '<i class="fa fa-download" aria-hidden="true"></i> Descargar datos'},
+          attr:       {href: card.download, download: ''},
+          styles:     {width: '100%', textAlign: 'center', margin: '0'}
+        }),
+        Modal.add.subContainer({
+          settings:  {type: 'default'},
+          attr:      {class: 'loading flex'},
+          styles:    {position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white', zIndex: 2, borderRadius: '4px'},
+          childrens: [
+            Modal.add.paragraph({
+              settings: {type: 'default', text: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'}
+            })
+          ]
+        })
+      ]
+    });
 
-        window.document.getElementById('cardsContainer').appendChild(card);
+    document.querySelector('#cardsContainer .cards').appendChild(cardComponent);
+
+    downloadFile(`./public/data/series/${ card.id }.json`, card.id)
+      .then(() => {
+        let data = gdata[card.id].data,
+            metadata = gdata[card.id].metadata;
+
+        // Se agrega data de la API
+        ////////////////////////////////////////////////////////////////////////
+
+        let cardComponent = document.getElementById(metadata.id);
+            cardComponent.querySelector('#frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0]);
+            cardComponent.querySelector('#units_representation').innerHTML = parseValueIndicator(card.units_representation, data[data.length - 1][1]);
+            cardComponent.querySelector('#units').innerHTML = metadata.units;
+            cardComponent.querySelector('.loading').remove();
       });
   });
 
   return modalComponent;
-};
-
-function renderAlgo() {
-  const modulos = [
-    {name: 'cards', render: () => Modal.add.subContainer({
-      settings:  {type: 'default'},
-      attr:      {id: 'cardsContainer', class: 'mod-line-line'},
-      styles:    {flexWrap: 'wrap', justifyContent: 'space-around', border: '1px solid silver'}
-    })},
-    {name: 'charts', render: () => Modal.add.subContainer({
-      settings: {type: 'default'},
-      attr:     {id: 'chartsContainer', class: 'mod-col-col strictCenter'},
-      styles:   {width: '100%', border: '1px solid red', boxSizing: 'border-box'},
-    })}
-  ];
-
-  modulos.forEach((modulo) => {
-    window.document.querySelector('#modal_contenido').appendChild(modulo.render());
-  });
-}
-
-// Render App
-function start() {
-  let cardChildrens;
-
-  downloadFile('./public/data/cards.json', 'cards')
-    .then(renderAlgo)
-    .then(generateCardsModal);
 }
 
 // // Is Document Ready

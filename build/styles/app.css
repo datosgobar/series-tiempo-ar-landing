@@ -5,3 +5,9 @@ body {
   max-width: 816px;
   margin: 0 auto;
 }
+
+#chartsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
