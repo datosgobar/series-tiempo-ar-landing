@@ -6,7 +6,8 @@
  * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
-.boton_efecto {
+
+.button-waves {
   position: relative;
   cursor: pointer;
   overflow: hidden;
@@ -14,9 +15,10 @@
   -webkit-tap-highlight-color: transparent;
   vertical-align: middle;
   z-index: 1;
-  transition: .3s ease-out;
+  transition: 0.3s ease-out;
 }
-.boton_efecto .waves-ripple {
+
+.button-waves .waves-ripple {
   position: absolute;
   border-radius: 50%;
   width: 20px;
@@ -30,17 +32,22 @@
   transform: scale(0);
   pointer-events: none;
 }
-.boton_efecto.waves-light .waves-ripple {
+
+.button-waves.waves-light .waves-ripple {
   background-color: rgba(255, 255, 255, 0.45);
 }
-.boton_efecto input[type="button"], .boton_efecto input[type="reset"], .boton_efecto input[type="submit"] {
+
+.button-waves input[type="button"],
+.button-waves input[type="reset"],
+.button-waves input[type="submit"] {
   border: 0;
   font-style: normal;
   font-size: inherit;
   text-transform: inherit;
   background: none;
 }
-.boton_efecto img {
+
+.button-waves img {
   position: relative;
   z-index: -1;
 }
@@ -58,6 +65,7 @@
   border-radius: 0.2em;
   vertical-align: bottom;
 }
+
 .waves-input-wrapper .waves-button-input {
   position: relative;
   top: 0;
@@ -79,6 +87,7 @@
 }
 
 /* Firefox Bug: link not triggered */
-.boton_efecto .waves-ripple {
+
+.button-waves .waves-ripple {
   z-index: -1;
 }

@@ -27190,7 +27190,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 ////////////////////////////////////////////////////////////////////////////////
 
 // Check 09.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
-const randomString = (quantity) => {
+function randomString(quantity) {
   let text = '',
       possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -27201,7 +27201,7 @@ const randomString = (quantity) => {
   return text;
 }
 // Check 05.07.2017 - Sobreescribe los atributos de un objeto en otro
-const mergeStructure = (target, source) => {
+function mergeStructure(target, source) {
   return {
     settings:   jQuery.extend(target.settings, source.settings),
     attr:       (source.hasOwnProperty('attr'))?(source.attr):({}),
@@ -27210,7 +27210,7 @@ const mergeStructure = (target, source) => {
   };
 };
 // Check 05.07.2017 - Inyecta los estilos de un componente
-const injectStyles = (component, styles) => {
+function injectStyles(component, styles) {
 
   for (let style in styles) {
     component.style[style] = styles[style];
@@ -27219,7 +27219,7 @@ const injectStyles = (component, styles) => {
   return true;
 };
 // Check 05.07.2017 - Inyecta los atributos de un componente
-const injectAttributes = (component, attributes) => {
+function injectAttributes(component, attributes) {
 
   for (let attr in attributes) {
     if (attr === 'class') {
@@ -27234,7 +27234,7 @@ const injectAttributes = (component, attributes) => {
   return true;
 };
 // Check 05.07.2017 - Inyecta los componentes hijos de un componente
-const injectChildrens = (component, childrens) => {
+function injectChildrens(component, childrens) {
   childrens.forEach((children) => {
     component.appendChild(children);
   });
@@ -27242,20 +27242,20 @@ const injectChildrens = (component, childrens) => {
   return true;
 };
 // Check 05.07.2017 - Muesta el componente cuando el mouse esta dentro del modulo
-const buttonShareShow = (component) => {
+function buttonShareShow(component) {
   component.querySelector('.modalShare').style.opacity = 1;
 
   return true;
 };
 // Check 05.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
-const buttonShareHide = (component) => {
+function buttonShareHide(component) {
   component.querySelector('.modalShare').style.opacity = '';
   component.querySelector('.modalShare input').checked = false;
 
   return true;
 };
 // Check 05.07.2017 - Comparte en redes sociales un modulo especifico
-const share = (social, elemento) => {
+function share(social, elemento) {
   let node = elemento.parentNode.parentNode.parentNode,
       nroModule = node.getAttribute('module-nro'),
       date = new Date();
@@ -27290,21 +27290,21 @@ const share = (social, elemento) => {
   });
 };
 // Check 05.07.2017 - Muesta el contenedor para embeber el modulo
-const embebedContainerShow = (component) => {
+function embebedContainerShow(component) {
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.opacity = '';
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.visibility = '';
 
   return true;
 };
 // Check 05.07.2017 - Oculta el contenedor para embeber el modulo
-const embebedContainerHide = (component) => {
+function embebedContainerHide(component) {
   component.parentNode.style.opacity = 0;
   component.parentNode.style.visibility = 'hidden';
 
   return true;
 };
 // Check 05.07.2017 - Guarda en el portapapeles el texto de un elemento
-const copyText = (elemento) => {
+function copyText(elemento) {
   let copy = elemento.parentNode.querySelector('input').select();
 
   window.document.execCommand('copy');
@@ -32638,79 +32638,494 @@ return hooks;
 
 })));
 
-// Global Variables
+/*!
+ * Waves v0.6.4
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
+ * https://github.com/fians/Waves/blob/master/LICENSE
+ */
+
+(function(window) {
+    var Waves = Waves || {};
+    var $$ = document.querySelectorAll.bind(document);
+
+    // Find exact position of element
+    function isWindow(obj) {
+        return obj !== null && obj === obj.window;
+    }
+
+    function getWindow(elem) {
+        return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
+    }
+
+    function offset(elem) {
+        var docElem, win,
+            box = {top: 0, left: 0},
+            doc = elem && elem.ownerDocument;
+
+        docElem = doc.documentElement;
+
+        if (typeof elem.getBoundingClientRect !== typeof undefined) {
+            box = elem.getBoundingClientRect();
+        }
+        win = getWindow(doc);
+        return {
+            top: box.top + win.pageYOffset - docElem.clientTop,
+            left: box.left + win.pageXOffset - docElem.clientLeft
+        };
+    }
+
+    function convertStyle(obj) {
+        var style = '';
+
+        for (var a in obj) {
+            if (obj.hasOwnProperty(a)) {
+                style += (a + ':' + obj[a] + ';');
+            }
+        }
+
+        return style;
+    }
+
+    var Effect = {
+
+        // Effect delay
+        duration: 750,
+
+        show: function(e, element) {
+
+            // Disable right click
+            if (e.button === 2) {
+                return false;
+            }
+
+            var el = element || this;
+
+            // Create ripple
+            var ripple = document.createElement('div');
+            ripple.className = 'waves-ripple';
+            el.appendChild(ripple);
+
+            // Get click coordinate and element witdh
+            var pos         = offset(el);
+            var relativeY   = (e.pageY - pos.top);
+            var relativeX   = (e.pageX - pos.left);
+            var scale       = 'scale('+((el.clientWidth / 100) * 10)+')';
+
+            // Support for touch devices
+            if ('touches' in e) {
+              relativeY   = (e.touches[0].pageY - pos.top);
+              relativeX   = (e.touches[0].pageX - pos.left);
+            }
+
+            // Attach data to element
+            ripple.setAttribute('data-hold', Date.now());
+            ripple.setAttribute('data-scale', scale);
+            ripple.setAttribute('data-x', relativeX);
+            ripple.setAttribute('data-y', relativeY);
+
+            // Set ripple position
+            var rippleStyle = {
+                'top': relativeY+'px',
+                'left': relativeX+'px'
+            };
+
+            ripple.className = ripple.className + ' waves-notransition';
+            ripple.setAttribute('style', convertStyle(rippleStyle));
+            ripple.className = ripple.className.replace('waves-notransition', '');
+
+            // Scale the ripple
+            rippleStyle['-webkit-transform'] = scale;
+            rippleStyle['-moz-transform'] = scale;
+            rippleStyle['-ms-transform'] = scale;
+            rippleStyle['-o-transform'] = scale;
+            rippleStyle.transform = scale;
+            rippleStyle.opacity   = '1';
+
+            rippleStyle['-webkit-transition-duration'] = Effect.duration + 'ms';
+            rippleStyle['-moz-transition-duration']    = Effect.duration + 'ms';
+            rippleStyle['-o-transition-duration']      = Effect.duration + 'ms';
+            rippleStyle['transition-duration']         = Effect.duration + 'ms';
+
+            rippleStyle['-webkit-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+            rippleStyle['-moz-transition-timing-function']    = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+            rippleStyle['-o-transition-timing-function']      = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+            rippleStyle['transition-timing-function']         = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
+
+            ripple.setAttribute('style', convertStyle(rippleStyle));
+        },
+
+        hide: function(e) {
+            TouchHandler.touchup(e);
+
+            var el = this;
+            var width = el.clientWidth * 1.4;
+
+            // Get first ripple
+            var ripple = null;
+            var ripples = el.getElementsByClassName('waves-ripple');
+            if (ripples.length > 0) {
+                ripple = ripples[ripples.length - 1];
+            } else {
+                return false;
+            }
+
+            var relativeX   = ripple.getAttribute('data-x');
+            var relativeY   = ripple.getAttribute('data-y');
+            var scale       = ripple.getAttribute('data-scale');
+
+            // Get delay beetween mousedown and mouse leave
+            var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
+            var delay = 350 - diff;
+
+            if (delay < 0) {
+                delay = 0;
+            }
+
+            // Fade out ripple after delay
+            setTimeout(function() {
+                var style = {
+                    'top': relativeY+'px',
+                    'left': relativeX+'px',
+                    'opacity': '0',
+
+                    // Duration
+                    '-webkit-transition-duration': Effect.duration + 'ms',
+                    '-moz-transition-duration': Effect.duration + 'ms',
+                    '-o-transition-duration': Effect.duration + 'ms',
+                    'transition-duration': Effect.duration + 'ms',
+                    '-webkit-transform': scale,
+                    '-moz-transform': scale,
+                    '-ms-transform': scale,
+                    '-o-transform': scale,
+                    'transform': scale,
+                };
+
+                ripple.setAttribute('style', convertStyle(style));
+
+                setTimeout(function() {
+                    try {
+                        el.removeChild(ripple);
+                    } catch(e) {
+                        return false;
+                    }
+                }, Effect.duration);
+            }, delay);
+        },
+
+        // Little hack to make <input> can perform waves effect
+        wrapInput: function(elements) {
+            for (var a = 0; a < elements.length; a++) {
+                var el = elements[a];
+
+                if (el.tagName.toLowerCase() === 'input') {
+                    var parent = el.parentNode;
+
+                    // If input already have parent just pass through
+                    if (parent.tagName.toLowerCase() === 'i' && parent.className.indexOf('button-waves') !== -1) {
+                        continue;
+                    }
+
+                    // Put element class and style to the specified parent
+                    var wrapper = document.createElement('i');
+                    wrapper.className = el.className + ' waves-input-wrapper';
+
+                    var elementStyle = el.getAttribute('style');
+
+                    if (!elementStyle) {
+                        elementStyle = '';
+                    }
+
+                    wrapper.setAttribute('style', elementStyle);
+
+                    el.className = 'waves-button-input';
+                    el.removeAttribute('style');
+
+                    // Put element as child
+                    parent.replaceChild(wrapper, el);
+                    wrapper.appendChild(el);
+                }
+            }
+        }
+    };
+
+
+    /**
+     * Disable mousedown event for 500ms during and after touch
+     */
+    var TouchHandler = {
+        /* uses an integer rather than bool so there's no issues with
+         * needing to clear timeouts if another touch event occurred
+         * within the 500ms. Cannot mouseup between touchstart and
+         * touchend, nor in the 500ms after touchend. */
+        touches: 0,
+        allowEvent: function(e) {
+            var allow = true;
+
+            if (e.type === 'touchstart') {
+                TouchHandler.touches += 1; //push
+            } else if (e.type === 'touchend' || e.type === 'touchcancel') {
+                setTimeout(function() {
+                    if (TouchHandler.touches > 0) {
+                        TouchHandler.touches -= 1; //pop after 500ms
+                    }
+                }, 500);
+            } else if (e.type === 'mousedown' && TouchHandler.touches > 0) {
+                allow = false;
+            }
+
+            return allow;
+        },
+        touchup: function(e) {
+            TouchHandler.allowEvent(e);
+        }
+    };
+
+
+    /**
+     * Delegated click handler for .button-waves element.
+     * returns null when .button-waves element not in "click tree"
+     */
+    function getWavesEffectElement(e) {
+        if (TouchHandler.allowEvent(e) === false) {
+            return null;
+        }
+
+        var element = null;
+        var target = e.target || e.srcElement;
+
+        while (target.parentElement !== null) {
+            if (!(target instanceof SVGElement) && target.className.indexOf('button-waves') !== -1) {
+                element = target;
+                break;
+            } else if (target.classList.contains('button-waves')) {
+                element = target;
+                break;
+            }
+            target = target.parentElement;
+        }
+
+        return element;
+    }
+
+    /**
+     * Bubble the click and show effect if .button-waves elem was found
+     */
+    function showEffect(e) {
+        var element = getWavesEffectElement(e);
+
+        if (element !== null) {
+            Effect.show(e, element);
+
+            if ('ontouchstart' in window) {
+                element.addEventListener('touchend', Effect.hide, false);
+                element.addEventListener('touchcancel', Effect.hide, false);
+            }
+
+            element.addEventListener('mouseup', Effect.hide, false);
+            element.addEventListener('mouseleave', Effect.hide, false);
+        }
+    }
+
+    Waves.displayEffect = function(options) {
+        options = options || {};
+
+        if ('duration' in options) {
+            Effect.duration = options.duration;
+        }
+
+        //Wrap input inside <i> tag
+        Effect.wrapInput($$('.button-waves'));
+
+        if ('ontouchstart' in window) {
+            document.body.addEventListener('touchstart', showEffect, false);
+        }
+
+        document.body.addEventListener('mousedown', showEffect, false);
+    };
+
+    /**
+     * Attach Waves to an input element (or any element which doesn't
+     * bubble mouseup/mousedown events).
+     *   Intended to be used with dynamically loaded forms/inputs, or
+     * where the user doesn't want a delegated click handler.
+     */
+    Waves.attach = function(element) {
+        //FUTURE: automatically add waves classes and allow users
+        // to specify them with an options param? Eg. light/classic/button
+        if (element.tagName.toLowerCase() === 'input') {
+            Effect.wrapInput([element]);
+            element = element.parentElement;
+        }
+
+        if ('ontouchstart' in window) {
+            element.addEventListener('touchstart', showEffect, false);
+        }
+
+        element.addEventListener('mousedown', showEffect, false);
+    };
+
+    window.Waves = Waves;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        Waves.displayEffect();
+    }, false);
+
+})(window);
+
+// Se define una constante en donde se va a alojar toda la data.
 ////////////////////////////////////////////////////////////////////////////////
 
-let gdata = {};
+const STORAGE = {};
 
 // Esta función parsea el el formato de tipo de linea.
 ////////////////////////////////////////////////////////////////////////////////
 
-function proccessTypeLine(type) {
+function parseTypeLine(type) {
+
   switch (type) {
     case 'solid': return null;
     case 'dashed': return '5, 5';
-    default: return null;
+    default: console.error(`El tipo de linea ${ type } no es válido.`); return null;
   }
 }
 
-// Esta renderiza los gráficos.
+// Esta función descarga un archivo y devuelve una promesa.
+////////////////////////////////////////////////////////////////////////////////
+
+function downloadFile(path, name) {
+  return new Promise((success) => {
+    d3.json(path, (data) => {
+      STORAGE[name] = data;
+
+      success();
+    });
+  });
+}
+
+// Esta función parsea el formato de tipo de fecha.
+////////////////////////////////////////////////////////////////////////////////
+
+function parseFormatDate(format, date) {
+  date = moment(date);
+
+  switch (format) {
+    case 'R/P1Y':
+      return date.format('YYYY');
+    case 'R/P6M':
+      let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
+          semester = Math.round(semester(date.format('M')));
+
+      return `${ semester }º semestre de ${ date.format('YYYY') }`;
+    case 'R/P3M':
+      let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
+          trimester = Math.round(trimester(date.format('M')));
+
+      return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+    case 'R/P1M':
+      return date.format('MMMM [de] YYYY');
+    case 'R/P1D':
+      return date.format('D [de] MMMM [de] YYYY');
+    default:
+      return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
+  }
+}
+
+// Esta función parsea el el formato de tipo de unidad.
+////////////////////////////////////////////////////////////////////////////////
+
+function parseValueIndicator(format, value) {
+  value = value.toFixed(2);
+
+  switch (format) {
+    case 'Porcentaje':
+      return `${ value }%`;
+    default:
+      return value; // TODO ##0002 - Definir valor por defecto
+  }
+}
+
+// Esta función cambia la vista a los gráficos.
+////////////////////////////////////////////////////////////////////////////////
+
+function changeView(container) {
+
+  if (container === 'charts') {
+    $('#chartsContainer').show();
+    // $('#chartsContainer').fadeIn(250);
+  } else {
+    // $('#chartsContainer').hide();
+    $('#chartsContainer').fadeOut(250);
+  }
+}
+
+// Esta función renderiza los gráficos.
 ////////////////////////////////////////////////////////////////////////////////
 
 function generateCharts(element) {
-  // console.log('Se solicita generación de graficos ...');
-
-  let id = element.getAttribute('id'),
-      chartsContainer = window.document.querySelector('#chartsContainer .charts');
+  let id = element.parentNode.getAttribute('id'),
+      chartsContainer = document.querySelector('#chartsContainer #charts');
       chartsContainer.innerHTML = '';
 
-  function downloadData(processData, renderChart) {
-    // console.log('Se descargan indicadores faltantes para generación de grafico');
-    let charts, indicators, length, count;
+  function renderPreviewCharts() {
+    STORAGE.cards.forEach((card) => {
 
-    gdata.cards.forEach((card) => {
-
-      if (card.id === id) { // Se identifica la tarjeta seleccionada y se consulta data
-        charts = card.charts;
+      if (card.id === id) {
+        let charts = card.charts;
 
         charts.forEach((chart) => {
 
-          indicators = chart.indicators;
-          count = 0;
-          length = indicators.length - 1;
+          let chartComponente = document.createElement('div');
+              chartComponente.setAttribute('id', chart.id);
+              chartComponente.classList.add('chart');
+              chartComponente.innerHTML = `<div class="head">
+                                              <h3>${ chart.title }</h3>
+                                              <span id="references"></span>
+                                           </div>
+                                           <div class="break-line"><br></div>
+                                           <p class="paragraph">${ chart.description }</p>
+                                           <div class="break-line"><br></div>
+                                           <div class="chart-svg"></div>
+                                           <div class="break-line"><br></div>
+                                           <div class="loading flex">
+                                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                           </div>`;
 
-          // var promises = [];
-          indicators.forEach((indicator, index) => { // Se guarda información de cada indicador
-            // console.log(indicator);
-            if (!gdata[indicator.id]) {
-              // console.log('download');
-              /*var promise = */downloadFile(`./public/data/series/${ indicator.id }.json`, indicator.id).then(() => {
-                // console.log('finish download');
-                // console.log(count);
-                // console.log(length);
-                if (length === count) { console.log('render');processData(chart, renderChart); } else { count++; console.log(count, '/', length);}
-              });
-              // promises.push(promise)
-            } else {
-              // console.log('not download');
-              if (length === count) { processData(chart, renderChart); } else { count++; /*console.log(count, '/', indicators.length); */}
-            }
-          });
-          // $.when.call(promises)
+          chartsContainer.append(chartComponente);
+
+          downloadData(chart);
         });
       }
     });
   }
 
-  function processData(chart, renderCallback) {
+  function downloadData(chart) {
+    let indicators = chart.indicators,
+        length = indicators.length - 1,
+        count = 0, promises = [];
+
+    indicators.forEach((indicator, index) => { // Se guarda información de cada indicador
+
+      if (!STORAGE[indicator.id]) {
+        promises.push(
+          downloadFile(`./public/data/series/${ indicator.id }.json`, indicator.id)
+        );
+      }
+    });
+
+    jQuery.when(...promises).then(() => { processData(chart); });
+  }
+
+  function processData(chart) {
     // console.log('Process data ...');
     let group = {}, dataset = [], index;
 
-    console.log(chart);
     // Se agrupan indicadores
     chart.indicators.forEach((indicator) => {
       // console.log(indicator);
-      gdata[indicator.id].data.forEach((value) => {
+      STORAGE[indicator.id].data.forEach((value) => {
 
         index = group[value[0]];
 
@@ -32727,16 +33142,12 @@ function generateCharts(element) {
       dataset.push(group[item]);
     }
 
-    return renderCallback(chart, dataset);
+    return renderCharts(chart, dataset);
   }
 
   function renderCharts(chart, data) {
-    // Se agrega titulo
-    let modulo = Modal.add.title({
-      settings: {type: 'title2', text: chart.title},
-      styles:   {color: Modal.variables.colors.gobar_dark, textAlign: 'center'}
-    });
-    chartsContainer.appendChild(modulo);
+    let chartComponent = document.getElementById(chart.id);
+        chartComponent.querySelector('.loading').remove();
 
     ////////////////////////////////////////////////////////////////////////////
     // Render LineChart
@@ -32825,7 +33236,7 @@ function generateCharts(element) {
     // se crea SVG
     ////////////////////////////////////////////////////////////////////////////
 
-    let svg = d3.select('#chartsContainer .charts').append('svg')
+    let svg = d3.select(`#${ chart.id } .chart-svg`).append('svg')
       .attr('width', chartWidth + chartMargin.left + chartMargin.right)
       .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
 
@@ -32875,7 +33286,7 @@ function generateCharts(element) {
 
     chartLines.append('path')
       .attr('class', 'line')
-      .attr('stroke-dasharray', (d, i) => { return proccessTypeLine(chart.indicators[i].typeLine); })
+      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(chart.indicators[i].typeLine); })
       .attr('d', (d) => chartLine(d.values))
       .style('fill', 'none')
       .attr('clip-path', 'url(#clip)')
@@ -33057,210 +33468,46 @@ function generateCharts(element) {
     }
   }
 
-  downloadData(processData, renderCharts);
-}
-
-// Esta función inicia la aplicación.
-////////////////////////////////////////////////////////////////////////////////
-
-function start() {
-  downloadFile('./public/data/cards.json', 'cards').then(() => {  // Se renderiza cardsContainer y chartsContainer
-    let modules = [
-      {name: 'cards', render: () => Modal.add.subContainer({
-        settings:  {type: 'section'},
-        attr:      {id: 'cardsContainer'},
-        styles:   {width: '100%', zIndex: 1},
-        childrens: [
-          Modal.add.title({
-            settings:  {type: 'title2', text: 'Categorías'},
-            styles:    {display: 'none'}
-          }),
-          Modal.add.subContainer({
-            settings: {type: 'default'},
-            attr:     {class: 'mod-line-line cards'},
-            styles:   {flexWrap: 'wrap', justifyContent: 'center', backgroundColor: 'white'}
-          })
-        ]
-      })},
-      {name: 'charts', render: () => Modal.add.subContainer({
-        settings: {type: 'section'},
-        attr:     {id: 'chartsContainer'},
-        styles:   {width: '100%', zIndex: 3, display: 'none'},
-        childrens: [
-          Modal.add.title({
-            settings:  {type: 'title2', text: 'Gráficos'},
-            styles:    {display: 'none'},
-          }),
-          Modal.add.link({
-            settings: {type: 'link', text: '<i class="fa fa-arrow-left" aria-hidden="true"></i> Volver'},
-            attr:     {href: '#', onclick: 'changeView("cards");'}
-          }),
-          Modal.add.subContainer({
-            settings: {type: 'default'},
-            attr:     {class: 'mod-col-col strictCenter charts'},
-            styles:   {width: '100%', backgroundColor: 'white', boxSizing: 'border-box'},
-          })
-        ]
-      })}
-    ];
-
-    modules.forEach((module) => { document.querySelector('#modal_contenido').append(module.render()); });
-  }).then(renderCards);
-}
-
-// Esta función descarga un archivo y devuelve una promesa.
-////////////////////////////////////////////////////////////////////////////////
-
-function downloadFile(path, name) {
-  return new Promise((success) => {
-    d3.json(path, (data) => {
-      gdata[name] = data;
-
-      success();
-    });
-  });
-}
-
-// Esta función parsea el formato de tipo de fecha.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseFormatDate(format, date) {
-  date = moment(date);
-
-  switch (format) {
-    case 'R/P1Y':
-      return date.format('YYYY');
-    case 'R/P6M':
-      let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
-          semester = Math.round(semester(date.format('M')));
-
-      return `${ semester }º semestre de ${ date.format('YYYY') }`;
-    case 'R/P3M':
-      let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
-          trimester = Math.round(trimester(date.format('M')));
-
-      return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
-    case 'R/P1M':
-      return date.format('MMMM [de] YYYY');
-    case 'R/P1D':
-      return date.format('D [de] MMMM [de] YYYY');
-    default:
-      return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
-  }
-}
-
-// Esta función parsea el el formato de tipo de unidad.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseValueIndicator(format, value) {
-  value = value.toFixed(2);
-
-  switch (format) {
-    case 'Porcentaje':
-      return `${ value }%`;
-    default:
-      return value; // TODO ##0002 - Definir valor por defecto
-  }
-}
-
-// Esta función cambia la vista a los gráficos.
-////////////////////////////////////////////////////////////////////////////////
-
-// function animateAnchor(target) {
-//   $('body').animate({ scrollTop: $(target).offset().top }, 500);
-// }
-
-function changeView(container) {
-
-  if (container === 'charts') {
-    document.getElementById('chartsContainer').style.display = 'block';
-  } else {
-    document.getElementById('chartsContainer').style.display = 'none';
-  }
+  renderPreviewCharts();
 }
 
 // Esta función renderiza las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
 
 function renderCards() {
-  let modalComponent = [];
 
-  gdata.cards.forEach((card) => {
+  STORAGE.cards.forEach((card) => {
 
-    let cardComponent = Modal.add.subContainer({
-      settings:  {type: 'card'},
-      attr:      {id: card.id, class: 'mod-col-col strictCenter'},
-      styles:    {width: '250px', margin: '0 10px 20px 10px', padding: '20px 20px', position: 'relative'},
-      childrens: [
-        Modal.add.title({
-          settings: {type: 'title3', text: card.title},
-          // attr:     {class: 'flex'},
-          styles:   {color: Modal.variables.colors.gobar_dark, textAlign: 'center', height: 'calc((1.75rem * 1.2) * 2)'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}, styles: {borderBottom: `1px solid ${ Modal.variables.colors.base }`}}),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-        Modal.add.title({
-          settings: {type: 'title4', text: card.name},
-          // attr:     {class: 'flex'},
-          styles:   {color: Modal.variables.colors.base_contraste, textAlign: 'center', height: 'calc((1.5rem * 1.2) * 2)'}
-        }),
-        Modal.add.paragraph({
-          settings: {type: 'default', text: ''},
-          attr:     {id: 'frequency'},
-          styles:   {textAlign: 'center'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-        Modal.add.paragraph({
-          settings: {type: 'big', text: ''},
-          attr:     {id: 'units_representation'},
-          styles:   {color: Modal.variables.colors.gobar_dark, lineHeight: '1'}
-        }),
-        Modal.add.paragraph({
-          settings: {type: 'default', text: ''},
-          attr:     {id: 'units'},
-          styles:   {textAlign: 'center'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-        Modal.add.image({
-          styles: {height: '40px', width: '50%'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-        Modal.add.link({
-          settings:   {type: 'block', text: ''},
-          styles:     {width: '100%'},
-          childrens:  [
-            Modal.add.button({
-              settings: {type: 'roundSmall', text: 'Ver más gráficos'},
-              attr:     {id: card.id, onclick: 'generateCharts(this); changeView("charts");'},
-              styles:   {width: '100%'}
-            })
-          ]
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-        Modal.add.link({
-          settings:   {type: 'link', text: '<i class="fa fa-download" aria-hidden="true"></i> Descargar datos'},
-          attr:       {href: card.download, download: ''},
-          styles:     {width: '100%', textAlign: 'center', margin: '0'}
-        }),
-        Modal.add.subContainer({
-          settings:  {type: 'default'},
-          attr:      {class: 'loading flex'},
-          styles:    {position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white', zIndex: 2, borderRadius: '4px'},
-          childrens: [
-            Modal.add.paragraph({
-              settings: {type: 'default', text: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'}
-            })
-          ]
-        })
-      ]
-    });
+    let cardComponent = document.createElement('div');
+        cardComponent.setAttribute('id', card.id);
+        cardComponent.classList.add('card');
+        cardComponent.innerHTML = `<h3>${ card.title }</h3>
+                                   <div class="break-line"><br><br><hr><br><br></div>
+                                   <h4>${ card.name }</h4>
+                                   <div class="break-line"><br></div>
+                                   <p id="frequency"></p>
+                                   <div class="break-line"><br><br></div>
+                                   <p id="units_representation"></p>
+                                   <div class="break-line"><br></div>
+                                   <p id="units"></p>
+                                   <div class="break-line"><br></div>
+                                   <img src="#" />
+                                   <div class="break-line"><br><br><br></div>
+                                   <button class="button" onclick="changeView('charts'); generateCharts(this);">
+                                      <span class="button-waves">Ver más gráficos</span>
+                                   </button>
+                                   <div class="break-line"><br></div>
+                                   <a href="${ card.download }" class="link" download><i class="fa fa-download" aria-hidden="true"></i> Descargar datos</a>
+                                   <div class="loading flex">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                   </div>`;
 
-    document.querySelector('#cardsContainer .cards').appendChild(cardComponent);
+    document.querySelector('#cardsContainer #cards').append(cardComponent);
 
     downloadFile(`./public/data/series/${ card.id }.json`, card.id)
       .then(() => {
-        let data = gdata[card.id].data,
-            metadata = gdata[card.id].metadata;
+        let data     = STORAGE[card.id].data,
+            metadata = STORAGE[card.id].metadata;
 
         // Se agrega data de la API
         ////////////////////////////////////////////////////////////////////////
@@ -33272,8 +33519,13 @@ function renderCards() {
             cardComponent.querySelector('.loading').remove();
       });
   });
+}
 
-  return modalComponent;
+// Esta función inicia la aplicación.
+////////////////////////////////////////////////////////////////////////////////
+
+function start() {
+  downloadFile('./public/data/cards.json', 'cards').then(renderCards);
 }
 
 // // Is Document Ready

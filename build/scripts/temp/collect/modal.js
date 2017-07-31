@@ -25,7 +25,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // Check 09.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
-const randomString = (quantity) => {
+function randomString(quantity) {
   let text = '',
       possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -36,7 +36,7 @@ const randomString = (quantity) => {
   return text;
 }
 // Check 05.07.2017 - Sobreescribe los atributos de un objeto en otro
-const mergeStructure = (target, source) => {
+function mergeStructure(target, source) {
   return {
     settings:   jQuery.extend(target.settings, source.settings),
     attr:       (source.hasOwnProperty('attr'))?(source.attr):({}),
@@ -45,7 +45,7 @@ const mergeStructure = (target, source) => {
   };
 };
 // Check 05.07.2017 - Inyecta los estilos de un componente
-const injectStyles = (component, styles) => {
+function injectStyles(component, styles) {
 
   for (let style in styles) {
     component.style[style] = styles[style];
@@ -54,7 +54,7 @@ const injectStyles = (component, styles) => {
   return true;
 };
 // Check 05.07.2017 - Inyecta los atributos de un componente
-const injectAttributes = (component, attributes) => {
+function injectAttributes(component, attributes) {
 
   for (let attr in attributes) {
     if (attr === 'class') {
@@ -69,7 +69,7 @@ const injectAttributes = (component, attributes) => {
   return true;
 };
 // Check 05.07.2017 - Inyecta los componentes hijos de un componente
-const injectChildrens = (component, childrens) => {
+function injectChildrens(component, childrens) {
   childrens.forEach((children) => {
     component.appendChild(children);
   });
@@ -77,20 +77,20 @@ const injectChildrens = (component, childrens) => {
   return true;
 };
 // Check 05.07.2017 - Muesta el componente cuando el mouse esta dentro del modulo
-const buttonShareShow = (component) => {
+function buttonShareShow(component) {
   component.querySelector('.modalShare').style.opacity = 1;
 
   return true;
 };
 // Check 05.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
-const buttonShareHide = (component) => {
+function buttonShareHide(component) {
   component.querySelector('.modalShare').style.opacity = '';
   component.querySelector('.modalShare input').checked = false;
 
   return true;
 };
 // Check 05.07.2017 - Comparte en redes sociales un modulo especifico
-const share = (social, elemento) => {
+function share(social, elemento) {
   let node = elemento.parentNode.parentNode.parentNode,
       nroModule = node.getAttribute('module-nro'),
       date = new Date();
@@ -125,21 +125,21 @@ const share = (social, elemento) => {
   });
 };
 // Check 05.07.2017 - Muesta el contenedor para embeber el modulo
-const embebedContainerShow = (component) => {
+function embebedContainerShow(component) {
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.opacity = '';
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.visibility = '';
 
   return true;
 };
 // Check 05.07.2017 - Oculta el contenedor para embeber el modulo
-const embebedContainerHide = (component) => {
+function embebedContainerHide(component) {
   component.parentNode.style.opacity = 0;
   component.parentNode.style.visibility = 'hidden';
 
   return true;
 };
 // Check 05.07.2017 - Guarda en el portapapeles el texto de un elemento
-const copyText = (elemento) => {
+function copyText(elemento) {
   let copy = elemento.parentNode.querySelector('input').select();
 
   window.document.execCommand('copy');

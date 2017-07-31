@@ -3,6 +3,7 @@
   Descripción: Sistema de modularización de contenido
   Última actualización: 24.07.2017
   Últimas modificaciones:
+    - Se quitaron estilos de titulos.
     - Se modificó el tamaño tipográfico de los botones de 14px a 1rem.
     - Se quito MAYUSCULAS en los botones.
 */
@@ -22,6 +23,7 @@ html {
 html,
 body {
   font-family: Roboto;
+  line-height: 1;
 }
 
 /*
@@ -80,9 +82,29 @@ body {
 }
 
 /*
-    --------------------------------------------------------- Title - 06.07.2017
+    ---------------------------------------------------- BreakLines - 31.07.2017
 */
 
+.break-line {
+  width: 100%;
+
+  & > br {
+    content: "";
+    height: 10px;
+    display: block;
+  }
+
+  & > hr {
+    margin: 0;
+    border: 1px solid var(--base);
+  }
+}
+
+/*
+    --------------------------------------------------------- Title - 31.07.2017
+*/
+
+/*
 .title {
   color: var(--base);
   font-weight: 500;
@@ -119,12 +141,13 @@ h5.title {
 h6.title {
   font-size: 1rem;
 }
-
-/*
-    ---------------------------------------------------- Containers - 06.07.2017
 */
 
-.modalContainer {
+/*
+    ---------------------------------------------------- Containers - 31.07.2017
+*/
+
+.modal-container {
   background-color: white;
   position: relative;
   padding: 60px 0;
@@ -135,7 +158,7 @@ h6.title {
   }
 }
 
-.modalResponsive {
+.modal-responsive {
   width: 100%;
   max-width: 550px;
   margin: 0 auto;
@@ -152,14 +175,6 @@ h6.title {
   }
 }
 
-.cardContainer {
-  background: white;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
 /*
     ---------------------------------------------------- Paragraphs - 06.07.2017
 */
@@ -168,7 +183,6 @@ h6.title {
   text-align: center;
   color: var(--base);
   font-size: 14px;
-  line-height: 1.5;
   font-weight: 400;
   margin: 0;
 
@@ -191,7 +205,6 @@ h6.title {
     text-align: center;
     color: var(--base);
     font-size: 14px;
-    line-height: 1;
     font-weight: 600;
     margin: 0;
     text-transform: uppercase;
@@ -204,26 +217,11 @@ h6.title {
 }
 
 /*
-    ---------------------------------------------------- BreakLines - 06.07.2017
-*/
-
-.breakLine {
-  width: 100%;
-
-  & > hr {
-    margin: 0;
-    border: none;
-    height: 0.9rem;
-  }
-}
-
-/*
     ----------------------------------------------------- Increment - 06.07.2017
 */
 
 .increment {
   text-align: center;
-  line-height: 1;
 
   &.incrSmall {
     font-size: 1rem;
@@ -365,7 +363,7 @@ h6.title {
 }
 
 .strictCenter,
-.strictCenter > .modalResponsive {
+.strictCenter > .modal-responsive {
   align-items: center !important;
   justify-content: center !important;
 
@@ -398,30 +396,20 @@ h6.title {
 */
 
 .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: row nowrap;
   border: none;
   cursor: pointer;
   outline: none;
   position: relative;
-  margin: 0 auto;
-  padding: 0;
-  transition: background-color 0.25s ease-out;
-  width: 100%;
-  font-size: 1rem;
-
-  @media (--xsmall) {
-    width: initial;
-  }
 
   & > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-flow: row nowrap;
-    width: 100%;
     transition: background-color 0.25s ease-out;
 
     &:hover {
@@ -526,7 +514,7 @@ $menu-items: 3;
   transition: transform 200ms;
 }
 
-.modalShare {
+.modal-share {
   $height: 50px;
 
   width: calc(100% - 40px);

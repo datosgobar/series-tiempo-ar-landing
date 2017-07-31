@@ -1,76 +1,154 @@
-// Global Variables
+// Se define una constante en donde se va a alojar toda la data.
 ////////////////////////////////////////////////////////////////////////////////
 
-let gdata = {};
+const STORAGE = {};
 
 // Esta función parsea el el formato de tipo de linea.
 ////////////////////////////////////////////////////////////////////////////////
 
-function proccessTypeLine(type) {
+function parseTypeLine(type) {
+
   switch (type) {
     case 'solid': return null;
     case 'dashed': return '5, 5';
-    default: return null;
+    default: console.error(`El tipo de linea ${ type } no es válido.`); return null;
   }
 }
 
-// Esta renderiza los gráficos.
+// Esta función descarga un archivo y devuelve una promesa.
+////////////////////////////////////////////////////////////////////////////////
+
+function downloadFile(path, name) {
+  return new Promise((success) => {
+    d3.json(path, (data) => {
+      STORAGE[name] = data;
+
+      success();
+    });
+  });
+}
+
+// Esta función parsea el formato de tipo de fecha.
+////////////////////////////////////////////////////////////////////////////////
+
+function parseFormatDate(format, date) {
+  date = moment(date);
+
+  switch (format) {
+    case 'R/P1Y':
+      return date.format('YYYY');
+    case 'R/P6M':
+      let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
+          semester = Math.round(semester(date.format('M')));
+
+      return `${ semester }º semestre de ${ date.format('YYYY') }`;
+    case 'R/P3M':
+      let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
+          trimester = Math.round(trimester(date.format('M')));
+
+      return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+    case 'R/P1M':
+      return date.format('MMMM [de] YYYY');
+    case 'R/P1D':
+      return date.format('D [de] MMMM [de] YYYY');
+    default:
+      return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
+  }
+}
+
+// Esta función parsea el el formato de tipo de unidad.
+////////////////////////////////////////////////////////////////////////////////
+
+function parseValueIndicator(format, value) {
+  value = value.toFixed(2);
+
+  switch (format) {
+    case 'Porcentaje':
+      return `${ value }%`;
+    default:
+      return value; // TODO ##0002 - Definir valor por defecto
+  }
+}
+
+// Esta función cambia la vista a los gráficos.
+////////////////////////////////////////////////////////////////////////////////
+
+function changeView(container) {
+
+  if (container === 'charts') {
+    $('#chartsContainer').show();
+    // $('#chartsContainer').fadeIn(250);
+  } else {
+    // $('#chartsContainer').hide();
+    $('#chartsContainer').fadeOut(250);
+  }
+}
+
+// Esta función renderiza los gráficos.
 ////////////////////////////////////////////////////////////////////////////////
 
 function generateCharts(element) {
-  // console.log('Se solicita generación de graficos ...');
-
-  let id = element.getAttribute('id'),
-      chartsContainer = window.document.querySelector('#chartsContainer .charts');
+  let id = element.parentNode.getAttribute('id'),
+      chartsContainer = document.querySelector('#chartsContainer #charts');
       chartsContainer.innerHTML = '';
 
-  function downloadData(processData, renderChart) {
-    // console.log('Se descargan indicadores faltantes para generación de grafico');
-    let charts, indicators, length, count;
+  function renderPreviewCharts() {
+    STORAGE.cards.forEach((card) => {
 
-    gdata.cards.forEach((card) => {
-
-      if (card.id === id) { // Se identifica la tarjeta seleccionada y se consulta data
-        charts = card.charts;
+      if (card.id === id) {
+        let charts = card.charts;
 
         charts.forEach((chart) => {
 
-          indicators = chart.indicators;
-          count = 0;
-          length = indicators.length - 1;
+          let chartComponente = document.createElement('div');
+              chartComponente.setAttribute('id', chart.id);
+              chartComponente.classList.add('chart');
+              chartComponente.innerHTML = `<div class="head">
+                                              <h3>${ chart.title }</h3>
+                                              <span id="references"></span>
+                                           </div>
+                                           <div class="break-line"><br></div>
+                                           <p class="paragraph">${ chart.description }</p>
+                                           <div class="break-line"><br></div>
+                                           <div class="chart-svg"></div>
+                                           <div class="break-line"><br></div>
+                                           <div class="loading flex">
+                                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                           </div>`;
 
-          // var promises = [];
-          indicators.forEach((indicator, index) => { // Se guarda información de cada indicador
-            // console.log(indicator);
-            if (!gdata[indicator.id]) {
-              // console.log('download');
-              /*var promise = */downloadFile(`./public/data/series/${ indicator.id }.json`, indicator.id).then(() => {
-                // console.log('finish download');
-                // console.log(count);
-                // console.log(length);
-                if (length === count) { console.log('render');processData(chart, renderChart); } else { count++; console.log(count, '/', length);}
-              });
-              // promises.push(promise)
-            } else {
-              // console.log('not download');
-              if (length === count) { processData(chart, renderChart); } else { count++; /*console.log(count, '/', indicators.length); */}
-            }
-          });
-          // $.when.call(promises)
+          chartsContainer.append(chartComponente);
+
+          downloadData(chart);
         });
       }
     });
   }
 
-  function processData(chart, renderCallback) {
+  function downloadData(chart) {
+    let indicators = chart.indicators,
+        length = indicators.length - 1,
+        count = 0, promises = [];
+
+    indicators.forEach((indicator, index) => { // Se guarda información de cada indicador
+
+      if (!STORAGE[indicator.id]) {
+        promises.push(
+          downloadFile(`./public/data/series/${ indicator.id }.json`, indicator.id)
+        );
+      }
+    });
+
+    jQuery.when(...promises).then(() => { processData(chart); });
+  }
+
+  function processData(chart) {
     // console.log('Process data ...');
     let group = {}, dataset = [], index;
 
-    console.log(chart);
     // Se agrupan indicadores
     chart.indicators.forEach((indicator) => {
       // console.log(indicator);
-      gdata[indicator.id].data.forEach((value) => {
+      STORAGE[indicator.id].data.forEach((value) => {
 
         index = group[value[0]];
 
@@ -87,16 +165,12 @@ function generateCharts(element) {
       dataset.push(group[item]);
     }
 
-    return renderCallback(chart, dataset);
+    return renderCharts(chart, dataset);
   }
 
   function renderCharts(chart, data) {
-    // Se agrega titulo
-    let modulo = Modal.add.title({
-      settings: {type: 'title2', text: chart.title},
-      styles:   {color: Modal.variables.colors.gobar_dark, textAlign: 'center'}
-    });
-    chartsContainer.appendChild(modulo);
+    let chartComponent = document.getElementById(chart.id);
+        chartComponent.querySelector('.loading').remove();
 
     ////////////////////////////////////////////////////////////////////////////
     // Render LineChart
@@ -185,7 +259,7 @@ function generateCharts(element) {
     // se crea SVG
     ////////////////////////////////////////////////////////////////////////////
 
-    let svg = d3.select('#chartsContainer .charts').append('svg')
+    let svg = d3.select(`#${ chart.id } .chart-svg`).append('svg')
       .attr('width', chartWidth + chartMargin.left + chartMargin.right)
       .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
 
@@ -235,7 +309,7 @@ function generateCharts(element) {
 
     chartLines.append('path')
       .attr('class', 'line')
-      .attr('stroke-dasharray', (d, i) => { return proccessTypeLine(chart.indicators[i].typeLine); })
+      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(chart.indicators[i].typeLine); })
       .attr('d', (d) => chartLine(d.values))
       .style('fill', 'none')
       .attr('clip-path', 'url(#clip)')
@@ -417,210 +491,46 @@ function generateCharts(element) {
     }
   }
 
-  downloadData(processData, renderCharts);
-}
-
-// Esta función inicia la aplicación.
-////////////////////////////////////////////////////////////////////////////////
-
-function start() {
-  downloadFile('./public/data/cards.json', 'cards').then(() => {  // Se renderiza cardsContainer y chartsContainer
-    let modules = [
-      {name: 'cards', render: () => Modal.add.subContainer({
-        settings:  {type: 'section'},
-        attr:      {id: 'cardsContainer'},
-        styles:   {width: '100%', zIndex: 1},
-        childrens: [
-          Modal.add.title({
-            settings:  {type: 'title2', text: 'Categorías'},
-            styles:    {display: 'none'}
-          }),
-          Modal.add.subContainer({
-            settings: {type: 'default'},
-            attr:     {class: 'mod-line-line cards'},
-            styles:   {flexWrap: 'wrap', justifyContent: 'center', backgroundColor: 'white'}
-          })
-        ]
-      })},
-      {name: 'charts', render: () => Modal.add.subContainer({
-        settings: {type: 'section'},
-        attr:     {id: 'chartsContainer'},
-        styles:   {width: '100%', zIndex: 3, display: 'none'},
-        childrens: [
-          Modal.add.title({
-            settings:  {type: 'title2', text: 'Gráficos'},
-            styles:    {display: 'none'},
-          }),
-          Modal.add.link({
-            settings: {type: 'link', text: '<i class="fa fa-arrow-left" aria-hidden="true"></i> Volver'},
-            attr:     {href: '#', onclick: 'changeView("cards");'}
-          }),
-          Modal.add.subContainer({
-            settings: {type: 'default'},
-            attr:     {class: 'mod-col-col strictCenter charts'},
-            styles:   {width: '100%', backgroundColor: 'white', boxSizing: 'border-box'},
-          })
-        ]
-      })}
-    ];
-
-    modules.forEach((module) => { document.querySelector('#modal_contenido').append(module.render()); });
-  }).then(renderCards);
-}
-
-// Esta función descarga un archivo y devuelve una promesa.
-////////////////////////////////////////////////////////////////////////////////
-
-function downloadFile(path, name) {
-  return new Promise((success) => {
-    d3.json(path, (data) => {
-      gdata[name] = data;
-
-      success();
-    });
-  });
-}
-
-// Esta función parsea el formato de tipo de fecha.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseFormatDate(format, date) {
-  date = moment(date);
-
-  switch (format) {
-    case 'R/P1Y':
-      return date.format('YYYY');
-    case 'R/P6M':
-      let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
-          semester = Math.round(semester(date.format('M')));
-
-      return `${ semester }º semestre de ${ date.format('YYYY') }`;
-    case 'R/P3M':
-      let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
-          trimester = Math.round(trimester(date.format('M')));
-
-      return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
-    case 'R/P1M':
-      return date.format('MMMM [de] YYYY');
-    case 'R/P1D':
-      return date.format('D [de] MMMM [de] YYYY');
-    default:
-      return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
-  }
-}
-
-// Esta función parsea el el formato de tipo de unidad.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseValueIndicator(format, value) {
-  value = value.toFixed(2);
-
-  switch (format) {
-    case 'Porcentaje':
-      return `${ value }%`;
-    default:
-      return value; // TODO ##0002 - Definir valor por defecto
-  }
-}
-
-// Esta función cambia la vista a los gráficos.
-////////////////////////////////////////////////////////////////////////////////
-
-// function animateAnchor(target) {
-//   $('body').animate({ scrollTop: $(target).offset().top }, 500);
-// }
-
-function changeView(container) {
-
-  if (container === 'charts') {
-    document.getElementById('chartsContainer').style.display = 'block';
-  } else {
-    document.getElementById('chartsContainer').style.display = 'none';
-  }
+  renderPreviewCharts();
 }
 
 // Esta función renderiza las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
 
 function renderCards() {
-  let modalComponent = [];
 
-  gdata.cards.forEach((card) => {
+  STORAGE.cards.forEach((card) => {
 
-    let cardComponent = Modal.add.subContainer({
-      settings:  {type: 'card'},
-      attr:      {id: card.id, class: 'mod-col-col strictCenter'},
-      styles:    {width: '250px', margin: '0 10px 20px 10px', padding: '20px 20px', position: 'relative'},
-      childrens: [
-        Modal.add.title({
-          settings: {type: 'title3', text: card.title},
-          // attr:     {class: 'flex'},
-          styles:   {color: Modal.variables.colors.gobar_dark, textAlign: 'center', height: 'calc((1.75rem * 1.2) * 2)'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}, styles: {borderBottom: `1px solid ${ Modal.variables.colors.base }`}}),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-        Modal.add.title({
-          settings: {type: 'title4', text: card.name},
-          // attr:     {class: 'flex'},
-          styles:   {color: Modal.variables.colors.base_contraste, textAlign: 'center', height: 'calc((1.5rem * 1.2) * 2)'}
-        }),
-        Modal.add.paragraph({
-          settings: {type: 'default', text: ''},
-          attr:     {id: 'frequency'},
-          styles:   {textAlign: 'center'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-        Modal.add.paragraph({
-          settings: {type: 'big', text: ''},
-          attr:     {id: 'units_representation'},
-          styles:   {color: Modal.variables.colors.gobar_dark, lineHeight: '1'}
-        }),
-        Modal.add.paragraph({
-          settings: {type: 'default', text: ''},
-          attr:     {id: 'units'},
-          styles:   {textAlign: 'center'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-        Modal.add.image({
-          styles: {height: '40px', width: '50%'}
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 2}}),
-        Modal.add.link({
-          settings:   {type: 'block', text: ''},
-          styles:     {width: '100%'},
-          childrens:  [
-            Modal.add.button({
-              settings: {type: 'roundSmall', text: 'Ver más gráficos'},
-              attr:     {id: card.id, onclick: 'generateCharts(this); changeView("charts");'},
-              styles:   {width: '100%'}
-            })
-          ]
-        }),
-        Modal.add.space({settings: {type: 'allways', quantity: 1}}),
-        Modal.add.link({
-          settings:   {type: 'link', text: '<i class="fa fa-download" aria-hidden="true"></i> Descargar datos'},
-          attr:       {href: card.download, download: ''},
-          styles:     {width: '100%', textAlign: 'center', margin: '0'}
-        }),
-        Modal.add.subContainer({
-          settings:  {type: 'default'},
-          attr:      {class: 'loading flex'},
-          styles:    {position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'white', zIndex: 2, borderRadius: '4px'},
-          childrens: [
-            Modal.add.paragraph({
-              settings: {type: 'default', text: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'}
-            })
-          ]
-        })
-      ]
-    });
+    let cardComponent = document.createElement('div');
+        cardComponent.setAttribute('id', card.id);
+        cardComponent.classList.add('card');
+        cardComponent.innerHTML = `<h3>${ card.title }</h3>
+                                   <div class="break-line"><br><br><hr><br><br></div>
+                                   <h4>${ card.name }</h4>
+                                   <div class="break-line"><br></div>
+                                   <p id="frequency"></p>
+                                   <div class="break-line"><br><br></div>
+                                   <p id="units_representation"></p>
+                                   <div class="break-line"><br></div>
+                                   <p id="units"></p>
+                                   <div class="break-line"><br></div>
+                                   <img src="#" />
+                                   <div class="break-line"><br><br><br></div>
+                                   <button class="button" onclick="changeView('charts'); generateCharts(this);">
+                                      <span class="button-waves">Ver más gráficos</span>
+                                   </button>
+                                   <div class="break-line"><br></div>
+                                   <a href="${ card.download }" class="link" download><i class="fa fa-download" aria-hidden="true"></i> Descargar datos</a>
+                                   <div class="loading flex">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                   </div>`;
 
-    document.querySelector('#cardsContainer .cards').appendChild(cardComponent);
+    document.querySelector('#cardsContainer #cards').append(cardComponent);
 
     downloadFile(`./public/data/series/${ card.id }.json`, card.id)
       .then(() => {
-        let data = gdata[card.id].data,
-            metadata = gdata[card.id].metadata;
+        let data     = STORAGE[card.id].data,
+            metadata = STORAGE[card.id].metadata;
 
         // Se agrega data de la API
         ////////////////////////////////////////////////////////////////////////
@@ -632,8 +542,13 @@ function renderCards() {
             cardComponent.querySelector('.loading').remove();
       });
   });
+}
 
-  return modalComponent;
+// Esta función inicia la aplicación.
+////////////////////////////////////////////////////////////////////////////////
+
+function start() {
+  downloadFile('./public/data/cards.json', 'cards').then(renderCards);
 }
 
 // // Is Document Ready

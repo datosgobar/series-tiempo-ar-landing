@@ -7,7 +7,9 @@
     "units_representation": "",
     "charts": [
       {
+        "id": "chart_1",
         "title": "Producto Bruto Interno",
+        "description": "Esta es la descripción del gráfico.",
         "type": "line",
         "indicators": [
           {
@@ -20,7 +22,9 @@
         "laps": "24"
       },
       {
+        "id": "chart_2",
         "title": "Oferta y Demanda Globales por componente",
+        "description": "Esta es la descripción del gráfico.",
         "type": "line",
         "indicators": [
           {
@@ -57,7 +61,9 @@
         "laps": "24"
       },
       {
+        "id": "chart_3",
         "title": "Estimador mensual de la actividad económica",
+        "description": "Esta es la descripción del gráfico.",
         "type": "line",
         "indicators": [
           {
@@ -76,7 +82,9 @@
         "laps": "24"
       },
       {
+        "id": "chart_4",
         "title": "Actividad industrial y de la construcción",
+        "description": "Esta es la descripción del gráfico.",
         "type": "line",
         "indicators": [
           {

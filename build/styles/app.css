@@ -1,13 +1,178 @@
 body {
-  background-color: var(--baseLight);
   min-height: 100vh;
   padding: 0;
   max-width: 816px;
   margin: 0 auto;
 }
 
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Contenedor Tarjetas
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+#cardsContainer {
+  z-index: 1;
+}
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Tarjetas
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+#cards .card {
+  width: 250px;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid var(--base);
+  /*box-shadow: 0 0 5px silver;*/
+  padding: 20px 10px 30px;
+  text-align: center;
+  box-sizing: border-box;
+  margin: 10px;
+  position: relative;
+
+  & > h3 {
+    margin: 0;
+    font-size: 22px;
+    color: var(--gobarDark);
+    font-weight: 500;
+    height: calc(25px * 2);
+  }
+
+  & > h4 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--baseDark);
+    font-weight: 800;
+  }
+
+  & > #frequency {
+    margin: 0;
+    font-size: 14px;
+    color: var(--base);
+    font-weight: 600;
+  }
+
+  & > #units_representation {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--gobarDark);
+  }
+
+  & > #units {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--base);
+  }
+
+  & > img {
+    margin: 0;
+    width: 50%;
+  }
+
+  & > button {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    height: 30px;
+    background-color: var(--gobarDark);
+    border-radius: 15px;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+
+    & > span {
+      border-radius: 15px;
+    }
+  }
+
+  & > .link {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & > .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 4px;
+  }
+}
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Contenedor Gráficos
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
 #chartsContainer {
+  background-color: white;
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  transition: display 0.25s ease-out;
+
+  & > .back-link {
+    display: block;
+    margin: 10px 20px;
+  }
+}
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Gráficos
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+#charts .chart {
+  width: 100%;
+  /*height: 100px;*/
+  border: 1px solid var(--base);
+  border-radius: 4px;
+  position: relative;
+  margin: 10px 0;
+
+  & > .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 0;
+
+    & > h3 {
+      text-align: left;
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    & > #references {}
+  }
+
+  & > .paragraph {
+    margin: 0 10px;
+  }
+
+  & > .chart-svg {}
+
+  & > .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 4px;
+  }
 }
