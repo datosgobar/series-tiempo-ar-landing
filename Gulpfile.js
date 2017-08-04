@@ -25,16 +25,15 @@ const htmlalt          = require('posthtml-alt-always'); // Plugin para agregar 
 const htmlmin          = require('gulp-htmlmin'); // Plugin para minificar html
 const special          = require('gulp-special-html'); // Plugin para reemplazar caracteres especiales
 const babel            = require('gulp-babel'); // Plugin para compilar babel
-const uglify           = require('gulp-uglify'); // Plugin para minificar codigo JS
 const decomment        = require('gulp-decomment'); // Plugin para quitar comentarios
 const removeLogs       = require('gulp-removelogs'); // Plugin para quitar console.log
 const imagemin         = require('gulp-imagemin'); // Plugin para optimizar imagenes
 
 // Entorno
-let entorno = 'desarrollo';
+let entorno = 'dev';
 
-let config = { // opciones: desarrollo, produccion
-  isProd: (entorno === 'produccion') ? (true) : (false)
+let config = { // opciones: dev, prod
+  isProd: (entorno === 'prod') ? (true) : (false)
 };
 
 // Servidor
@@ -188,7 +187,7 @@ gulp.task('js_minify', () => {
   return gulp.src(routes)
     .pipe( plumber() )
     .pipe( gulpif(!entorno.isProd, sourcemaps.init()) )
-    .pipe( gulpif(entorno.isProd, uglify()) )
+    .pipe( gulpif(entorno.isProd, babel({ presets: ['babili'] }) ))
     .pipe( gulpif(entorno.isProd, removeLogs()) )
     .pipe( rename({ basename: 'app', extname: '.min.js' }) )
     .pipe( gulpif(!entorno.isProd, sourcemaps.write('.')) )

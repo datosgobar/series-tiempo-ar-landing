@@ -24,6 +24,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+// Check 02.08.2017 - Permite definir formato del número
+function formatNumber(n, p, m, d) {
+  let r = '\\d(?=(\\d{3})+' + (p > 0 ? '\\D' : '$') + ')',
+      v = n.toFixed(Math.max(0, p));
+  return (d ? v.replace('.', d) : v).replace(new RegExp(r, 'g'), '$&' + (m || ','));
+}
+
 // Check 09.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
 function randomString(quantity) {
   let text = '',

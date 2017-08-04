@@ -4,11 +4,11 @@
   --baseDark: #444;
   --gobarLigth: #17b2f8;
   --gobarDark: #0695d6;
-  --palette1: #14499e;
-  --palette2: #27b5f6;
-  --palette3: #02d57a;
-  --palette4: #ff8140;
-  --palette5: #ffbb42;
+  --palette1: #bdbdbd;
+  --palette2: '';
+  --palette3: '';
+  --palette4: '';
+  --palette5: '';
   --headerHeight: 72px;
   --footerHeight: 230px;
 }

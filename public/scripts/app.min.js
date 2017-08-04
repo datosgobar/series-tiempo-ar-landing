@@ -10870,18 +10870,17 @@ function axis(orient, scale) {
         tick = selection.selectAll(".tick").data(values, scale).order(),
         tickExit = tick.exit(),
         tickEnter = tick.enter().append("g").attr("class", "tick"),
-        line = tick.select("line"),
+        // line = tick.select("line"),
         text = tick.select("text");
 
     path = path.merge(path.enter().insert("path", ".tick")
-        .attr("class", "domain")
-        .attr("stroke", "#000"));
+        .attr("class", "domain"));
 
     tick = tick.merge(tickEnter);
 
-    line = line.merge(tickEnter.append("line")
-        .attr("stroke", "#000")
-        .attr(x + "2", k * tickSizeInner));
+    // line = line.merge(tickEnter.append("line")
+    //     .attr("stroke", "#000")
+    //     .attr(x + "2", k * tickSizeInner));
 
     text = text.merge(tickEnter.append("text")
         .attr("fill", "#000")
@@ -10891,7 +10890,7 @@ function axis(orient, scale) {
     if (context !== selection) {
       path = path.transition(context);
       tick = tick.transition(context);
-      line = line.transition(context);
+      // line = line.transition(context);
       text = text.transition(context);
 
       tickExit = tickExit.transition(context)
@@ -10905,17 +10904,16 @@ function axis(orient, scale) {
 
     tickExit.remove();
 
-    path
-        .attr("d", orient === left || orient == right
-            ? "M" + k * tickSizeOuter + "," + range0 + "H0.5V" + range1 + "H" + k * tickSizeOuter
-            : "M" + range0 + "," + k * tickSizeOuter + "V0.5H" + range1 + "V" + k * tickSizeOuter);
+    path.attr("d", orient === left || orient == right
+						? ''
+						// ? "M" + k * tickSizeOuter + "," + range0 + "H0.5V" + range1 + "H" + k * tickSizeOuter
+						: 'M' + range0 + ',' + k + 'H' + range1);
 
     tick
         .attr("opacity", 1)
         .attr("transform", function(d) { return transform(position(d)); });
 
-    line
-        .attr(x + "2", k * tickSizeInner);
+    // line.attr(x + "2", k * tickSizeInner);
 
     text
         .attr(x, k * spacing)
@@ -14545,9 +14543,10 @@ function brush$1(dim) {
       .enter().append("rect")
         .attr("class", "selection")
         .attr("cursor", cursors.selection)
-        .attr("fill", "#777")
-        .attr("fill-opacity", 0.3)
-        .attr("stroke", "#fff")
+        .attr("fill", null)
+				.attr("stroke", 'silver')
+				.attr('rx', 4)
+				.attr('ry', 4)
         .attr("shape-rendering", "crispEdges");
 
     var handle = group.selectAll(".handle")
@@ -14555,9 +14554,17 @@ function brush$1(dim) {
 
     handle.exit().remove();
 
-    handle.enter().append("rect")
-        .attr("class", function(d) { return "handle handle--" + d.type; })
-        .attr("cursor", function(d) { return cursors[d.type]; });
+		var hamburguer = handle.enter().append("g").attr('class', 'hangle-hamburger');
+				hamburguer.append('circle').attr('r', 15).attr('cx', 5).attr('cy', 7.5).attr('fill', 'white').attr('stroke', 'silver');
+				hamburguer.append('rect').attr('x', 0).attr('y', 0).attr('fill', 'gray').attr('height', '15').attr('width', '2');
+				hamburguer.append('rect').attr('x', 4).attr('y', 0).attr('fill', 'gray').attr('height', '15').attr('width', '2');
+				hamburguer.append('rect').attr('x', 8).attr('y', 0).attr('fill', 'gray').attr('height', '15').attr('width', '2');
+
+		handle.enter().append("circle")
+				.attr('r', 15)
+				.attr('fill', null)
+				.attr("class", function(d) { return "handle handle--" + d.type; })
+				.attr("cursor", function(d) { return cursors[d.type]; });
 
     group
         .each(redraw)
@@ -14610,6 +14617,9 @@ function brush$1(dim) {
         selection = local$$1(this).selection;
 
     if (selection) {
+			d3.select(this.parentNode).selectAll('.start-brush-date,.end-brush-date')
+				.style("display", null);
+
       group.selectAll(".selection")
           .style("display", null)
           .attr("x", selection[0][0])
@@ -14617,16 +14627,29 @@ function brush$1(dim) {
           .attr("width", selection[1][0] - selection[0][0])
           .attr("height", selection[1][1] - selection[0][1]);
 
+			group.selectAll(".hangle-hamburger")
+				.style("display", null)
+				.attr('transform', function(d) {
+					let x = (d.type === 'e')?(selection[1][0]):(selection[0][0] - 10);
+
+					return `translate(${ x }, 12.5)`;
+				});
+
       group.selectAll(".handle")
           .style("display", null)
-          .attr("x", function(d) { return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2; })
-          .attr("y", function(d) { return d.type[0] === "s" ? selection[1][1] - handleSize / 2 : selection[0][1] - handleSize / 2; })
-          .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
-          .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
-    }
+          .attr("cx", function(d) {
 
-    else {
-      group.selectAll(".selection,.handle")
+						return (d.type === 'e')?(selection[1][0] + 5):(selection[0][0] - 5);
+						// return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2;
+					})
+          .attr("cy", selection[1][1] / 2);
+          // .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
+          // .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
+    } else {
+			d3.select(this.parentNode).selectAll('.start-brush-date,.end-brush-date')
+				.style("display", "none");
+
+      group.selectAll(".selection,.handle,.hangle-hamburger")
           .style("display", "none")
           .attr("x", null)
           .attr("y", null)
@@ -16910,10 +16933,10 @@ var locale$1;
 
 
 defaultLocale({
-  decimal: ".",
-  thousands: ",",
+  decimal: ',',
+  thousands: '.',
   grouping: [3],
-  currency: ["$", ""]
+  currency: ['$', '']
 });
 
 function defaultLocale(definition) {
@@ -23177,19 +23200,15 @@ function formatLiteralPercent() {
 
 var locale$2;
 
-
-
-
-
 defaultLocale$1({
-  dateTime: "%x, %X",
-  date: "%-m/%-d/%Y",
-  time: "%-I:%M:%S %p",
+	dateTime: "%a %b %e %X %Y",
+  date: "%d/%m/%Y",
+  time: "%H:%M:%S",
   periods: ["AM", "PM"],
-  days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-  shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-  shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+  shortDays: ["Dom", "Lun", "Mar", "Mi", "Jue", "Vie", "Sab"],
+  months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+  shortMonths: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
 });
 
 function defaultLocale$1(definition) {
@@ -23245,37 +23264,26 @@ function calendar(year$$1, month$$1, week, day$$1, hour$$1, minute$$1, second$$1
       formatSecond = format(":%S"),
       formatMinute = format("%I:%M"),
       formatHour = format("%I %p"),
-      formatDay = format("%a %d"),
-      formatWeek = format("%b %d"),
-      formatMonth = format("%B"),
+      formatDay = format("%d %b %y"),
+      formatWeek = format("%d %b %y"),
+      formatMonth = format("%b %y"),
       formatYear = format("%Y");
 
   var tickIntervals = [
-    [second$$1,  1,      durationSecond],
-    [second$$1,  5,  5 * durationSecond],
-    [second$$1, 15, 15 * durationSecond],
-    [second$$1, 30, 30 * durationSecond],
-    [minute$$1,  1,      durationMinute],
-    [minute$$1,  5,  5 * durationMinute],
-    [minute$$1, 15, 15 * durationMinute],
-    [minute$$1, 30, 30 * durationMinute],
-    [  hour$$1,  1,      durationHour  ],
-    [  hour$$1,  3,  3 * durationHour  ],
-    [  hour$$1,  6,  6 * durationHour  ],
-    [  hour$$1, 12, 12 * durationHour  ],
     [   day$$1,  1,      durationDay   ],
     [   day$$1,  2,  2 * durationDay   ],
-    [  week,  1,      durationWeek  ],
+    [     week,  1,      durationWeek  ],
     [ month$$1,  1,      durationMonth ],
     [ month$$1,  3,  3 * durationMonth ],
+		// [ month$$1,  6,  6 * durationMonth ],
     [  year$$1,  1,      durationYear  ]
   ];
 
   function tickFormat(date$$1) {
-    return (second$$1(date$$1) < date$$1 ? formatMillisecond
+    return (/*second$$1(date$$1) < date$$1 ? formatMillisecond
         : minute$$1(date$$1) < date$$1 ? formatSecond
         : hour$$1(date$$1) < date$$1 ? formatMinute
-        : day$$1(date$$1) < date$$1 ? formatHour
+        : */day$$1(date$$1) < date$$1 ? formatHour
         : month$$1(date$$1) < date$$1 ? (week(date$$1) < date$$1 ? formatDay : formatWeek)
         : year$$1(date$$1) < date$$1 ? formatMonth
         : formatYear)(date$$1);
@@ -27188,6 +27196,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 // Funciones Globales del sitio
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+// Check 02.08.2017 - Permite definir formato del número
+function formatNumber(n, p, m, d) {
+  let r = '\\d(?=(\\d{3})+' + (p > 0 ? '\\D' : '$') + ')',
+      v = n.toFixed(Math.max(0, p));
+  return (d ? v.replace('.', d) : v).replace(new RegExp(r, 'g'), '$&' + (m || ','));
+}
 
 // Check 09.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
 function randomString(quantity) {
@@ -32564,11 +32579,11 @@ hooks.prototype             = proto;
 //! locale : Spanish [es]
 //! author : Julio Napurí : https://github.com/julionc
 
-var monthsShortDot$1 = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split('_');
-var monthsShort$2 = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_');
+var monthsShortDot$1 = 'Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sep._Oct._Nov._Dic.'.split('_');
+var monthsShort$2 = 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_');
 
 hooks.defineLocale('es', {
-    months : 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split('_'),
+    months : 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
     monthsShort : function (m, format) {
         if (!m) {
             return monthsShortDot$1;
@@ -32980,6 +32995,24 @@ return hooks;
 
 const STORAGE = {};
 
+// Funciones Globales
+////////////////////////////////////////////////////////////////////////////////
+
+// Check 02.08.2017 - Permite definir formato del número.
+function formatNumber(number) {
+  return d3.format((parseInt(number) === number)?(','):(',.2f'))(number);
+}
+// Check 02.08.2017 - Permite descargar un archivo y devolver una promesa.
+function downloadFile(path, name) {
+  return new Promise((success) => {
+    d3.json(path, (data) => {
+      STORAGE[name] = data;
+
+      success();
+    });
+  });
+}
+
 // Esta función parsea el el formato de tipo de linea.
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32990,19 +33023,6 @@ function parseTypeLine(type) {
     case 'dashed': return '5, 5';
     default: console.error(`El tipo de linea ${ type } no es válido.`); return null;
   }
-}
-
-// Esta función descarga un archivo y devuelve una promesa.
-////////////////////////////////////////////////////////////////////////////////
-
-function downloadFile(path, name) {
-  return new Promise((success) => {
-    d3.json(path, (data) => {
-      STORAGE[name] = data;
-
-      success();
-    });
-  });
 }
 
 // Esta función parsea el formato de tipo de fecha.
@@ -33037,13 +33057,11 @@ function parseFormatDate(format, date) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function parseValueIndicator(format, value) {
-  value = value.toFixed(2);
-
   switch (format) {
-    case 'Porcentaje':
-      return `${ value }%`;
+    case '%':
+      return `${ formatNumber(value * 100) }%`;
     default:
-      return value; // TODO ##0002 - Definir valor por defecto
+      return formatNumber(value);
   }
 }
 
@@ -33149,6 +33167,15 @@ function generateCharts(element) {
     let chartComponent = document.getElementById(chart.id);
         chartComponent.querySelector('.loading').remove();
 
+    // Se agregan referencias en HTML
+    ////////////////////////////////////////////////////////////////////////////
+    chart.indicators.forEach((v) => {
+      let container = document.querySelector(`#${ chart.id } #references`),
+          reference = document.createElement('p');
+          reference.innerHTML = `<div class="reference-circle" style="background-color: ${ v.color }"></div> ${ v.name }`;
+          container.append(reference);
+    });
+
     ////////////////////////////////////////////////////////////////////////////
     // Render LineChart
     ////////////////////////////////////////////////////////////////////////////
@@ -33156,10 +33183,9 @@ function generateCharts(element) {
     // variables
     ////////////////////////////////////////////////////////////////////////////
 
-    let totalHeight = 500,
-        diffRangeY  = 1.1,
-        chartMargin = {top: 30, right: 50, bottom: 150, left: 50},
-        rangeMargin = {top: 410, right: 50, bottom: 30, left: 50};
+    let totalHeight = 410,
+        chartMargin = {top: 0, right: 75, bottom: 112, left: 75},
+        rangeMargin = {top: 350, right: 75, bottom: 20, left: 75};
 
     // parámetros
     ////////////////////////////////////////////////////////////////////////////
@@ -33176,15 +33202,17 @@ function generateCharts(element) {
       };
     }),
     totalWidth = chartsContainer.getBoundingClientRect().width,
-    minValue   = d3.min(dataset, (c) => d3.min(c.values, (v) => v.value)) * diffRangeY,
-    maxValue   = d3.max(dataset, (c) => d3.max(c.values, (v) => v.value)) * diffRangeY;
-
+    minValue = d3.min(dataset, (c) => d3.min(c.values, (v) => v.value)),
+    maxValue = d3.max(dataset, (c) => d3.max(c.values, (v) => v.value)),
+    minExtend = (minValue < 0) ? (minValue - ((maxValue - minValue) / 15)) : (0),
+    maxExtend = maxValue + ((maxValue - minValue) / 15),
+    minDate = d3.min(dataset, (c) => d3.min(c.values, (v) => v.date)),
+    maxDate = d3.max(dataset, (c) => d3.max(c.values, (v) => v.date));
 
     let indice = dataset[0].values.length - 1 - chart.laps;
         indice = (indice < 0) ? (0) : (indice);
 
     let date = dataset[0].values[indice].date;
-
 
     // parámetros del gráfico
     ////////////////////////////////////////////////////////////////////////////
@@ -33192,7 +33220,7 @@ function generateCharts(element) {
     let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
         chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
         chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data, (d) => d.date)),
-        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]),
+        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minExtend, maxExtend]),
         chartAxisX  = d3.axisBottom(chartScaleX),
         chartAxisY  = d3.axisLeft(chartScaleY);
 
@@ -33203,7 +33231,7 @@ function generateCharts(element) {
         rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom,
         rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain()),
         rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain()),
-        rangeAxisX  = d3.axisBottom(rangeScaleX),
+        rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat(d3.timeFormat('%Y')),
         rangeAxisY  = d3.axisLeft(rangeScaleY);
 
     // brush
@@ -33216,22 +33244,15 @@ function generateCharts(element) {
     // escala de colores de lineas
     ////////////////////////////////////////////////////////////////////////////
 
-    let colorLines = d3.scaleOrdinal()
-      .domain(chart.indicators.map((d) => d.name))
-      .range(chart.indicators.map((d) => d.color));
+    // let colorLines = d3.scaleOrdinal()
+    //   .domain(chart.indicators.map((d) => d.name))
+    //   .range(chart.indicators.map((d) => d.color));
 
     // se definen lineas
     ////////////////////////////////////////////////////////////////////////////
 
-    let chartLine = d3.line()
-      .curve(d3.curveMonotoneX)
-      .x((d) => chartScaleX(d.date))
-      .y((d) => chartScaleY(d.value));
-
-    let rangeLine = d3.line()
-      .curve(d3.curveMonotoneX)
-      .x((d) => rangeScaleX(d.date))
-      .y((d) => rangeScaleY(d.value));
+    let chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)),
+        rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
 
     // se crea SVG
     ////////////////////////////////////////////////////////////////////////////
@@ -33247,11 +33268,9 @@ function generateCharts(element) {
       .attr('height', chartHeight);
 
     svg.append('rect')
-      .attr('class', 'zoom')
-      .attr('width', chartWidth)
-      .attr('height', chartHeight)
-      .style('fill', 'silver')
-      .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+      .attr('class', 'chart-background')
+      .attr('width', chartWidth + chartMargin.left + chartMargin. right)
+      .attr('height', chartHeight + chartMargin.top + 30);
 
     // se crea contenedor del gráfico
     ////////////////////////////////////////////////////////////////////////////
@@ -33259,6 +33278,9 @@ function generateCharts(element) {
     let chartContainer = svg.append('g')
       .attr('class', 'chartContainer')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+
+    console.log(chartScaleY(0));
+    console.log(chartScaleY(0));
 
     chartContainer.append('g')
       .attr('class', 'line-y-0')
@@ -33268,7 +33290,7 @@ function generateCharts(element) {
       .attr('y1', chartScaleY(0))
       .attr('y2', chartScaleY(0))
       .style('fill', 'none')
-      .style('stroke', 'black');
+      .style('stroke', 'red');
 
     chartContainer.append('g')
       .attr('class', 'axis axis--x')
@@ -33286,17 +33308,17 @@ function generateCharts(element) {
 
     chartLines.append('path')
       .attr('class', 'line')
-      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(chart.indicators[i].typeLine); })
+      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(chart.indicators[i].type); })
       .attr('d', (d) => chartLine(d.values))
       .style('fill', 'none')
       .attr('clip-path', 'url(#clip)')
-      .style('stroke', (d) => colorLines(d.name));
+      .style('stroke', (d, i) => chart.indicators[i].color);
 
     let dots = chartContainer.selectAll('.dot')
       .data(dataset)
       .enter().append('g')
       .attr('class', 'dot')
-      .style('fill', (d) => colorLines(d.name))
+      .style('fill', (d, i) => chart.indicators[i].color)
       .selectAll('circle')
       .data((d) => d.values)
       .enter().append('circle')
@@ -33312,16 +33334,6 @@ function generateCharts(element) {
       .attr('class', 'rangeConteiner')
       .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
 
-    rangeConteiner.append('g')
-      .attr('class', 'axis axis--x')
-      .attr('transform', `translate(0, ${ rangeHeight })`)
-      .call(rangeAxisX);
-
-    rangeConteiner.append('g')
-      .attr('class', 'brush')
-      .call(brush)
-      .call(brush.move, [rangeScaleX(date), chartWidth]);
-
     let rangeLines = rangeConteiner.selectAll('.mini-lines')
       .data(dataset)
       .enter().append('g')
@@ -33329,41 +33341,66 @@ function generateCharts(element) {
 
     rangeLines.append('path')
       .attr('d', (d) => rangeLine(d.values))
-      .style('stroke', 'black')
+      .style('stroke', (d, i) => chart.indicators[i].color)
       .style('fill', 'none');
+
+    rangeConteiner.append('g')
+      .attr('class', 'axis axis--x')
+      .attr('transform', `translate(0, ${ rangeHeight })`)
+      .call(rangeAxisX);
+
+    // console.log(date);
+    // console.log(chartWidth);
+
+    rangeConteiner.append('g')
+      .attr('class', 'start-brush-date')
+      .attr('text-anchor', 'start')
+      .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`)
+      .append('text');
+
+    rangeConteiner.append('g')
+      .attr('class', 'end-brush-date')
+      .attr('text-anchor', 'end')
+      .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`)
+      .append('text');
+
+    rangeConteiner.append('g')
+      .attr('class', 'brush')
+      .call(brush)
+      .call(brush.move, [rangeScaleX(date), chartWidth]);
 
     // se crea contenedor del rango dinámico
     ////////////////////////////////////////////////////////////////////////////
 
-    let legend = svg.append('g')
-      .attr('class', 'legends')
-      .attr('transform', `translate(${ -chartWidth + 75 }, 10)`)
-      .selectAll('.legend')
-      .data(dataset)
-      .enter().append('g')
-      .attr('class', 'legend');
-
-    legend.append('rect')
-      .attr('x', chartWidth - 20)
-      .attr('y', (d, i) => i * 20)
-      .attr('width', 10)
-      .attr('height', 10)
-      .style('fill', (d) => colorLines(d.name));
-
-    legend.append('text')
-      .attr('x', chartWidth - 8)
-      .attr('y', (d, i) => (i * 20) + 9)
-      .text((d) => d.name);
+    // let legend = svg.append('g')
+    //   .attr('class', 'legends')
+    //   .attr('transform', `translate(${ -chartWidth + 75 }, 10)`)
+    //   .selectAll('.legend')
+    //   .data(dataset)
+    //   .enter().append('g')
+    //   .attr('class', 'legend');
+    //
+    // legend.append('rect')
+    //   .attr('x', chartWidth - 20)
+    //   .attr('y', (d, i) => i * 20)
+    //   .attr('width', 10)
+    //   .attr('height', 10)
+    //   .style('fill', (d) => colorLines(d.name));
+    //
+    // legend.append('text')
+    //   .attr('x', chartWidth - 8)
+    //   .attr('y', (d, i) => (i * 20) + 9)
+    //   .text((d) => d.name);
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
     // Vertical Line
-    var lineHover = svg.append('g').attr('class', 'lineHover').attr("transform", "translate(" + chartMargin.left + "," + chartMargin.top + ")");
+    var lineHover = svg.append('g').attr('class', 'lineHover').attr('transform', 'translate(' + chartMargin.left + ',' + chartMargin.top + ')');
 
     lineHover.append('path') // this is the black vertical line to follow mouse
       .attr('class', 'mouse-line')
-      .style('stroke', 'red')
+      .style('stroke', Modal.variables.colors.base_contraste)
       .style('stroke-width', '1px')
       .style('opacity', '0');
 
@@ -33373,15 +33410,41 @@ function generateCharts(element) {
       .attr('class', 'mouse-per-line');
 
     mousePerLine.append('circle')
-      .attr('r', 10)
-      // .style('stroke', 'black')
-      .style('stroke', function(d) { return colorLines(d.name); })
-      .style('fill', 'none')
-      .style('stroke-width', '2px')
-      .style('opacity', '0');
+      .attr('class', 'tooltip-circle-hover')
+      .attr('r', 4)
+      .style('fill', (d) => colorLines(d.name));
+
+    mousePerLine.append('rect')
+      .attr('class', 'tooltip-rect-hover')
+      .attr('x', 10)
+      .attr('y', -10)
+      .attr('rx', 15)
+      .attr('ry', 15)
+      .attr('height', 25)
+      .style('fill', (d) => colorLines(d.name));
 
     mousePerLine.append('text')
-      .attr('transform', 'translate(10,3)');
+      .attr('class', 'tooltip-text-hover')
+      .attr('fill', 'white')
+      .attr('font-size', '12px')
+      .attr('transform', 'translate(25, 15)');
+
+    let dateGroup = lineHover.append('g')
+      .attr('class', 'group-date');
+
+    dateGroup.append('rect')
+      .attr('class', 'date-rect-hover')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('rx', 15)
+      .attr('ry', 15)
+      .attr('height', 25)
+      .style('fill', '#fafafa');
+
+    dateGroup.append('text')
+      .attr('class', 'date-text-hover')
+      .attr('fill', 'black')
+      .attr('transform', 'translate(0, 25)');
 
     lineHover.append('svg:rect') // append a rect to catch mouse movements on canvas
       .attr('width', chartWidth) // can't catch mouse events on a g element
@@ -33389,18 +33452,20 @@ function generateCharts(element) {
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
       .on('mouseover', function() { // on mouse in show line, circles and text
-
         d3.select(this.parentNode).select('.mouse-line').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line circle').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line text').style('opacity', '1');
-
+        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-circle-hover').style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-rect-hover').style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-text-hover').style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .date-rect-hover').style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .date-text-hover').style('opacity', '1');
       })
       .on('mouseout', function() { // on mouse out hide line, circles and text
-
         d3.select(this.parentNode).select('.mouse-line').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line circle').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line text').style('opacity', '0');
-
+        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-circle-hover').style('opacity', '0');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-rect-hover').style('opacity', '0');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-text-hover').style('opacity', '0');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .date-rect-hover').style('opacity', '0');
+        d3.select(this.parentNode).selectAll('.mouse-per-line .date-text-hover').style('opacity', '0');
       })
       .on('mousemove', function() { // mouse moving over canvas
         // keep a reference to all our lines
@@ -33416,8 +33481,8 @@ function generateCharts(element) {
         });
 
         // position the circle and text
-        d3.select(this.parentNode).selectAll(".mouse-per-line")
-          .attr("transform", function(d, i) {
+        d3.select(this.parentNode).selectAll('.mouse-per-line')
+          .attr('transform', function(d, i) {
 
             // console.log(width/mouse[0]);
 
@@ -33444,27 +33509,91 @@ function generateCharts(element) {
               else break; //position found
             }
 
+            d3.select(this).select('.tooltip-text-hover')
+              .text((d) => `${ formatNumber(chartScaleY.invert(pos.y)) } - ${ d.name }`);
+
             // update the text with y value
-            d3.select(this).select('text')
-              .text(chartScaleY.invert(pos.y).toFixed(2));
+            d3.select(this).select('.tooltip-rect-hover')
+              .attr('width', this.querySelector('.tooltip-text-hover').getBBox().width + 30);
+
+            d3.select(this.parentNode).select('.group-date')
+              .attr('transform', `translate(${ pos.x }, ${ chartHeight + 5 })`);
+
+            d3.select(this.parentNode).select('.group-date .date-text-hover')
+              .text(d3.timeFormat('%d %B %Y')(chartScaleX.invert(pos.x)));
+
+            d3.select(this.parentNode).select('.group-date .date-rect-hover')
+              .attr('width', this.parentNode.querySelector('.date-text-hover').getBBox().width + 30);
 
             // return position
-            return "translate(" + mouse[0] + "," + pos.y +")";
+            return 'translate(' + mouse[0] + ',' + pos.y +')';
           });
 
       });
 
     //create brush function redraw scatterplot with selection
     function brushed() {
-      let selection = d3.event.selection;
+      let position, range, min, max, minExt, maxExt;
 
-      chartScaleX.domain(selection.map(rangeScaleX.invert, rangeScaleX));
+      if (!d3.event.selection) {
+        // selection = rangeScaleX.range();
+        // console.log('sin seleccion');
+        // chartScaleX.domain(selection);
+      } else {
+        position = d3.event.selection;
+        range = position.map(rangeScaleX.invert, rangeScaleX);
 
-      chartContainer.selectAll('.line').attr('d', (d) => chartLine(d.values));
-      chartContainer.selectAll('.dot circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
-      chartContainer.select('.axis--x').call(chartAxisX);
-      chartContainer.select('.axis--y').call(chartAxisY);
-      // chartContainer.selectAll('.dot').attr('cx', (d) => chartScaleX(d[0]));
+        // Se actualiza rango-x
+        chartScaleX.domain(range);
+
+        // Se actualizan fecha mínima y máxima del eje x en rangeContainer
+        d3.select(this.parentNode)
+          .select('.start-brush-date')
+          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 15 })`)
+          .select('.start-brush-date text')
+          .text(d3.timeFormat('%d %B %Y')(range[0]));
+        d3.select(this.parentNode)
+          .select('.end-brush-date')
+          .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`)
+          .select('.end-brush-date text')
+          .text(d3.timeFormat('%d %B %Y')(range[1]));
+
+        // Se actualizan fecha mínima y máxima del eje x en rangeContainer
+        let dataFiltered = data.filter((d) => (d.date < range[1] && d.date > range[0]));
+
+        // console.log(dataFiltered.length);
+
+        if (dataFiltered.length > 1) {
+
+          // console.log('calcula');
+
+          min = d3.min(dataFiltered, (c) => {
+              let values = d3.values(c);
+                  values.splice(0, 1);
+
+              return d3.min(values);
+            }
+          );
+          max = d3.max(dataFiltered, (c) => {
+              let values = d3.values(c);
+                  values.splice(0, 1);
+
+              return d3.max(values);
+            }
+          );
+
+          maxExt = max + ((max - min) / 15);
+          minExt = min - ((max - min) / 15);
+
+          // Se actualiza rango-y
+          chartScaleY.domain([minExt, maxExt]);
+        }
+
+        chartContainer.selectAll('.line').attr('d', (d) => chartLine(d.values));
+        chartContainer.selectAll('.dot circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
+        chartContainer.select('.axis--x').call(chartAxisX);
+        chartContainer.select('.axis--y').transition().duration(150).call(chartAxisY);
+      }
     }
   }
 

@@ -97,6 +97,7 @@ body {
   & > hr {
     margin: 0;
     border: 1px solid var(--base);
+    opacity: 0.5;
   }
 }
 

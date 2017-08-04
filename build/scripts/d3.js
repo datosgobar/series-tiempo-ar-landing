@@ -616,18 +616,17 @@ function axis(orient, scale) {
         tick = selection.selectAll(".tick").data(values, scale).order(),
         tickExit = tick.exit(),
         tickEnter = tick.enter().append("g").attr("class", "tick"),
-        line = tick.select("line"),
+        // line = tick.select("line"),
         text = tick.select("text");
 
     path = path.merge(path.enter().insert("path", ".tick")
-        .attr("class", "domain")
-        .attr("stroke", "#000"));
+        .attr("class", "domain"));
 
     tick = tick.merge(tickEnter);
 
-    line = line.merge(tickEnter.append("line")
-        .attr("stroke", "#000")
-        .attr(x + "2", k * tickSizeInner));
+    // line = line.merge(tickEnter.append("line")
+    //     .attr("stroke", "#000")
+    //     .attr(x + "2", k * tickSizeInner));
 
     text = text.merge(tickEnter.append("text")
         .attr("fill", "#000")
@@ -637,7 +636,7 @@ function axis(orient, scale) {
     if (context !== selection) {
       path = path.transition(context);
       tick = tick.transition(context);
-      line = line.transition(context);
+      // line = line.transition(context);
       text = text.transition(context);
 
       tickExit = tickExit.transition(context)
@@ -651,17 +650,16 @@ function axis(orient, scale) {
 
     tickExit.remove();
 
-    path
-        .attr("d", orient === left || orient == right
-            ? "M" + k * tickSizeOuter + "," + range0 + "H0.5V" + range1 + "H" + k * tickSizeOuter
-            : "M" + range0 + "," + k * tickSizeOuter + "V0.5H" + range1 + "V" + k * tickSizeOuter);
+    path.attr("d", orient === left || orient == right
+						? ''
+						// ? "M" + k * tickSizeOuter + "," + range0 + "H0.5V" + range1 + "H" + k * tickSizeOuter
+						: 'M' + range0 + ',' + k + 'H' + range1);
 
     tick
         .attr("opacity", 1)
         .attr("transform", function(d) { return transform(position(d)); });
 
-    line
-        .attr(x + "2", k * tickSizeInner);
+    // line.attr(x + "2", k * tickSizeInner);
 
     text
         .attr(x, k * spacing)
@@ -4291,9 +4289,10 @@ function brush$1(dim) {
       .enter().append("rect")
         .attr("class", "selection")
         .attr("cursor", cursors.selection)
-        .attr("fill", "#777")
-        .attr("fill-opacity", 0.3)
-        .attr("stroke", "#fff")
+        .attr("fill", null)
+				.attr("stroke", 'silver')
+				.attr('rx', 4)
+				.attr('ry', 4)
         .attr("shape-rendering", "crispEdges");
 
     var handle = group.selectAll(".handle")
@@ -4301,9 +4300,17 @@ function brush$1(dim) {
 
     handle.exit().remove();
 
-    handle.enter().append("rect")
-        .attr("class", function(d) { return "handle handle--" + d.type; })
-        .attr("cursor", function(d) { return cursors[d.type]; });
+		var hamburguer = handle.enter().append("g").attr('class', 'hangle-hamburger');
+				hamburguer.append('circle').attr('r', 15).attr('cx', 5).attr('cy', 7.5).attr('fill', 'white').attr('stroke', 'silver');
+				hamburguer.append('rect').attr('x', 0).attr('y', 0).attr('fill', 'gray').attr('height', '15').attr('width', '2');
+				hamburguer.append('rect').attr('x', 4).attr('y', 0).attr('fill', 'gray').attr('height', '15').attr('width', '2');
+				hamburguer.append('rect').attr('x', 8).attr('y', 0).attr('fill', 'gray').attr('height', '15').attr('width', '2');
+
+		handle.enter().append("circle")
+				.attr('r', 15)
+				.attr('fill', null)
+				.attr("class", function(d) { return "handle handle--" + d.type; })
+				.attr("cursor", function(d) { return cursors[d.type]; });
 
     group
         .each(redraw)
@@ -4356,6 +4363,9 @@ function brush$1(dim) {
         selection = local$$1(this).selection;
 
     if (selection) {
+			d3.select(this.parentNode).selectAll('.start-brush-date,.end-brush-date')
+				.style("display", null);
+
       group.selectAll(".selection")
           .style("display", null)
           .attr("x", selection[0][0])
@@ -4363,16 +4373,29 @@ function brush$1(dim) {
           .attr("width", selection[1][0] - selection[0][0])
           .attr("height", selection[1][1] - selection[0][1]);
 
+			group.selectAll(".hangle-hamburger")
+				.style("display", null)
+				.attr('transform', function(d) {
+					let x = (d.type === 'e')?(selection[1][0]):(selection[0][0] - 10);
+
+					return `translate(${ x }, 12.5)`;
+				});
+
       group.selectAll(".handle")
           .style("display", null)
-          .attr("x", function(d) { return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2; })
-          .attr("y", function(d) { return d.type[0] === "s" ? selection[1][1] - handleSize / 2 : selection[0][1] - handleSize / 2; })
-          .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
-          .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
-    }
+          .attr("cx", function(d) {
 
-    else {
-      group.selectAll(".selection,.handle")
+						return (d.type === 'e')?(selection[1][0] + 5):(selection[0][0] - 5);
+						// return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2;
+					})
+          .attr("cy", selection[1][1] / 2);
+          // .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
+          // .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
+    } else {
+			d3.select(this.parentNode).selectAll('.start-brush-date,.end-brush-date')
+				.style("display", "none");
+
+      group.selectAll(".selection,.handle,.hangle-hamburger")
           .style("display", "none")
           .attr("x", null)
           .attr("y", null)
@@ -6656,10 +6679,10 @@ var locale$1;
 
 
 defaultLocale({
-  decimal: ".",
-  thousands: ",",
+  decimal: ',',
+  thousands: '.',
   grouping: [3],
-  currency: ["$", ""]
+  currency: ['$', '']
 });
 
 function defaultLocale(definition) {
@@ -12923,19 +12946,15 @@ function formatLiteralPercent() {
 
 var locale$2;
 
-
-
-
-
 defaultLocale$1({
-  dateTime: "%x, %X",
-  date: "%-m/%-d/%Y",
-  time: "%-I:%M:%S %p",
+	dateTime: "%a %b %e %X %Y",
+  date: "%d/%m/%Y",
+  time: "%H:%M:%S",
   periods: ["AM", "PM"],
-  days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-  shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-  shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+  shortDays: ["Dom", "Lun", "Mar", "Mi", "Jue", "Vie", "Sab"],
+  months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+  shortMonths: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
 });
 
 function defaultLocale$1(definition) {
@@ -12991,37 +13010,26 @@ function calendar(year$$1, month$$1, week, day$$1, hour$$1, minute$$1, second$$1
       formatSecond = format(":%S"),
       formatMinute = format("%I:%M"),
       formatHour = format("%I %p"),
-      formatDay = format("%a %d"),
-      formatWeek = format("%b %d"),
-      formatMonth = format("%B"),
+      formatDay = format("%d %b %y"),
+      formatWeek = format("%d %b %y"),
+      formatMonth = format("%b %y"),
       formatYear = format("%Y");
 
   var tickIntervals = [
-    [second$$1,  1,      durationSecond],
-    [second$$1,  5,  5 * durationSecond],
-    [second$$1, 15, 15 * durationSecond],
-    [second$$1, 30, 30 * durationSecond],
-    [minute$$1,  1,      durationMinute],
-    [minute$$1,  5,  5 * durationMinute],
-    [minute$$1, 15, 15 * durationMinute],
-    [minute$$1, 30, 30 * durationMinute],
-    [  hour$$1,  1,      durationHour  ],
-    [  hour$$1,  3,  3 * durationHour  ],
-    [  hour$$1,  6,  6 * durationHour  ],
-    [  hour$$1, 12, 12 * durationHour  ],
     [   day$$1,  1,      durationDay   ],
     [   day$$1,  2,  2 * durationDay   ],
-    [  week,  1,      durationWeek  ],
+    [     week,  1,      durationWeek  ],
     [ month$$1,  1,      durationMonth ],
     [ month$$1,  3,  3 * durationMonth ],
+		// [ month$$1,  6,  6 * durationMonth ],
     [  year$$1,  1,      durationYear  ]
   ];
 
   function tickFormat(date$$1) {
-    return (second$$1(date$$1) < date$$1 ? formatMillisecond
+    return (/*second$$1(date$$1) < date$$1 ? formatMillisecond
         : minute$$1(date$$1) < date$$1 ? formatSecond
         : hour$$1(date$$1) < date$$1 ? formatMinute
-        : day$$1(date$$1) < date$$1 ? formatHour
+        : */day$$1(date$$1) < date$$1 ? formatHour
         : month$$1(date$$1) < date$$1 ? (week(date$$1) < date$$1 ? formatDay : formatWeek)
         : year$$1(date$$1) < date$$1 ? formatMonth
         : formatYear)(date$$1);

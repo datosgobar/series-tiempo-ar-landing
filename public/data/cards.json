@@ -4,7 +4,7 @@
     "title": "Nivel de actividad",
     "download": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
     "name": "EMAE",
-    "units_representation": "",
+    "units_representation": "%",
     "charts": [
       {
         "id": "chart_1",
