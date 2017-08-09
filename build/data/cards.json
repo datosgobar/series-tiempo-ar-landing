@@ -2,8 +2,8 @@
   {
     "id": "11.3_VIPAA_2004_M_31",
     "title": "Nivel de actividad",
-    "download": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
-    "name": "EMAE",
+    "download_url": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
+    "short_name": "EMAE",
     "units_representation": "%",
     "charts": [
       {
@@ -14,11 +14,12 @@
         "indicators": [
           {
             "id": "4.2_OGP_2004_T_17",
-            "name": "PBI",
+            "short_name": "PBI",
             "color": "#8b0000",
             "type": "solid"
           }
         ],
+        "frequency": "R/P3M",
         "laps": "24"
       },
       {
@@ -29,35 +30,36 @@
         "indicators": [
           {
             "id": "4.2_MGCP_2004_T_25",
-            "name": "Consumo Privado",
+            "short_name": "Consumo Privado",
             "color": "#8b0000",
             "type": "solid"
           },
           {
             "id": "4.2_DGCP_2004_T_30",
-            "name": "Consumo Publico",
+            "short_name": "Consumo Publico",
             "color": "#c52940",
             "type": "dashed"
           },
           {
             "id": "4.2_DGE_2004_T_26",
-            "name": "Exportaciones",
+            "short_name": "Exportaciones",
             "color": "#ed645c",
             "type": "solid"
           },
           {
             "id": "4.2_VE_2004_T_21",
-            "name": "Variacion de Existencias",
+            "short_name": "Variacion de Existencias",
             "color": "#ffa474",
             "type": "dashed"
           },
           {
             "id": "4.2_DGIT_2004_T_25",
-            "name": "IBIF",
+            "short_name": "IBIF",
             "color": "#ffe3af",
             "type": "solid"
           }
         ],
+        "frequency": "R/P3M",
         "laps": "24"
       },
       {
@@ -68,17 +70,18 @@
         "indicators": [
           {
             "id": "11.3_ITC_2004_M_22",
-            "name": "EMAE Serie Tendencia Ciclo",
+            "short_name": "EMAE Serie Tendencia Ciclo",
             "color": "#8b0000",
             "type": "solid"
           },
           {
             "id": "11.3_ISD_2004_M_31",
-            "name": "EMAE Serie Desestacionalizada",
+            "short_name": "EMAE Serie Desestacionalizada",
             "color": "#c52940",
             "type": "dashed"
           }
         ],
+        "frequency": "R/P1M",
         "laps": "24"
       },
       {
@@ -89,17 +92,18 @@
         "indicators": [
           {
             "id": "12.3_E_2004_M_3",
-            "name": "EMI",
+            "short_name": "EMI",
             "color": "#8b0000",
             "type": "solid"
           },
           {
             "id": "33.2_I_2004_M_4",
-            "name": "ISAC",
+            "short_name": "ISAC",
             "color": "#c52940",
             "type": "dashed"
           }
         ],
+        "frequency": "R/P1M",
         "laps": "24"
       }
     ]
@@ -107,48 +111,48 @@
   {
     "id": "45.2_ECTDT_0_T_33",
     "title": "Empleo e ingresos",
-    "download": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
-    "name": "Desempleo",
+    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
+    "short_name": "Desempleo",
     "units_representation": "%",
     "charts": []
   },
   {
     "id": "101.1_I2NG_2016_M_22",
     "title": "Precios",
-    "download": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
-    "name": "IPC",
-    "units_representation": "",
+    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
+    "short_name": "IPC",
+    "units_representation": "1",
     "charts": []
   },
   {
     "id": "115.3_TCRM_0_M_29",
     "title": "Sector externo",
-    "download": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
-    "name": "TCRM",
-    "units_representation": "",
+    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
+    "short_name": "TCRM",
+    "units_representation": "1",
     "charts": []
   },
   {
     "id": "142.3_TOTAL_2001_M_26",
     "title": "Finanzas públicas",
-    "download": "http://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
-    "name": "Recursos tributarios",
-    "units_representation": "",
+    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
+    "short_name": "Recursos tributarios",
+    "units_representation": "1",
     "charts": []
   },
   {
     "id": "87.3_IGC_1980_M_27",
     "title": "Economía Internacional",
-    "download": "http://www.mecon.gov.ar/download/infoeco/internacional_ied.xlsx",
-    "name": "Commodities",
+    "download_url": "http://www.mecon.gov.ar/download/infoeco/internacional_ied.xlsx",
+    "short_name": "Commodities",
     "units_representation": "",
     "charts": []
   },
   {
     "id": "89.1_TIB_0_0_20",
     "title": "Dinero y Bancos",
-    "download": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
-    "name": "BADLAR",
+    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
+    "short_name": "BADLAR",
     "units_representation": "%",
     "charts": []
   }

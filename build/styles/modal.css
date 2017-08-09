@@ -27,7 +27,7 @@ body {
 }
 
 /*
-    ----------------------------------------------- FlexBox Helpers - 07.07.2017
+    ----------------------------------------------- FlexBox Helpers - 04.08.2017
 */
 
 .flex {
@@ -82,7 +82,7 @@ body {
 }
 
 /*
-    ---------------------------------------------------- BreakLines - 31.07.2017
+    ---------------------------------------------------- BreakLines - 04.08.2017
 */
 
 .break-line {
@@ -102,50 +102,7 @@ body {
 }
 
 /*
-    --------------------------------------------------------- Title - 31.07.2017
-*/
-
-/*
-.title {
-  color: var(--base);
-  font-weight: 500;
-  line-height: 1.2;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-
-  @media (--tablet) {
-    text-align: left;
-  }
-}
-
-h1.title {
-  font-size: 2.5rem;
-}
-
-h2.title {
-  font-size: 2rem;
-}
-
-h3.title {
-  font-size: 1.75rem;
-}
-
-h4.title {
-  font-size: 1.5rem;
-}
-
-h5.title {
-  font-size: 1.25rem;
-}
-
-h6.title {
-  font-size: 1rem;
-}
-*/
-
-/*
-    ---------------------------------------------------- Containers - 31.07.2017
+    ---------------------------------------------------- Containers - 04.08.2017
 */
 
 .modal-container {
@@ -177,174 +134,7 @@ h6.title {
 }
 
 /*
-    ---------------------------------------------------- Paragraphs - 06.07.2017
-*/
-
-.paragraph {
-  text-align: center;
-  color: var(--base);
-  font-size: 14px;
-  font-weight: 400;
-  margin: 0;
-
-  @media (--tablet) {
-    text-align: left;
-    font-size: 16px;
-  }
-
-  &.pSmall {
-    font-size: 14px !important;
-    font-weight: 400 !important;
-  }
-
-  &.pBig {
-    font-size: 44px !important;
-    font-weight: 600 !important;
-  }
-
-  &.pFly {
-    text-align: center;
-    color: var(--base);
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0;
-    text-transform: uppercase;
-
-    @media (--tablet) {
-      text-align: left;
-      font-size: 16px;
-    }
-  }
-}
-
-/*
-    ----------------------------------------------------- Increment - 06.07.2017
-*/
-
-.increment {
-  text-align: center;
-
-  &.incrSmall {
-    font-size: 1rem;
-
-    @media (--xsmall) {
-      font-size: 1.5rem;
-    }
-
-    @media (--tablet) {
-      font-size: 2rem;
-    }
-  }
-
-  &.incrMedium {
-    font-size: 2rem;
-
-    @media (--xsmall) {
-      font-size: 3rem;
-    }
-
-    @media (--tablet) {
-      font-size: 4rem;
-    }
-  }
-
-  &.incrBig {
-    font-size: 4rem;
-
-    @media (--xsmall) {
-      font-size: 6rem;
-    }
-
-    @media (--tablet) {
-      font-size: 8rem;
-    }
-  }
-}
-
-/*
-    ----------------------------------------- Responsive Transforms - 06.07.2017
-*/
-
-.mod-line-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-flow: row nowrap;
-}
-
-.mod-col-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-
-  @media (--tablet) {
-    justify-content: space-between;
-    flex-direction: row;
-  }
-}
-
-.mod-col-line-reverse {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column-reverse nowrap;
-
-  @media (--tablet) {
-    justify-content: space-between;
-    flex-direction: row;
-  }
-}
-
-.mod-col-col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-
-  @media (--tablet) {
-    align-items: flex-start;
-  }
-}
-
-/*
-    ------------------------------------------ Container Transforms - 06.07.2017
-*/
-
-.child-1 > .subContainer,
-.child-1 > .cardContainer {
-  width: 100%;
-}
-
-.child-2 > .subContainer,
-.child-2 > .cardContainer {
-  width: 100%;
-
-  @media (--tablet) {
-    width: 45%;
-  }
-}
-
-.child-3 > .subContainer,
-.child-3 > .cardContainer {
-  width: 100%;
-
-  @media (--tablet) {
-    width: 30%;
-  }
-}
-
-.child-4 > .subContainer,
-.child-4 > .cardContainer {
-  width: 100%;
-
-  @media (--tablet) {
-    width: 22.5%;
-  }
-}
-
-/*
-    ------------------------------------------------ Others Helpers - 06.07.2017
+    ------------------------------------------------ Others Helpers - 04.08.2017
 */
 
 .max-width {
@@ -361,17 +151,6 @@ h6.title {
 
 .no-padding {
   padding: 0;
-}
-
-.strictCenter,
-.strictCenter > .modal-responsive {
-  align-items: center !important;
-  justify-content: center !important;
-
-  & > {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
 }
 
 .hide {
@@ -495,10 +274,8 @@ h6.title {
 }
 
 /*
-    -------------------------------------------------- Share Module - 00.00.2017
+    -------------------------------------------------- Share Module - 04.08.2017
 */
-
-$menu-items: 3;
 
 @define-extend hamburger {
   $width: 15px;
@@ -510,33 +287,23 @@ $menu-items: 3;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -$width/2;
-  margin-top: -$height/2;
+  margin-left: calc(-$width / 2);
+  margin-top: calc(-$height / 2);
   transition: transform 200ms;
 }
 
 .modal-share {
-  $height: 50px;
+  $height: 37px;
 
+  position: absolute;
+  padding: 0;
+  margin: 0;
   width: calc(100% - 40px);
   height: $height;
-  box-sizing: border-box;
-  text-align: right;
-  margin: 0 0 0 -80px;
-  padding: 0;
-  position: absolute;
-  top: 0 - $height - ((60 - $height) / 2);
+  top: 20px;
   right: 20px;
   filter: url('#shadowed-goo');
   transition: all 0.2s ease-in-out;
-
-  @media (--tablet) {
-    opacity: 0;
-  }
-
-  @media (--large-desktop) {
-    top: 0 - $height - ((70 - $height) / 2);
-  }
 
   .share-open {
     display: none;
@@ -561,12 +328,27 @@ $menu-items: 3;
       & ~ .share-item {
         opacity: 1;
 
-        @for $i from 1 through $menu-items {
-          &:nth-child(#{$i+2}) {
+        &:nth-of-type(1) {
+          transition-duration: 0.3s;
+          transform: scale(0.9) translate3d(-60px, 0, 0);
+        }
+
+        &:nth-of-type(2) {
+          transition-duration: 0.4s;
+          transform: scale(0.9) translate3d(-120px, 0, 0);
+        }
+
+        &:nth-of-type(3) {
+          transition-duration: 0.5s;
+          transform: scale(0.9) translate3d(-180px, 0, 0);
+        }
+
+        /*@for $i from 1 through 5 {
+          &:nth-child(#{$i + 2}) {
             transition-duration: 0.3s + (0.1s * $i);
             transform: scale(0.9) translate3d(-60px * $i, 0, 0);
           }
-        }
+        }*/
       }
     }
   }
@@ -575,13 +357,11 @@ $menu-items: 3;
     $width: 35px;
     $height: 35px;
 
+    position: absolute;
+    top: 0;
+    right: 0;
     width: $width;
     height: $height;
-    position: absolute;
-    top: (50 - $height) / 2;
-    margin-left: -$width;
-    line-height: $height;
-    text-align: center;
     border-radius: 100%;
     z-index: 2;
     transition: all 0.2s ease-in-out;
@@ -634,7 +414,6 @@ $menu-items: 3;
     width: $width;
     height: $height;
     position: absolute;
-    top: (50 - $height) / 2;
     line-height: $height;
     margin-left: -$width;
     border-radius: 100%;
@@ -647,11 +426,15 @@ $menu-items: 3;
       color: white;
     }
 
-    @for $i from 1 through $menu-items {
+    /*&:nth-child(1) {
+      transition-duration: 0.2s;
+    }*/
+
+    /*@for $i from 1 through 5 {
       &:nth-child(#{$i + 2}) {
         transition-duration: 0.2s;
       }
-    }
+    }*/
   }
 }
 

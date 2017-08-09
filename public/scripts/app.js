@@ -23208,7 +23208,7 @@ defaultLocale$1({
   days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
   shortDays: ["Dom", "Lun", "Mar", "Mi", "Jue", "Vie", "Sab"],
   months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-  shortMonths: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+  shortMonths: ["Ene.", "Feb.", "Mar.", "Abr.", "May.", "Jun.", "Jul.", "Ago.", "Sep.", "Oct.", "Nov.", "Dic."]
 });
 
 function defaultLocale$1(definition) {
@@ -27177,44 +27177,27 @@ Object.defineProperty(exports, '__esModule', { value: true });
   Última actualización: 18.07.2017
 */
 
-// Variables Globales del sitio
-////////////////////////////////////////////////////////////////////////////////
+// Configuración Firebase
 ////////////////////////////////////////////////////////////////////////////////
 
-// Initialize Firebase
+// let firebaseStorage;
+
 // firebase.initializeApp({
-//   apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
-//   authDomain: 'analytical-park-149313.firebaseapp.com',
-//   databaseURL: 'https://analytical-park-149313.firebaseio.com',
-//   projectId: 'analytical-park-149313',
-//   storageBucket: 'analytical-park-149313.appspot.com',
+//              apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
+//          authDomain: 'analytical-park-149313.firebaseapp.com',
+//         databaseURL: 'https://analytical-park-149313.firebaseio.com',
+//           projectId: 'analytical-park-149313',
+//       storageBucket: 'analytical-park-149313.appspot.com',
 //   messagingSenderId: '215411573688'
 // });
-//
-// let firebaseStorage = firebase.storage().ref()
+
+// firebaseStorage = firebase.storage().ref();
 
 // Funciones Globales del sitio
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-// Check 02.08.2017 - Permite definir formato del número
-function formatNumber(n, p, m, d) {
-  let r = '\\d(?=(\\d{3})+' + (p > 0 ? '\\D' : '$') + ')',
-      v = n.toFixed(Math.max(0, p));
-  return (d ? v.replace('.', d) : v).replace(new RegExp(r, 'g'), '$&' + (m || ','));
-}
 
-// Check 09.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
-function randomString(quantity) {
-  let text = '',
-      possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < quantity; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-
-  return text;
-}
 // Check 05.07.2017 - Sobreescribe los atributos de un objeto en otro
 function mergeStructure(target, source) {
   return {
@@ -27223,38 +27206,6 @@ function mergeStructure(target, source) {
     styles:     jQuery.extend(target.styles, source.styles),
     childrens:  (source.hasOwnProperty('childrens'))?(source.childrens):([])
   };
-};
-// Check 05.07.2017 - Inyecta los estilos de un componente
-function injectStyles(component, styles) {
-
-  for (let style in styles) {
-    component.style[style] = styles[style];
-  }
-
-  return true;
-};
-// Check 05.07.2017 - Inyecta los atributos de un componente
-function injectAttributes(component, attributes) {
-
-  for (let attr in attributes) {
-    if (attr === 'class') {
-        attributes[attr].split(' ').forEach((className) => {
-          component.classList.add(className);
-        });
-    } else {
-      component.setAttribute(attr, attributes[attr]);
-    }
-  }
-
-  return true;
-};
-// Check 05.07.2017 - Inyecta los componentes hijos de un componente
-function injectChildrens(component, childrens) {
-  childrens.forEach((children) => {
-    component.appendChild(children);
-  });
-
-  return true;
 };
 // Check 05.07.2017 - Muesta el componente cuando el mouse esta dentro del modulo
 function buttonShareShow(component) {
@@ -27270,40 +27221,40 @@ function buttonShareHide(component) {
   return true;
 };
 // Check 05.07.2017 - Comparte en redes sociales un modulo especifico
-function share(social, elemento) {
-  let node = elemento.parentNode.parentNode.parentNode,
-      nroModule = node.getAttribute('module-nro'),
-      date = new Date();
-
-  // Generar imagen Uint8Array
-  let w = node.offsetWidth,
-      h = node.offsetHeight,
-      imageW, imageH;
-
-  if (w > h) {
-    imageW = 2400;
-    imageH = (imageW / w) * h;
-  } else {
-    imageH = 1260;
-    imageW = (imageH / h) * w;
-  }
-
-  domtoimage.toBlob(node).then((file) => {
-  // domtoimage.toBlob(node, {height: imageH, width: imageW}).then((file) => {
-    console.log(file);
-    firebaseStorage
-      .child(`module_${ nroModule }_${ randomString(10) }_${ date.getTime() }`)
-      .put(file)
-      .then((snapshot) => {
-        let url = snapshot.metadata.downloadURLs[0];
-
-        switch (social) {
-          case 'facebook': window.open(`https://www.facebook.com/sharer.php?u=https://datosgobar.github.io/GDE&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-          case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`); break;
-        }
-      });
-  });
-};
+// function share(social, elemento) {
+//   let node = elemento.parentNode.parentNode.parentNode,
+//       nroModule = node.getAttribute('module-nro'),
+//       date = new Date();
+//
+//   // Generar imagen Uint8Array
+//   let w = node.offsetWidth,
+//       h = node.offsetHeight,
+//       imageW, imageH;
+//
+//   if (w > h) {
+//     imageW = 2400;
+//     imageH = (imageW / w) * h;
+//   } else {
+//     imageH = 1260;
+//     imageW = (imageH / h) * w;
+//   }
+//
+//   domtoimage.toBlob(node).then((file) => {
+//   // domtoimage.toBlob(node, {height: imageH, width: imageW}).then((file) => {
+//     console.log(file);
+//     firebaseStorage
+//       .child(`module_${ nroModule }_${ randomString(10) }_${ date.getTime() }`)
+//       .put(file)
+//       .then((snapshot) => {
+//         let url = snapshot.metadata.downloadURLs[0];
+//
+//         switch (social) {
+//           case 'facebook': window.open(`https://www.facebook.com/sharer.php?u=https://datosgobar.github.io/GDE&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
+//           case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`); break;
+//         }
+//       });
+//   });
+// };
 // Check 05.07.2017 - Muesta el contenedor para embeber el modulo
 function embebedContainerShow(component) {
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.opacity = '';
@@ -28114,6 +28065,508 @@ const Modal = {
     }
   }
 };
+
+/*! dom-to-image 10-06-2017 */ ! function(a) {
+  "use strict";
+
+  function b(a, b) {
+    function c(a) {
+      return b.bgcolor && (a.style.backgroundColor = b.bgcolor), b.width && (a.style.width = b.width + "px"), b.height && (a.style.height = b.height + "px"), b.style && Object.keys(b.style).forEach(function(c) {
+        a.style[c] = b.style[c]
+      }), a
+    }
+    return b = b || {}, g(b), Promise.resolve(a).then(function(a) {
+      return i(a, b.filter, !0)
+    }).then(j).then(k).then(c).then(function(c) {
+      return l(c, b.width || q.width(a), b.height || q.height(a))
+    })
+  }
+
+  function c(a, b) {
+    return h(a, b || {}).then(function(b) {
+      return b.getContext("2d").getImageData(0, 0, q.width(a), q.height(a)).data
+    })
+  }
+
+  function d(a, b) {
+    return h(a, b || {}).then(function(a) {
+      return a.toDataURL()
+    })
+  }
+
+  function e(a, b) {
+    return b = b || {}, h(a, b).then(function(a) {
+      return a.toDataURL("image/jpeg", b.quality || 1)
+    })
+  }
+
+  function f(a, b) {
+    return h(a, b || {}).then(q.canvasToBlob)
+  }
+
+  function g(a) {
+    "undefined" == typeof a.imagePlaceholder ? v.impl.options.imagePlaceholder = u.imagePlaceholder : v.impl.options.imagePlaceholder = a.imagePlaceholder, "undefined" == typeof a.cacheBust ? v.impl.options.cacheBust = u.cacheBust : v.impl.options.cacheBust = a.cacheBust
+  }
+
+  function h(a, c) {
+    function d(a) {
+      var b = document.createElement("canvas");
+      if (b.width = c.width || q.width(a), b.height = c.height || q.height(a), c.bgcolor) {
+        var d = b.getContext("2d");
+        d.fillStyle = c.bgcolor, d.fillRect(0, 0, b.width, b.height)
+      }
+      return b
+    }
+    return b(a, c).then(q.makeImage).then(q.delay(100)).then(function(b) {
+      var c = d(a);
+      return c.getContext("2d").drawImage(b, 0, 0), c
+    })
+  }
+
+  function i(a, b, c) {
+    function d(a) {
+      return a instanceof HTMLCanvasElement ? q.makeImage(a.toDataURL()) : a.cloneNode(!1)
+    }
+
+    function e(a, b, c) {
+      function d(a, b, c) {
+        var d = Promise.resolve();
+        return b.forEach(function(b) {
+          d = d.then(function() {
+            return i(b, c)
+          }).then(function(b) {
+            b && a.appendChild(b)
+          })
+        }), d
+      }
+      var e = a.childNodes;
+      return 0 === e.length ? Promise.resolve(b) : d(b, q.asArray(e), c).then(function() {
+        return b
+      })
+    }
+
+    function f(a, b) {
+      function c() {
+        function c(a, b) {
+          function c(a, b) {
+            q.asArray(a).forEach(function(c) {
+              b.setProperty(c, a.getPropertyValue(c), a.getPropertyPriority(c))
+            })
+          }
+          a.cssText ? b.cssText = a.cssText : c(a, b)
+        }
+        c(window.getComputedStyle(a), b.style)
+      }
+
+      function d() {
+        function c(c) {
+          function d(a, b, c) {
+            function d(a) {
+              var b = a.getPropertyValue("content");
+              return a.cssText + " content: " + b + ";"
+            }
+
+            function e(a) {
+              function b(b) {
+                return b + ": " + a.getPropertyValue(b) + (a.getPropertyPriority(b) ? " !important" : "")
+              }
+              return q.asArray(a).map(b).join("; ") + ";"
+            }
+            var f = "." + a + ":" + b,
+              g = c.cssText ? d(c) : e(c);
+            return document.createTextNode(f + "{" + g + "}")
+          }
+          var e = window.getComputedStyle(a, c),
+            f = e.getPropertyValue("content");
+          if ("" !== f && "none" !== f) {
+            var g = q.uid();
+            b.className = b.className + " " + g;
+            var h = document.createElement("style");
+            h.appendChild(d(g, c, e)), b.appendChild(h)
+          }
+        }[":before", ":after"].forEach(function(a) {
+          c(a)
+        })
+      }
+
+      function e() {
+        a instanceof HTMLTextAreaElement && (b.innerHTML = a.value), a instanceof HTMLInputElement && b.setAttribute("value", a.value)
+      }
+
+      function f() {
+        b instanceof SVGElement && (b.setAttribute("xmlns", "http://www.w3.org/2000/svg"), b instanceof SVGRectElement && ["width", "height"].forEach(function(a) {
+          var c = b.getAttribute(a);
+          c && b.style.setProperty(a, c)
+        }))
+      }
+      return b instanceof Element ? Promise.resolve().then(c).then(d).then(e).then(f).then(function() {
+        return b
+      }) : b
+    }
+    return c || !b || b(a) ? Promise.resolve(a).then(d).then(function(c) {
+      return e(a, c, b)
+    }).then(function(b) {
+      return f(a, b)
+    }) : Promise.resolve()
+  }
+
+  function j(a) {
+    return s.resolveAll().then(function(b) {
+      var c = document.createElement("style");
+      return a.appendChild(c), c.appendChild(document.createTextNode(b)), a
+    })
+  }
+
+  function k(a) {
+    return t.inlineAll(a).then(function() {
+      return a
+    })
+  }
+
+  function l(a, b, c) {
+    return Promise.resolve(a).then(function(a) {
+      return a.setAttribute("xmlns", "http://www.w3.org/1999/xhtml"), (new XMLSerializer).serializeToString(a)
+    }).then(q.escapeXhtml).then(function(a) {
+      return '<foreignObject x="0" y="0" width="100%" height="100%">' + a + "</foreignObject>"
+    }).then(function(a) {
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="' + b + '" height="' + c + '">' + a + "</svg>"
+    }).then(function(a) {
+      return "data:image/svg+xml;charset=utf-8," + a
+    })
+  }
+
+  function m() {
+    function a() {
+      var a = "application/font-woff",
+        b = "image/jpeg";
+      return {
+        woff: a,
+        woff2: a,
+        ttf: "application/font-truetype",
+        eot: "application/vnd.ms-fontobject",
+        png: "image/png",
+        jpg: b,
+        jpeg: b,
+        gif: "image/gif",
+        tiff: "image/tiff",
+        svg: "image/svg+xml"
+      }
+    }
+
+    function b(a) {
+      var b = /\.([^\.\/]*?)$/g.exec(a);
+      return b ? b[1] : ""
+    }
+
+    function c(c) {
+      var d = b(c).toLowerCase();
+      return a()[d] || ""
+    }
+
+    function d(a) {
+      return a.search(/^(data:)/) !== -1
+    }
+
+    function e(a) {
+      return new Promise(function(b) {
+        for (var c = window.atob(a.toDataURL().split(",")[1]), d = c.length, e = new Uint8Array(d), f = 0; f < d; f++) e[f] = c.charCodeAt(f);
+        b(new Blob([e], {
+          type: "image/png"
+        }))
+      })
+    }
+
+    function f(a) {
+      return a.toBlob ? new Promise(function(b) {
+        a.toBlob(b)
+      }) : e(a)
+    }
+
+    function g(a, b) {
+      var c = document.implementation.createHTMLDocument(),
+        d = c.createElement("base");
+      c.head.appendChild(d);
+      var e = c.createElement("a");
+      return c.body.appendChild(e), d.href = b, e.href = a, e.href
+    }
+
+    function h() {
+      var a = 0;
+      return function() {
+        function b() {
+          return ("0000" + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4)
+        }
+        return "u" + b() + a++
+      }
+    }
+
+    function i(a) {
+      return new Promise(function(b, c) {
+        var d = new Image;
+        d.onload = function() {
+          b(d)
+        }, d.onerror = c, d.src = a
+      })
+    }
+
+    function j(a) {
+      var b = 3e4;
+      return v.impl.options.cacheBust && (a += (/\?/.test(a) ? "&" : "?") + (new Date).getTime()), new Promise(function(c) {
+        function d() {
+          if (4 === g.readyState) {
+            if (200 !== g.status) return void(h ? c(h) : f("cannot fetch resource: " + a + ", status: " + g.status));
+            var b = new FileReader;
+            b.onloadend = function() {
+              var a = b.result.split(/,/)[1];
+              c(a)
+            }, b.readAsDataURL(g.response)
+          }
+        }
+
+        function e() {
+          h ? c(h) : f("timeout of " + b + "ms occured while fetching resource: " + a)
+        }
+
+        function f(a) {
+          console.error(a), c("")
+        }
+        var g = new XMLHttpRequest;
+        g.onreadystatechange = d, g.ontimeout = e, g.responseType = "blob", g.timeout = b, g.open("GET", a, !0), g.send();
+        var h;
+        if (v.impl.options.imagePlaceholder) {
+          var i = v.impl.options.imagePlaceholder.split(/,/);
+          i && i[1] && (h = i[1])
+        }
+      })
+    }
+
+    function k(a, b) {
+      return "data:" + b + ";base64," + a
+    }
+
+    function l(a) {
+      return a.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1")
+    }
+
+    function m(a) {
+      return function(b) {
+        return new Promise(function(c) {
+          setTimeout(function() {
+            c(b)
+          }, a)
+        })
+      }
+    }
+
+    function n(a) {
+      for (var b = [], c = a.length, d = 0; d < c; d++) b.push(a[d]);
+      return b
+    }
+
+    function o(a) {
+      return a.replace(/#/g, "%23").replace(/\n/g, "%0A")
+    }
+
+    function p(a) {
+      var b = r(a, "border-left-width"),
+        c = r(a, "border-right-width");
+      return a.scrollWidth + b + c
+    }
+
+    function q(a) {
+      var b = r(a, "border-top-width"),
+        c = r(a, "border-bottom-width");
+      return a.scrollHeight + b + c
+    }
+
+    function r(a, b) {
+      var c = window.getComputedStyle(a).getPropertyValue(b);
+      return parseFloat(c.replace("px", ""))
+    }
+    return {
+      escape: l,
+      parseExtension: b,
+      mimeType: c,
+      dataAsUrl: k,
+      isDataUrl: d,
+      canvasToBlob: f,
+      resolveUrl: g,
+      getAndEncode: j,
+      uid: h(),
+      delay: m,
+      asArray: n,
+      escapeXhtml: o,
+      makeImage: i,
+      width: p,
+      height: q
+    }
+  }
+
+  function n() {
+    function a(a) {
+      return a.search(e) !== -1
+    }
+
+    function b(a) {
+      for (var b, c = []; null !== (b = e.exec(a));) c.push(b[1]);
+      return c.filter(function(a) {
+        return !q.isDataUrl(a)
+      })
+    }
+
+    function c(a, b, c, d) {
+      function e(a) {
+        return new RegExp("(url\\(['\"]?)(" + q.escape(a) + ")(['\"]?\\))", "g")
+      }
+      return Promise.resolve(b).then(function(a) {
+        return c ? q.resolveUrl(a, c) : a
+      }).then(d || q.getAndEncode).then(function(a) {
+        return q.dataAsUrl(a, q.mimeType(b))
+      }).then(function(c) {
+        return a.replace(e(b), "$1" + c + "$3")
+      })
+    }
+
+    function d(d, e, f) {
+      function g() {
+        return !a(d)
+      }
+      return g() ? Promise.resolve(d) : Promise.resolve(d).then(b).then(function(a) {
+        var b = Promise.resolve(d);
+        return a.forEach(function(a) {
+          b = b.then(function(b) {
+            return c(b, a, e, f)
+          })
+        }), b
+      })
+    }
+    var e = /url\(['"]?([^'"]+?)['"]?\)/g;
+    return {
+      inlineAll: d,
+      shouldProcess: a,
+      impl: {
+        readUrls: b,
+        inline: c
+      }
+    }
+  }
+
+  function o() {
+    function a() {
+      return b(document).then(function(a) {
+        return Promise.all(a.map(function(a) {
+          return a.resolve()
+        }))
+      }).then(function(a) {
+        return a.join("\n")
+      })
+    }
+
+    function b() {
+      function a(a) {
+        return a.filter(function(a) {
+          return a.type === CSSRule.FONT_FACE_RULE
+        }).filter(function(a) {
+          return r.shouldProcess(a.style.getPropertyValue("src"))
+        })
+      }
+
+      function b(a) {
+        var b = [];
+        return a.forEach(function(a) {
+          try {
+            q.asArray(a.cssRules || []).forEach(b.push.bind(b))
+          } catch (c) {
+            console.log("Error while reading CSS rules from " + a.href, c.toString())
+          }
+        }), b
+      }
+
+      function c(a) {
+        return {
+          resolve: function() {
+            var b = (a.parentStyleSheet || {}).href;
+            return r.inlineAll(a.cssText, b)
+          },
+          src: function() {
+            return a.style.getPropertyValue("src")
+          }
+        }
+      }
+      return Promise.resolve(q.asArray(document.styleSheets)).then(b).then(a).then(function(a) {
+        return a.map(c)
+      })
+    }
+    return {
+      resolveAll: a,
+      impl: {
+        readAll: b
+      }
+    }
+  }
+
+  function p() {
+    function a(a) {
+      function b(b) {
+        return q.isDataUrl(a.src) ? Promise.resolve() : Promise.resolve(a.src).then(b || q.getAndEncode).then(function(b) {
+          return q.dataAsUrl(b, q.mimeType(a.src))
+        }).then(function(b) {
+          return new Promise(function(c, d) {
+            a.onload = c, a.onerror = d, a.src = b
+          })
+        })
+      }
+      return {
+        inline: b
+      }
+    }
+
+    function b(c) {
+      function d(a) {
+        var b = a.style.getPropertyValue("background");
+        return b ? r.inlineAll(b).then(function(b) {
+          a.style.setProperty("background", b, a.style.getPropertyPriority("background"))
+        }).then(function() {
+          return a
+        }) : Promise.resolve(a)
+      }
+      return c instanceof Element ? d(c).then(function() {
+        return c instanceof HTMLImageElement ? a(c).inline() : Promise.all(q.asArray(c.childNodes).map(function(a) {
+          return b(a)
+        }))
+      }) : Promise.resolve(c)
+    }
+    return {
+      inlineAll: b,
+      impl: {
+        newImage: a
+      }
+    }
+  }
+  var q = m(),
+    r = n(),
+    s = o(),
+    t = p(),
+    u = {
+      imagePlaceholder: void 0,
+      cacheBust: !1
+    },
+    v = {
+      toSvg: b,
+      toPng: d,
+      toJpeg: e,
+      toBlob: f,
+      toPixelData: c,
+      impl: {
+        fontFaces: s,
+        images: t,
+        util: q,
+        inliner: r,
+        options: {}
+      }
+    };
+  "undefined" != typeof module ? module.exports = v : a.domtoimage = v
+}(this);
 
 //! moment.js
 //! version : 2.18.1
@@ -32995,14 +33448,48 @@ return hooks;
 
 const STORAGE = {};
 
+// Firebase
+////////////////////////////////////////////////////////////////////////////////
+
+function startFirebaseService() {
+  firebase.initializeApp({
+               apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
+           authDomain: 'analytical-park-149313.firebaseapp.com',
+          databaseURL: 'https://analytical-park-149313.firebaseio.com',
+            projectId: 'analytical-park-149313',
+        storageBucket: 'analytical-park-149313.appspot.com',
+    messagingSenderId: '215411573688'
+  });
+
+  return firebase.storage().ref();
+}
+
+var firebase_storage = startFirebaseService();
+
 // Funciones Globales
 ////////////////////////////////////////////////////////////////////////////////
 
-// Check 02.08.2017 - Permite definir formato del número.
-function formatNumber(number) {
+// Actualizado 04.08.2017 - Genera una cadena de texto aleatoria.
+function generateToken(length) {
+  let text = '',
+      possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return text;
+}
+// Actualizado 04.08.2017 - Permite definir formato del número.
+function formatNumberD3(number) {
   return d3.format((parseInt(number) === number)?(','):(',.2f'))(number);
 }
-// Check 02.08.2017 - Permite descargar un archivo y devolver una promesa.
+function formatNumberJS(number, precision, miles, decimales) {
+  let r = '\\d(?=(\\d{3})+' + (precision > 0 ? '\\D' : '$') + ')',
+      v = number.toFixed(Math.max(0, precision));
+  return (decimales ? v.replace('.', decimales) : v).replace(new RegExp(r, 'g'), '$&' + (miles || ','));
+}
+// Actualizado 04.08.2017 - Permite descargar un archivo y devolver una promesa.
 function downloadFile(path, name) {
   return new Promise((success) => {
     d3.json(path, (data) => {
@@ -33010,6 +33497,40 @@ function downloadFile(path, name) {
 
       success();
     });
+  });
+}
+// Actualizado 04.08.2017 - Permite compartir uns imagen en redes sociales
+function share(social, element) {
+  let renderNode = element.parentNode.parentNode,
+      date = new Date();
+
+  // Generar imagen Uint8Array
+  let w = renderNode.offsetWidth,
+      h = renderNode.offsetHeight,
+      imgW = 1024,
+      imgH = 512;
+
+  domtoimage.toBlob(renderNode, {height: imgH, width: imgW}).then((file) => {
+
+    console.log(file);
+
+    let url = firebaseStorage.child(`${ date.getTime() }${ generateToken(10) }`)
+      .put(file)
+      .then((snapshot) => {
+        let github = 'https://datosgobar.github.io/landing-ied/';
+        let url = 'https%3A%2F%2Fdatosgobar.github.io%2Flanding-ied%2Fpublic%2Fimages%2Fmodule.png';
+        // let url = snapshot.metadata.downloadURLs[0];
+
+        console.log(`${ date.getTime() }${ generateToken(10) }`);
+
+        console.log(url);
+
+        switch (social) {
+          case 'facebook': window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${ github }&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
+          // case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
+        }
+      });
   });
 }
 
@@ -33028,7 +33549,7 @@ function parseTypeLine(type) {
 // Esta función parsea el formato de tipo de fecha.
 ////////////////////////////////////////////////////////////////////////////////
 
-function parseFormatDate(format, date) {
+function parseFormatDate(format, date, short = false) {
   date = moment(date);
 
   switch (format) {
@@ -33038,16 +33559,28 @@ function parseFormatDate(format, date) {
       let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
           semester = Math.round(semester(date.format('M')));
 
-      return `${ semester }º semestre de ${ date.format('YYYY') }`;
+      if (short) {
+        return `${ semester }S ${ date.format('YY') }`;
+      } else {
+        return `${ semester }º semestre de ${ date.format('YYYY') }`;
+      }
+
+      break;
     case 'R/P3M':
       let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
           trimester = Math.round(trimester(date.format('M')));
 
-      return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+      if (short) {
+        return `${ trimester }T ${ date.format('YY') }`;
+      } else {
+        return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+      }
+
+      break;
     case 'R/P1M':
-      return date.format('MMMM [de] YYYY');
+      return date.format('MMM YY');
     case 'R/P1D':
-      return date.format('D [de] MMMM [de] YYYY');
+      return date.format('D MMM YY');
     default:
       return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
   }
@@ -33059,9 +33592,9 @@ function parseFormatDate(format, date) {
 function parseValueIndicator(format, value) {
   switch (format) {
     case '%':
-      return `${ formatNumber(value * 100) }%`;
+      return `${ formatNumberD3(value * 100) }%`;
     default:
-      return formatNumber(value);
+      return formatNumberD3(value);
   }
 }
 
@@ -33093,23 +33626,62 @@ function generateCharts(element) {
       if (card.id === id) {
         let charts = card.charts;
 
-        charts.forEach((chart) => {
+        charts.forEach((chart, index) => {
 
           let chartComponente = document.createElement('div');
               chartComponente.setAttribute('id', chart.id);
               chartComponente.classList.add('chart');
               chartComponente.innerHTML = `<div class="head">
                                               <h3>${ chart.title }</h3>
-                                              <span id="references"></span>
+                                              <div class="break-line"><br></div>
+                                              <p class="paragraph">${ chart.description }</p>
+                                              <div class="break-line"><br></div>
                                            </div>
-                                           <div class="break-line"><br></div>
-                                           <p class="paragraph">${ chart.description }</p>
-                                           <div class="break-line"><br></div>
+                                           <div class="referenceContainer">
+                                             <div class="break-line"><br></div>
+                                             <span id="references"></span>
+                                             <div class="break-line"><br></div>
+                                           </div>
+                                           <div class="rangeButton">
+                                            <div class="break-line"><br></div>
+                                            <div class="rangeButton-component">
+                                              <div class="rangeButton-text">Escala:</div>
+                                              <div>
+                                                <button>Estática</button>
+                                                <button>Dinámica</button>
+                                              </div>
+                                            </div>
+                                            <div class="break-line"><br></div>
+                                           </div>
+
                                            <div class="chart-svg"></div>
                                            <div class="break-line"><br></div>
-                                           <div class="loading flex">
-                                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                           </div>`;
+                                           <div class="modal-share">
+                                              <input id="share-${ charts[index].id }" type="checkbox" class="share-open">
+                                              <label for="share-${ charts[index].id }" class="share-open-button hamburger-dark">
+                                                <span class="hamburger-1"></span>
+                                                <span class="hamburger-2"></span>
+                                                <span class="hamburger-3"></span>
+                                              </label>
+                                              <button class="share-item buttonEmbebed button buttonCircle" title="Embeber sección" onclick="embebedContainerShow(this)" style="background-color: black; color: white; right: 0px;">
+                                                <span class="buttonCircleSmall boton_efecto">
+                                                  <i class="fa fa-code" aria-hidden="true"></i>
+                                                </span>
+                                              </button>
+                                              <button class="share-item button buttonCircle" title="Compartir en Twitter" onclick="share('twitter', this)" style="background-color: rgb(29, 161, 242); color: white; right: 0px;">
+                                                <span class="buttonCircleSmall boton_efecto">
+                                                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                                                </span>
+                                              </button>
+                                              <button class="share-item button buttonCircle" title="Compartir en Facebook" onclick="share('facebook', this)" style="background-color: rgb(59, 89, 152); color: white; right: 0px;">
+                                                <span class="buttonCircleSmall boton_efecto">
+                                                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                                                </span>
+                                              </button>
+                                            </div>
+                                            <div class="loading flex">
+                                             <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                            </div>`;
 
           chartsContainer.append(chartComponente);
 
@@ -33151,7 +33723,7 @@ function generateCharts(element) {
           group[value[0]] = { date: new Date(value[0]) };
         }
 
-        group[value[0]][indicator.name] = value[1];
+        group[value[0]][indicator.short_name] = value[1];
       });
     });
 
@@ -33172,7 +33744,7 @@ function generateCharts(element) {
     chart.indicators.forEach((v) => {
       let container = document.querySelector(`#${ chart.id } #references`),
           reference = document.createElement('p');
-          reference.innerHTML = `<div class="reference-circle" style="background-color: ${ v.color }"></div> ${ v.name }`;
+          reference.innerHTML = `<div class="reference-circle" style="background-color: ${ v.color }"></div> ${ v.short_name }`;
           container.append(reference);
     });
 
@@ -33184,19 +33756,19 @@ function generateCharts(element) {
     ////////////////////////////////////////////////////////////////////////////
 
     let totalHeight = 410,
-        chartMargin = {top: 0, right: 75, bottom: 112, left: 75},
-        rangeMargin = {top: 350, right: 75, bottom: 20, left: 75};
+        chartMargin = {top: 0, right: 50, bottom: 112, left: 75},
+        rangeMargin = {top: 350, right: 50, bottom: 20, left: 75};
 
     // parámetros
     ////////////////////////////////////////////////////////////////////////////
 
     let dataset = chart.indicators.map((d) => {
       return {
-        name: d.name,
+        name: d.short_name,
         values: data.map((c) => {
           return {
             date: c.date,
-            value: (c[d.name] !== undefined) ? (+c[d.name]) : (0)
+            value: (c[d.short_name] !== undefined) ? (+c[d.short_name]) : (0)
           };
         })
       };
@@ -33204,8 +33776,8 @@ function generateCharts(element) {
     totalWidth = chartsContainer.getBoundingClientRect().width,
     minValue = d3.min(dataset, (c) => d3.min(c.values, (v) => v.value)),
     maxValue = d3.max(dataset, (c) => d3.max(c.values, (v) => v.value)),
-    minExtend = (minValue < 0) ? (minValue - ((maxValue - minValue) / 15)) : (0),
-    maxExtend = maxValue + ((maxValue - minValue) / 15),
+    minExtend = minValue - ((maxValue - minValue) / 15),
+    // maxExtend = maxValue + ((maxValue - minValue) / 15),
     minDate = d3.min(dataset, (c) => d3.min(c.values, (v) => v.date)),
     maxDate = d3.max(dataset, (c) => d3.max(c.values, (v) => v.date));
 
@@ -33220,7 +33792,7 @@ function generateCharts(element) {
     let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
         chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
         chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data, (d) => d.date)),
-        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minExtend, maxExtend]),
+        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minExtend, maxValue]),
         chartAxisX  = d3.axisBottom(chartScaleX),
         chartAxisY  = d3.axisLeft(chartScaleY);
 
@@ -33231,7 +33803,7 @@ function generateCharts(element) {
         rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom,
         rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain()),
         rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain()),
-        rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat(d3.timeFormat('%Y')),
+        rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat((d) => parseFormatDate(chart.frequency, d, true)),
         rangeAxisY  = d3.axisLeft(rangeScaleY);
 
     // brush
@@ -33245,7 +33817,7 @@ function generateCharts(element) {
     ////////////////////////////////////////////////////////////////////////////
 
     // let colorLines = d3.scaleOrdinal()
-    //   .domain(chart.indicators.map((d) => d.name))
+    //   .domain(chart.indicators.map((d) => d.short_name))
     //   .range(chart.indicators.map((d) => d.color));
 
     // se definen lineas
@@ -33261,13 +33833,13 @@ function generateCharts(element) {
       .attr('width', chartWidth + chartMargin.left + chartMargin.right)
       .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
 
-    svg.append('defs').append('clipPath')
+    let defs = svg.append('defs').append('clipPath')
       .attr('id', 'clip')
       .append('rect')
       .attr('width', chartWidth)
       .attr('height', chartHeight);
 
-    svg.append('rect')
+    let svg_background = svg.append('rect')
       .attr('class', 'chart-background')
       .attr('width', chartWidth + chartMargin.left + chartMargin. right)
       .attr('height', chartHeight + chartMargin.top + 30);
@@ -33276,54 +33848,47 @@ function generateCharts(element) {
     ////////////////////////////////////////////////////////////////////////////
 
     let chartContainer = svg.append('g')
-      .attr('class', 'chartContainer')
+      .attr('class', 'chart-container')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
 
-    console.log(chartScaleY(0));
-    console.log(chartScaleY(0));
-
-    chartContainer.append('g')
-      .attr('class', 'line-y-0')
+    // TODO - La posición de la linea no esta siempre en la posición 0 del eje-y. Además, no se actualiza cuando de modifica el eje-x.
+    let chart_line_0 = chartContainer.append('g')
+      .attr('class', 'chart-line-0')
       .append('line')
       .attr('x1', 0)
       .attr('x2', chartWidth)
       .attr('y1', chartScaleY(0))
-      .attr('y2', chartScaleY(0))
-      .style('fill', 'none')
-      .style('stroke', 'red');
+      .attr('y2', chartScaleY(0));
 
     chartContainer.append('g')
-      .attr('class', 'axis axis--x')
+      .attr('class', 'chart-axis-x')
       .attr('transform', `translate(0, ${ chartHeight })`)
       .call(chartAxisX);
 
     chartContainer.append('g')
-      .attr('class', 'axis axis--y')
+      .attr('class', 'chart-axis-y')
       .call(chartAxisY);
 
-    let chartLines = chartContainer.selectAll('.lines')
+    let chartLines = chartContainer.selectAll('.chart-line')
       .data(dataset)
       .enter().append('g')
-      .attr('class', 'lines');
+      .attr('class', 'chart-line');
 
-    chartLines.append('path')
-      .attr('class', 'line')
+    let chartLines_line = chartLines.append('path')
       .attr('stroke-dasharray', (d, i) => { return parseTypeLine(chart.indicators[i].type); })
       .attr('d', (d) => chartLine(d.values))
-      .style('fill', 'none')
-      .attr('clip-path', 'url(#clip)')
-      .style('stroke', (d, i) => chart.indicators[i].color);
+      .style('stroke', (d, i) => chart.indicators[i].color)
+      .attr('clip-path', 'url(#clip)');
 
-    let dots = chartContainer.selectAll('.dot')
+    let dots = chartContainer.selectAll('.chart-dots')
       .data(dataset)
       .enter().append('g')
-      .attr('class', 'dot')
-      .style('fill', (d, i) => chart.indicators[i].color)
+      .attr('class', 'chart-dots')
+      .style('fill', 'black')
       .selectAll('circle')
       .data((d) => d.values)
       .enter().append('circle')
       .attr('clip-path', 'url(#clip)')
-      .attr('r', 2)
       .attr('cx', (d) => chartScaleX(d.date))
       .attr('cy', (d) => chartScaleY(d.value));
 
@@ -33331,41 +33896,51 @@ function generateCharts(element) {
     ////////////////////////////////////////////////////////////////////////////
 
     let rangeConteiner = svg.append('g')
-      .attr('class', 'rangeConteiner')
+      .attr('class', 'range-container')
       .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
 
-    let rangeLines = rangeConteiner.selectAll('.mini-lines')
+    let rangeLines = rangeConteiner.selectAll('.range-line')
       .data(dataset)
       .enter().append('g')
-      .attr('class', 'mini-lines');
+      .attr('class', 'range-line');
 
     rangeLines.append('path')
       .attr('d', (d) => rangeLine(d.values))
-      .style('stroke', (d, i) => chart.indicators[i].color)
-      .style('fill', 'none');
+      .style('stroke', (d, i) => chart.indicators[i].color);
 
     rangeConteiner.append('g')
-      .attr('class', 'axis axis--x')
+      .attr('class', 'range-axis-x')
       .attr('transform', `translate(0, ${ rangeHeight })`)
       .call(rangeAxisX);
 
-    // console.log(date);
-    // console.log(chartWidth);
-
-    rangeConteiner.append('g')
+    // TODO - Mover esto a D3
+    let startBrush = rangeConteiner.append('g')
       .attr('class', 'start-brush-date')
-      .attr('text-anchor', 'start')
-      .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`)
-      .append('text');
-
-    rangeConteiner.append('g')
-      .attr('class', 'end-brush-date')
       .attr('text-anchor', 'end')
-      .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`)
-      .append('text');
+      .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
+
+    startBrush.append('rect')
+      .attr('height', '20px')
+      .attr('transform', 'translate(0, -15)')
+      .attr('fill', 'white');
+
+    startBrush.append('text');
+
+    // TODO - Mover esto a D3
+    let endBrush = rangeConteiner.append('g')
+      .attr('class', 'end-brush-date')
+      .attr('text-anchor', 'start')
+      .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+
+    endBrush.append('rect')
+      .attr('height', '20px')
+      .attr('transform', 'translate(-7.5, -15)')
+      .attr('fill', 'white');
+
+    endBrush.append('text');
 
     rangeConteiner.append('g')
-      .attr('class', 'brush')
+      .attr('class', 'range-brush')
       .call(brush)
       .call(brush.move, [rangeScaleX(date), chartWidth]);
 
@@ -33385,151 +33960,254 @@ function generateCharts(element) {
     //   .attr('y', (d, i) => i * 20)
     //   .attr('width', 10)
     //   .attr('height', 10)
-    //   .style('fill', (d) => colorLines(d.name));
+    //   .style('fill', (d) => colorLines(d.short_name));
     //
     // legend.append('text')
     //   .attr('x', chartWidth - 8)
     //   .attr('y', (d, i) => (i * 20) + 9)
-    //   .text((d) => d.name);
+    //   .text((d) => d.short_name);
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
     // Vertical Line
-    var lineHover = svg.append('g').attr('class', 'lineHover').attr('transform', 'translate(' + chartMargin.left + ',' + chartMargin.top + ')');
+    let tooltipLine = svg.append('g')
+      .attr('class', 'chart-tooltip')
+      .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
 
-    lineHover.append('path') // this is the black vertical line to follow mouse
-      .attr('class', 'mouse-line')
-      .style('stroke', Modal.variables.colors.base_contraste)
-      .style('stroke-width', '1px')
-      .style('opacity', '0');
+    tooltipLine.append('path')
+      .attr('class', 'tooltip-line')
+      .style('opacity', 0);
 
-    var mousePerLine = lineHover.selectAll('.mouse-per-line')
+    let tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
       .data(dataset)
       .enter().append('g')
-      .attr('class', 'mouse-per-line');
+      .attr('class', 'tooltip-indicator')
+      .style('opacity', 0);
 
-    mousePerLine.append('circle')
-      .attr('class', 'tooltip-circle-hover')
-      .attr('r', 4)
-      .style('fill', (d) => colorLines(d.name));
+    tooltipIndicator.append('circle')
+      .attr('transform', 'translate(0, 2)')
+      .style('fill', (d, i) => chart.indicators[i].color);
 
-    mousePerLine.append('rect')
-      .attr('class', 'tooltip-rect-hover')
-      .attr('x', 10)
-      .attr('y', -10)
-      .attr('rx', 15)
-      .attr('ry', 15)
-      .attr('height', 25)
-      .style('fill', (d) => colorLines(d.name));
+    let boxText = tooltipIndicator.append('g')
+      .attr('class', 'boxText');
 
-    mousePerLine.append('text')
-      .attr('class', 'tooltip-text-hover')
-      .attr('fill', 'white')
-      .attr('font-size', '12px')
-      .attr('transform', 'translate(25, 15)');
+    boxText.append('rect')
+      .style('fill', (d, i) => chart.indicators[i].color);
 
-    let dateGroup = lineHover.append('g')
-      .attr('class', 'group-date');
+    boxText.append('text');
 
-    dateGroup.append('rect')
-      .attr('class', 'date-rect-hover')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('rx', 15)
-      .attr('ry', 15)
-      .attr('height', 25)
-      .style('fill', '#fafafa');
+    let tooltipDate = tooltipLine.append('g')
+      .attr('class', 'tooltip-date')
+      .attr('opacity', 0);
 
-    dateGroup.append('text')
-      .attr('class', 'date-text-hover')
-      .attr('fill', 'black')
-      .attr('transform', 'translate(0, 25)');
+    tooltipDate.append('rect');
 
-    lineHover.append('svg:rect') // append a rect to catch mouse movements on canvas
-      .attr('width', chartWidth) // can't catch mouse events on a g element
+    tooltipDate.append('text');
+
+    tooltipLine.append('rect')
+      .attr('class', 'tooltip-rect-space')
+      .attr('width', chartWidth)
       .attr('height', chartHeight)
-      .attr('fill', 'none')
       .attr('pointer-events', 'all')
-      .on('mouseover', function() { // on mouse in show line, circles and text
-        d3.select(this.parentNode).select('.mouse-line').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-circle-hover').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-rect-hover').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-text-hover').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .date-rect-hover').style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .date-text-hover').style('opacity', '1');
+      .on('mouseover',  function() {
+        d3.select(this.parentNode).select('.tooltip-line').transition().style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.tooltip-indicator').transition().style('opacity', '1');
+        d3.select(this.parentNode).selectAll('.tooltip-date').transition().style('opacity', '1');
       })
-      .on('mouseout', function() { // on mouse out hide line, circles and text
-        d3.select(this.parentNode).select('.mouse-line').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-circle-hover').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-rect-hover').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .tooltip-text-hover').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .date-rect-hover').style('opacity', '0');
-        d3.select(this.parentNode).selectAll('.mouse-per-line .date-text-hover').style('opacity', '0');
+      .on('mouseout',   function() {
+        d3.select(this.parentNode).select('.tooltip-line').transition().style('opacity', 0);
+        d3.select(this.parentNode).selectAll('.tooltip-indicator').transition().style('opacity', 0);
+        d3.select(this.parentNode).selectAll('.tooltip-date').transition().style('opacity', 0);
       })
-      .on('mousemove', function() { // mouse moving over canvas
-        // keep a reference to all our lines
-        var lines = this.parentNode.parentNode.querySelectorAll('.line');
+      .on('mousemove',  function() {
+        console.log('event action');
+        let lines     = this.parentNode.parentNode.querySelectorAll('.chart-line path'),
+            mouse     = d3.mouse(this),
+            dateMouse = chartScaleX(mouse[0]),
+            datePoint = '';
 
-        var mouse = d3.mouse(this);
+        console.log(mouse);
+        console.log(dateMouse);
+        console.log(datePoint);
 
-        d3.select(this.parentNode).select('.mouse-line').attr('d', function() {
-          var d = 'M' + mouse[0] + ',' + chartHeight;
-              d += ' ' + mouse[0] + ',' + 0;
 
-          return d;
-        });
+        d3.select(this.parentNode).select('.tooltip-line').attr('d', () => `M ${ mouse[0] }, 0 V ${ chartHeight }`);
+        d3.select(this.parentNode).selectAll('.tooltip-indicator')
+          .attr('transform', (d, i) => {
+            let xDate  = chartScaleX.invert(mouse[0]),
+                bisect = d3.bisector((d) => d.date).right,
+                idx    = bisect(d.values, xDate),
+                spaceWidth = d3.select('.tooltip-rect-space').node().getBBox().width;
 
-        // position the circle and text
-        d3.select(this.parentNode).selectAll('.mouse-per-line')
-          .attr('transform', function(d, i) {
+            let beginning = 0,
+                end       = lines[i].getTotalLength(),
+                target    = null,
+                pos;
 
-            // console.log(width/mouse[0]);
-
-            var xDate = chartScaleX.invert(mouse[0]),
-                bisect = d3.bisector(function(d) { return d.date; }).right,
-                idx = bisect(d.values, xDate);
-
-            // since we are use curve fitting we can't relay on finding the points like I had done in my last answer
-            // this conducts a search using some SVG path functions
-            // to find the correct position on the line
-            // from http://bl.ocks.org/duopixel/3824661
-            var beginning = 0,
-                end = lines[i].getTotalLength(),
-                target = null;
-
-            while (true){
+            while (true) {
               target = Math.floor((beginning + end) / 2);
               pos = lines[i].getPointAtLength(target);
+
               if ((target === end || target === beginning) && pos.x !== mouse[0]) {
-                  break;
+                break;
               }
-              if (pos.x > mouse[0])      end = target;
-              else if (pos.x < mouse[0]) beginning = target;
-              else break; //position found
+
+              if (pos.x > mouse[0]) {
+                end = target;
+              } else if (pos.x < mouse[0]) {
+                beginning = target;
+              } else {
+                break;
+              }
             }
 
-            d3.select(this).select('.tooltip-text-hover')
-              .text((d) => `${ formatNumber(chartScaleY.invert(pos.y)) } - ${ d.name }`);
+            d3.select(this.parentNode).selectAll('.tooltip-indicator text').filter((v, k) => (k === i))
+              .text((d) => `${ formatNumberD3(chartScaleY.invert(pos.y)) } - ${ d.name }`)
+              .transition().duration(100)
+              .attr('text-anchor', (d, i) => {
 
-            // update the text with y value
-            d3.select(this).select('.tooltip-rect-hover')
-              .attr('width', this.querySelector('.tooltip-text-hover').getBBox().width + 30);
+                if (pos.x < (spaceWidth / 2)) {
+                  return 'start';
+                } else {
+                  return 'end';
+                }
+              })
+              .attr('transform', (d, i) => {
 
-            d3.select(this.parentNode).select('.group-date')
+                if (pos.x < (spaceWidth / 2)) {
+                  return 'translate(25, 7)';
+                } else {
+                  return 'translate(-25, 7)';
+                }
+              });
+
+            let widthBackgroundTooltip =
+            d3.select(this.parentNode).selectAll('.tooltip-indicator rect')
+              .transition().duration(100)
+              .attr('x', (d, i) => {
+
+                if (pos.x < (spaceWidth / 2)) {
+                  return 10;
+                } else {
+                  return - (10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30);
+                }
+              })
+              .attr('y', -10)
+              .attr('width', (d, i) => this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30);
+
+            d3.select(this.parentNode).select('.tooltip-date')
               .attr('transform', `translate(${ pos.x }, ${ chartHeight + 5 })`);
 
-            d3.select(this.parentNode).select('.group-date .date-text-hover')
-              .text(d3.timeFormat('%d %B %Y')(chartScaleX.invert(pos.x)));
+            d3.select(this.parentNode).select('.tooltip-date text')
+              .text(parseFormatDate(chart.frequency, chartScaleX.invert(pos.x), true));
 
-            d3.select(this.parentNode).select('.group-date .date-rect-hover')
-              .attr('width', this.parentNode.querySelector('.date-text-hover').getBBox().width + 30);
+            let w = this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30;
 
-            // return position
-            return 'translate(' + mouse[0] + ',' + pos.y +')';
+            d3.select(this.parentNode).select('.tooltip-date rect')
+              .attr('width', w)
+              .attr('transform', `translate(-${w / 2}, -1)`);
+
+            return `translate(${ mouse[0] }, ${ pos.y })`;
           });
 
+        tooltipsCollapse(chart.id);
       });
+
+      function tooltipsCollapse(chart) {
+        function orderAscPosition(a, b) {
+          var aPosition = a.transform.baseVal['0'].matrix.f,
+              bPosition = b.transform.baseVal['0'].matrix.f;
+
+          if (aPosition < bPosition) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+        function orderDescPosition(a, b) {
+          var aPosition = a.transform.baseVal['0'].matrix.f,
+              bPosition = b.transform.baseVal['0'].matrix.f;
+
+          if (aPosition > bPosition) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+
+        // se seleccionan todos los indicadores del gráfico
+        var elements = document.querySelectorAll(`#${ chart } .tooltip-indicator`),
+            elements_asc = [], elements_desc = [];
+
+        document.querySelectorAll(`#${ chart } .tooltip-indicator .boxText`).forEach((v) => {
+          v.setAttribute('transform', 'translate(0, 0)');
+        });
+
+        elements.forEach((v) => {
+          elements_asc.push(v);
+          elements_desc.push(v);
+        });
+
+        // se obtienen las posiciones de cada indicador
+        elements_asc.sort(orderDescPosition);
+        elements_desc.sort(orderAscPosition);
+
+        // console.log(elements_asc);
+        // console.log(elements_desc);
+
+        // se hace pasada 1
+        var count = 0;
+        var force = 0;
+
+        elements_asc.forEach((v, k) => {
+
+          if (k !== elements_asc.length - 1) {
+            let start         = elements_asc[k],
+                startPosition = start.transform.baseVal['0'].matrix.f,
+                end           = elements_asc[k + 1],
+                endPosition   = end.transform.baseVal['0'].matrix.f,
+                diff          = endPosition - startPosition,
+                minHeight     = 30;
+
+            // console.log('posicion original', startPosition, endPosition);
+            // console.log('diferencia', diff, 'acumulado', count);
+            // console.log('diferencia real', diff - count);
+            // console.log('resultado', (diff - count) < minHeight);
+
+            if ((diff - count) < minHeight) {
+              count += (30 - diff);
+              elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', `translate(0, ${ count })`);
+            }
+          }
+        });
+
+        // se hace pasada 2
+        elements_desc.forEach((v, k) => {
+          if (k !== elements_desc.length - 1) {
+            let start         = elements_desc[k],
+                startPosition = start.transform.baseVal['0'].matrix.f,
+                end           = elements_desc[k + 1],
+                endPosition   = end.transform.baseVal['0'].matrix.f,
+                diff          = startPosition - endPosition,
+                minHeight     = 30,
+                minPosY       = 0,
+                maxPosY       = document.querySelector(`#${ chart } .tooltip-rect-space`).getBoundingClientRect().height - minHeight / 2;
+
+            // console.log(v);
+            // console.log('limite', minPosY, maxPosY);
+            // console.log('posicion original', startPosition + count, endPosition + count);
+
+            if ((startPosition + count) > maxPosY) {
+              force = (startPosition + count) - maxPosY;
+            }
+
+            // console.log('forzar', force);
+
+            elements_desc[k].querySelector('.boxText').transform.baseVal['0'].matrix.f -= force;
+          }
+        });
+      }
 
     //create brush function redraw scatterplot with selection
     function brushed() {
@@ -33547,16 +34225,30 @@ function generateCharts(element) {
         chartScaleX.domain(range);
 
         // Se actualizan fecha mínima y máxima del eje x en rangeContainer
-        d3.select(this.parentNode)
+        let startBrush = d3.select(this.parentNode)
           .select('.start-brush-date')
-          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 15 })`)
-          .select('.start-brush-date text')
-          .text(d3.timeFormat('%d %B %Y')(range[0]));
-        d3.select(this.parentNode)
+          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 15 })`);
+
+        startBrush.select('.start-brush-date text')
+          .text(parseFormatDate(chart.frequency, range[0], true));
+
+        let widthStartBrush = this.parentNode.querySelector('.start-brush-date text').getBBox().width;
+
+        startBrush.select('.start-brush-date rect')
+            .attr('width', widthStartBrush + 15)
+            .attr('x', -((widthStartBrush + 15) / 2) - (widthStartBrush / 2));
+
+        let endBrush = d3.select(this.parentNode)
           .select('.end-brush-date')
-          .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`)
-          .select('.end-brush-date text')
-          .text(d3.timeFormat('%d %B %Y')(range[1]));
+          .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
+
+        endBrush.select('.end-brush-date text')
+          .text(parseFormatDate(chart.frequency, range[1], true));
+
+        let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
+
+        endBrush.select('.end-brush-date rect')
+            .attr('width', widthEndBrush + 15);
 
         // Se actualizan fecha mínima y máxima del eje x en rangeContainer
         let dataFiltered = data.filter((d) => (d.date < range[1] && d.date > range[0]));
@@ -33582,19 +34274,73 @@ function generateCharts(element) {
             }
           );
 
-          maxExt = max + ((max - min) / 15);
+          // maxExt = max + ((max - min) / 15);
           minExt = min - ((max - min) / 15);
 
           // Se actualiza rango-y
-          chartScaleY.domain([minExt, maxExt]);
+          chartScaleY.domain([minExt, max]);
+
+          chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
         }
 
-        chartContainer.selectAll('.line').attr('d', (d) => chartLine(d.values));
-        chartContainer.selectAll('.dot circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
-        chartContainer.select('.axis--x').call(chartAxisX);
-        chartContainer.select('.axis--y').transition().duration(150).call(chartAxisY);
+        chartContainer.selectAll('.chart-line path').transition().duration(100).attr('d', (d) => chartLine(d.values));
+        chartContainer.selectAll('.chart-dots circle').transition().duration(100).attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
+        chartContainer.select('.chart-axis-x').transition().duration(100).call(chartAxisX);
+        chartContainer.select('.chart-axis-y').transition().duration(100).call(chartAxisY);
       }
     }
+
+    function redraw() {
+      // console.log(chartComponent);
+
+      totalWidth = chartsContainer.getBoundingClientRect().width;
+
+      chartWidth  = totalWidth - chartMargin.left - chartMargin.right;
+      chartScaleX.range([0, chartWidth]);
+      //chartAxisX = d3.axisBottom(chartScaleX);
+
+      rangeWidth  = totalWidth - rangeMargin.left - rangeMargin.right;
+      rangeScaleX.range([0, rangeWidth]);
+      //rangeAxisX = d3.axisBottom(rangeScaleX);
+
+      brush.extent([[0, 0], [rangeWidth, rangeHeight]]);
+
+      svg.attr('width', chartWidth + chartMargin.left + chartMargin.right);
+
+      defs.attr('width', chartWidth);
+
+      svg_background.attr('width', chartWidth + chartMargin.left + chartMargin. right);
+
+      chartContainer.attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+
+      chart_line_0.attr('x2', chartWidth);
+
+      chartLines.selectAll('path').attr('d', (d) => chartLine(d.values));
+
+      chartContainer.select('.chart-axis-x').call(chartAxisX);
+
+      chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date));
+
+      rangeConteiner.attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
+
+      rangeLines.selectAll('path').attr('d', (d) => rangeLine(d.values));
+
+      rangeConteiner.select('.range-axis-x').call(rangeAxisX);
+
+      rangeConteiner = svg.selectAll('.range-container').attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
+
+      rangeLines.selectAll('path').attr('d', (d) => rangeLine(d.values));
+
+      rangeConteiner.select('.range-axis-x').call(rangeAxisX);
+
+      startBrush.attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
+
+      endBrush.attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+
+      rangeConteiner.select('.range-brush').call(brush).call(brush.move, [rangeScaleX(date), chartWidth]);
+    }
+
+    window.addEventListener('resize', redraw);
   }
 
   renderPreviewCharts();
@@ -33612,7 +34358,7 @@ function renderCards() {
         cardComponent.classList.add('card');
         cardComponent.innerHTML = `<h3>${ card.title }</h3>
                                    <div class="break-line"><br><br><hr><br><br></div>
-                                   <h4>${ card.name }</h4>
+                                   <h4>${ card.short_name }</h4>
                                    <div class="break-line"><br></div>
                                    <p id="frequency"></p>
                                    <div class="break-line"><br><br></div>
@@ -33626,7 +34372,7 @@ function renderCards() {
                                       <span class="button-waves">Ver más gráficos</span>
                                    </button>
                                    <div class="break-line"><br></div>
-                                   <a href="${ card.download }" class="link" download><i class="fa fa-download" aria-hidden="true"></i> Descargar datos</a>
+                                   <a href="${ card.download_url }" class="link" download><i class="fa fa-download" aria-hidden="true"></i> Descargar datos</a>
                                    <div class="loading flex">
                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                                    </div>`;
@@ -33642,7 +34388,7 @@ function renderCards() {
         ////////////////////////////////////////////////////////////////////////
 
         let cardComponent = document.getElementById(metadata.id);
-            cardComponent.querySelector('#frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0]);
+            cardComponent.querySelector('#frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0], true);
             cardComponent.querySelector('#units_representation').innerHTML = parseValueIndicator(card.units_representation, data[data.length - 1][1]);
             cardComponent.querySelector('#units').innerHTML = metadata.units;
             cardComponent.querySelector('.loading').remove();
@@ -33657,7 +34403,7 @@ function start() {
   downloadFile('./public/data/cards.json', 'cards').then(renderCards);
 }
 
-// // Is Document Ready
-// ////////////////////////////////////////////////////////////////////////////////
+// Is Document Ready
+////////////////////////////////////////////////////////////////////////////////
 
 window.document.onload = start();

@@ -1,4 +1,5 @@
 :root {
+  /* colors variables */
   --base: #767676;
   --baseLight: #fafafa;
   --baseDark: #444;
@@ -9,6 +10,8 @@
   --palette3: '';
   --palette4: '';
   --palette5: '';
+  
+  /* header and footer variables */
   --headerHeight: 72px;
   --footerHeight: 230px;
 }

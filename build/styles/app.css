@@ -142,11 +142,13 @@ body {
   border-radius: 4px;
   position: relative;
   margin: 10px 0;
+  background-color: white;
 
   & > .head {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     padding: 20px 10px 0;
 
     & > h3 {
@@ -155,19 +157,24 @@ body {
       font-size: 22px;
       font-weight: 600;
     }
+  }
+
+  & > .referenceContainer {
+    background-color: var(--baseLight);
+    border-bottom: 1px solid var(--base);
 
     & > #references {
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
-      width: 50%;
+      margin: 0px 10px;
 
       & > p {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 10px 0 0;
+        margin: 0 10px 5px 0;
       }
 
       & .reference-circle {
@@ -179,8 +186,22 @@ body {
     }
   }
 
-  & > .paragraph {
-    margin: 0 10px;
+  & > .rangeButton {
+    background-color: var(--baseLight);
+
+    & > .rangeButton-component {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      & > .rangeButton-text {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  & .paragraph {
+    margin: 0;
   }
 
   & > .loading {
@@ -194,16 +215,108 @@ body {
   }
 }
 
-.rangeConteiner {
-  & > .axis--x > path {
-    stroke: none;
+.chart-background {
+  fill: var(--baseLight);
+}
+
+.chart-container {
+  & .chart-line-0 line {
+    fill: none;
+    stroke: var(--baseDark);
+  }
+
+  & .chart-axis-x {
+    & > path {
+      stroke: var(--baseDark);
+    }
+
+    & > .tick text {
+      font-size: 12px;
+      color: var(--base);
+    }
+  }
+
+  & .chart-axis-y {
+    & > path {
+      stroke: none;
+    }
+
+    & > .tick text {
+      font-size: 12px;
+      color: var(--base);
+    }
+  }
+
+  & .chart-line path {
+    fill: none;
+  }
+
+  & .chart-dots circle {
+    r: 2;
   }
 }
 
-.axis--y .tick,
-.axis--x .tick {
-  & > text {
-    fill: var(--base);
+.range-container {
+  & .range-line {
+    fill: none;
+  }
+
+  & .range-axis-x {
+    stroke: none;
+
+    & > .tick text {
+      font-size: 12px;
+      color: var(--base);
+    }
+  }
+}
+
+.chart-tooltip {
+  & .tooltip-line {
+    stroke: var(--baseDark);
+  }
+
+  & .tooltip-indicator {
+    & circle {
+      r: 4;
+    }
+
+    & rect {
+      rx: 15;
+      ry: 15;
+      height: 25px;
+    }
+
+    & text {
+      font-size: 12px;
+      fill: white;
+    }
+  }
+
+  & .tooltip-date {
+    x: 0;
+    y: 0;
+    rx: 15;
+    ry: 15;
+    height: 25px;
+    fill: var(--baseLight);
+
+    & text {
+      font-size: 14px;
+      transform: translate(0, 12px);
+      fill: var(--baseDark);
+      text-anchor: middle;
+      font-weight: 600;
+    }
+
+    & rect {
+      fill: var(--baseLight);
+      height: 18px;
+    }
+  }
+
+  & .tooltip-rect-space {
+    fill: none;
   }
 }
 
@@ -213,12 +326,4 @@ body {
     fill: var(--base);
     font-size: 12px;
   }
-}
-
-.axis--x path {
-  stroke: var(--baseDark);
-}
-
-.chart-background {
-  fill: var(--baseLight);
 }

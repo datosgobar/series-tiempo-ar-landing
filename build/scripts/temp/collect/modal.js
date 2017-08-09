@@ -4,44 +4,27 @@
   Última actualización: 18.07.2017
 */
 
-// Variables Globales del sitio
-////////////////////////////////////////////////////////////////////////////////
+// Configuración Firebase
 ////////////////////////////////////////////////////////////////////////////////
 
-// Initialize Firebase
+// let firebaseStorage;
+
 // firebase.initializeApp({
-//   apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
-//   authDomain: 'analytical-park-149313.firebaseapp.com',
-//   databaseURL: 'https://analytical-park-149313.firebaseio.com',
-//   projectId: 'analytical-park-149313',
-//   storageBucket: 'analytical-park-149313.appspot.com',
+//              apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
+//          authDomain: 'analytical-park-149313.firebaseapp.com',
+//         databaseURL: 'https://analytical-park-149313.firebaseio.com',
+//           projectId: 'analytical-park-149313',
+//       storageBucket: 'analytical-park-149313.appspot.com',
 //   messagingSenderId: '215411573688'
 // });
-//
-// let firebaseStorage = firebase.storage().ref()
+
+// firebaseStorage = firebase.storage().ref();
 
 // Funciones Globales del sitio
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-// Check 02.08.2017 - Permite definir formato del número
-function formatNumber(n, p, m, d) {
-  let r = '\\d(?=(\\d{3})+' + (p > 0 ? '\\D' : '$') + ')',
-      v = n.toFixed(Math.max(0, p));
-  return (d ? v.replace('.', d) : v).replace(new RegExp(r, 'g'), '$&' + (m || ','));
-}
 
-// Check 09.07.2017 - Oculta el componente cuando el mouse esta fuera del modulo
-function randomString(quantity) {
-  let text = '',
-      possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < quantity; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-
-  return text;
-}
 // Check 05.07.2017 - Sobreescribe los atributos de un objeto en otro
 function mergeStructure(target, source) {
   return {
@@ -50,38 +33,6 @@ function mergeStructure(target, source) {
     styles:     jQuery.extend(target.styles, source.styles),
     childrens:  (source.hasOwnProperty('childrens'))?(source.childrens):([])
   };
-};
-// Check 05.07.2017 - Inyecta los estilos de un componente
-function injectStyles(component, styles) {
-
-  for (let style in styles) {
-    component.style[style] = styles[style];
-  }
-
-  return true;
-};
-// Check 05.07.2017 - Inyecta los atributos de un componente
-function injectAttributes(component, attributes) {
-
-  for (let attr in attributes) {
-    if (attr === 'class') {
-        attributes[attr].split(' ').forEach((className) => {
-          component.classList.add(className);
-        });
-    } else {
-      component.setAttribute(attr, attributes[attr]);
-    }
-  }
-
-  return true;
-};
-// Check 05.07.2017 - Inyecta los componentes hijos de un componente
-function injectChildrens(component, childrens) {
-  childrens.forEach((children) => {
-    component.appendChild(children);
-  });
-
-  return true;
 };
 // Check 05.07.2017 - Muesta el componente cuando el mouse esta dentro del modulo
 function buttonShareShow(component) {
@@ -97,40 +48,40 @@ function buttonShareHide(component) {
   return true;
 };
 // Check 05.07.2017 - Comparte en redes sociales un modulo especifico
-function share(social, elemento) {
-  let node = elemento.parentNode.parentNode.parentNode,
-      nroModule = node.getAttribute('module-nro'),
-      date = new Date();
-
-  // Generar imagen Uint8Array
-  let w = node.offsetWidth,
-      h = node.offsetHeight,
-      imageW, imageH;
-
-  if (w > h) {
-    imageW = 2400;
-    imageH = (imageW / w) * h;
-  } else {
-    imageH = 1260;
-    imageW = (imageH / h) * w;
-  }
-
-  domtoimage.toBlob(node).then((file) => {
-  // domtoimage.toBlob(node, {height: imageH, width: imageW}).then((file) => {
-    console.log(file);
-    firebaseStorage
-      .child(`module_${ nroModule }_${ randomString(10) }_${ date.getTime() }`)
-      .put(file)
-      .then((snapshot) => {
-        let url = snapshot.metadata.downloadURLs[0];
-
-        switch (social) {
-          case 'facebook': window.open(`https://www.facebook.com/sharer.php?u=https://datosgobar.github.io/GDE&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-          case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`); break;
-        }
-      });
-  });
-};
+// function share(social, elemento) {
+//   let node = elemento.parentNode.parentNode.parentNode,
+//       nroModule = node.getAttribute('module-nro'),
+//       date = new Date();
+//
+//   // Generar imagen Uint8Array
+//   let w = node.offsetWidth,
+//       h = node.offsetHeight,
+//       imageW, imageH;
+//
+//   if (w > h) {
+//     imageW = 2400;
+//     imageH = (imageW / w) * h;
+//   } else {
+//     imageH = 1260;
+//     imageW = (imageH / h) * w;
+//   }
+//
+//   domtoimage.toBlob(node).then((file) => {
+//   // domtoimage.toBlob(node, {height: imageH, width: imageW}).then((file) => {
+//     console.log(file);
+//     firebaseStorage
+//       .child(`module_${ nroModule }_${ randomString(10) }_${ date.getTime() }`)
+//       .put(file)
+//       .then((snapshot) => {
+//         let url = snapshot.metadata.downloadURLs[0];
+//
+//         switch (social) {
+//           case 'facebook': window.open(`https://www.facebook.com/sharer.php?u=https://datosgobar.github.io/GDE&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
+//           case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`); break;
+//         }
+//       });
+//   });
+// };
 // Check 05.07.2017 - Muesta el contenedor para embeber el modulo
 function embebedContainerShow(component) {
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.opacity = '';
