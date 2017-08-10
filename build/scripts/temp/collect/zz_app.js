@@ -316,14 +316,13 @@ function generateCharts(element) {
 
     // parámetros
     ////////////////////////////////////////////////////////////////////////////
-
     let dataset = chart.indicators.map((d) => {
       return {
         name: d.short_name,
-        values: data.map((c) => {
+        values: data.filter((c) => c[d.short_name] !== undefined).map((c) => {
           return {
             date: c.date,
-            value: (c[d.short_name] !== undefined) ? (+c[d.short_name]) : (0)
+            value: +c[d.short_name]
           };
         })
       };
@@ -367,13 +366,6 @@ function generateCharts(element) {
     let brush = d3.brushX()
       .extent([[0, 0], [rangeWidth, rangeHeight]])
       .on('brush', brushed);
-
-    // escala de colores de lineas
-    ////////////////////////////////////////////////////////////////////////////
-
-    // let colorLines = d3.scaleOrdinal()
-    //   .domain(chart.indicators.map((d) => d.short_name))
-    //   .range(chart.indicators.map((d) => d.color));
 
     // se definen lineas
     ////////////////////////////////////////////////////////////////////////////
@@ -499,32 +491,6 @@ function generateCharts(element) {
       .call(brush)
       .call(brush.move, [rangeScaleX(date), chartWidth]);
 
-    // se crea contenedor del rango dinámico
-    ////////////////////////////////////////////////////////////////////////////
-
-    // let legend = svg.append('g')
-    //   .attr('class', 'legends')
-    //   .attr('transform', `translate(${ -chartWidth + 75 }, 10)`)
-    //   .selectAll('.legend')
-    //   .data(dataset)
-    //   .enter().append('g')
-    //   .attr('class', 'legend');
-    //
-    // legend.append('rect')
-    //   .attr('x', chartWidth - 20)
-    //   .attr('y', (d, i) => i * 20)
-    //   .attr('width', 10)
-    //   .attr('height', 10)
-    //   .style('fill', (d) => colorLines(d.short_name));
-    //
-    // legend.append('text')
-    //   .attr('x', chartWidth - 8)
-    //   .attr('y', (d, i) => (i * 20) + 9)
-    //   .text((d) => d.short_name);
-
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-
     // Vertical Line
     let tooltipLine = svg.append('g')
       .attr('class', 'chart-tooltip')
@@ -576,195 +542,140 @@ function generateCharts(element) {
         d3.select(this.parentNode).selectAll('.tooltip-date').transition().style('opacity', 0);
       })
       .on('mousemove',  function() {
-        console.log('event action');
-        let lines     = this.parentNode.parentNode.querySelectorAll('.chart-line path'),
-            mouse     = d3.mouse(this),
-            dateMouse = chartScaleX(mouse[0]),
-            datePoint = '';
+        let lines         = this.parentNode.parentNode.querySelectorAll('.chart-line path'),
+            chart_tooltip = d3.select(this.parentNode),
+            mouse         = d3.mouse(this),
+            dateMouse     = moment(chartScaleX.invert(mouse[0])),
+            date_event    = searchProximityPoint(dateMouse),
+            datePoint     = chartScaleX(date_event),
+            dateValues    = getValuesToDate(data, date_event),
+            spaceWidth    = d3.select('.tooltip-rect-space').attr('width');
 
-        console.log(mouse);
-        console.log(dateMouse);
-        console.log(datePoint);
-
-
-        d3.select(this.parentNode).select('.tooltip-line').attr('d', () => `M ${ mouse[0] }, 0 V ${ chartHeight }`);
-        d3.select(this.parentNode).selectAll('.tooltip-indicator')
-          .attr('transform', (d, i) => {
-            let xDate  = chartScaleX.invert(mouse[0]),
-                bisect = d3.bisector((d) => d.date).right,
-                idx    = bisect(d.values, xDate),
-                spaceWidth = d3.select('.tooltip-rect-space').node().getBBox().width;
-
-            let beginning = 0,
-                end       = lines[i].getTotalLength(),
-                target    = null,
-                pos;
-
-            while (true) {
-              target = Math.floor((beginning + end) / 2);
-              pos = lines[i].getPointAtLength(target);
-
-              if ((target === end || target === beginning) && pos.x !== mouse[0]) {
-                break;
-              }
-
-              if (pos.x > mouse[0]) {
-                end = target;
-              } else if (pos.x < mouse[0]) {
-                beginning = target;
-              } else {
-                break;
-              }
-            }
-
-            d3.select(this.parentNode).selectAll('.tooltip-indicator text').filter((v, k) => (k === i))
-              .text((d) => `${ formatNumberD3(chartScaleY.invert(pos.y)) } - ${ d.name }`)
-              .transition().duration(100)
-              .attr('text-anchor', (d, i) => {
-
-                if (pos.x < (spaceWidth / 2)) {
-                  return 'start';
-                } else {
-                  return 'end';
-                }
-              })
-              .attr('transform', (d, i) => {
-
-                if (pos.x < (spaceWidth / 2)) {
-                  return 'translate(25, 7)';
-                } else {
-                  return 'translate(-25, 7)';
-                }
-              });
-
-            let widthBackgroundTooltip =
-            d3.select(this.parentNode).selectAll('.tooltip-indicator rect')
-              .transition().duration(100)
-              .attr('x', (d, i) => {
-
-                if (pos.x < (spaceWidth / 2)) {
-                  return 10;
-                } else {
-                  return - (10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30);
-                }
-              })
-              .attr('y', -10)
-              .attr('width', (d, i) => this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30);
-
-            d3.select(this.parentNode).select('.tooltip-date')
-              .attr('transform', `translate(${ pos.x }, ${ chartHeight + 5 })`);
-
-            d3.select(this.parentNode).select('.tooltip-date text')
-              .text(parseFormatDate(chart.frequency, chartScaleX.invert(pos.x), true));
-
-            let w = this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30;
-
-            d3.select(this.parentNode).select('.tooltip-date rect')
-              .attr('width', w)
-              .attr('transform', `translate(-${w / 2}, -1)`);
-
-            return `translate(${ mouse[0] }, ${ pos.y })`;
-          });
+        chart_tooltip.select('.tooltip-line').attr('d', () => `M ${ datePoint }, 0 V ${ chartHeight }`);
+        chart_tooltip.selectAll('.tooltip-indicator').attr('transform', (d, i) => {return `translate(${ datePoint }, ${ chartScaleY((dateValues[i] === undefined)?(0):(dateValues[i])) })`});
+        chart_tooltip.selectAll('.tooltip-indicator text')
+          .text((d, i) => `${ formatNumberD3(dateValues[i]) } - ${ d.name }`)
+          .attr('text-anchor', (datePoint < (spaceWidth / 2))?('start'):('end'))
+          .attr('transform', (datePoint < (spaceWidth / 2))?('translate(25, 7)'):('translate(-25, 7)'));
+        chart_tooltip.selectAll('.tooltip-indicator rect')
+          .attr('width', (d, i) => this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)
+          .attr('y', -10)
+          .attr('x', (d, i) => (datePoint < (spaceWidth / 2))?(10):(-(10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)));
+        chart_tooltip.select('.tooltip-date').attr('transform', `translate(${ datePoint }, ${ chartHeight + 5 })`);
+        chart_tooltip.select('.tooltip-date text').text(parseFormatDate(chart.frequency, date_event, true));
+        chart_tooltip.select('.tooltip-date rect')
+          .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30)
+          .attr('transform', `translate(-${this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30 / 2}, -1)`);
 
         tooltipsCollapse(chart.id);
       });
 
-      function tooltipsCollapse(chart) {
-        function orderAscPosition(a, b) {
-          var aPosition = a.transform.baseVal['0'].matrix.f,
-              bPosition = b.transform.baseVal['0'].matrix.f;
+    function searchProximityPoint(date) {
+      let distances = data.map((v, k) => [Math.pow(moment(v.date).diff(date), 2), v.date]); // [diff, date]
+          distances.sort((a, b) => { return (a[0] - b[0]); });
 
-          if (aPosition < bPosition) {
-            return 1;
-          } else {
-            return -1;
-          }
+      return distances[0][1];
+    }
+    function getValuesToDate(data, date) {
+      let values = d3.values(data.filter((d) => d.date === date)[0]);
+          values.splice(0, 1);
+
+      return values;
+    }
+    function tooltipsCollapse(chart) {
+      function orderAscPosition(a, b) {
+        var aPosition = a.transform.baseVal['0'].matrix.f,
+            bPosition = b.transform.baseVal['0'].matrix.f;
+
+        if (aPosition < bPosition) {
+          return 1;
+        } else {
+          return -1;
         }
-        function orderDescPosition(a, b) {
-          var aPosition = a.transform.baseVal['0'].matrix.f,
-              bPosition = b.transform.baseVal['0'].matrix.f;
+      }
+      function orderDescPosition(a, b) {
+        var aPosition = a.transform.baseVal['0'].matrix.f,
+            bPosition = b.transform.baseVal['0'].matrix.f;
 
-          if (aPosition > bPosition) {
-            return 1;
-          } else {
-            return -1;
-          }
+        if (aPosition > bPosition) {
+          return 1;
+        } else {
+          return -1;
         }
-
-        // se seleccionan todos los indicadores del gráfico
-        var elements = document.querySelectorAll(`#${ chart } .tooltip-indicator`),
-            elements_asc = [], elements_desc = [];
-
-        document.querySelectorAll(`#${ chart } .tooltip-indicator .boxText`).forEach((v) => {
-          v.setAttribute('transform', 'translate(0, 0)');
-        });
-
-        elements.forEach((v) => {
-          elements_asc.push(v);
-          elements_desc.push(v);
-        });
-
-        // se obtienen las posiciones de cada indicador
-        elements_asc.sort(orderDescPosition);
-        elements_desc.sort(orderAscPosition);
-
-        // console.log(elements_asc);
-        // console.log(elements_desc);
-
-        // se hace pasada 1
-        var count = 0;
-        var force = 0;
-
-        elements_asc.forEach((v, k) => {
-
-          if (k !== elements_asc.length - 1) {
-            let start         = elements_asc[k],
-                startPosition = start.transform.baseVal['0'].matrix.f,
-                end           = elements_asc[k + 1],
-                endPosition   = end.transform.baseVal['0'].matrix.f,
-                diff          = endPosition - startPosition,
-                minHeight     = 30;
-
-            // console.log('posicion original', startPosition, endPosition);
-            // console.log('diferencia', diff, 'acumulado', count);
-            // console.log('diferencia real', diff - count);
-            // console.log('resultado', (diff - count) < minHeight);
-
-            if ((diff - count) < minHeight) {
-              count += (30 - diff);
-              elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', `translate(0, ${ count })`);
-            }
-          }
-        });
-
-        // se hace pasada 2
-        elements_desc.forEach((v, k) => {
-          if (k !== elements_desc.length - 1) {
-            let start         = elements_desc[k],
-                startPosition = start.transform.baseVal['0'].matrix.f,
-                end           = elements_desc[k + 1],
-                endPosition   = end.transform.baseVal['0'].matrix.f,
-                diff          = startPosition - endPosition,
-                minHeight     = 30,
-                minPosY       = 0,
-                maxPosY       = document.querySelector(`#${ chart } .tooltip-rect-space`).getBoundingClientRect().height - minHeight / 2;
-
-            // console.log(v);
-            // console.log('limite', minPosY, maxPosY);
-            // console.log('posicion original', startPosition + count, endPosition + count);
-
-            if ((startPosition + count) > maxPosY) {
-              force = (startPosition + count) - maxPosY;
-            }
-
-            // console.log('forzar', force);
-
-            elements_desc[k].querySelector('.boxText').transform.baseVal['0'].matrix.f -= force;
-          }
-        });
       }
 
-    //create brush function redraw scatterplot with selection
+      // se seleccionan todos los indicadores del gráfico
+      var elements = document.querySelectorAll(`#${ chart } .tooltip-indicator`),
+          elements_asc = [], elements_desc = [];
+
+      document.querySelectorAll(`#${ chart } .tooltip-indicator .boxText`).forEach((v) => {
+        v.setAttribute('transform', 'translate(0, 0)');
+      });
+
+      elements.forEach((v) => {
+        elements_asc.push(v);
+        elements_desc.push(v);
+      });
+
+      // se obtienen las posiciones de cada indicador
+      elements_asc.sort(orderDescPosition);
+      elements_desc.sort(orderAscPosition);
+
+      // console.log(elements_asc);
+      // console.log(elements_desc);
+
+      // se hace pasada 1
+      var count = 0;
+      var force = 0;
+
+      elements_asc.forEach((v, k) => {
+
+        if (k !== elements_asc.length - 1) {
+          let start         = elements_asc[k],
+              startPosition = start.transform.baseVal['0'].matrix.f,
+              end           = elements_asc[k + 1],
+              endPosition   = end.transform.baseVal['0'].matrix.f,
+              diff          = endPosition - startPosition,
+              minHeight     = 30;
+
+          // console.log('posicion original', startPosition, endPosition);
+          // console.log('diferencia', diff, 'acumulado', count);
+          // console.log('diferencia real', diff - count);
+          // console.log('resultado', (diff - count) < minHeight);
+
+          if ((diff - count) < minHeight) {
+            count += (30 - diff);
+            elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', `translate(0, ${ count })`);
+          }
+        }
+      });
+
+      // se hace pasada 2
+      elements_desc.forEach((v, k) => {
+        if (k !== elements_desc.length - 1) {
+          let start         = elements_desc[k],
+              startPosition = start.transform.baseVal['0'].matrix.f,
+              end           = elements_desc[k + 1],
+              endPosition   = end.transform.baseVal['0'].matrix.f,
+              diff          = startPosition - endPosition,
+              minHeight     = 30,
+              minPosY       = 0,
+              maxPosY       = document.querySelector(`#${ chart } .tooltip-rect-space`).getBoundingClientRect().height - minHeight / 2;
+
+          // console.log(v);
+          // console.log('limite', minPosY, maxPosY);
+          // console.log('posicion original', startPosition + count, endPosition + count);
+
+          if ((startPosition + count) > maxPosY) {
+            force = (startPosition + count) - maxPosY;
+          }
+
+          // console.log('forzar', force);
+
+          elements_desc[k].querySelector('.boxText').transform.baseVal['0'].matrix.f -= force;
+        }
+      });
+    }
     function brushed() {
       let position, range, min, max, minExt, maxExt;
 
@@ -844,7 +755,6 @@ function generateCharts(element) {
         chartContainer.select('.chart-axis-y').transition().duration(100).call(chartAxisY);
       }
     }
-
     function redraw() {
       // console.log(chartComponent);
 
