@@ -33446,40 +33446,42 @@ return hooks;
 // Se define una constante en donde se va a alojar toda la data.
 ////////////////////////////////////////////////////////////////////////////////
 
-const STORAGE = {};
-
+const STORAGE = {
+  'charts': {} // Se guarda información correspondiente a cada gráfico
+};
+window.storage = STORAGE;
 // Firebase
 ////////////////////////////////////////////////////////////////////////////////
 
-function startFirebaseService() {
-  firebase.initializeApp({
-               apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
-           authDomain: 'analytical-park-149313.firebaseapp.com',
-          databaseURL: 'https://analytical-park-149313.firebaseio.com',
-            projectId: 'analytical-park-149313',
-        storageBucket: 'analytical-park-149313.appspot.com',
-    messagingSenderId: '215411573688'
-  });
+// function startFirebaseService() {
+//   firebase.initializeApp({
+//                apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
+//            authDomain: 'analytical-park-149313.firebaseapp.com',
+//           databaseURL: 'https://analytical-park-149313.firebaseio.com',
+//             projectId: 'analytical-park-149313',
+//         storageBucket: 'analytical-park-149313.appspot.com',
+//     messagingSenderId: '215411573688'
+//   });
+//
+//   return firebase.storage().ref();
+// }
 
-  return firebase.storage().ref();
-}
-
-var firebase_storage = startFirebaseService();
+// var firebase_storage = startFirebaseService();
 
 // Funciones Globales
 ////////////////////////////////////////////////////////////////////////////////
 
 // Actualizado 04.08.2017 - Genera una cadena de texto aleatoria.
-function generateToken(length) {
-  let text = '',
-      possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-
-  return text;
-}
+// function generateToken(length) {
+//   let text = '',
+//       possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//
+//   for (let i = 0; i < length; i++) {
+//     text += possible.charAt(Math.floor(Math.random() * possible.length));
+//   }
+//
+//   return text;
+// }
 // Actualizado 04.08.2017 - Permite definir formato del número.
 function formatNumberD3(number) {
   return d3.format((parseInt(number) === number)?(','):(',.2f'))(number);
@@ -33500,39 +33502,39 @@ function downloadFile(path, name) {
   });
 }
 // Actualizado 04.08.2017 - Permite compartir uns imagen en redes sociales
-function share(social, element) {
-  let renderNode = element.parentNode.parentNode,
-      date = new Date();
-
-  // Generar imagen Uint8Array
-  let w = renderNode.offsetWidth,
-      h = renderNode.offsetHeight,
-      imgW = 1024,
-      imgH = 512;
-
-  domtoimage.toBlob(renderNode, {height: imgH, width: imgW}).then((file) => {
-
-    console.log(file);
-
-    let url = firebaseStorage.child(`${ date.getTime() }${ generateToken(10) }`)
-      .put(file)
-      .then((snapshot) => {
-        let github = 'https://datosgobar.github.io/landing-ied/';
-        let url = 'https%3A%2F%2Fdatosgobar.github.io%2Flanding-ied%2Fpublic%2Fimages%2Fmodule.png';
-        // let url = snapshot.metadata.downloadURLs[0];
-
-        console.log(`${ date.getTime() }${ generateToken(10) }`);
-
-        console.log(url);
-
-        switch (social) {
-          case 'facebook': window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${ github }&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-          // case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-        }
-      });
-  });
-}
+// function share(social, element) {
+//   let renderNode = element.parentNode.parentNode,
+//       date = new Date();
+//
+//   // Generar imagen Uint8Array
+//   let w = renderNode.offsetWidth,
+//       h = renderNode.offsetHeight,
+//       imgW = 1024,
+//       imgH = 512;
+//
+//   domtoimage.toBlob(renderNode, {height: imgH, width: imgW}).then((file) => {
+//
+//     console.log(file);
+//
+//     let url = firebaseStorage.child(`${ date.getTime() }${ generateToken(10) }`)
+//       .put(file)
+//       .then((snapshot) => {
+//         let github = 'https://datosgobar.github.io/landing-ied/';
+//         let url = 'https%3A%2F%2Fdatosgobar.github.io%2Flanding-ied%2Fpublic%2Fimages%2Fmodule.png';
+//         // let url = snapshot.metadata.downloadURLs[0];
+//
+//         console.log(`${ date.getTime() }${ generateToken(10) }`);
+//
+//         console.log(url);
+//
+//         switch (social) {
+//           case 'facebook': window.open(
+//             `https://www.facebook.com/sharer/sharer.php?u=${ github }&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
+//           // case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
+//         }
+//       });
+//   });
+// }
 
 // Esta función parsea el el formato de tipo de linea.
 ////////////////////////////////////////////////////////////////////////////////
@@ -33612,29 +33614,31 @@ function changeView(container) {
   }
 }
 
-// Esta función renderiza los gráficos.
+// Esta función genera el efecto switch de los botones de rango.
 ////////////////////////////////////////////////////////////////////////////////
 
-function generateCharts(element) {
-  let id = element.parentNode.getAttribute('id'),
-      chartsContainer = document.querySelector('#chartsContainer #charts');
-      chartsContainer.innerHTML = '';
 
-  function renderPreviewCharts() {
-    STORAGE.cards.forEach((card) => {
 
-      if (card.id === id) {
-        let charts = card.charts;
 
-        charts.forEach((chart, index) => {
 
+// Esta función renderiza los gráficos.
+////////////////////////////////////////////////////////////////////////////////
+  // OK - Esta función genera un preview de los gráficos.
+  function renderPreviewCharts(_chartContiner, _id) {
+
+    STORAGE.cards.forEach((_card) => {
+
+      if (_card.id === _id) {
+        let charts = _card.charts;
+
+        charts.forEach((_chart, _index) => {
           let chartComponente = document.createElement('div');
-              chartComponente.setAttribute('id', chart.id);
+              chartComponente.setAttribute('id', _chart.id);
               chartComponente.classList.add('chart');
               chartComponente.innerHTML = `<div class="head">
-                                              <h3>${ chart.title }</h3>
+                                              <h3>${ _chart.title }</h3>
                                               <div class="break-line"><br></div>
-                                              <p class="paragraph">${ chart.description }</p>
+                                              <p class="paragraph">${ _chart.description }</p>
                                               <div class="break-line"><br></div>
                                            </div>
                                            <div class="referenceContainer">
@@ -33646,19 +33650,19 @@ function generateCharts(element) {
                                             <div class="break-line"><br></div>
                                             <div class="rangeButton-component">
                                               <div class="rangeButton-text">Escala:</div>
-                                              <div>
-                                                <button>Estática</button>
-                                                <button>Dinámica</button>
+                                              <div class="rangeButton-button" state="off">
+                                                <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
+                                                <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
+                                                <div class="switch-effect" style="left: 2px;"></div>
                                               </div>
                                             </div>
                                             <div class="break-line"><br></div>
                                            </div>
-
                                            <div class="chart-svg"></div>
                                            <div class="break-line"><br></div>
                                            <div class="modal-share">
-                                              <input id="share-${ charts[index].id }" type="checkbox" class="share-open">
-                                              <label for="share-${ charts[index].id }" class="share-open-button hamburger-dark">
+                                              <input id="share-${ charts[_index].id }" type="checkbox" class="share-open">
+                                              <label for="share-${ charts[_index].id }" class="share-open-button hamburger-dark">
                                                 <span class="hamburger-1"></span>
                                                 <span class="hamburger-2"></span>
                                                 <span class="hamburger-3"></span>
@@ -33683,70 +33687,68 @@ function generateCharts(element) {
                                              <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
                                             </div>`;
 
-          chartsContainer.append(chartComponente);
+          _chartContiner.append(chartComponente);
 
-          downloadData(chart);
+          STORAGE.charts[_chart.id] = { container:  chartComponente };
+
+          downloadChart(_chart);
         });
       }
     });
   }
-
-  function downloadData(chart) {
-    let indicators = chart.indicators,
+  // OK - Esta función descarga los paquetes de datos para renderizar el gráfico.
+  function downloadChart(_chartData) {
+    let indicators = _chartData.indicators,
         length = indicators.length - 1,
         count = 0, promises = [];
 
-    indicators.forEach((indicator, index) => { // Se guarda información de cada indicador
+    indicators.forEach((_indicator) => {
 
-      if (!STORAGE[indicator.id]) {
+      if (!STORAGE[_indicator.id]) {
         promises.push(
-          downloadFile(`./public/data/series/${ indicator.id }.json`, indicator.id)
+          downloadFile(`./public/data/series/${ _indicator.id }.json`, _indicator.id)
         );
       }
     });
 
-    jQuery.when(...promises).then(() => { processData(chart); });
+    jQuery.when(...promises).then(() => { processData(_chartData); });
   }
-
-  function processData(chart) {
-    // console.log('Process data ...');
+  // TODO - Esta función transforma el formato de la data para renderizar el gráfico.
+  function processData(_chartData) {
     let group = {}, dataset = [], index;
 
-    // Se agrupan indicadores
-    chart.indicators.forEach((indicator) => {
-      // console.log(indicator);
-      STORAGE[indicator.id].data.forEach((value) => {
-
-        index = group[value[0]];
-
+    _chartData.indicators.forEach((_indicator) => {
+      STORAGE[_indicator.id].data.forEach((_value) => {
+        index = group[_value[0]];
         if (index === undefined) {
-          group[value[0]] = { date: new Date(value[0]) };
+          group[_value[0]] = { date: new Date(_value[0]) };
         }
-
-        group[value[0]][indicator.short_name] = value[1];
+        group[_value[0]][_indicator.short_name] = _value[1];
       });
     });
 
-    // Se define formato
-    for (var item in group) {
-      dataset.push(group[item]);
+    // TODO - Utilziar otro método que no sea "for in"
+    for (let _item in group) {
+      dataset.push(group[_item]);
     }
 
-    return renderCharts(chart, dataset);
+    return renderCharts(_chartData, dataset);
   }
+  // Esta función renderiza el gráfico.
+  function renderCharts(_chartData, _data) {
+    let containerChart = STORAGE.charts[_chartData.id].container;
+        containerChart.querySelector('.loading').remove();
 
-  function renderCharts(chart, data) {
-    let chartComponent = document.getElementById(chart.id);
-        chartComponent.querySelector('.loading').remove();
-
-    // Se agregan referencias en HTML
+    // Funciones Complementarias
     ////////////////////////////////////////////////////////////////////////////
-    chart.indicators.forEach((v) => {
-      let container = document.querySelector(`#${ chart.id } #references`),
-          reference = document.createElement('p');
-          reference.innerHTML = `<div class="reference-circle" style="background-color: ${ v.color }"></div> ${ v.short_name }`;
-          container.append(reference);
-    });
+    function addReferences(_chartData, _container) {
+      _chartData.indicators.forEach((_value) => {
+        let container = document.querySelector(`#${ _chartData.id } #references`),
+            reference = document.createElement('p');
+            reference.innerHTML = `<div class="reference-circle" style="background-color: ${ _value.color }"></div> ${ _value.short_name }`;
+            container.append(reference);
+      });
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     // Render LineChart
@@ -33754,46 +33756,50 @@ function generateCharts(element) {
 
     // variables
     ////////////////////////////////////////////////////////////////////////////
-
     let totalHeight = 410,
         chartMargin = {top: 0, right: 50, bottom: 112, left: 75},
         rangeMargin = {top: 350, right: 50, bottom: 20, left: 75};
 
     // parámetros
     ////////////////////////////////////////////////////////////////////////////
-    let dataset = chart.indicators.map((d) => {
+    let dataset = _chartData.indicators.map((d) => {
       return {
         name: d.short_name,
-        values: data.filter((c) => c[d.short_name] !== undefined).map((c) => {
+        values: _data.filter((c) => c[d.short_name] !== undefined).map((c) => {
           return {
             date: c.date,
             value: +c[d.short_name]
           };
         })
       };
-    }),
-    totalWidth = chartsContainer.getBoundingClientRect().width,
-    minValue = d3.min(dataset, (c) => d3.min(c.values, (v) => v.value)),
-    maxValue = d3.max(dataset, (c) => d3.max(c.values, (v) => v.value)),
-    minExtend = minValue - ((maxValue - minValue) / 15),
-    // maxExtend = maxValue + ((maxValue - minValue) / 15),
-    minDate = d3.min(dataset, (c) => d3.min(c.values, (v) => v.date)),
-    maxDate = d3.max(dataset, (c) => d3.max(c.values, (v) => v.date));
+    });
 
-    let indice = dataset[0].values.length - 1 - chart.laps;
+    STORAGE.charts[_chartData.id]['data'] = dataset;
+    STORAGE.charts[_chartData.id]['data_chart'] = _data;
+    STORAGE.charts[_chartData.id]['data_range'] = dataset;
+
+    let totalWidth = containerChart.getBoundingClientRect().width,
+        minDate = d3.min(STORAGE.charts[_chartData.id].data, (c) => d3.min(c.values, (v) => v.date)),
+        maxDate = d3.max(STORAGE.charts[_chartData.id].data, (c) => d3.max(c.values, (v) => v.date));
+
+    let indice = STORAGE.charts[_chartData.id].data[0].values.length - 1 - _chartData.laps;
         indice = (indice < 0) ? (0) : (indice);
 
-    let date = dataset[0].values[indice].date;
+    let date = STORAGE.charts[_chartData.id].data[0].values[indice].date;
+
+    // console.log('breakpoint_1', STORAGE.charts[_chartData.id]);
 
     // parámetros del gráfico
     ////////////////////////////////////////////////////////////////////////////
 
     let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
         chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
-        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data, (d) => d.date)),
-        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minExtend, maxValue]),
+        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(_data, (d) => d.date)),
+        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain(generateRangeYStatic(_chartData.id)),
         chartAxisX  = d3.axisBottom(chartScaleX),
         chartAxisY  = d3.axisLeft(chartScaleY);
+
+    // console.log('breakpoint_2');
 
     // parámetros del rango dinámico
     ////////////////////////////////////////////////////////////////////////////
@@ -33802,15 +33808,17 @@ function generateCharts(element) {
         rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom,
         rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain()),
         rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain()),
-        rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat((d) => parseFormatDate(chart.frequency, d, true)),
+        rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat((d) => parseFormatDate(_chartData.frequency, d, true)),
         rangeAxisY  = d3.axisLeft(rangeScaleY);
+
+    // console.log('breakpoint_3');
 
     // brush
     ////////////////////////////////////////////////////////////////////////////
 
-    let brush = d3.brushX()
-      .extent([[0, 0], [rangeWidth, rangeHeight]])
-      .on('brush', brushed);
+    let brush = d3.brushX().extent([[0, 0], [rangeWidth, rangeHeight]]).on('brush', brushed);
+
+    // console.log('breakpoint_4');
 
     // se definen lineas
     ////////////////////////////////////////////////////////////////////////////
@@ -33818,125 +33826,128 @@ function generateCharts(element) {
     let chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)),
         rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
 
+    // console.log('breakpoint_5');
+
     // se crea SVG
     ////////////////////////////////////////////////////////////////////////////
+    let svg, defs, background;
 
-    let svg = d3.select(`#${ chart.id } .chart-svg`).append('svg')
+    svg = d3.select(`#${ _chartData.id } .chart-svg`).append('svg')
       .attr('width', chartWidth + chartMargin.left + chartMargin.right)
       .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
 
-    let defs = svg.append('defs').append('clipPath')
+    defs = svg.append('defs').append('clipPath')
       .attr('id', 'clip')
       .append('rect')
+      // .attr('transform', `translate(${ chartMargin.left }, 0)`)
       .attr('width', chartWidth)
       .attr('height', chartHeight);
 
-    let svg_background = svg.append('rect')
+    background = svg.append('rect')
       .attr('class', 'chart-background')
       .attr('width', chartWidth + chartMargin.left + chartMargin. right)
       .attr('height', chartHeight + chartMargin.top + 30);
 
+    STORAGE.charts[_chartData.id]['svg'] = svg;
+
+    // console.log('breakpoint_6');
+
     // se crea contenedor del gráfico
     ////////////////////////////////////////////////////////////////////////////
+    let chartContainer, chartLines, dots;
 
-    let chartContainer = svg.append('g')
+    chartContainer = svg.append('g')
       .attr('class', 'chart-container')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
-
-    // TODO - La posición de la linea no esta siempre en la posición 0 del eje-y. Además, no se actualiza cuando de modifica el eje-x.
-    let chart_line_0 = chartContainer.append('g')
+    chartContainer.append('g')
       .attr('class', 'chart-line-0')
       .append('line')
       .attr('x1', 0)
       .attr('x2', chartWidth)
       .attr('y1', chartScaleY(0))
       .attr('y2', chartScaleY(0));
-
     chartContainer.append('g')
       .attr('class', 'chart-axis-x')
       .attr('transform', `translate(0, ${ chartHeight })`)
       .call(chartAxisX);
-
     chartContainer.append('g')
       .attr('class', 'chart-axis-y')
       .call(chartAxisY);
 
-    let chartLines = chartContainer.selectAll('.chart-line')
-      .data(dataset)
+    chartLines = chartContainer.selectAll('.chart-line')
+      .data(STORAGE.charts[_chartData.id].data)
       .enter().append('g')
       .attr('class', 'chart-line');
-
-    let chartLines_line = chartLines.append('path')
-      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(chart.indicators[i].type); })
+    chartLines.append('path')
+      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(_chartData.indicators[i].type); })
       .attr('d', (d) => chartLine(d.values))
-      .style('stroke', (d, i) => chart.indicators[i].color)
+      .style('stroke', (d, i) => _chartData.indicators[i].color)
       .attr('clip-path', 'url(#clip)');
 
-    let dots = chartContainer.selectAll('.chart-dots')
-      .data(dataset)
-      .enter().append('g')
-      .attr('class', 'chart-dots')
-      .style('fill', 'black')
-      .selectAll('circle')
-      .data((d) => d.values)
-      .enter().append('circle')
-      .attr('clip-path', 'url(#clip)')
-      .attr('cx', (d) => chartScaleX(d.date))
-      .attr('cy', (d) => chartScaleY(d.value));
+    // dots = chartContainer.selectAll('.chart-dots')
+    //   .data(STORAGE.charts[_chartData.id].data)
+    //   .enter().append('g')
+    //   .attr('class', 'chart-dots')
+    //   .style('fill', 'black')
+    //   .selectAll('circle')
+    //   .data((d) => d.values)
+    //   .enter().append('circle')
+    //   .attr('clip-path', 'url(#clip)')
+    //   .attr('cx', (d) => chartScaleX(d.date))
+    //   .attr('cy', (d) => chartScaleY(d.value));
+
+    // console.log('breakpoint_7');
 
     // se crea contenedor del rango dinámico
     ////////////////////////////////////////////////////////////////////////////
+    let rangeContainer, rangeLines, startBrush, endBrush;
 
-    let rangeConteiner = svg.append('g')
+    rangeContainer = svg.append('g')
       .attr('class', 'range-container')
       .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
 
-    let rangeLines = rangeConteiner.selectAll('.range-line')
-      .data(dataset)
-      .enter().append('g')
-      .attr('class', 'range-line');
-
-    rangeLines.append('path')
-      .attr('d', (d) => rangeLine(d.values))
-      .style('stroke', (d, i) => chart.indicators[i].color);
-
-    rangeConteiner.append('g')
-      .attr('class', 'range-axis-x')
-      .attr('transform', `translate(0, ${ rangeHeight })`)
-      .call(rangeAxisX);
-
-    // TODO - Mover esto a D3
-    let startBrush = rangeConteiner.append('g')
+    startBrush = rangeContainer.append('g')
       .attr('class', 'start-brush-date')
       .attr('text-anchor', 'end')
       .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
-
     startBrush.append('rect')
       .attr('height', '20px')
       .attr('transform', 'translate(0, -15)')
       .attr('fill', 'white');
-
     startBrush.append('text');
 
-    // TODO - Mover esto a D3
-    let endBrush = rangeConteiner.append('g')
+    endBrush = rangeContainer.append('g')
       .attr('class', 'end-brush-date')
       .attr('text-anchor', 'start')
       .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
-
     endBrush.append('rect')
       .attr('height', '20px')
       .attr('transform', 'translate(-7.5, -15)')
       .attr('fill', 'white');
-
     endBrush.append('text');
 
-    rangeConteiner.append('g')
+    rangeLines = rangeContainer.selectAll('.range-line')
+      .data(STORAGE.charts[_chartData.id].data)
+      .enter().append('g')
+      .attr('class', 'range-line');
+    rangeLines.append('path')
+      .attr('d', (d) => rangeLine(d.values))
+      .style('stroke', (d, i) => _chartData.indicators[i].color);
+
+    rangeContainer.append('g')
+      .attr('class', 'range-axis-x')
+      .attr('transform', `translate(0, ${ rangeHeight })`)
+      .call(rangeAxisX);
+    rangeContainer.append('g')
       .attr('class', 'range-brush')
       .call(brush)
       .call(brush.move, [rangeScaleX(date), chartWidth]);
 
-    // Vertical Line
+    // console.log('breakpoint_8');
+
+    // se crea tooltip de linea vertical
+    ////////////////////////////////////////////////////////////////////////////
+
     let tooltipLine = svg.append('g')
       .attr('class', 'chart-tooltip')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
@@ -33946,20 +33957,22 @@ function generateCharts(element) {
       .style('opacity', 0);
 
     let tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
-      .data(dataset)
+      .data(STORAGE.charts[_chartData.id].data)
       .enter().append('g')
       .attr('class', 'tooltip-indicator')
       .style('opacity', 0);
 
     tooltipIndicator.append('circle')
       .attr('transform', 'translate(0, 2)')
-      .style('fill', (d, i) => chart.indicators[i].color);
+      .style('fill', (d, i) => _chartData.indicators[i].color);
 
     let boxText = tooltipIndicator.append('g')
       .attr('class', 'boxText');
 
     boxText.append('rect')
-      .style('fill', (d, i) => chart.indicators[i].color);
+      .attr('rx', 15)
+      .attr('ry', 15)
+      .style('fill', (d, i) => _chartData.indicators[i].color);
 
     boxText.append('text');
 
@@ -33993,11 +34006,13 @@ function generateCharts(element) {
             dateMouse     = moment(chartScaleX.invert(mouse[0])),
             date_event    = searchProximityPoint(dateMouse),
             datePoint     = chartScaleX(date_event),
-            dateValues    = getValuesToDate(data, date_event),
+            dateValues    = getValuesToDate(_data, date_event),
             spaceWidth    = d3.select('.tooltip-rect-space').attr('width');
 
-        chart_tooltip.select('.tooltip-line').attr('d', () => `M ${ datePoint }, 0 V ${ chartHeight }`);
-        chart_tooltip.selectAll('.tooltip-indicator').attr('transform', (d, i) => {return `translate(${ datePoint }, ${ chartScaleY((dateValues[i] === undefined)?(0):(dateValues[i])) })`});
+        chart_tooltip.select('.tooltip-line')
+          .attr('d', () => `M ${ datePoint }, 0 V ${ chartHeight }`);
+        chart_tooltip.selectAll('.tooltip-indicator')
+          .attr('transform', (d, i) => `translate(${ datePoint }, ${ chartScaleY((dateValues[i] === undefined)?(0):(dateValues[i])) })`);
         chart_tooltip.selectAll('.tooltip-indicator text')
           .text((d, i) => `${ formatNumberD3(dateValues[i]) } - ${ d.name }`)
           .attr('text-anchor', (datePoint < (spaceWidth / 2))?('start'):('end'))
@@ -34006,17 +34021,28 @@ function generateCharts(element) {
           .attr('width', (d, i) => this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)
           .attr('y', -10)
           .attr('x', (d, i) => (datePoint < (spaceWidth / 2))?(10):(-(10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)));
-        chart_tooltip.select('.tooltip-date').attr('transform', `translate(${ datePoint }, ${ chartHeight + 5 })`);
-        chart_tooltip.select('.tooltip-date text').text(parseFormatDate(chart.frequency, date_event, true));
+        chart_tooltip.select('.tooltip-date')
+          .attr('transform', `translate(${ datePoint }, ${ chartHeight + 5 })`);
+        chart_tooltip.select('.tooltip-date text')
+          .text(parseFormatDate(_chartData.frequency, date_event, true));
         chart_tooltip.select('.tooltip-date rect')
           .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30)
-          .attr('transform', `translate(-${this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30 / 2}, -1)`);
+          .attr('transform', `translate(-${ (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2}, -1)`);
 
-        tooltipsCollapse(chart.id);
+        tooltipsCollapse(_chartData.id);
       });
 
+    // console.log('breakpoint_9');
+
+    // se agregan referencias
+    ////////////////////////////////////////////////////////////////////////////
+
+    addReferences(_chartData, containerChart);
+
+    // console.log('breakpoint_10');
+
     function searchProximityPoint(date) {
-      let distances = data.map((v, k) => [Math.pow(moment(v.date).diff(date), 2), v.date]); // [diff, date]
+      let distances = _data.map((v, k) => [Math.pow(moment(v.date).diff(date), 2), v.date]); // [diff, date]
           distances.sort((a, b) => { return (a[0] - b[0]); });
 
       return distances[0][1];
@@ -34028,9 +34054,13 @@ function generateCharts(element) {
       return values;
     }
     function tooltipsCollapse(chart) {
+      // console.log(chart);
+      function updateTranslatePositionY(element) {
+        return element.getAttribute('transform').split('(')[1].split(')')[0].split(',').map((v) => parseFloat(v.trim()));
+      }
       function orderAscPosition(a, b) {
-        var aPosition = a.transform.baseVal['0'].matrix.f,
-            bPosition = b.transform.baseVal['0'].matrix.f;
+        var aPosition = updateTranslatePositionY(a)[1],
+            bPosition = updateTranslatePositionY(b)[1];
 
         if (aPosition < bPosition) {
           return 1;
@@ -34039,8 +34069,8 @@ function generateCharts(element) {
         }
       }
       function orderDescPosition(a, b) {
-        var aPosition = a.transform.baseVal['0'].matrix.f,
-            bPosition = b.transform.baseVal['0'].matrix.f;
+        var aPosition = updateTranslatePositionY(a)[1],
+            bPosition = updateTranslatePositionY(b)[1];
 
         if (aPosition > bPosition) {
           return 1;
@@ -34077,9 +34107,9 @@ function generateCharts(element) {
 
         if (k !== elements_asc.length - 1) {
           let start         = elements_asc[k],
-              startPosition = start.transform.baseVal['0'].matrix.f,
+              startPosition = updateTranslatePositionY(start)[1],
               end           = elements_asc[k + 1],
-              endPosition   = end.transform.baseVal['0'].matrix.f,
+              endPosition   = updateTranslatePositionY(end)[1],
               diff          = endPosition - startPosition,
               minHeight     = 30;
 
@@ -34095,13 +34125,15 @@ function generateCharts(element) {
         }
       });
 
+      // console.log(count);
+
       // se hace pasada 2
       elements_desc.forEach((v, k) => {
         if (k !== elements_desc.length - 1) {
           let start         = elements_desc[k],
-              startPosition = start.transform.baseVal['0'].matrix.f,
+              startPosition = updateTranslatePositionY(start)[1],
               end           = elements_desc[k + 1],
-              endPosition   = end.transform.baseVal['0'].matrix.f,
+              endPosition   = updateTranslatePositionY(end)[1],
               diff          = startPosition - endPosition,
               minHeight     = 30,
               minPosY       = 0,
@@ -34116,148 +34148,265 @@ function generateCharts(element) {
           }
 
           // console.log('forzar', force);
+          let transform = updateTranslatePositionY(elements_desc[k].querySelector('.boxText'));
+          transform[1] -= force;
 
-          elements_desc[k].querySelector('.boxText').transform.baseVal['0'].matrix.f -= force;
+          elements_desc[k].querySelector('.boxText').setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
         }
       });
     }
     function brushed() {
       let position, range, min, max, minExt, maxExt;
-
-      if (!d3.event.selection) {
-        // selection = rangeScaleX.range();
-        // console.log('sin seleccion');
-        // chartScaleX.domain(selection);
-      } else {
+      // console.log('brush_1');
+      if (d3.event.selection) {
         position = d3.event.selection;
         range = position.map(rangeScaleX.invert, rangeScaleX);
-
+        // console.log('brush_2');
         // Se actualiza rango-x
         chartScaleX.domain(range);
-
+        // console.log('brush_3');
         // Se actualizan fecha mínima y máxima del eje x en rangeContainer
         let startBrush = d3.select(this.parentNode)
           .select('.start-brush-date')
           .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 15 })`);
-
+        // console.log('brush_4');
         startBrush.select('.start-brush-date text')
-          .text(parseFormatDate(chart.frequency, range[0], true));
-
+          .text(parseFormatDate(_chartData.frequency, range[0], true));
+        // console.log('brush_5');
         let widthStartBrush = this.parentNode.querySelector('.start-brush-date text').getBBox().width;
-
+        // console.log('brush_6');
         startBrush.select('.start-brush-date rect')
             .attr('width', widthStartBrush + 15)
             .attr('x', -((widthStartBrush + 15) / 2) - (widthStartBrush / 2));
-
+        // console.log('brush_7');
         let endBrush = d3.select(this.parentNode)
           .select('.end-brush-date')
           .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
-
+        // console.log('brush_8');
         endBrush.select('.end-brush-date text')
-          .text(parseFormatDate(chart.frequency, range[1], true));
-
+          .text(parseFormatDate(_chartData.frequency, range[1], true));
+        // console.log('brush_9');
         let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
-
+        // console.log('brush_10');
         endBrush.select('.end-brush-date rect')
             .attr('width', widthEndBrush + 15);
+        // console.log('brush_11');
 
         // Se actualizan fecha mínima y máxima del eje x en rangeContainer
-        let dataFiltered = data.filter((d) => (d.date < range[1] && d.date > range[0]));
+        let dataFiltered = _data.filter((d) => (d.date < range[1] && d.date > range[0]));
+        STORAGE.charts[this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')].data_range = dataFiltered;
 
-        // console.log(dataFiltered.length);
+        // Si el switch esta en on, hace algo, sino, hace otra cosa.
+        if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
+          // console.log(dataFiltered.length);
+          if (dataFiltered.length > 1) {
 
-        if (dataFiltered.length > 1) {
+            // Se actualiza rango-y
+            chartScaleY.domain(generateRangeYDinamic(this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')));
 
-          // console.log('calcula');
-
-          min = d3.min(dataFiltered, (c) => {
-              let values = d3.values(c);
-                  values.splice(0, 1);
-
-              return d3.min(values);
-            }
-          );
-          max = d3.max(dataFiltered, (c) => {
-              let values = d3.values(c);
-                  values.splice(0, 1);
-
-              return d3.max(values);
-            }
-          );
-
-          // maxExt = max + ((max - min) / 15);
-          minExt = min - ((max - min) / 15);
-
-          // Se actualiza rango-y
-          chartScaleY.domain([minExt, max]);
-
-          chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+            chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+          }
         }
-
-        chartContainer.selectAll('.chart-line path').transition().duration(100).attr('d', (d) => chartLine(d.values));
-        chartContainer.selectAll('.chart-dots circle').transition().duration(100).attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
-        chartContainer.select('.chart-axis-x').transition().duration(100).call(chartAxisX);
-        chartContainer.select('.chart-axis-y').transition().duration(100).call(chartAxisY);
+        // console.log('brush_12');
+        chartContainer.selectAll('.chart-line path').attr('d', (d) => chartLine(d.values));
+        // chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
+        chartContainer.select('.chart-axis-x').call(chartAxisX);
+        chartContainer.select('.chart-axis-y').call(chartAxisY);
+        // console.log('brush_13');
       }
     }
     function redraw() {
-      // console.log(chartComponent);
-
-      totalWidth = chartsContainer.getBoundingClientRect().width;
-
+      let charts;
+      // se actualiza ancho total
+      totalWidth = document.querySelector('#chartsContainer').offsetWidth;
+      // se actualiza ancho del gráfico
       chartWidth  = totalWidth - chartMargin.left - chartMargin.right;
-      chartScaleX.range([0, chartWidth]);
-      //chartAxisX = d3.axisBottom(chartScaleX);
-
+      // se actualiza ancho del rango
       rangeWidth  = totalWidth - rangeMargin.left - rangeMargin.right;
+      // se actualiza escala en x del gráfico
+      chartScaleX.range([0, chartWidth]);
+      // se actualiza escala en x del rango
       rangeScaleX.range([0, rangeWidth]);
+
+      //chartAxisX = d3.axisBottom(chartScaleX);
       //rangeAxisX = d3.axisBottom(rangeScaleX);
 
+      // se actualiza brush component
       brush.extent([[0, 0], [rangeWidth, rangeHeight]]);
+      // se actualiza el ancho de todos los gráficos
+      charts = d3.selectAll('.chart-svg svg');
+      charts.attr('width', chartWidth + chartMargin.left + chartMargin.right);
+      // se actualiza el ancho de todos los defs
+      charts.select('defs').attr('width', chartWidth);
+      // se actualiza el ancho de todos los background
+      charts.select('.chart-background').attr('width', chartWidth + chartMargin.left + chartMargin. right);
+      // se actualiza la posición del gráfico
+      charts.select('.chart-container').attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+      // se actualiza el ancho de la linea en la posición 0 del eje y
+      charts.select('.chart-container').select('.chart-line-0 line').attr('x2', chartWidth);
+      // se actualiza el ancho de la linea del gráfico
+      charts.select('.chart-container').selectAll('.chart-line path').attr('d', (d) => chartLine(d.values));
+      // se actualiza el ancho del axis en x del gráfico
+      charts.select('.chart-container').select('.chart-axis-x').call(chartAxisX);
+      // se actualiza la posición del rango
+      charts.select('.range-container').attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
+      // se actualiza el ancho de la linea del rango
+      charts.select('.range-container').selectAll('.range-line path').attr('d', (d) => rangeLine(d.values));
+      // se actualiza el ancho del axis en x del rango
+      charts.select('.range-container').select('.range-axis-x').call(rangeAxisX);
+      // se actualiza la posición de la fecha inicial seleccionada en el rango
+      charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
+      // se actualiza la posición de la fecha final seleccionada en el rango
+      charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+      // se actualiza el ancho del brush
+      charts.select('.range-container').select('.range-brush').call(brush).call(brush.move, [rangeScaleX(date), chartWidth]);
+    }
+    function changeSwitchPosition(activeButton, id) {
+      let container = activeButton.parentNode,
+          state = container.getAttribute('state');
+      // console.log(state);
 
-      svg.attr('width', chartWidth + chartMargin.left + chartMargin.right);
+      if (state === 'on') {
+        container.querySelectorAll('button')[0].setAttribute('state', 'active');
+        container.querySelectorAll('button')[1].setAttribute('state', '');
+        container.querySelector('.switch-effect').setAttribute('style', 'left: 2px;');
+        container.setAttribute('state', 'off');
 
-      defs.attr('width', chartWidth);
+        updateAxisY(generateRangeYStatic(id.getAttribute('id')), id.getAttribute('id'));
+      } else {
+        container.querySelectorAll('button')[0].setAttribute('state', '');
+        container.querySelectorAll('button')[1].setAttribute('state', 'active');
+        container.querySelector('.switch-effect').setAttribute('style', 'left: calc(50% - 2px);');
+        container.setAttribute('state', 'on');
 
-      svg_background.attr('width', chartWidth + chartMargin.left + chartMargin. right);
+        updateAxisY(generateRangeYDinamic(id.getAttribute('id')), id.getAttribute('id'));
+      }
+    }
+    window.changeSwitchPosition = changeSwitchPosition;
+    function updateAxisY(domain, id) {
+      console.log('dominio', domain);
+      chartScaleY.domain(domain);
 
-      chartContainer.attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+      d3.select(`#${ id }`).select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+      d3.select(`#${ id }`).select('.chart-axis-y').call(chartAxisY);
+      d3.select(`#${ id }`).selectAll('.chart-line path').attr('d', (d) => {console.log(d);return chartLine(d.values);});
+    }
+    function generateRangeYStatic(chart_id) {
+      let minValue = d3.min(STORAGE.charts[chart_id].data_chart, (c) => {
+            let values = d3.values(c);
+                values.splice(0, 1);
 
-      chart_line_0.attr('x2', chartWidth);
+            return d3.min(values);
+          }),
+          maxValue = d3.max(STORAGE.charts[chart_id].data_chart, (c) => {
+            let values = d3.values(c);
+              values.splice(0, 1);
 
-      chartLines.selectAll('path').attr('d', (d) => chartLine(d.values));
+            return d3.max(values);
+          }),
+          minExtend = minValue - ((maxValue - minValue) / 15),
+          maxExtend = maxValue + ((maxValue - minValue) / 15);
+      console.log('se calculó el rango total', [minExtend, maxExtend]);
+      return [minExtend, maxExtend];
+    }
+    function generateRangeYDinamic(chart_id) {
+      let minValue = d3.min(STORAGE.charts[chart_id].data_range, (c) => {
+            let values = d3.values(c);
+                values.splice(0, 1);
 
-      chartContainer.select('.chart-axis-x').call(chartAxisX);
+            return d3.min(values);
+          }),
+          maxValue = d3.max(STORAGE.charts[chart_id].data_range, (c) => {
+            let values = d3.values(c);
+              values.splice(0, 1);
 
-      chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date));
-
-      rangeConteiner.attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
-
-      rangeLines.selectAll('path').attr('d', (d) => rangeLine(d.values));
-
-      rangeConteiner.select('.range-axis-x').call(rangeAxisX);
-
-      rangeConteiner = svg.selectAll('.range-container').attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
-
-      rangeLines.selectAll('path').attr('d', (d) => rangeLine(d.values));
-
-      rangeConteiner.select('.range-axis-x').call(rangeAxisX);
-
-      startBrush.attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
-
-      endBrush.attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
-
-      rangeConteiner.select('.range-brush').call(brush).call(brush.move, [rangeScaleX(date), chartWidth]);
+            return d3.max(values);
+          }),
+          minExtend = minValue - ((maxValue - minValue) / 15),
+          maxExtend = maxValue + ((maxValue - minValue) / 15);
+      console.log('se calculó el rango parcial', [minExtend, maxExtend]);
+      return [minExtend, maxExtend];
     }
 
     window.addEventListener('resize', redraw);
   }
+  // OK - Esta función ejecuta el proceso de renderizado de los gráficos.
+  function generateCharts(_element) {
+    let id = _element.parentNode.getAttribute('id'),
+        chartsContainer = document.querySelector('#chartsContainer #charts');
+        chartsContainer.innerHTML = '';
 
-  renderPreviewCharts();
-}
+    renderPreviewCharts(chartsContainer, id);
+  }
 
 // Esta función renderiza las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
+function generateMiniChart(_cardData, _element) {
+  let data = STORAGE[_cardData.id],
+      container = d3.select(_element);
+
+  ////////////////////////////////////////////////////////////////////////////
+  // Render Mini-LineChart
+  ////////////////////////////////////////////////////////////////////////////
+
+  // variables
+  ////////////////////////////////////////////////////////////////////////////
+  let totalHeight = 50,
+      totalWidth  = 100,
+      chartMargin = {top: 10, right: 10, bottom: 10, left: 10};
+
+  data = data.data.filter((d) => (d[1] !== null));
+  let chartData = data.slice(-5);
+  let dataDot = data.slice(-1);
+
+  // parámetros del gráfico
+  ////////////////////////////////////////////////////////////////////////////
+  let minValue = d3.min(chartData, (d) => d[1]),
+      maxValue = d3.max(chartData, (d) => d[1]);
+      // minExtend = minValue - ((maxValue - minValue) / 15),
+      // maxExtend = maxValue + ((maxValue - minValue) / 15);
+
+  let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
+      chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
+      chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(chartData, (d) => new Date(d[0]))),
+      chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
+
+  // se definen lineas
+  ////////////////////////////////////////////////////////////////////////////
+
+  let chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(new Date(d[0]))).y((d) => chartScaleY(d[1]));
+
+  // se crea SVG
+  ////////////////////////////////////////////////////////////////////////////
+  let svg, defs, background;
+
+  svg = container.append('svg')
+    .attr('width', chartWidth + chartMargin.left + chartMargin.right)
+    .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
+
+  // se crea contenedor del gráfico
+  ////////////////////////////////////////////////////////////////////////////
+  let chartContainer, chartLines, dots;
+
+  chartContainer = svg.append('g')
+    .attr('class', 'chart-container')
+    .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+  chartLines = chartContainer.append('g').attr('class', 'chart-line');
+  chartLines.append('path')
+    .attr('stroke-width', 3)
+    .style('stroke', 'silver')
+    .attr('d', (d) => chartLine(chartData));
+  console.log(data);
+  console.log(dataDot);
+  let lastDot = chartContainer.append('g')
+    .style('fill', Modal.variables.colors.gobar_dark)
+    .selectAll('circle')
+    .data(dataDot)
+    .enter().append('circle')
+    .attr('r', 4)
+    .attr('cx', (d) => chartScaleX(new Date(d[0])))
+    .attr('cy', (d) => chartScaleY(d[1]));
+}
 
 function renderCards() {
 
@@ -34276,7 +34425,7 @@ function renderCards() {
                                    <div class="break-line"><br></div>
                                    <p id="units"></p>
                                    <div class="break-line"><br></div>
-                                   <img src="#" />
+                                   <div id="mini-chart"></div>
                                    <div class="break-line"><br><br><br></div>
                                    <button class="button" onclick="changeView('charts'); generateCharts(this);">
                                       <span class="button-waves">Ver más gráficos</span>
@@ -34302,6 +34451,8 @@ function renderCards() {
             cardComponent.querySelector('#units_representation').innerHTML = parseValueIndicator(card.units_representation, data[data.length - 1][1]);
             cardComponent.querySelector('#units').innerHTML = metadata.units;
             cardComponent.querySelector('.loading').remove();
+
+        generateMiniChart(card, cardComponent.querySelector('#mini-chart'));
       });
   });
 }

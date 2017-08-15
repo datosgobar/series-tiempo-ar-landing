@@ -4644,6 +4644,46 @@ body {
   margin: 0 10px;
 }
 
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button {
+  border-radius: 50px;
+  border: 1px solid silver;
+  padding: 2px;
+  background: white;
+  position: relative;
+}
+
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button {
+  width: 90px;
+  border: none;
+  background: white;
+  border-radius: 50px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-transition: font-weight 0.25s ease-out;
+  transition: font-weight 0.25s ease-out;
+}
+
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button[state="active"] {
+  font-weight: 600;
+}
+
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button:hover {
+  font-weight: 600;
+}
+
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > .switch-effect {
+  background: rgba(0, 0, 100, 0.5);
+  width: 50%;
+  height: calc(100% - 4px);
+  position: absolute;
+  top: 2px;
+  border-radius: 50px;
+  -webkit-transition: left 0.25s ease-out;
+  transition: left 0.25s ease-out;
+}
+
 #charts .chart .paragraph {
   margin: 0;
 }
@@ -4715,8 +4755,6 @@ body {
 }
 
 .chart-tooltip .tooltip-indicator rect {
-  rx: 15;
-  ry: 15;
   height: 25px;
 }
 

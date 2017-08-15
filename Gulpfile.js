@@ -30,7 +30,7 @@ const removeLogs       = require('gulp-removelogs'); // Plugin para quitar conso
 const imagemin         = require('gulp-imagemin'); // Plugin para optimizar imagenes
 
 // Entorno
-let entorno = 'dev';
+let entorno = 'prod';
 
 let config = { // opciones: dev, prod
   isProd: (entorno === 'prod') ? (true) : (false)
@@ -42,7 +42,7 @@ gulp.task('start_server', () => browserSync.init({
   logPrefix: 'Modernización',
   host: 'localhost',
   port: 9000, online: true,
-  browser: ['google chrome'],
+  browser: ['safari'],
   logLevel: 'info', ui: false,
 }));
 
