@@ -4556,7 +4556,7 @@ body {
           box-sizing: border-box;
   border-radius: 4px;
   position: relative;
-  margin: 10px 0;
+  margin: 0 0 20px;
   background-color: white
 }
 
@@ -4744,6 +4744,14 @@ body {
 .range-container .range-axis-x > .tick text {
   font-size: 12px;
   color: #767676;
+}
+
+.range-container .range-axis-x > .tick:first-of-type text {
+  text-anchor: end;
+}
+
+.range-container .range-axis-x > .tick:last-of-type text {
+  text-anchor: start;
 }
 
 .chart-tooltip .tooltip-line {

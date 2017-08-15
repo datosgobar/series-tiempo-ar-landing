@@ -141,7 +141,7 @@ body {
   box-sizing: border-box;
   border-radius: 4px;
   position: relative;
-  margin: 10px 0;
+  margin: 0 0 20px;
   background-color: white;
 
   & > .head {
@@ -302,9 +302,19 @@ body {
   & .range-axis-x {
     stroke: none;
 
-    & > .tick text {
-      font-size: 12px;
-      color: var(--base);
+    & > .tick {
+      & text {
+        font-size: 12px;
+        color: var(--base);
+      }
+
+      &:first-of-type text {
+        text-anchor: end;
+      }
+
+      &:last-of-type text {
+        text-anchor: start;
+      }
     }
   }
 }

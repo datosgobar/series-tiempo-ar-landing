@@ -27220,41 +27220,6 @@ function buttonShareHide(component) {
 
   return true;
 };
-// Check 05.07.2017 - Comparte en redes sociales un modulo especifico
-// function share(social, elemento) {
-//   let node = elemento.parentNode.parentNode.parentNode,
-//       nroModule = node.getAttribute('module-nro'),
-//       date = new Date();
-//
-//   // Generar imagen Uint8Array
-//   let w = node.offsetWidth,
-//       h = node.offsetHeight,
-//       imageW, imageH;
-//
-//   if (w > h) {
-//     imageW = 2400;
-//     imageH = (imageW / w) * h;
-//   } else {
-//     imageH = 1260;
-//     imageW = (imageH / h) * w;
-//   }
-//
-//   domtoimage.toBlob(node).then((file) => {
-//   // domtoimage.toBlob(node, {height: imageH, width: imageW}).then((file) => {
-//     console.log(file);
-//     firebaseStorage
-//       .child(`module_${ nroModule }_${ randomString(10) }_${ date.getTime() }`)
-//       .put(file)
-//       .then((snapshot) => {
-//         let url = snapshot.metadata.downloadURLs[0];
-//
-//         switch (social) {
-//           case 'facebook': window.open(`https://www.facebook.com/sharer.php?u=https://datosgobar.github.io/GDE&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-//           case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`); break;
-//         }
-//       });
-//   });
-// };
 // Check 05.07.2017 - Muesta el contenedor para embeber el modulo
 function embebedContainerShow(component) {
   component.parentNode.parentNode.parentNode.querySelector('.embebedContainer').style.opacity = '';
@@ -28567,6 +28532,195 @@ const Modal = {
     };
   "undefined" != typeof module ? module.exports = v : a.domtoimage = v
 }(this);
+
+/* FileSaver.js
+ * A saveAs() FileSaver implementation.
+ * 1.3.2
+ * 2016-06-16 18:25:19
+ *
+ * By Eli Grey, http://eligrey.com
+ * License: MIT
+ *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
+ */
+
+/*global self */
+/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+
+/*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
+
+var saveAs = saveAs || (function(view) {
+	"use strict";
+	// IE <10 is explicitly unsupported
+	if (typeof view === "undefined" || typeof navigator !== "undefined" && /MSIE [1-9]\./.test(navigator.userAgent)) {
+		return;
+	}
+	var
+		  doc = view.document
+		  // only get URL when necessary in case Blob.js hasn't overridden it yet
+		, get_URL = function() {
+			return view.URL || view.webkitURL || view;
+		}
+		, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+		, can_use_save_link = "download" in save_link
+		, click = function(node) {
+			var event = new MouseEvent("click");
+			node.dispatchEvent(event);
+		}
+		, is_safari = /constructor/i.test(view.HTMLElement) || view.safari
+		, is_chrome_ios =/CriOS\/[\d]+/.test(navigator.userAgent)
+		, throw_outside = function(ex) {
+			(view.setImmediate || view.setTimeout)(function() {
+				throw ex;
+			}, 0);
+		}
+		, force_saveable_type = "application/octet-stream"
+		// the Blob API is fundamentally broken as there is no "downloadfinished" event to subscribe to
+		, arbitrary_revoke_timeout = 1000 * 40 // in ms
+		, revoke = function(file) {
+			var revoker = function() {
+				if (typeof file === "string") { // file is an object URL
+					get_URL().revokeObjectURL(file);
+				} else { // file is a File
+					file.remove();
+				}
+			};
+			setTimeout(revoker, arbitrary_revoke_timeout);
+		}
+		, dispatch = function(filesaver, event_types, event) {
+			event_types = [].concat(event_types);
+			var i = event_types.length;
+			while (i--) {
+				var listener = filesaver["on" + event_types[i]];
+				if (typeof listener === "function") {
+					try {
+						listener.call(filesaver, event || filesaver);
+					} catch (ex) {
+						throw_outside(ex);
+					}
+				}
+			}
+		}
+		, auto_bom = function(blob) {
+			// prepend BOM for UTF-8 XML and text/* types (including HTML)
+			// note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+			if (/^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+				return new Blob([String.fromCharCode(0xFEFF), blob], {type: blob.type});
+			}
+			return blob;
+		}
+		, FileSaver = function(blob, name, no_auto_bom) {
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			// First try a.download, then web filesystem, then object URLs
+			var
+				  filesaver = this
+				, type = blob.type
+				, force = type === force_saveable_type
+				, object_url
+				, dispatch_all = function() {
+					dispatch(filesaver, "writestart progress write writeend".split(" "));
+				}
+				// on any filesys errors revert to saving with object URLs
+				, fs_error = function() {
+					if ((is_chrome_ios || (force && is_safari)) && view.FileReader) {
+						// Safari doesn't allow downloading of blob urls
+						var reader = new FileReader();
+						reader.onloadend = function() {
+							var url = is_chrome_ios ? reader.result : reader.result.replace(/^data:[^;]*;/, 'data:attachment/file;');
+							var popup = view.open(url, '_blank');
+							if(!popup) view.location.href = url;
+							url=undefined; // release reference before dispatching
+							filesaver.readyState = filesaver.DONE;
+							dispatch_all();
+						};
+						reader.readAsDataURL(blob);
+						filesaver.readyState = filesaver.INIT;
+						return;
+					}
+					// don't create more object URLs than needed
+					if (!object_url) {
+						object_url = get_URL().createObjectURL(blob);
+					}
+					if (force) {
+						view.location.href = object_url;
+					} else {
+						var opened = view.open(object_url, "_blank");
+						if (!opened) {
+							// Apple does not allow window.open, see https://developer.apple.com/library/safari/documentation/Tools/Conceptual/SafariExtensionGuide/WorkingwithWindowsandTabs/WorkingwithWindowsandTabs.html
+							view.location.href = object_url;
+						}
+					}
+					filesaver.readyState = filesaver.DONE;
+					dispatch_all();
+					revoke(object_url);
+				}
+			;
+			filesaver.readyState = filesaver.INIT;
+
+			if (can_use_save_link) {
+				object_url = get_URL().createObjectURL(blob);
+				setTimeout(function() {
+					save_link.href = object_url;
+					save_link.download = name;
+					click(save_link);
+					dispatch_all();
+					revoke(object_url);
+					filesaver.readyState = filesaver.DONE;
+				});
+				return;
+			}
+
+			fs_error();
+		}
+		, FS_proto = FileSaver.prototype
+		, saveAs = function(blob, name, no_auto_bom) {
+			return new FileSaver(blob, name || blob.name || "download", no_auto_bom);
+		}
+	;
+	// IE 10+ (native saveAs)
+	if (typeof navigator !== "undefined" && navigator.msSaveOrOpenBlob) {
+		return function(blob, name, no_auto_bom) {
+			name = name || blob.name || "download";
+
+			if (!no_auto_bom) {
+				blob = auto_bom(blob);
+			}
+			return navigator.msSaveOrOpenBlob(blob, name);
+		};
+	}
+
+	FS_proto.abort = function(){};
+	FS_proto.readyState = FS_proto.INIT = 0;
+	FS_proto.WRITING = 1;
+	FS_proto.DONE = 2;
+
+	FS_proto.error =
+	FS_proto.onwritestart =
+	FS_proto.onprogress =
+	FS_proto.onwrite =
+	FS_proto.onabort =
+	FS_proto.onerror =
+	FS_proto.onwriteend =
+		null;
+
+	return saveAs;
+}(
+	   typeof self !== "undefined" && self
+	|| typeof window !== "undefined" && window
+	|| this.content
+));
+// `self` is undefined in Firefox for Android content script context
+// while `this` is nsIContentFrameMessageManager
+// with an attribute `content` that corresponds to the window
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports.saveAs = saveAs;
+} else if ((typeof define !== "undefined" && define !== null) && (define.amd !== null)) {
+  define("FileSaver.js", function() {
+    return saveAs;
+  });
+}
 
 //! moment.js
 //! version : 2.18.1
@@ -33449,39 +33603,12 @@ return hooks;
 const STORAGE = {
   'charts': {} // Se guarda información correspondiente a cada gráfico
 };
+
 window.storage = STORAGE;
-// Firebase
-////////////////////////////////////////////////////////////////////////////////
-
-// function startFirebaseService() {
-//   firebase.initializeApp({
-//                apiKey: 'AIzaSyDbLZWG2xFkyP8BZz7dfJF5daK9F3KwJJ4',
-//            authDomain: 'analytical-park-149313.firebaseapp.com',
-//           databaseURL: 'https://analytical-park-149313.firebaseio.com',
-//             projectId: 'analytical-park-149313',
-//         storageBucket: 'analytical-park-149313.appspot.com',
-//     messagingSenderId: '215411573688'
-//   });
-//
-//   return firebase.storage().ref();
-// }
-
-// var firebase_storage = startFirebaseService();
 
 // Funciones Globales
 ////////////////////////////////////////////////////////////////////////////////
 
-// Actualizado 04.08.2017 - Genera una cadena de texto aleatoria.
-// function generateToken(length) {
-//   let text = '',
-//       possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//
-//   for (let i = 0; i < length; i++) {
-//     text += possible.charAt(Math.floor(Math.random() * possible.length));
-//   }
-//
-//   return text;
-// }
 // Actualizado 04.08.2017 - Permite definir formato del número.
 function formatNumberD3(number) {
   return d3.format((parseInt(number) === number)?(','):(',.2f'))(number);
@@ -33501,40 +33628,153 @@ function downloadFile(path, name) {
     });
   });
 }
-// Actualizado 04.08.2017 - Permite compartir uns imagen en redes sociales
-// function share(social, element) {
-//   let renderNode = element.parentNode.parentNode,
-//       date = new Date();
-//
-//   // Generar imagen Uint8Array
-//   let w = renderNode.offsetWidth,
-//       h = renderNode.offsetHeight,
-//       imgW = 1024,
-//       imgH = 512;
-//
-//   domtoimage.toBlob(renderNode, {height: imgH, width: imgW}).then((file) => {
-//
-//     console.log(file);
-//
-//     let url = firebaseStorage.child(`${ date.getTime() }${ generateToken(10) }`)
-//       .put(file)
-//       .then((snapshot) => {
-//         let github = 'https://datosgobar.github.io/landing-ied/';
-//         let url = 'https%3A%2F%2Fdatosgobar.github.io%2Flanding-ied%2Fpublic%2Fimages%2Fmodule.png';
-//         // let url = snapshot.metadata.downloadURLs[0];
-//
-//         console.log(`${ date.getTime() }${ generateToken(10) }`);
-//
-//         console.log(url);
-//
-//         switch (social) {
-//           case 'facebook': window.open(
-//             `https://www.facebook.com/sharer/sharer.php?u=${ github }&picture=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-//           // case 'twitter': window.open(`https://twitter.com/share?save.snapshot.downloadURL=https://datosgobar.github.io/GDE&image=${ url }`, 'pop', 'width=600, height=260, scrollbars=no'); break;
-//         }
-//       });
-//   });
-// }
+// Actualizado 15.08.2017 - Permite renderizar un bloque de contenido y descargar una imagen.
+function shareDownload(_element, _indicatorId) {
+  let renderNode = _element.parentNode.parentNode,
+      timestamp  = moment().format('x');
+
+  domtoimage.toBlob(renderNode).then((blob) => {
+    window.saveAs(blob, `indicator_${ _indicatorId }_chart_${ renderNode.getAttribute('id') }_${ timestamp }.png`);
+  }).catch(function (error) {
+    console.error('oops, algo sucedio mal!', error);
+  });
+}
+// Actualizado 15.08.2017 - Permite generar una imagen para embeber ese bloque de contenido.
+function shareEmbebed(_element, _indicatorId) {
+  let renderNode = _element.parentNode.parentNode;
+  console.log(_element);
+  console.log(renderNode);
+  console.log(_indicatorId);
+
+  embebedContainerShow(renderNode);
+}
+
+// Render Iframe
+function renderIframe(_indicator, _chart) {
+  $(() => {
+    // Se define el contenedor de los modulos
+    let container = window.document.querySelector('#app');
+        container.setAttribute('class', 'flex flex-column flex-align-end');
+    // Se configurán estilos especiales
+    window.document.querySelector('#chartsContainer').style.display = 'block';
+    window.document.querySelector('#chartsContainer').style.position = 'relative';
+    // Se eliminan contenedores innecesarios
+    window.document.querySelector('#cardsContainer').remove();
+    window.document.querySelector('.back-link').remove();
+    // Se renderizan todos los modulos
+    start(_indicator, _chart);
+    // Si existe, se elimina boton para embeber
+    // if (window.document.querySelector('.buttonEmbebed') !== null) {
+    //   window.document.querySelector('.buttonEmbebed').remove();
+    // }
+    // Se crean créditos
+    let creditos = window.document.createElement('span');
+        creditos.innerHTML = 'Desarrollado por <a href="" class="link">destinatario</a>';
+        creditos.style.opacity = '0.5';
+    // Se agregan créditos
+    container.appendChild(creditos);
+  });
+}
+// Actualizado 15.08.2017 - Devuelve un array con todos los parametros GET.
+function parseSearch(search) {
+  let args       = search.substring(1).split('&'),
+      argsParsed = {}, i, arg, kvp, key, value;
+
+  for (i = 0; i < args.length; i++) {
+
+    if (args[i].indexOf('=') === -1) {
+      argsParsed[decodeURIComponent(args[i]).trim()] = true;
+    } else {
+      kvp   = args[i].split('=');
+      key   = decodeURIComponent(kvp[0]).trim();
+      value = decodeURIComponent(kvp[1]).trim();
+      argsParsed[key] = value;
+    }
+  }
+
+  return argsParsed;
+}
+// Actualizado 15.08.2017 - Verifica si se está solicitando embeber el código.
+function checkGetRequest() {
+  let parametros = parseSearch(window.location.search);
+
+  if (parametros.hasOwnProperty('indicator') && parametros.hasOwnProperty('chart')) {
+    renderIframe(parametros.indicator, parametros.chart);
+  } else {
+    start();
+  }
+}
+
+function addContainerEmbebed(_container, _indicator, _chart) {
+  console.log(_container);
+  console.log(_indicator);
+  console.log(_chart);
+
+  let iframe = window.document.createElement('iframe');
+      iframe.setAttribute('src', `${ window.location.origin }?indicator=${ _indicator }&chart=${ _chart }`);
+      iframe.setAttribute('width', '100%');
+      iframe.setAttribute('height', '100%');
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('scrolling', 'no');
+
+  console.log(iframe);
+
+  let background = window.document.createElement('div');
+      background.classList.add('embebedContainer');
+      background.style.opacity = 0;
+      background.style.visibility = 'hidden';
+
+  console.log(background);
+
+  let exit = window.document.createElement('span');
+      exit.classList.add('embebedExit');
+      exit.setAttribute('onclick', 'embebedContainerHide(this)');
+      exit.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+
+  console.log(exit);
+
+  let input = window.document.createElement('input');
+      input.setAttribute('value', iframe.outerHTML);
+
+  console.log(input);
+
+  let button = window.document.createElement('button');
+      button.setAttribute('onclick', 'copyText(this)');
+      button.innerHTML = '<i class="fa fa-clone" aria-hidden="true"></i><span style="margin-left: 10px;">Copiar</span>';
+
+  background.appendChild(exit);
+  background.appendChild(input);
+  background.appendChild(button);
+  _container.querySelector(`#${ _chart }`).appendChild(background);
+
+  return true;
+}
+
+
+
+// Check 05.07.2017 - Muesta el contenedor para embeber el modulo
+function embebedContainerShow(_component) {
+
+  _component.querySelector('.embebedContainer').style.opacity = '';
+  _component.querySelector('.embebedContainer').style.visibility = '';
+
+  return true;
+}
+// Check 05.07.2017 - Oculta el contenedor para embeber el modulo
+function embebedContainerHide(_component) {
+  _component.parentNode.style.opacity = 0;
+  _component.parentNode.style.visibility = 'hidden';
+
+  return true;
+}
+// Check 05.07.2017 - Guarda en el portapapeles el texto de un elemento
+function copyText(elemento) {
+  let copy = elemento.parentNode.querySelector('input').select();
+
+  window.document.execCommand('copy');
+
+  return true;
+};
 
 // Esta función parsea el el formato de tipo de linea.
 ////////////////////////////////////////////////////////////////////////////////
@@ -33651,8 +33891,8 @@ function changeView(container) {
                                             <div class="rangeButton-component">
                                               <div class="rangeButton-text">Escala:</div>
                                               <div class="rangeButton-button" state="off">
-                                                <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
-                                                <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
+                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
+                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
                                                 <div class="switch-effect" style="left: 2px;"></div>
                                               </div>
                                             </div>
@@ -33667,19 +33907,14 @@ function changeView(container) {
                                                 <span class="hamburger-2"></span>
                                                 <span class="hamburger-3"></span>
                                               </label>
-                                              <button class="share-item buttonEmbebed button buttonCircle" title="Embeber sección" onclick="embebedContainerShow(this)" style="background-color: black; color: white; right: 0px;">
+                                              <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
                                                 <span class="buttonCircleSmall boton_efecto">
                                                   <i class="fa fa-code" aria-hidden="true"></i>
                                                 </span>
                                               </button>
-                                              <button class="share-item button buttonCircle" title="Compartir en Twitter" onclick="share('twitter', this)" style="background-color: rgb(29, 161, 242); color: white; right: 0px;">
+                                              <button class="share-item button buttonCircle" title="descargar" onclick="shareDownload(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
                                                 <span class="buttonCircleSmall boton_efecto">
-                                                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                                                </span>
-                                              </button>
-                                              <button class="share-item button buttonCircle" title="Compartir en Facebook" onclick="share('facebook', this)" style="background-color: rgb(59, 89, 152); color: white; right: 0px;">
-                                                <span class="buttonCircleSmall boton_efecto">
-                                                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                                                  <i class="fa fa-download" aria-hidden="true"></i>
                                                 </span>
                                               </button>
                                             </div>
@@ -33688,6 +33923,7 @@ function changeView(container) {
                                             </div>`;
 
           _chartContiner.append(chartComponente);
+          addContainerEmbebed(_chartContiner, _card.id, _chart.id);
 
           STORAGE.charts[_chart.id] = { container:  chartComponente };
 
@@ -33906,6 +34142,11 @@ function changeView(container) {
       .attr('class', 'range-container')
       .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
 
+    rangeContainer.append('g')
+      .attr('class', 'range-axis-x')
+      .attr('transform', `translate(0, ${ rangeHeight })`)
+      .call(rangeAxisX);
+
     startBrush = rangeContainer.append('g')
       .attr('class', 'start-brush-date')
       .attr('text-anchor', 'end')
@@ -33935,14 +34176,9 @@ function changeView(container) {
       .style('stroke', (d, i) => _chartData.indicators[i].color);
 
     rangeContainer.append('g')
-      .attr('class', 'range-axis-x')
-      .attr('transform', `translate(0, ${ rangeHeight })`)
-      .call(rangeAxisX);
-    rangeContainer.append('g')
       .attr('class', 'range-brush')
       .call(brush)
       .call(brush.move, [rangeScaleX(date), chartWidth]);
-
     // console.log('breakpoint_8');
 
     // se crea tooltip de linea vertical
@@ -34408,7 +34644,7 @@ function generateMiniChart(_cardData, _element) {
     .attr('cy', (d) => chartScaleY(d[1]));
 }
 
-function renderCards() {
+function renderAllCards() {
 
   STORAGE.cards.forEach((card) => {
 
@@ -34456,15 +34692,86 @@ function renderCards() {
       });
   });
 }
+function renderOnlyCard(_cardId, _chartId) {
+  console.log('render only card');
+  STORAGE.cards.forEach((_card) => {
+    if (_cardId === _card.id) {
+      _card.charts.forEach((_chart) => {
+        if (_chart.id === _chartId) {
+          console.log(_chart);
+          let chartComponente = document.createElement('div');
+              chartComponente.setAttribute('id', _chart.id);
+              chartComponente.classList.add('chart');
+              chartComponente.innerHTML = `<div class="head">
+                                              <h3>${ _chart.title }</h3>
+                                              <div class="break-line"><br></div>
+                                              <p class="paragraph">${ _chart.description }</p>
+                                              <div class="break-line"><br></div>
+                                           </div>
+                                           <div class="referenceContainer">
+                                             <div class="break-line"><br></div>
+                                             <span id="references"></span>
+                                             <div class="break-line"><br></div>
+                                           </div>
+                                           <div class="rangeButton">
+                                            <div class="break-line"><br></div>
+                                            <div class="rangeButton-component">
+                                              <div class="rangeButton-text">Escala:</div>
+                                              <div class="rangeButton-button" state="off">
+                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
+                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
+                                                <div class="switch-effect" style="left: 2px;"></div>
+                                              </div>
+                                            </div>
+                                            <div class="break-line"><br></div>
+                                           </div>
+                                           <div class="chart-svg"></div>
+                                           <div class="break-line"><br></div>
+                                           <div class="modal-share">
+                                              <input id="share-${ _chart.id }" type="checkbox" class="share-open">
+                                              <label for="share-${ _chart.id }" class="share-open-button hamburger-dark">
+                                                <span class="hamburger-1"></span>
+                                                <span class="hamburger-2"></span>
+                                                <span class="hamburger-3"></span>
+                                              </label>
+                                              <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this, '${ _cardId }')" style="background-color: gray; color: white; right: 0px;">
+                                                <span class="buttonCircleSmall boton_efecto">
+                                                  <i class="fa fa-code" aria-hidden="true"></i>
+                                                </span>
+                                              </button>
+                                              <button class="share-item button buttonCircle" title="descargar" onclick="shareDownload(this, '${ _cardId }')" style="background-color: gray; color: white; right: 0px;">
+                                                <span class="buttonCircleSmall boton_efecto">
+                                                  <i class="fa fa-download" aria-hidden="true"></i>
+                                                </span>
+                                              </button>
+                                            </div>
+                                            <div class="loading flex">
+                                             <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                            </div>`;
+
+          window.document.querySelector('#app #chartsContainer #charts').append(chartComponente);
+
+          STORAGE.charts[_chart.id] = { container:  chartComponente };
+
+          downloadChart(_chart);
+        }
+      })
+    }
+  });
+}
 
 // Esta función inicia la aplicación.
 ////////////////////////////////////////////////////////////////////////////////
 
-function start() {
-  downloadFile('./public/data/cards.json', 'cards').then(renderCards);
+function start(_card = null, _indicator = null) {
+  if (_card === null || _indicator === null) {
+    downloadFile('./public/data/cards.json', 'cards').then(renderAllCards);
+  } else {
+    downloadFile('./public/data/cards.json', 'cards').then(() => { renderOnlyCard(_card, _indicator); });
+  }
 }
 
 // Is Document Ready
 ////////////////////////////////////////////////////////////////////////////////
 
-window.document.onload = start();
+window.document.onload = checkGetRequest();
