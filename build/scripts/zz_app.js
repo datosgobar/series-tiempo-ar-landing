@@ -382,7 +382,7 @@ function changeView(container) {
       _chartData.indicators.forEach((_value) => {
         let container = document.querySelector(`#${ _chartData.id } #references`),
             reference = document.createElement('p');
-            reference.innerHTML = `<div class="reference-circle" style="background-color: ${ _value.color }"></div> ${ _value.short_name }`;
+            reference.innerHTML = `<div class="reference-round-line" style="background-color: ${ _value.color }"></div> ${ _value.short_name }`;
             container.append(reference);
       });
     }

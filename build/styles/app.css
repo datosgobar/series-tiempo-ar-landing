@@ -177,11 +177,11 @@ body {
         margin: 0 10px 5px 0;
       }
 
-      & .reference-circle {
-        width: 10px;
-        height: 10px;
-        border-radius: 10px;
-        margin-right: 10px;
+      & .reference-round-line {
+        width: 20px;
+        height: 5px;
+        border-radius: 5px;
+        margin-right: 5px;
       }
     }
   }

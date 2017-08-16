@@ -5,6 +5,7 @@
     "download_url": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
     "short_name": "EMAE",
     "units_representation": "%",
+    "laps": "5",
     "charts": [
       {
         "id": "chart_1",
@@ -120,6 +121,7 @@
     "download_url": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
     "short_name": "Desempleo",
     "units_representation": "%",
+    "laps": "5",
     "charts": [
       {
         "id": "chart_1",
@@ -194,6 +196,7 @@
     "download_url": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
     "short_name": "IPC",
     "units_representation": "1",
+    "laps": "5",
     "charts": []
   },
   {
@@ -202,6 +205,7 @@
     "download_url": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
     "short_name": "TCRM",
     "units_representation": "1",
+    "laps": "5",
     "charts": [
       {
         "id": "chart_1",
@@ -295,6 +299,7 @@
     "download_url": "http://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
     "short_name": "Recursos tributarios",
     "units_representation": "1",
+    "laps": "5",
     "charts": [
       {
         "id": "chart_1",
@@ -322,6 +327,7 @@
     "download_url": "http://www.mecon.gov.ar/download/infoeco/internacional_ied.xlsx",
     "short_name": "Commodities",
     "units_representation": "",
+    "laps": "5",
     "charts": [
       {
         "id": "chart_1",
@@ -375,6 +381,7 @@
     "download_url": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
     "short_name": "BADLAR",
     "units_representation": "%",
+    "laps": "5",
     "charts": [
       {
         "id": "chart_1",
