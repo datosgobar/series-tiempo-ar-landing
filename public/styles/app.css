@@ -3590,40 +3590,39 @@ footer#oldfooter #footer-spacer .footer-section.links-externos .ckan-name:hover 
 }
 
 /*
-  Producto: MODAL
-  Descripción: Sistema de modularización de contenido
-  Última actualización: 24.07.2017
-  Últimas modificaciones:
-    - Se quitaron estilos de titulos.
-    - Se modificó el tamaño tipográfico de los botones de 14px a 1rem.
-    - Se quito MAYUSCULAS en los botones.
+  Estilos predefinidos
 */
 
-html {
+body {
+  font-family: Roboto;
   font-size: 12px;
+  line-height: 1;
+  color: #767676;
 }
 
 @media (min-width: 768px) {
 
-  html {
+  body {
     font-size: 14px;
   }
 }
 
 @media (min-width: 1200px) {
 
-  html {
+  body {
     font-size: 16px;
   }
 }
 
-html, body {
-  font-family: Roboto;
-  line-height: 1;
+button {
+  cursor: pointer;
+  outline: none;
 }
 
 /*
-    ----------------------------------------------- FlexBox Helpers - 04.08.2017
+  //////////////////////////////////////////////////////////////////////////////
+  // FlexBox Helpers
+  //////////////////////////////////////////////////////////////////////////////
 */
 
 .flex {
@@ -3642,73 +3641,66 @@ html, body {
           flex-flow: row nowrap;
 }
 
-.flex-column {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+.flex-column { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
+
+.flex-justify-between { -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
+
+.flex-justify-around { -ms-flex-pack: distribute; justify-content: space-around; }
+
+.flex-justify-start { -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; }
+
+.flex-justify-end { -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; }
+
+.flex-align-center { -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.flex-align-between { -webkit-box-align: space-between; -ms-flex-align: space-between; align-items: space-between; }
+
+.flex-align-around { -webkit-box-align: space-around; -ms-flex-align: space-around; align-items: space-around; }
+
+.flex-align-start { -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; }
+
+.flex-align-end { -webkit-box-align: end; -ms-flex-align: end; align-items: flex-end; }
+
+.flex-wrap { -ms-flex-wrap: wrap; flex-wrap: wrap; }
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Others Helpers
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+.max-width { width: 100%; }
+
+.max-height { height: 100%; }
+
+.no-margin { margin: 0; }
+
+.no-padding { padding: 0; }
+
+.hide { display: none; }
+
+@media (min-width: 768px) {
+
+  .onlyMobile {
+    display: none;
+  }
 }
 
-.flex-justify-between {
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+.onlyWeb {
+  display: none;
 }
 
-.flex-justify-around {
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-}
+@media (min-width: 768px) {
 
-.flex-justify-start {
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-}
-
-.flex-justify-end {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-}
-
-.flex-align-center {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.flex-align-between {
-  -webkit-box-align: space-between;
-      -ms-flex-align: space-between;
-          align-items: space-between;
-}
-
-.flex-align-around {
-  -webkit-box-align: space-around;
-      -ms-flex-align: space-around;
-          align-items: space-around;
-}
-
-.flex-align-start {
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-}
-
-.flex-align-end {
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-}
-
-.flex-wrap {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  .onlyWeb {
+    display: inherit;
+  }
 }
 
 /*
-    ---------------------------------------------------- BreakLines - 04.08.2017
+  //////////////////////////////////////////////////////////////////////////////
+  // Break Lines
+  //////////////////////////////////////////////////////////////////////////////
 */
 
 .break-line {
@@ -3723,7 +3715,7 @@ html, body {
 
 .break-line > hr {
   margin: 0;
-  border: 1px solid #767676;
+  border: 1px solid #ccc;
   opacity: 0.5;
 }
 
@@ -3766,48 +3758,6 @@ html, body {
 
   .modal-responsive {
     max-width: 1200px;
-  }
-}
-
-/*
-    ------------------------------------------------ Others Helpers - 04.08.2017
-*/
-
-.max-width {
-  width: 100%;
-}
-
-.max-height {
-  height: 100%;
-}
-
-.no-margin {
-  margin: 0;
-}
-
-.no-padding {
-  padding: 0;
-}
-
-.hide {
-  display: none;
-}
-
-.onlyWeb {
-  display: none;
-}
-
-@media (min-width: 768px) {
-
-  .onlyWeb {
-    display: inherit;
-  }
-}
-
-@media (min-width: 768px) {
-
-  .onlyMobile {
-    display: none;
   }
 }
 
@@ -4097,65 +4047,6 @@ html, body {
 }
 
 /*
-    ------------------------------------------ Share Embebed Module - 05.07.2017
-*/
-
-.embebedContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  z-index: 99999999;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out
-}
-
-.embebedContainer > input {
-  width: 320px;
-  padding: 14px;
-  border-radius: 4px;
-  border: none;
-}
-
-.embebedExit {
-  font-size: 20px;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  color: white;
-  cursor: pointer;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out
-}
-
-.embebedExit:hover {
-  font-size: 30px;
-}
-
-/*
     ------------------------------------------------ Charts Modules - 00.00.2017
 */
 
@@ -4415,9 +4306,7 @@ body {
   //////////////////////////////////////////////////////////////////////////////
 */
 
-#cardsContainer {
-  z-index: 1;
-}
+#cardsContainer { z-index: 1; }
 
 /*
   //////////////////////////////////////////////////////////////////////////////
@@ -4428,9 +4317,8 @@ body {
 #cards .card {
   width: 250px;
   background-color: white;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 0 5px #767676;
-          box-shadow: 0 0 5px #767676;
+  -webkit-box-shadow: 0 0 2px #767676;
+          box-shadow: 0 0 2px #767676;
   padding: 20px 10px 30px;
   text-align: center;
   -webkit-box-sizing: border-box;
@@ -4449,28 +4337,28 @@ body {
 
 #cards .card > h4 {
   margin: 0;
-  font-size: 16px;
+  font-size: 19px;
   color: #444;
   font-weight: 800;
 }
 
-#cards .card > #frequency {
+#cards .card > .frequency {
   margin: 0;
   font-size: 14px;
   color: #767676;
   font-weight: 600;
 }
 
-#cards .card > #units_representation {
+#cards .card > .units_representation {
   margin: 0;
   font-size: 32px;
   font-weight: 600;
   color: #0695d6;
 }
 
-#cards .card > #units {
+#cards .card > .units {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: #767676;
 }
@@ -4487,7 +4375,7 @@ body {
   height: 30px;
   background-color: #0695d6;
   border-radius: 15px;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
   font-weight: 500;
 }
@@ -4507,6 +4395,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 16px;
 }
 
 #cards .card > .loading {
@@ -4548,16 +4437,19 @@ body {
   //////////////////////////////////////////////////////////////////////////////
 */
 
+#charts {
+  margin: 0 10px
+}
+
 #charts .chart {
   width: 100%;
-  -webkit-box-shadow: 0 0 5px #767676;
-          box-shadow: 0 0 5px #767676;
+  -webkit-box-shadow: 0 0 2px #767676;
+          box-shadow: 0 0 2px #767676;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  border-radius: 4px;
   position: relative;
   margin: 0 0 20px;
-  background-color: white
+  background-color: white;
 }
 
 #charts .chart > .head {
@@ -4586,7 +4478,6 @@ body {
 
 #charts .chart > .referenceContainer {
   background-color: #fafafa;
-  border-bottom: 1px solid #767676;
 }
 
 #charts .chart > .referenceContainer > #references {
@@ -4601,7 +4492,7 @@ body {
           align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0px 10px;
+  margin: 0 10px;
 }
 
 #charts .chart > .referenceContainer > #references > p {
@@ -4615,12 +4506,13 @@ body {
       -ms-flex-align: center;
           align-items: center;
   margin: 0 10px 5px 0;
+  font-weight: 600;
 }
 
 #charts .chart > .referenceContainer > #references .reference-round-line {
-  width: 20px;
-  height: 5px;
-  border-radius: 5px;
+  width: 15px;
+  height: 2px;
+  border-radius: 2px;
   margin-right: 5px;
 }
 
@@ -4650,19 +4542,31 @@ body {
   padding: 2px;
   background: white;
   position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 190px;
+  height: 32px;
 }
 
 #charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button {
-  width: 90px;
+  position: absolute;
+  width: 50%;
   border: none;
-  background: white;
-  border-radius: 50px;
+  background-color: transparent;
   padding: 5px 10px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
   -webkit-transition: font-weight 0.25s ease-out;
   transition: font-weight 0.25s ease-out;
+}
+
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button:first-of-type {
+  left: 0;
+}
+
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button:last-of-type {
+  right: 0;
 }
 
 #charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button[state="active"] {
@@ -4674,7 +4578,7 @@ body {
 }
 
 #charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > .switch-effect {
-  background: rgba(0, 0, 100, 0.5);
+  background: #b8e1f4;
   width: 50%;
   height: calc(100% - 4px);
   position: absolute;
@@ -4698,9 +4602,7 @@ body {
   border-radius: 4px;
 }
 
-.chart-background {
-  fill: #fafafa;
-}
+.chart-background { fill: #fafafa; }
 
 .chart-container .chart-line-0 line {
   fill: none;
@@ -4727,6 +4629,7 @@ body {
 
 .chart-container .chart-line path {
   fill: none;
+  stroke-width: 2px;
 }
 
 .chart-container .chart-dots circle {
@@ -4735,6 +4638,7 @@ body {
 
 .range-container .range-line {
   fill: none;
+  stroke-width: 2px;
 }
 
 .range-container .range-axis-x {
@@ -4801,6 +4705,64 @@ body {
 .start-brush-date > text, .end-brush-date > text {
   fill: #767676;
   font-size: 12px;
+}
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Embebed and SaveAs
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+.embebedContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 99999999;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease
+}
+
+.embebedContainer > .btn-exit {
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  cursor: pointer;
+  border-radius: 100%;
+  -webkit-transition: font-size 0.2s ease-in-out;
+  transition: font-size 0.2s ease-in-out;
+}
+
+.embebedContainer > .btn-exit:hover {
+  font-size: 30px;
+}
+
+.embebedContainer .embebed-text-info {
+  color: white;
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.embebedContainer input {
+  width: 320px;
+  padding: 14px;
+  border-radius: 4px;
+  border: none;
+}
+
+.embebedContainer button {
+  background-color: #0695d6;
+  margin-left: 10px;
+  width: 100px;
+  height: 44px;
+  color: white;
 }
 
 .odometer.odometer-auto-theme, .odometer.odometer-theme-minimal {

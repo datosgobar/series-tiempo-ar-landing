@@ -1,33 +1,27 @@
 /*
-  Producto: MODAL
-  Descripción: Sistema de modularización de contenido
-  Última actualización: 24.07.2017
-  Últimas modificaciones:
-    - Se quitaron estilos de titulos.
-    - Se modificó el tamaño tipográfico de los botones de 14px a 1rem.
-    - Se quito MAYUSCULAS en los botones.
+  Estilos predefinidos
 */
 
-html {
-  font-size: 12px;
-
-  @media (--tablet) {
-    font-size: 14px;
-  }
-
-  @media (--large-desktop) {
-    font-size: 16px;
-  }
-}
-
-html,
 body {
   font-family: Roboto;
+  font-size: 12px;
   line-height: 1;
+  color: var(--base);
+
+  @media (--tablet) { font-size: 14px; }
+
+  @media (--large-desktop) { font-size: 16px; }
+}
+
+button {
+  cursor: pointer;
+  outline: none;
 }
 
 /*
-    ----------------------------------------------- FlexBox Helpers - 04.08.2017
+  //////////////////////////////////////////////////////////////////////////////
+  // FlexBox Helpers
+  //////////////////////////////////////////////////////////////////////////////
 */
 
 .flex {
@@ -37,52 +31,56 @@ body {
   flex-flow: row nowrap;
 }
 
-.flex-column {
-  flex-direction: column;
-}
+.flex-column { flex-direction: column; }
 
-.flex-justify-between {
-  justify-content: space-between;
-}
+.flex-justify-between { justify-content: space-between; }
 
-.flex-justify-around {
-  justify-content: space-around;
-}
+.flex-justify-around { justify-content: space-around; }
 
-.flex-justify-start {
-  justify-content: flex-start;
-}
+.flex-justify-start { justify-content: flex-start; }
 
-.flex-justify-end {
-  justify-content: flex-end;
-}
+.flex-justify-end { justify-content: flex-end; }
 
-.flex-align-center {
-  align-items: center;
-}
+.flex-align-center { align-items: center; }
 
-.flex-align-between {
-  align-items: space-between;
-}
+.flex-align-between { align-items: space-between; }
 
-.flex-align-around {
-  align-items: space-around;
-}
+.flex-align-around { align-items: space-around; }
 
-.flex-align-start {
-  align-items: flex-start;
-}
+.flex-align-start { align-items: flex-start; }
 
-.flex-align-end {
-  align-items: flex-end;
-}
+.flex-align-end { align-items: flex-end; }
 
-.flex-wrap {
-  flex-wrap: wrap;
+.flex-wrap { flex-wrap: wrap; }
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Others Helpers
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+.max-width { width: 100%; }
+
+.max-height { height: 100%; }
+
+.no-margin { margin: 0; }
+
+.no-padding { padding: 0; }
+
+.hide { display: none; }
+
+.onlyMobile { @media (--tablet) { display: none; } }
+
+.onlyWeb {
+  display: none;
+
+  @media (--tablet) { display: inherit; }
 }
 
 /*
-    ---------------------------------------------------- BreakLines - 04.08.2017
+  //////////////////////////////////////////////////////////////////////////////
+  // Break Lines
+  //////////////////////////////////////////////////////////////////////////////
 */
 
 .break-line {
@@ -96,7 +94,7 @@ body {
 
   & > hr {
     margin: 0;
-    border: 1px solid var(--base);
+    border: 1px solid #ccc;
     opacity: 0.5;
   }
 }
@@ -130,44 +128,6 @@ body {
 
   @media (--large-desktop) {
     max-width: 1200px;
-  }
-}
-
-/*
-    ------------------------------------------------ Others Helpers - 04.08.2017
-*/
-
-.max-width {
-  width: 100%;
-}
-
-.max-height {
-  height: 100%;
-}
-
-.no-margin {
-  margin: 0;
-}
-
-.no-padding {
-  padding: 0;
-}
-
-.hide {
-  display: none;
-}
-
-.onlyWeb {
-  display: none;
-
-  @media (--tablet) {
-    display: inherit;
-  }
-}
-
-.onlyMobile {
-  @media (--tablet) {
-    display: none;
   }
 }
 
@@ -435,51 +395,6 @@ body {
         transition-duration: 0.2s;
       }
     }*/
-  }
-}
-
-/*
-    ------------------------------------------ Share Embebed Module - 05.07.2017
-*/
-
-.embebedContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999999;
-  transition: all 0.2s ease-in-out;
-
-  & > input {
-    width: 320px;
-    padding: 14px;
-    border-radius: 4px;
-    border: none;
-  }
-}
-
-.embebedExit {
-  font-size: 20px;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  cursor: pointer;
-  border-radius: 100%;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    font-size: 30px;
   }
 }
 

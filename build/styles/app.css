@@ -11,9 +11,7 @@ body {
   //////////////////////////////////////////////////////////////////////////////
 */
 
-#cardsContainer {
-  z-index: 1;
-}
+#cardsContainer { z-index: 1; }
 
 /*
   //////////////////////////////////////////////////////////////////////////////
@@ -24,8 +22,7 @@ body {
 #cards .card {
   width: 250px;
   background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 0 5px var(--base);
+  box-shadow: 0 0 2px var(--base);
   padding: 20px 10px 30px;
   text-align: center;
   box-sizing: border-box;
@@ -42,28 +39,28 @@ body {
 
   & > h4 {
     margin: 0;
-    font-size: 16px;
+    font-size: 19px;
     color: var(--baseDark);
     font-weight: 800;
   }
 
-  & > #frequency {
+  & > .frequency {
     margin: 0;
     font-size: 14px;
     color: var(--base);
     font-weight: 600;
   }
 
-  & > #units_representation {
+  & > .units_representation {
     margin: 0;
     font-size: 32px;
     font-weight: 600;
     color: var(--gobarDark);
   }
 
-  & > #units {
+  & > .units {
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--base);
   }
@@ -80,13 +77,11 @@ body {
     height: 30px;
     background-color: var(--gobarDark);
     border-radius: 15px;
-    font-size: 14px;
+    font-size: 16px;
     color: white;
     font-weight: 500;
 
-    & > span {
-      border-radius: 15px;
-    }
+    & > span { border-radius: 15px; }
   }
 
   & > .link {
@@ -94,6 +89,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px;
   }
 
   & > .loading {
@@ -134,128 +130,139 @@ body {
   // Gráficos
   //////////////////////////////////////////////////////////////////////////////
 */
+#charts {
+  margin: 0 10px;
 
-#charts .chart {
-  width: 100%;
-  box-shadow: 0 0 5px var(--base);
-  box-sizing: border-box;
-  border-radius: 4px;
-  position: relative;
-  margin: 0 0 20px;
-  background-color: white;
-
-  & > .head {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px 10px 0;
-
-    & > h3 {
-      text-align: left;
-      margin: 0;
-      font-size: 22px;
-      font-weight: 600;
-    }
-  }
-
-  & > .referenceContainer {
-    background-color: var(--baseLight);
-    border-bottom: 1px solid var(--base);
-
-    & > #references {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: wrap;
-      margin: 0px 10px;
-
-      & > p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 10px 5px 0;
-      }
-
-      & .reference-round-line {
-        width: 20px;
-        height: 5px;
-        border-radius: 5px;
-        margin-right: 5px;
-      }
-    }
-  }
-
-  & > .rangeButton {
-    background-color: var(--baseLight);
-
-    & > .rangeButton-component {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      & > .rangeButton-text {
-        margin: 0 10px;
-      }
-
-      & > .rangeButton-button {
-        border-radius: 50px;
-        border: 1px solid silver;
-        padding: 2px;
-        background: white;
-        position: relative;
-
-        & > button {
-          width: 90px;
-          border: none;
-          background: white;
-          border-radius: 50px;
-          padding: 5px 10px;
-          cursor: pointer;
-          font-size: 14px;
-          font-weight: 400;
-          transition: font-weight 0.25s ease-out;
-
-          &[state="active"] {
-            font-weight: 600;
-          }
-
-          &:hover {
-            font-weight: 600;
-          }
-        }
-
-        & > .switch-effect {
-          background: rgba(0, 0, 100, 0.5);
-          width: 50%;
-          height: calc(100% - 4px);
-          position: absolute;
-          top: 2px;
-          border-radius: 50px;
-          transition: left 0.25s ease-out;
-        }
-      }
-    }
-  }
-
-  & .paragraph {
-    margin: 0;
-  }
-
-  & > .loading {
-    position: absolute;
-    top: 0;
-    left: 0;
+  & .chart {
     width: 100%;
-    height: 100%;
+    box-shadow: 0 0 2px var(--base);
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 0 20px;
     background-color: white;
-    border-radius: 4px;
+
+    & > .head {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 10px 0;
+
+      & > h3 {
+        text-align: left;
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+      }
+    }
+
+    & > .referenceContainer {
+      background-color: var(--baseLight);
+
+      & > #references {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 10px;
+
+        & > p {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 10px 5px 0;
+          font-weight: 600;
+        }
+
+        & .reference-round-line {
+          width: 15px;
+          height: 2px;
+          border-radius: 2px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    & > .rangeButton {
+      background-color: var(--baseLight);
+
+      & > .rangeButton-component {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        & > .rangeButton-text {
+          margin: 0 10px;
+        }
+
+        & > .rangeButton-button {
+          border-radius: 50px;
+          border: 1px solid silver;
+          padding: 2px;
+          background: white;
+          position: relative;
+          box-sizing: border-box;
+          width: 190px;
+          height: 32px;
+
+          & > button {
+            position: absolute;
+            width: 50%;
+            border: none;
+            background-color: transparent;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            transition: font-weight 0.25s ease-out;
+
+            &:first-of-type {
+              left: 0;
+            }
+
+            &:last-of-type {
+              right: 0;
+            }
+
+            &[state="active"] {
+              font-weight: 600;
+            }
+
+            &:hover {
+              font-weight: 600;
+            }
+          }
+
+          & > .switch-effect {
+            background: #b8e1f4;
+            width: 50%;
+            height: calc(100% - 4px);
+            position: absolute;
+            top: 2px;
+            border-radius: 50px;
+            transition: left 0.25s ease-out;
+          }
+        }
+      }
+    }
+
+    & .paragraph {
+      margin: 0;
+    }
+
+    & > .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border-radius: 4px;
+    }
   }
 }
 
-.chart-background {
-  fill: var(--baseLight);
-}
+.chart-background { fill: var(--baseLight); }
 
 .chart-container {
   & .chart-line-0 line {
@@ -287,6 +294,7 @@ body {
 
   & .chart-line path {
     fill: none;
+    stroke-width: 2px;
   }
 
   & .chart-dots circle {
@@ -297,6 +305,7 @@ body {
 .range-container {
   & .range-line {
     fill: none;
+    stroke-width: 2px;
   }
 
   & .range-axis-x {
@@ -371,5 +380,61 @@ body {
   & > text {
     fill: var(--base);
     font-size: 12px;
+  }
+}
+
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Embebed and SaveAs
+  //////////////////////////////////////////////////////////////////////////////
+*/
+
+.embebedContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 99999999;
+  transition: all 0.5s ease;
+
+  & > .btn-exit {
+    font-size: 20px;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: font-size 0.2s ease-in-out;
+
+    &:hover {
+      font-size: 30px;
+    }
+  }
+
+  & .embebed-text-info {
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  & input {
+    width: 320px;
+    padding: 14px;
+    border-radius: 4px;
+    border: none;
+  }
+
+  & button {
+    background-color: var(--gobarDark);
+    margin-left: 10px;
+    width: 100px;
+    height: 44px;
+    color: white;
   }
 }

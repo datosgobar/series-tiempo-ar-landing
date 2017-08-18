@@ -2,7 +2,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 const STORAGE = {
-  'charts': {} // Se guarda información correspondiente a cada gráfico
+  'charts': {}, // Se guarda información correspondiente a cada gráfico
+  'colors': {
+    base: '#767676', base_dark: '#444444', base_light: '#FAFAFA',
+    gobar_light: '#17B2F8', gobar_dark: '#0695D6',
+    palette: { color1: '', color2: '', color3: '' }
+  }
 };
 
 window.storage = STORAGE;
@@ -10,220 +15,162 @@ window.storage = STORAGE;
 // Funciones Globales
 ////////////////////////////////////////////////////////////////////////////////
 
-// Actualizado 04.08.2017 - Permite definir formato del número.
-function formatNumberD3(number) {
-  return d3.format((parseInt(number) === number)?(','):(',.2f'))(number);
-}
-function formatNumberJS(number, precision, miles, decimales) {
-  let r = '\\d(?=(\\d{3})+' + (precision > 0 ? '\\D' : '$') + ')',
-      v = number.toFixed(Math.max(0, precision));
-  return (decimales ? v.replace('.', decimales) : v).replace(new RegExp(r, 'g'), '$&' + (miles || ','));
-}
-// Actualizado 04.08.2017 - Permite descargar un archivo y devolver una promesa.
-function downloadFile(path, name) {
-  return new Promise((success) => {
-    d3.json(path, (data) => {
-      STORAGE[name] = data;
+  // Actualizado 17.08.2017 - Permite definir formato del número.
+  function roundNumber(_number, _decimals) {
+    return Number( Math.round( _number + 'e' + _decimals ) + 'e-' + _decimals);
+  }
+  function formatNumberD3(_number) {
+    return d3.format((parseInt(_number) === _number)?(','):(',.2f'))(_number);
+  }
+  function formatNumberJS(_number, _precision, _miles, _decimales) {
+    let r = '\\d(?=(\\d{3})+' + (_precision > 0 ? '\\D' : '$') + ')',
+        v = _number.toFixed(Math.max(0, _precision));
+    return (_decimales ? v.replace('.', _decimales) : v).replace(new RegExp(r, 'g'), '$&' + (_miles || ','));
+  }
+  // Actualizado 17.08.2017 - Permite descargar un archivo y devolver una promesa.
+  function downloadFile(_path, _name) {
 
-      success();
+    return new Promise((success) => {
+      function saveDataAndCallSuccess(_data) {
+        STORAGE[_name] = _data;
+        success();
+      }
+      function tryLocal() {
+        $.getJSON(_path.local).then(saveDataAndCallSuccess);
+      }
+
+      $.getJSON((_path.external)?(_path.external):(_path.local)).then(saveDataAndCallSuccess).fail(tryLocal);
     });
-  });
-}
-// Actualizado 15.08.2017 - Permite renderizar un bloque de contenido y descargar una imagen.
-function shareDownload(_element, _indicatorId) {
-  let renderNode = _element.parentNode.parentNode,
-      timestamp  = moment().format('x');
+  }
+  // Actualizado 17.08.2017 - Guarda en el portapapeles el texto de un elemento.
+  function copyText(_element) {
+    let copy = _element.parentNode.querySelector('input').select();
 
-  domtoimage.toBlob(renderNode).then((blob) => {
-    window.saveAs(blob, `indicator_${ _indicatorId }_chart_${ renderNode.getAttribute('id') }_${ timestamp }.png`);
-  }).catch(function (error) {
-    console.error('oops, algo sucedio mal!', error);
-  });
-}
-// Actualizado 15.08.2017 - Permite generar una imagen para embeber ese bloque de contenido.
-function shareEmbebed(_element, _indicatorId) {
-  let renderNode = _element.parentNode.parentNode;
-  // console.log(_element);
-  // console.log(renderNode);
-  // console.log(_indicatorId);
+    window.document.execCommand('copy');
+  }
 
-  embebedContainerShow(renderNode);
-}
+// Embebido y guardar como
+////////////////////////////////////////////////////////////////////////////////
 
-// Render Iframe
+  // Actualizado 17.08.2017 - Permite renderizar un bloque de contenido y descargar una imagen.
+  function shareSaveAs(_element, _indicatorId) {
+    let renderNode = _element.parentNode.parentNode;
+        renderNode.parentNode.querySelector('.share-open').checked = false;
 
-// Actualizado 15.08.2017 - Devuelve un array con todos los parametros GET.
-function parseSearch(search) {
-  let args       = search.substring(1).split('&'),
-      argsParsed = {}, i, arg, kvp, key, value;
+    domtoimage.toBlob(renderNode).then((blob) => {
+      window.saveAs(blob, `indicator_${ _indicatorId }_chart_${ renderNode.getAttribute('id') }_${ moment().format('x') }.png`);
+    }).catch(function (error) {
+      console.error('oops, algo sucedio mal!', error);
+    });
+  }
+  // Actualizado 17.08.2017 - Permite generar una imagen para embeber ese bloque de contenido.
+  function shareEmbebed(_element) {
+    let renderNode = _element.parentNode.parentNode;
+        renderNode.parentNode.querySelector('.share-open').checked = false;
 
-  for (i = 0; i < args.length; i++) {
+    embebedContainerShow(renderNode);
+  }
+  // Actualizado 17.08.2017 - Muesta el contenedor para embeber el modulo.
+  function embebedContainerShow(_component) {
+    _component.querySelector('.embebedContainer').style.opacity = '';
+    _component.querySelector('.embebedContainer').style.visibility = '';
+  }
+  // Actualizado 17.08.2017 - Oculta el contenedor para embeber el modulo.
+  function embebedContainerHide(_component) {
+    _component.parentNode.style.opacity = 0;
+    _component.parentNode.style.visibility = 'hidden';
+  }
+  // Actualizado 17.08.2017 - Genera el contenedor para embeber el código.
+  function addContainerEmbebed(_container, _indicator, _chart) {
+    let actionContainer, iframeLink, inputText, copyButton, exitButton, textInfo, background;
 
-    if (args[i].indexOf('=') === -1) {
-      argsParsed[decodeURIComponent(args[i]).trim()] = true;
-    } else {
-      kvp   = args[i].split('=');
-      key   = decodeURIComponent(kvp[0]).trim();
-      value = decodeURIComponent(kvp[1]).trim();
-      argsParsed[key] = value;
+    iframeLink = `<iframe src="${ window.location.origin }?indicator=${ _indicator }&chart=${ _chart }" width="100%" height="100%" frameborder=0 scrolling="no"></iframe>`;
+    inputText  = `<input value='${ iframeLink }'></input>`;
+    copyButton = `<button class="button buttonBig buttonSquare" onclick="copyText(this)">
+                    <span class="button-waves"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copiar</span>
+                  </button>`;
+
+    actionContainer = window.document.createElement('div');
+    actionContainer.setAttribute('class', 'flex');
+    actionContainer.innerHTML = inputText + copyButton;
+
+    exitButton = `<span class="btn-exit flex" onclick="embebedContainerHide(this)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </span>`;
+    textInfo = '<span class="embebed-text-info">Copie el siguiente código y peguelo en su sitio.</span>';
+
+    background = window.document.createElement('div');
+    background.setAttribute('class', 'embebedContainer flex flex-column');
+    background.style.visibility = 'hidden';
+    background.style.opacity = 0;
+    background.innerHTML = exitButton + textInfo;
+
+    background.appendChild(actionContainer);
+    _container.querySelector(`#${ _chart }`).appendChild(background);
+  }
+
+// Funciones de parseo de datos.
+////////////////////////////////////////////////////////////////////////////////
+
+  // Actualizado 17.08.2017 - Esta función parsea el el formato de tipo de linea.
+  function parseTypeLine(type) {
+
+    switch (type) {
+      case 'solid': return null;
+      case 'dashed': return '5, 5';
+      default: console.error(`El tipo de linea ${ type } no es válido.`); return null;
+    }
+  }
+  // Actualizado 17.08.2017 - Esta función parsea el formato de tipo de fecha.
+  function parseFormatDate(format, date, short = false) {
+    date = moment(date);
+
+    switch (format) {
+      case 'R/P1Y':
+        return date.format('YYYY');
+      case 'R/P6M':
+        let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
+            semester = Math.round(semester(date.format('M')));
+
+        if (short) {
+          return `${ semester }S ${ date.format('YY') }`;
+        } else {
+          return `${ semester }º semestre de ${ date.format('YYYY') }`;
+        }
+
+        break;
+      case 'R/P3M':
+        let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
+            trimester = Math.round(trimester(date.format('M')));
+
+        if (short) {
+          return `${ trimester }T ${ date.format('YY') }`;
+        } else {
+          return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+        }
+
+        break;
+      case 'R/P1M':
+        return date.format('MMM YY');
+      case 'R/P1D':
+        return date.format('D MMM YY');
+      default:
+        return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
+    }
+  }
+  // Actualizado 17.08.2017 - Esta función parsea el el formato de tipo de unidad.
+  function parseValueIndicator(format, value) {
+    switch (format) {
+      case '%':
+        return `${ formatNumberD3(value * 100) }%`;
+      default:
+        return formatNumberD3(value);
     }
   }
 
-  return argsParsed;
-}
-
-
-function addContainerEmbebed(_container, _indicator, _chart) {
-  // console.log(_container);
-  // console.log(_indicator);
-  // console.log(_chart);
-
-  let iframe = window.document.createElement('iframe');
-      iframe.setAttribute('src', `${ window.location.origin }?indicator=${ _indicator }&chart=${ _chart }`);
-      iframe.setAttribute('width', '100%');
-      iframe.setAttribute('height', '100%');
-      iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('scrolling', 'no');
-
-  // console.log(iframe);
-
-  let background = window.document.createElement('div');
-      background.classList.add('embebedContainer');
-      background.style.opacity = 0;
-      background.style.visibility = 'hidden';
-
-  // console.log(background);
-
-  let exit = window.document.createElement('span');
-      exit.classList.add('embebedExit');
-      exit.setAttribute('onclick', 'embebedContainerHide(this)');
-      exit.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
-
-  // console.log(exit);
-
-  let input = window.document.createElement('input');
-      input.setAttribute('value', iframe.outerHTML);
-
-  // console.log(input);
-
-  let button = window.document.createElement('button');
-      button.setAttribute('onclick', 'copyText(this)');
-      button.innerHTML = '<i class="fa fa-clone" aria-hidden="true"></i><span style="margin-left: 10px;">Copiar</span>';
-
-  background.appendChild(exit);
-  background.appendChild(input);
-  background.appendChild(button);
-  _container.querySelector(`#${ _chart }`).appendChild(background);
-
-  return true;
-}
 
 
 
-// Check 05.07.2017 - Muesta el contenedor para embeber el modulo
-function embebedContainerShow(_component) {
-
-  _component.querySelector('.embebedContainer').style.opacity = '';
-  _component.querySelector('.embebedContainer').style.visibility = '';
-
-  return true;
-}
-// Check 05.07.2017 - Oculta el contenedor para embeber el modulo
-function embebedContainerHide(_component) {
-  _component.parentNode.style.opacity = 0;
-  _component.parentNode.style.visibility = 'hidden';
-
-  return true;
-}
-// Check 05.07.2017 - Guarda en el portapapeles el texto de un elemento
-function copyText(elemento) {
-  let copy = elemento.parentNode.querySelector('input').select();
-
-  window.document.execCommand('copy');
-
-  return true;
-};
-
-// Esta función parsea el el formato de tipo de linea.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseTypeLine(type) {
-
-  switch (type) {
-    case 'solid': return null;
-    case 'dashed': return '5, 5';
-    default: console.error(`El tipo de linea ${ type } no es válido.`); return null;
-  }
-}
-
-// Esta función parsea el formato de tipo de fecha.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseFormatDate(format, date, short = false) {
-  date = moment(date);
-
-  switch (format) {
-    case 'R/P1Y':
-      return date.format('YYYY');
-    case 'R/P6M':
-      let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
-          semester = Math.round(semester(date.format('M')));
-
-      if (short) {
-        return `${ semester }S ${ date.format('YY') }`;
-      } else {
-        return `${ semester }º semestre de ${ date.format('YYYY') }`;
-      }
-
-      break;
-    case 'R/P3M':
-      let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
-          trimester = Math.round(trimester(date.format('M')));
-
-      if (short) {
-        return `${ trimester }T ${ date.format('YY') }`;
-      } else {
-        return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
-      }
-
-      break;
-    case 'R/P1M':
-      return date.format('MMM YY');
-    case 'R/P1D':
-      return date.format('D MMM YY');
-    default:
-      return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
-  }
-}
-
-// Esta función parsea el el formato de tipo de unidad.
-////////////////////////////////////////////////////////////////////////////////
-
-function parseValueIndicator(format, value) {
-  switch (format) {
-    case '%':
-      return `${ formatNumberD3(value * 100) }%`;
-    default:
-      return formatNumberD3(value);
-  }
-}
-
-// Esta función cambia la vista a los gráficos.
-////////////////////////////////////////////////////////////////////////////////
-
-function changeView(container) {
-
-  if (container === 'charts') {
-    $('#chartsContainer').show();
-    // $('#chartsContainer').fadeIn(250);
-  } else {
-    // $('#chartsContainer').hide();
-    $('#chartsContainer').fadeOut(250);
-  }
-}
-
-// Esta función genera el efecto switch de los botones de rango.
-////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -231,75 +178,30 @@ function changeView(container) {
 
 // Esta función renderiza los gráficos.
 ////////////////////////////////////////////////////////////////////////////////
-  // OK - Esta función genera un preview de los gráficos.
-  function renderPreviewCharts(_chartContiner, _id) {
+
+  // Actualizado 18.08.2017 - Esta función habilita el contenedor para renderizar los gráficos.
+  function generateCharts(_element) {
+    let indicatorId = _element.parentNode.getAttribute('id'),
+        chartsContainer = document.querySelector('#chartsContainer #charts');
+        chartsContainer.innerHTML = '';
+
+    renderChartContainer(chartsContainer, indicatorId);
+  }
+  // Actualizado 18.08.2017 - Esta función renderiza los gráficos.
+  function renderChartContainer(_chartsContainer, _indicatorId) {
 
     STORAGE.cards.forEach((_card) => {
 
-      if (_card.id === _id) {
-        let charts = _card.charts;
+      if (_card.id === _indicatorId) {
 
-        charts.forEach((_chart, _index) => {
-          let chartComponente = document.createElement('div');
-              chartComponente.setAttribute('id', _chart.id);
-              chartComponente.classList.add('chart');
-              chartComponente.innerHTML = `<div class="head">
-                                              <h3>${ _chart.title }</h3>
-                                              <div class="break-line"><br></div>
-                                              <p class="paragraph">${ _chart.description }</p>
-                                              <div class="break-line"><br></div>
-                                           </div>
-                                           <div class="referenceContainer">
-                                             <div class="break-line"><br></div>
-                                             <span id="references"></span>
-                                             <div class="break-line"><br></div>
-                                           </div>
-                                           <div class="rangeButton">
-                                            <div class="break-line"><br></div>
-                                            <div class="rangeButton-component">
-                                              <div class="rangeButton-text">Escala:</div>
-                                              <div class="rangeButton-button" state="off">
-                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
-                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
-                                                <div class="switch-effect" style="left: 2px;"></div>
-                                              </div>
-                                            </div>
-                                            <div class="break-line"><br></div>
-                                           </div>
-                                           <div class="chart-svg"></div>
-                                           <div class="break-line"><br></div>
-                                           <div class="modal-share">
-                                              <input id="share-${ charts[_index].id }" type="checkbox" class="share-open">
-                                              <label for="share-${ charts[_index].id }" class="share-open-button hamburger-dark">
-                                                <span class="hamburger-1"></span>
-                                                <span class="hamburger-2"></span>
-                                                <span class="hamburger-3"></span>
-                                              </label>
-                                              <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
-                                                <span class="buttonCircleSmall boton_efecto">
-                                                  <i class="fa fa-code" aria-hidden="true"></i>
-                                                </span>
-                                              </button>
-                                              <button class="share-item button buttonCircle" title="descargar" onclick="shareDownload(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
-                                                <span class="buttonCircleSmall boton_efecto">
-                                                  <i class="fa fa-download" aria-hidden="true"></i>
-                                                </span>
-                                              </button>
-                                            </div>
-                                            <div class="loading flex">
-                                             <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                            </div>`;
-
-          _chartContiner.append(chartComponente);
-          addContainerEmbebed(_chartContiner, _card.id, _chart.id);
-
-          STORAGE.charts[_chart.id] = { container:  chartComponente };
-
-          downloadChart(_chart);
+        _card.charts.forEach((_chart, _index) => {
+          renderChart();
         });
       }
     });
   }
+
+
   // OK - Esta función descarga los paquetes de datos para renderizar el gráfico.
   function downloadChart(_chartData) {
     let indicators = _chartData.indicators,
@@ -310,7 +212,7 @@ function changeView(container) {
 
       if (!STORAGE[_indicator.id]) {
         promises.push(
-          downloadFile(`./public/data/series/${ _indicator.id }.json`, _indicator.id)
+          downloadFile({local: `./public/data/series/${ _indicator.id }.json`}, _indicator.id)
         );
       }
     });
@@ -366,10 +268,11 @@ function changeView(container) {
 
     // parámetros
     ////////////////////////////////////////////////////////////////////////////
+
     let dataset = _chartData.indicators.map((d) => {
       return {
         name: d.short_name,
-        values: _data.filter((c) => c[d.short_name] !== undefined).map((c) => {
+        values: _data.filter((c) => typeof c[d.short_name] === 'number').map((c) => {
           return {
             date: c.date,
             value: +c[d.short_name]
@@ -377,7 +280,8 @@ function changeView(container) {
         })
       };
     });
-
+    console.log('data', _data);
+    console.log('dataset', dataset);
     STORAGE.charts[_chartData.id]['data'] = dataset;
     STORAGE.charts[_chartData.id]['data_chart'] = _data;
     STORAGE.charts[_chartData.id]['data_range'] = dataset;
@@ -518,7 +422,7 @@ function changeView(container) {
     startBrush = rangeContainer.append('g')
       .attr('class', 'start-brush-date')
       .attr('text-anchor', 'end')
-      .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
+      .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 17.5 })`);
     startBrush.append('rect')
       .attr('height', '20px')
       .attr('transform', 'translate(0, -15)')
@@ -616,7 +520,13 @@ function changeView(container) {
         chart_tooltip.select('.tooltip-line')
           .attr('d', () => `M ${ datePoint }, 0 V ${ chartHeight }`);
         chart_tooltip.selectAll('.tooltip-indicator')
-          .attr('transform', (d, i) => `translate(${ datePoint }, ${ chartScaleY((dateValues[i] === undefined)?(0):(dateValues[i])) })`);
+          .attr('transform', (d, i) => {
+            if (typeof dateValues[i] === 'number') {
+              return `translate(${ datePoint }, ${ chartScaleY(dateValues[i]) })`;
+            } else {
+              return `translate(-9999, 0)`;
+            }
+          });
         chart_tooltip.selectAll('.tooltip-indicator text')
           .text((d, i) => `${ formatNumberD3(dateValues[i]) } - ${ d.name }`)
           .attr('text-anchor', (datePoint < (spaceWidth / 2))?('start'):('end'))
@@ -708,7 +618,6 @@ function changeView(container) {
       var force = 0;
 
       elements_asc.forEach((v, k) => {
-
         if (k !== elements_asc.length - 1) {
           let start         = elements_asc[k],
               startPosition = updateTranslatePositionY(start)[1],
@@ -742,21 +651,35 @@ function changeView(container) {
               minHeight     = 30,
               minPosY       = 0,
               maxPosY       = document.querySelector(`#${ chart } .tooltip-rect-space`).getBoundingClientRect().height - minHeight / 2;
-
+          // console.log('Tengo G: ', v);
+          // console.log('posición del elemento actual', startPosition);
+          // console.log('posición del elemento siguiente', endPosition);
+          // console.log('diff', diff);
           // console.log(v);
           // console.log('limite', minPosY, maxPosY);
           // console.log('posicion original', startPosition + count, endPosition + count);
 
-          if ((startPosition + count) > maxPosY) {
-            force = (startPosition + count) - maxPosY;
+          if (k === 0) {
+            if ((startPosition + count) > maxPosY) {
+              force = (startPosition + count) - maxPosY;
+              // console.log('Lo movemos', force);
+            } else {
+              // console.log('No lo movemos')
+            }
           }
 
           // console.log('forzar', force);
-          let transform = updateTranslatePositionY(elements_desc[k].querySelector('.boxText'));
-          transform[1] -= force;
 
-          elements_desc[k].querySelector('.boxText').setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+          // elements_desc[k].querySelector('.boxText').setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+          // console.log('Entonces el texto quedó en', updateTranslatePositionY(elements_desc[k].querySelector('.boxText')));
+        } else {
+          // console.log('Tengo G: ', v);
+          // console.log('pasa una vez');
         }
+        let transform = updateTranslatePositionY(elements_desc[k].querySelector('.boxText'));
+        transform[1] -= force;
+        elements_desc[k].querySelector('.boxText').setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+        // console.log('Entonces el texto quedó en', updateTranslatePositionY(elements_desc[k].querySelector('.boxText')));
       });
     }
     function brushed() {
@@ -772,7 +695,7 @@ function changeView(container) {
         // Se actualizan fecha mínima y máxima del eje x en rangeContainer
         let startBrush = d3.select(this.parentNode)
           .select('.start-brush-date')
-          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 15 })`);
+          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 17.5 })`);
         // console.log('brush_4');
         startBrush.select('.start-brush-date text')
           .text(parseFormatDate(_chartData.frequency, range[0], true));
@@ -859,7 +782,7 @@ function changeView(container) {
       // se actualiza el ancho del axis en x del rango
       charts.select('.range-container').select('.range-axis-x').call(rangeAxisX);
       // se actualiza la posición de la fecha inicial seleccionada en el rango
-      charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 15 })`);
+      charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 17.5 })`);
       // se actualiza la posición de la fecha final seleccionada en el rango
       charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
       // se actualiza el ancho del brush
@@ -934,206 +857,310 @@ function changeView(container) {
 
     window.addEventListener('resize', redraw);
   }
-  // OK - Esta función ejecuta el proceso de renderizado de los gráficos.
-  function generateCharts(_element) {
-    let id = _element.parentNode.getAttribute('id'),
-        chartsContainer = document.querySelector('#chartsContainer #charts');
-        chartsContainer.innerHTML = '';
 
-    renderPreviewCharts(chartsContainer, id);
-  }
+function renderChart() {
+  let chartComponente = document.createElement('div');
+      chartComponente.setAttribute('id', _chart.id);
+      chartComponente.classList.add('chart');
+      chartComponente.innerHTML = `<div class="head">
+                                      <h3>${ _chart.title }</h3>
+                                      <div class="break-line"><br></div>
+                                      <p class="paragraph">${ _chart.description }</p>
+                                      <div class="break-line"><br><br></div>
+                                   </div>
+                                   <div class="referenceContainer">
+                                     <div class="break-line"><br></div>
+                                     <span id="references"></span>
+                                     <div class="break-line"><br></div>
+                                     <div class="break-line"><hr></div>
+                                   </div>
+                                   <div class="rangeButton">
+                                    <div class="break-line"><br></div>
+                                    <div class="rangeButton-component">
+                                      <div class="rangeButton-text">Escala:</div>
+                                      <div class="rangeButton-button" state="off">
+                                        <div class="switch-effect" style="left: 2px;"></div>
+                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
+                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
+                                      </div>
+                                    </div>
+                                    <div class="break-line"><br></div>
+                                   </div>
+                                   <div class="chart-svg"></div>
+                                   <div class="break-line"><br></div>
+                                   <div class="modal-share">
+                                      <input id="share-${ charts[_index].id }" type="checkbox" class="share-open">
+                                      <label for="share-${ charts[_index].id }" class="share-open-button hamburger-dark">
+                                        <span class="hamburger-1"></span>
+                                        <span class="hamburger-2"></span>
+                                        <span class="hamburger-3"></span>
+                                      </label>
+                                      <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this)" style="background-color: gray; color: white; right: 0px;">
+                                        <span class="buttonCircleSmall boton_efecto">
+                                          <i class="fa fa-code" aria-hidden="true"></i>
+                                        </span>
+                                      </button>
+                                      <button class="share-item button buttonCircle" title="descargar" onclick="shareSaveAs(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
+                                        <span class="buttonCircleSmall boton_efecto">
+                                          <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
+                                      </button>
+                                    </div>
+                                    <div class="loading flex">
+                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    </div>`;
 
-// Esta función renderiza las tarjetas.
-////////////////////////////////////////////////////////////////////////////////
-function generateMiniChart(_cardData, _element) {
-  let data = STORAGE[_cardData.id],
-      container = d3.select(_element);
+  _chartContiner.append(chartComponente);
+  addContainerEmbebed(_chartContiner, _card.id, _chart.id);
 
-  ////////////////////////////////////////////////////////////////////////////
-  // Render Mini-LineChart
-  ////////////////////////////////////////////////////////////////////////////
+  STORAGE.charts[_chart.id] = { container:  chartComponente };
 
-  // variables
-  ////////////////////////////////////////////////////////////////////////////
-  let totalHeight = 50,
-      totalWidth  = 100,
-      chartMargin = {top: 10, right: 10, bottom: 10, left: 10};
-
-  data = data.data.filter((d) => (d[1] !== null));
-  let chartData = data.slice(-1 * parseInt((_cardData.laps <= data.length)?(_cardData.laps):(data.length)));
-  let dataDot = data.slice(-1);
-
-  // parámetros del gráfico
-  ////////////////////////////////////////////////////////////////////////////
-  let minValue = d3.min(chartData, (d) => d[1]),
-      maxValue = d3.max(chartData, (d) => d[1]);
-      // minExtend = minValue - ((maxValue - minValue) / 15),
-      // maxExtend = maxValue + ((maxValue - minValue) / 15);
-
-  let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
-      chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
-      chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(chartData, (d) => new Date(d[0]))),
-      chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
-
-  // se definen lineas
-  ////////////////////////////////////////////////////////////////////////////
-
-  let chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(new Date(d[0]))).y((d) => chartScaleY(d[1]));
-
-  // se crea SVG
-  ////////////////////////////////////////////////////////////////////////////
-  let svg, defs, background;
-
-  svg = container.append('svg')
-    .attr('width', chartWidth + chartMargin.left + chartMargin.right)
-    .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
-
-  // se crea contenedor del gráfico
-  ////////////////////////////////////////////////////////////////////////////
-  let chartContainer, chartLines, dots;
-
-  chartContainer = svg.append('g')
-    .attr('class', 'chart-container')
-    .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
-  chartLines = chartContainer.append('g').attr('class', 'chart-line');
-  chartLines.append('path')
-    .attr('stroke-width', 3)
-    .style('stroke', 'silver')
-    .attr('d', (d) => chartLine(chartData));
-  // console.log(data);
-  // console.log(dataDot);
-  let lastDot = chartContainer.append('g')
-    .style('fill', Modal.variables.colors.gobar_dark)
-    .selectAll('circle')
-    .data(dataDot)
-    .enter().append('circle')
-    .attr('r', 4)
-    .attr('cx', (d) => chartScaleX(new Date(d[0])))
-    .attr('cy', (d) => chartScaleY(d[1]));
+  downloadChart(_chart);
 }
 
-function renderAllCards() {
 
-  STORAGE.cards.forEach((card) => {
+function previewChart(_cardData, _idIndicator) {
+  console.log(_cardData);
+  console.log(_idIndicator);
+  STORAGE.cards.forEach((_card) => {
 
-    let cardComponent = document.createElement('div');
-        cardComponent.setAttribute('id', card.id);
-        cardComponent.classList.add('card');
-        cardComponent.innerHTML = `<h3>${ card.title }</h3>
-                                   <div class="break-line"><br><br><hr><br><br></div>
-                                   <h4>${ card.short_name }</h4>
-                                   <div class="break-line"><br></div>
-                                   <p id="frequency"></p>
-                                   <div class="break-line"><br><br></div>
-                                   <p id="units_representation"></p>
-                                   <div class="break-line"><br></div>
-                                   <p id="units"></p>
-                                   <div class="break-line"><br></div>
-                                   <div id="mini-chart"></div>
-                                   <div class="break-line"><br><br><br></div>
-                                   <button class="button" onclick="changeView('charts'); generateCharts(this);">
-                                      <span class="button-waves">Ver más gráficos</span>
-                                   </button>
-                                   <div class="break-line"><br></div>
-                                   <a href="${ card.download_url }" class="link" download><i class="fa fa-download" aria-hidden="true"></i> Descargar datos</a>
-                                   <div class="loading flex">
-                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                   </div>`;
+    if (_card.id === _idIndicator) {
 
-    document.querySelector('#cardsContainer #cards').append(cardComponent);
-
-    downloadFile(`./public/data/series/${ card.id }.json`, card.id)
-      .then(() => {
-        let data     = STORAGE[card.id].data,
-            metadata = STORAGE[card.id].metadata;
-
-        // Se agrega data de la API
-        ////////////////////////////////////////////////////////////////////////
-
-        let cardComponent = document.getElementById(metadata.id);
-            cardComponent.querySelector('#frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0], true);
-            cardComponent.querySelector('#units_representation').innerHTML = parseValueIndicator(card.units_representation, data[data.length - 1][1]);
-            cardComponent.querySelector('#units').innerHTML = metadata.units;
-            cardComponent.querySelector('.loading').remove();
-
-        generateMiniChart(card, cardComponent.querySelector('#mini-chart'));
-      });
+      _card.charts.forEach((_chart, _index) => { renderChart(); });
+    }
   });
 }
-function renderOnlyCard(_cardId, _chartId) {
-  // console.log('render only card');
+
+function previewOnlyChart(_chartContiner, _id) {
   STORAGE.cards.forEach((_card) => {
-    if (_cardId === _card.id) {
+
+    if (_card.id === _id) {
+
       _card.charts.forEach((_chart) => {
         if (_chart.id === _chartId) {
-          // console.log(_chart);
-          let chartComponente = document.createElement('div');
-              chartComponente.setAttribute('id', _chart.id);
-              chartComponente.classList.add('chart');
-              chartComponente.innerHTML = `<div class="head">
-                                              <h3>${ _chart.title }</h3>
-                                              <div class="break-line"><br></div>
-                                              <p class="paragraph">${ _chart.description }</p>
-                                              <div class="break-line"><br></div>
-                                           </div>
-                                           <div class="referenceContainer">
-                                             <div class="break-line"><br></div>
-                                             <span id="references"></span>
-                                             <div class="break-line"><br></div>
-                                           </div>
-                                           <div class="rangeButton">
-                                            <div class="break-line"><br></div>
-                                            <div class="rangeButton-component">
-                                              <div class="rangeButton-text">Escala:</div>
-                                              <div class="rangeButton-button" state="off">
-                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
-                                              <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
-                                                <div class="switch-effect" style="left: 2px;"></div>
-                                              </div>
-                                            </div>
-                                            <div class="break-line"><br></div>
-                                           </div>
-                                           <div class="chart-svg"></div>
-                                           <div class="break-line"><br></div>
-                                           <div class="modal-share">
-                                              <input id="share-${ _chart.id }" type="checkbox" class="share-open">
-                                              <label for="share-${ _chart.id }" class="share-open-button hamburger-dark">
-                                                <span class="hamburger-1"></span>
-                                                <span class="hamburger-2"></span>
-                                                <span class="hamburger-3"></span>
-                                              </label>
-                                              <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this, '${ _cardId }')" style="background-color: gray; color: white; right: 0px;">
-                                                <span class="buttonCircleSmall boton_efecto">
-                                                  <i class="fa fa-code" aria-hidden="true"></i>
-                                                </span>
-                                              </button>
-                                              <button class="share-item button buttonCircle" title="descargar" onclick="shareDownload(this, '${ _cardId }')" style="background-color: gray; color: white; right: 0px;">
-                                                <span class="buttonCircleSmall boton_efecto">
-                                                  <i class="fa fa-download" aria-hidden="true"></i>
-                                                </span>
-                                              </button>
-                                            </div>
-                                            <div class="loading flex">
-                                             <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                            </div>`;
-
-          window.document.querySelector('#app #chartsContainer #charts').append(chartComponente);
-
-          STORAGE.charts[_chart.id] = { container:  chartComponente };
-
-          downloadChart(_chart);
+          renderChart();
         }
       })
     }
   });
 }
 
-// Esta función inicia la aplicación.
+function renderChart() {
+  let chartComponente = document.createElement('div');
+      chartComponente.setAttribute('id', _chart.id);
+      chartComponente.classList.add('chart');
+      chartComponente.innerHTML = `<div class="head">
+                                      <h3>${ _chart.title }</h3>
+                                      <div class="break-line"><br></div>
+                                      <p class="paragraph">${ _chart.description }</p>
+                                      <div class="break-line"><br><br></div>
+                                   </div>
+                                   <div class="referenceContainer">
+                                     <div class="break-line"><br></div>
+                                     <span id="references"></span>
+                                     <div class="break-line"><br></div>
+                                     <div class="break-line"><hr></div>
+                                   </div>
+                                   <div class="rangeButton">
+                                    <div class="break-line"><br></div>
+                                    <div class="rangeButton-component">
+                                      <div class="rangeButton-text">Escala:</div>
+                                      <div class="rangeButton-button" state="off">
+                                        <div class="switch-effect" style="left: 2px;"></div>
+                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
+                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
+                                      </div>
+                                    </div>
+                                    <div class="break-line"><br></div>
+                                   </div>
+                                   <div class="chart-svg"></div>
+                                   <div class="break-line"><br></div>
+                                   <div class="modal-share">
+                                      <input id="share-${ charts[_index].id }" type="checkbox" class="share-open">
+                                      <label for="share-${ charts[_index].id }" class="share-open-button hamburger-dark">
+                                        <span class="hamburger-1"></span>
+                                        <span class="hamburger-2"></span>
+                                        <span class="hamburger-3"></span>
+                                      </label>
+                                      <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this)" style="background-color: gray; color: white; right: 0px;">
+                                        <span class="buttonCircleSmall boton_efecto">
+                                          <i class="fa fa-code" aria-hidden="true"></i>
+                                        </span>
+                                      </button>
+                                      <button class="share-item button buttonCircle" title="descargar" onclick="shareSaveAs(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
+                                        <span class="buttonCircleSmall boton_efecto">
+                                          <i class="fa fa-download" aria-hidden="true"></i>
+                                        </span>
+                                      </button>
+                                    </div>
+                                    <div class="loading flex">
+                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    </div>`;
+
+  _chartContiner.append(chartComponente);
+  addContainerEmbebed(_chartContiner, _card.id, _chart.id);
+
+  STORAGE.charts[_chart.id] = { container:  chartComponente };
+
+  downloadChart(_chart);
+}
+
+
+
+
+// Funciones para render de las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
 
-  // 16.08.2017 - Verifica si tiene que cargar el sitio o un iframe.
+  // Actualizado 18.08.2017 - Esta función intercambia las vistas cards/charts.
+  function changeView(_container) {
+
+    if (_container === 'charts') {
+      $('#chartsContainer').show();
+    } else {
+      $('#chartsContainer').fadeOut(250);
+    }
+  }
+  // Actualizado 18.08.2017 - Esta función genera el html de todas las tarjetas.
+  function previewAllCards() {
+    STORAGE.cards.forEach((_card) => { previewCard(_card); });
+  }
+  // Actualizado 18.08.2017 - Esta función genera el html una tarjeta.
+  function previewCard(_card) {
+    let component, card, url_ext, url_loc;
+
+    card =  `<h3>${ _card.title }</h3>`;
+    card += `<div class="break-line"><br><br><hr><br><br></div>`;
+    card += `<h4>${ _card.short_name }</h4>`;
+    card += `<div class="break-line"><br></div>`;
+    card += `<p class="frequency"></p>`;
+    card += `<div class="break-line"><br><br></div>`;
+    card += `<p class="units_representation"></p>`;
+    card += `<div class="break-line"><br></div>`;
+    card += `<p class="units"></p>`;
+    card += `<div class="break-line"><br></div>`;
+    card += `<div class="mini-chart"></div>`;
+    card += `<div class="break-line"><br><br><br></div>`;
+    card += `<button class="button" onclick="changeView('charts'); generateCharts(this);">`;
+    card += `<span class="button-waves">Ver más gráficos</span>`;
+    card += `</button>`;
+    card += `<div class="break-line"><br></div>`;
+    card += `<a href="${ _card.download_url }" class="link" download><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos</a>`;
+    card += `<div class="loading flex">`;
+    card += `<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>`;
+    card += `</div>`;
+
+    component = document.createElement('div');
+    component.setAttribute('id', _card.id);
+    component.setAttribute('class', 'card');
+    component.innerHTML = card;
+
+    document.querySelector('#cardsContainer #cards').append(component);
+
+    url_ext = `http://meconcd.mecon.gob.ar/public.php?service=files&t=e9cd25ad56afd6c53514d9c9d191f494&download&path=//${ _card.id }.json`;
+    url_loc = `./public/data/series/${ _card.id }.json`;
+
+    downloadFile({local: url_loc, external: url_ext}, _card.id).then(() => { injectCardData(_card); });
+  }
+  // Actualizado 18.08.2017 - Esta función inyecta los datos recibidos y renderiza la tarjeta.
+  function injectCardData(_card) {
+    let data, metadata, component;
+
+    // Se agrega data de la API
+    ////////////////////////////////////////////////////////////////////////
+
+    data     = STORAGE[_card.id].data;
+    metadata = STORAGE[_card.id].metadata;
+
+    component = document.getElementById(metadata.id);
+    component.querySelector('.frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0], true);
+    component.querySelector('.units_representation').innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
+    component.querySelector('.units').innerHTML = metadata.units;
+    component.querySelector('.loading').remove();
+
+    renderMiniChart(_card, component.querySelector('.mini-chart'));
+  }
+  // Actualizado 18.08.2017 - Esta función genera un gráfico de linea en la tarjeta.
+  function renderMiniChart(_cardData, _element) {
+    let data, container, margin, width, height, minValue, maxValue, chartWidth,
+        chartHeight, scaleX, scaleY, line, svg, chartContainer;
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Render Mini-LineChart
+    ////////////////////////////////////////////////////////////////////////////
+
+    // Procesamiento de los datos //////////////////////////////////////////////
+    data = STORAGE[_cardData.id].data;
+    data = data
+      .filter((d) => (d[1] !== null))
+      .slice(-1 * parseInt((_cardData.laps <= data.length) ? (_cardData.laps) : (data.length)))
+      .map((d) => { return { date: new Date(d[0]), value: roundNumber(d[1], 3) }; });
+
+    // Definición de los parámetros de configuración ///////////////////////////
+    container   = d3.select(_element);
+    margin      = { top: 10, right: 10, bottom: 10, left: 10 };
+    width       = 100;
+    height      = 50;
+
+    // Generación de parámetros para el gráfico ////////////////////////////////
+    minValue    = d3.min(data, (d) => d.value);
+    maxValue    = d3.max(data, (d) => d.value);
+    chartWidth  = width - margin.left - margin.right;
+    chartHeight = height - margin.top - margin.bottom;
+    scaleX      = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data, (d) => d.date));
+    scaleY      = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
+
+    // Se define el tipo de línea  /////////////////////////////////////////////
+    line = d3.line()
+      .curve(d3.curveMonotoneX)
+      .x((d) => scaleX(d.date))
+      .y((d) => scaleY(d.value));
+
+    // Se define svg ///////////////////////////////////////////////////////////
+    svg = container.append('svg')
+      .attr('width', chartWidth + margin.left + margin.right)
+      .attr('height', chartHeight + margin.top + margin.bottom);
+
+    // se crea contenedor del gráfico //////////////////////////////////////////
+    chartContainer = svg.append('g')
+      .attr('transform', `translate(${ margin.left }, ${ margin.top })`);
+
+    // se genera gráfico ///////////////////////////////////////////////////////
+    chartContainer.append('path')
+      .attr('stroke-width', 3)
+      .style('stroke', 'silver')
+      .style('fill', 'none')
+      .attr('d', (d) => line(data));
+    chartContainer.append('circle')
+      .style('fill', STORAGE.colors.gobar_dark)
+      .attr('r', 4)
+      .attr('cx', (d) => scaleX(data[data.length - 1].date))
+      .attr('cy', (d) => scaleY(data[data.length - 1].value));
+  }
+
+// Inicio de la aplicación.
+////////////////////////////////////////////////////////////////////////////////
+
+  // Actualizado 17.08.2017 - Devuelve un array con todos los parametros GET.
+  function getRequestToArray(search) {
+    let args       = search.substring(1).split('&'),
+        argsParsed = {}, i, arg, kvp, key, value;
+
+    for (i = 0; i < args.length; i++) {
+      if (args[i].indexOf('=') === -1) {
+        argsParsed[decodeURIComponent(args[i]).trim()] = true;
+      } else {
+        kvp   = args[i].split('=');
+        key   = decodeURIComponent(kvp[0]).trim();
+        value = decodeURIComponent(kvp[1]).trim();
+        argsParsed[key] = value;
+      }
+    }
+
+    return argsParsed;
+  }
+  // Actualizado 17.08.2017 - Verifica si tiene que cargar el sitio o un iframe.
   function checkGetRequest() {
-    let params = parseSearch(window.location.search);
+    let params = getRequestToArray(window.location.search);
 
     if (params.hasOwnProperty('indicator') && params.hasOwnProperty('chart')) {
       renderIframe(params.indicator, params.chart);
@@ -1141,38 +1168,34 @@ function renderOnlyCard(_cardId, _chartId) {
       start();
     }
   }
-  // 16.08.2017 - Renderiza un iframe.
+  // Actualizado 17.08.2017 - Renderiza un iframe.
   function renderIframe(_indicator, _chart) {
-    $(() => {
-      // Se define el contenedor de los modulos
-      let container = window.document.querySelector('#app');
-          container.setAttribute('class', 'flex flex-column flex-align-end');
-      // Se configurán estilos especiales
-      window.document.querySelector('#chartsContainer').style.display = 'block';
-      window.document.querySelector('#chartsContainer').style.position = 'relative';
-      // Se eliminan contenedores innecesarios
-      window.document.querySelector('#cardsContainer').remove();
-      window.document.querySelector('.back-link').remove();
-      // Se renderizan todos los modulos
-      start(_indicator, _chart);
-      // Si existe, se elimina boton para embeber
-      // if (window.document.querySelector('.buttonEmbebed') !== null) {
-      //   window.document.querySelector('.buttonEmbebed').remove();
-      // }
-      // Se crean créditos
+    // Se define el contenedor de los modulos
+    let container = window.document.querySelector('#app');
+        container.setAttribute('class', 'flex flex-column flex-align-end');
+    // Se configurán estilos especiales
+    window.document.querySelector('#chartsContainer').style.display = 'block';
+    window.document.querySelector('#chartsContainer').style.position = 'relative';
+    // Se eliminan contenedores innecesarios
+    window.document.querySelector('#cardsContainer').remove();
+    window.document.querySelector('.back-link').remove();
+    // Se descargar créditos
+    downloadFile({local: './public/data/createBy.json'}, 'createBy').then(() => {
       let creditos = window.document.createElement('span');
-          creditos.innerHTML = 'Desarrollado por <a href="" class="link">destinatario</a>';
+          creditos.innerHTML = `Desarrollado por <a href="${ STORAGE.createBy.redirect_url }" class="link">${ STORAGE.createBy.name }</a>`;
           creditos.style.opacity = '0.5';
       // Se agregan créditos
       container.appendChild(creditos);
     });
+    // Se renderizan todos los modulos
+    start(_indicator, _chart);
   }
-  // 16.08.2017 - Renderiza el sitio.
+  // Actualizado 17.08.2017 - Renderiza el sitio.
   function start(_card = null, _indicator = null) {
     if (_card === null || _indicator === null) {
-      downloadFile('./public/data/cards.json', 'cards').then(renderAllCards);
+      downloadFile({local: './public/data/cards.json'}, 'cards').then(previewAllCards);
     } else {
-      downloadFile('./public/data/cards.json', 'cards').then(() => { renderOnlyCard(_card, _indicator); });
+      downloadFile({local: './public/data/cards.json'}, 'cards').then(() => { previewChart(_card, _indicator); });
     }
   }
 
