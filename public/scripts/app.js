@@ -35513,13 +35513,13 @@ window.storage = STORAGE;
               </div>`;
     chart += `<div class="rangeButton">
                 <div class="break-line"><br></div>
-                <div class="rangeButton-component">
+                <!--div class="rangeButton-component">
                   <div class="rangeButton-text">Escala:</div>
                   <div class="rangeButton-button" state="off">
                   <div class="switch-effect" style="left: 2px;"></div>
                   <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
                   <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
-                </div>
+                </div-->
                 <div class="break-line"><br></div>
               </div>`;
     chart += `<div class="chart-svg"></div>
@@ -35903,6 +35903,11 @@ window.storage = STORAGE;
     tooltipLine.append('path')
       .attr('class', 'tooltip-line')
       .style('opacity', 0);
+    tooltipDate = tooltipLine.append('g')
+      .attr('class', 'tooltip-date')
+      .attr('opacity', 0);
+    tooltipDate.append('rect');
+    tooltipDate.append('text');
     tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
       .data(data_lines)
       .enter().append('g')
@@ -35918,11 +35923,7 @@ window.storage = STORAGE;
       .attr('ry', 15)
       .style('fill', (d, i) => _chart.indicators[i].color);
     boxText.append('text');
-    tooltipDate = tooltipLine.append('g')
-      .attr('class', 'tooltip-date')
-      .attr('opacity', 0);
-    tooltipDate.append('rect');
-    tooltipDate.append('text');
+
     tooltipLine.append('rect')
       .attr('class', 'tooltip-rect-space')
       .attr('width', chartWidth)
@@ -35979,68 +35980,63 @@ window.storage = STORAGE;
     }
 
     function brushed() {
+      let position, range, min, max, minExt, maxExt, dataFiltered;
 
+      if (d3.event.selection) {
+        position = d3.event.selection;
+        range = position.map(rangeScaleX.invert, rangeScaleX);
+
+        // Se actualiza rango-x
+        chartScaleX.domain(range);
+
+        // Se actualizan fecha mínima y máxima del eje x en rangeContainer
+        let startBrush = d3.select(this.parentNode)
+          .select('.start-brush-date')
+          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 17.5 })`);
+
+        startBrush.select('.start-brush-date text').text(parseFormatDate(_chart.frequency, range[0], true));
+
+        let widthStartBrush = this.parentNode.querySelector('.start-brush-date text').getBBox().width;
+
+        startBrush.select('.start-brush-date rect')
+            .attr('width', widthStartBrush + 15)
+            .attr('x', -((widthStartBrush + 15) / 2) - (widthStartBrush / 2));
+
+        let endBrush = d3.select(this.parentNode)
+          .select('.end-brush-date')
+          .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
+
+        endBrush.select('.end-brush-date text')
+          .text(parseFormatDate(_chart.frequency, range[1], true));
+
+        let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
+
+        endBrush.select('.end-brush-date rect')
+            .attr('width', widthEndBrush + 15);
+
+        // Se actualizan fecha mínima y máxima del eje x en rangeContainer
+        dataFiltered = $.extend(true, [], STORAGE.charts[_chart.id]['data_chart']);
+        dataFiltered = data_range.filter((d) => (d.date < range[1] && d.date > range[0]));
+        STORAGE.charts[_chart.id].data_range = dataFiltered;
+
+        // Si el switch esta en on, hace algo, sino, hace otra cosa.
+        // if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
+        //   // console.log(dataFiltered.length);
+        //   if (dataFiltered.length > 1) {
+        //
+        //     // Se actualiza rango-y
+        //     chartScaleY.domain(generateRangeYDinamic(_chart.id));
+        //
+        //     chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+        //   }
+        // }
+
+        chartContainer.selectAll('.chart-line path').attr('d', chartLine);
+        // chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
+        chartContainer.select('.chart-axis-x').call(chartAxisX);
+        chartContainer.select('.chart-axis-y').call(chartAxisY);
+      }
     }
-    // function brushed() {
-    //   let position, range, min, max, minExt, maxExt;
-    //   // console.log('brush_1');
-    //   if (d3.event.selection) {
-    //     position = d3.event.selection;
-    //     range = position.map(rangeScaleX.invert, rangeScaleX);
-    //     // console.log('brush_2');
-    //     // Se actualiza rango-x
-    //     chartScaleX.domain(range);
-    //     // console.log('brush_3');
-    //     // Se actualizan fecha mínima y máxima del eje x en rangeContainer
-    //     let startBrush = d3.select(this.parentNode)
-    //       .select('.start-brush-date')
-    //       .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 17.5 })`);
-    //     // console.log('brush_4');
-    //     startBrush.select('.start-brush-date text')
-    //       .text(parseFormatDate(_chart.frequency, range[0], true));
-    //     // console.log('brush_5');
-    //     let widthStartBrush = this.parentNode.querySelector('.start-brush-date text').getBBox().width;
-    //     // console.log('brush_6');
-    //     startBrush.select('.start-brush-date rect')
-    //         .attr('width', widthStartBrush + 15)
-    //         .attr('x', -((widthStartBrush + 15) / 2) - (widthStartBrush / 2));
-    //     // console.log('brush_7');
-    //     let endBrush = d3.select(this.parentNode)
-    //       .select('.end-brush-date')
-    //       .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
-    //     // console.log('brush_8');
-    //     endBrush.select('.end-brush-date text')
-    //       .text(parseFormatDate(_chart.frequency, range[1], true));
-    //     // console.log('brush_9');
-    //     let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
-    //     // console.log('brush_10');
-    //     endBrush.select('.end-brush-date rect')
-    //         .attr('width', widthEndBrush + 15);
-    //     // console.log('brush_11');
-    //
-    //     // Se actualizan fecha mínima y máxima del eje x en rangeContainer
-    //     let dataFiltered = _data.filter((d) => (d.date < range[1] && d.date > range[0]));
-    //     STORAGE.charts[this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')].data_range = dataFiltered;
-    //
-    //     // Si el switch esta en on, hace algo, sino, hace otra cosa.
-    //     if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
-    //       // console.log(dataFiltered.length);
-    //       if (dataFiltered.length > 1) {
-    //
-    //         // Se actualiza rango-y
-    //         chartScaleY.domain(generateRangeYDinamic(this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')));
-    //
-    //         chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
-    //       }
-    //     }
-    //     // console.log('brush_12');
-    //     chartContainer.selectAll('.chart-line path').attr('d', (d) => chartLine(d.values));
-    //     // chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
-    //     chartContainer.select('.chart-axis-x').call(chartAxisX);
-    //     chartContainer.select('.chart-axis-y').call(chartAxisY);
-    //     // console.log('brush_13');
-    //   }
-    // }
     function redraw() {
       let charts;
 
@@ -36083,7 +36079,13 @@ window.storage = STORAGE;
       // se actualiza la posición de la fecha final seleccionada en el rango
       charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
       // se actualiza el ancho del brush
-      charts.select('.range-container').select('.range-brush').call(brush).call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
+      // console.log('date_1', STORAGE.charts[_chart.id].data_range[0].date);
+      // console.log('date_2', STORAGE.charts[_chart.id].data_range[1].date);
+      // console.log('pos_1', rangeScaleX(STORAGE.charts[_chart.id].data_range[0].date));
+      // console.log('pos_2', rangeScaleX(STORAGE.charts[_chart.id].data_range[1].date));
+      // charts.select('.range-container').select('.range-brush').call(brushed);
+
+      charts.select('.tooltip-rect-space').attr('width', chartWidth);
     }
 
     // function changeSwitchPosition(activeButton, id) {
@@ -36108,49 +36110,31 @@ window.storage = STORAGE;
     //   }
     // }
     // window.changeSwitchPosition = changeSwitchPosition;
+
     // function updateAxisY(domain, id) {
-    //   // console.log('dominio', domain);
+    //   console.log('dominio', domain);
+    //
     //   chartScaleY.domain(domain);
+    //   chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value));
     //
     //   d3.select(`#${ id }`).select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
     //   d3.select(`#${ id }`).select('.chart-axis-y').call(chartAxisY);
-    //   d3.select(`#${ id }`).selectAll('.chart-line path').attr('d', (d) => {return chartLine(d.values);});
+    //   d3.select(`#${ id }`).selectAll('.chart-line path').attr('d', chartLine);
     // }
+
     // function generateRangeYStatic(chart_id) {
-    //   let minValue = d3.min(STORAGE.charts[chart_id].data_chart, (c) => {
-    //         let values = d3.values(c);
-    //             values.splice(0, 1);
+    //   let minValue = calcMinRangeY(STORAGE.charts[chart_id].data_chart),
+    //       maxValue = calcMaxRangeY(STORAGE.charts[chart_id].data_chart);
     //
-    //         return d3.min(values);
-    //       }),
-    //       maxValue = d3.max(STORAGE.charts[chart_id].data_chart, (c) => {
-    //         let values = d3.values(c);
-    //           values.splice(0, 1);
-    //
-    //         return d3.max(values);
-    //       }),
-    //       minExtend = minValue - ((maxValue - minValue) / 15),
-    //       maxExtend = maxValue + ((maxValue - minValue) / 15);
     //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
-    //   return [minExtend, maxExtend];
+    //   return [minValue, maxValue];
     // }
     // function generateRangeYDinamic(chart_id) {
-    //   let minValue = d3.min(STORAGE.charts[chart_id].data_range, (c) => {
-    //         let values = d3.values(c);
-    //             values.splice(0, 1);
+    //   let minValue = calcMinRangeY(STORAGE.charts[chart_id].data_range),
+    //       maxValue = calcMaxRangeY(STORAGE.charts[chart_id].data_range);
     //
-    //         return d3.min(values);
-    //       }),
-    //       maxValue = d3.max(STORAGE.charts[chart_id].data_range, (c) => {
-    //         let values = d3.values(c);
-    //           values.splice(0, 1);
-    //
-    //         return d3.max(values);
-    //       }),
-    //       minExtend = minValue - ((maxValue - minValue) / 15),
-    //       maxExtend = maxValue + ((maxValue - minValue) / 15);
-    //   // console.log('se calculó el rango parcial', [minExtend, maxExtend]);
-    //   return [minExtend, maxExtend];
+    //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
+    //   return [minValue, maxValue];
     // }
 
     window.addEventListener('resize', redraw);
