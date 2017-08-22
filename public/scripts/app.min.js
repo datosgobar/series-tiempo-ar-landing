@@ -35342,10 +35342,6 @@ window.storage = STORAGE;
 
     window.document.execCommand('copy');
   }
-
-// Embebido y guardar como
-////////////////////////////////////////////////////////////////////////////////
-
   // Actualizado 17.08.2017 - Permite renderizar un bloque de contenido y descargar una imagen.
   function shareSaveAs(_element, _indicatorId) {
     let renderNode = _element.parentNode.parentNode;
@@ -35374,33 +35370,40 @@ window.storage = STORAGE;
     _component.parentNode.style.opacity = 0;
     _component.parentNode.style.visibility = 'hidden';
   }
-  // Actualizado 17.08.2017 - Genera el contenedor para embeber el código.
-  function addContainerEmbebed(_container, _indicator, _chart) {
-    let actionContainer, iframeLink, inputText, copyButton, exitButton, textInfo, background;
+  // Actualizado 17.08.2017 - Genera un div de embebedido.
+  function addEmbebed(_indicatorId, _chart) {
+    let component, callToAction, iframe, input, button, exit, title;
 
-    iframeLink = `<iframe src="${ window.location.origin }?indicator=${ _indicator }&chart=${ _chart }" width="100%" height="100%" frameborder=0 scrolling="no"></iframe>`;
-    inputText  = `<input value='${ iframeLink }'></input>`;
-    copyButton = `<button class="button buttonBig buttonSquare" onclick="copyText(this)">
-                    <span class="button-waves"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copiar</span>
-                  </button>`;
+    iframe = `<iframe src="${ window.location.origin }?indicator=${ _indicatorId }&chart=${ _chart.id }" width="100%" height="100%" frameborder=0 scrolling="no"></iframe>`;
+    input  = `<input value='${ iframe }'></input>`;
+    button = `<button class="button buttonBig buttonSquare" onclick="copyText(this)"><span class="button-waves"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copiar</span></button>`;
 
-    actionContainer = window.document.createElement('div');
-    actionContainer.setAttribute('class', 'flex');
-    actionContainer.innerHTML = inputText + copyButton;
+    callToAction = window.document.createElement('div');
+    callToAction.setAttribute('class', 'flex');
+    callToAction.innerHTML = input + button;
 
-    exitButton = `<span class="btn-exit flex" onclick="embebedContainerHide(this)">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  </span>`;
-    textInfo = '<span class="embebed-text-info">Copie el siguiente código y peguelo en su sitio.</span>';
+    exit  = `<span class="btn-exit flex" onclick="embebedContainerHide(this)"><i class="fa fa-times" aria-hidden="true"></i></span>`;
+    title = '<span class="embebed-text-info">Copie el siguiente código y peguelo en su sitio.</span>';
 
-    background = window.document.createElement('div');
-    background.setAttribute('class', 'embebedContainer flex flex-column');
-    background.style.visibility = 'hidden';
-    background.style.opacity = 0;
-    background.innerHTML = exitButton + textInfo;
+    component = window.document.createElement('div');
+    component.setAttribute('class', 'embebedContainer flex flex-column');
+    component.style.visibility = 'hidden';
+    component.style.opacity = 0;
+    component.innerHTML = exit + title;
 
-    background.appendChild(actionContainer);
-    _container.querySelector(`#${ _chart }`).appendChild(background);
+    component.appendChild(callToAction);
+
+    return component;
+  }
+  // Actualizado 17.08.2017 - Genera un div de loading.
+  function addLoading() {
+    let component;
+
+    component = window.document.createElement('div');
+    component.setAttribute('class', 'loading flex');
+    component.innerHTML = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>';
+
+    return component;
   }
 
 // Funciones de parseo de datos.
@@ -35423,8 +35426,7 @@ window.storage = STORAGE;
       case 'R/P1Y':
         return date.format('YYYY');
       case 'R/P6M':
-        let semester = d3.scaleLinear().domain([1, 12]).range([1, 2]);
-            semester = Math.round(semester(date.format('M')));
+        let semester = Math.ceil(date.format('M') / 6);
 
         if (short) {
           return `${ semester }S ${ date.format('YY') }`;
@@ -35434,8 +35436,7 @@ window.storage = STORAGE;
 
         break;
       case 'R/P3M':
-        let trimester = d3.scaleLinear().domain([1, 12]).range([1, 4]);
-            trimester = Math.round(trimester(date.format('M')));
+        let trimester = Math.ceil(date.format('M') / 3);
 
         if (short) {
           return `${ trimester }T ${ date.format('YY') }`;
@@ -35462,202 +35463,371 @@ window.storage = STORAGE;
     }
   }
 
-
-
-
-
-
-
-
-
-// Esta función renderiza los gráficos.
+// Funciones para render de los gráficos.
 ////////////////////////////////////////////////////////////////////////////////
 
-  // Actualizado 18.08.2017 - Esta función habilita el contenedor para renderizar los gráficos.
-  function generateCharts(_element) {
-    let indicatorId = _element.parentNode.getAttribute('id'),
-        chartsContainer = document.querySelector('#chartsContainer #charts');
-        chartsContainer.innerHTML = '';
+  // Actualizado 18.08.2017 - Esta función solicita el html de todos los gráficos.
+  function requestAllCharts(_cardElement) {
+    let indicatorId, chartsContainer;
 
-    renderChartContainer(chartsContainer, indicatorId);
-  }
-  // Actualizado 18.08.2017 - Esta función renderiza los gráficos.
-  function renderChartContainer(_chartsContainer, _indicatorId) {
+    indicatorId     = _cardElement.parentNode.getAttribute('id');
+    chartsContainer = document.querySelector('#chartsContainer #charts');
+    chartsContainer.innerHTML = '';
 
     STORAGE.cards.forEach((_card) => {
 
-      if (_card.id === _indicatorId) {
+      if (_card.id === indicatorId) {
 
-        _card.charts.forEach((_chart, _index) => {
-          renderChart();
-        });
+        _card.charts.forEach((_chart) => { previewChart(indicatorId, chartsContainer, _chart); });
       }
     });
   }
+  // Actualizado 18.08.2017 - Esta función solicita el html de un gráfico.
+  // function requestOnlyChart(_cardElement, _chartId) {
+  //   STORAGE.cards.forEach((_card) => {
+  //
+  //     if (_card.id === _indicatorId) {
+  //
+  //       _card.charts.forEach((_chart) => {
+  //
+  //         if (_chart.id === _chartId) { previewChart(); }
+  //       });
+  //     }
+  //   });
+  // }
+  // Actualizado 18.08.2017 - Esta función genera el html un gráfico.
+  function previewChart(_indicatorId, _container, _chart) {
+    let component, chart;
 
+    chart =  `<div class="head">
+                <h3>${ _chart.title }</h3>
+                <div class="break-line"><br></div>
+                <p class="paragraph">${ _chart.description }</p>
+                <div class="break-line"><br><br></div>
+              </div>`;
+    chart += `<div class="referenceContainer">
+                <div class="break-line"><br></div>
+                <span id="references"></span>
+                <div class="break-line"><br></div>
+                <div class="break-line"><hr></div>
+              </div>`;
+    chart += `<div class="rangeButton">
+                <div class="break-line"><br></div>
+                <div class="rangeButton-component">
+                  <div class="rangeButton-text">Escala:</div>
+                  <div class="rangeButton-button" state="off">
+                  <div class="switch-effect" style="left: 2px;"></div>
+                  <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
+                  <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
+                </div>
+                <div class="break-line"><br></div>
+              </div>`;
+    chart += `<div class="chart-svg"></div>
+              <div class="break-line"><br></div>`;
+    chart += `<div class="modal-share">
+                <input id="share-${ _chart.id }" type="checkbox" class="share-open">
+                <label for="share-${ _chart.id }" class="share-open-button hamburger-dark">
+                  <span class="hamburger-1"></span><span class="hamburger-2"></span><span class="hamburger-3"></span>
+                </label>
+                <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this)" style="background-color: gray; color: white; right: 0px;">
+                  <span class="buttonCircleSmall boton_efecto">
+                    <i class="fa fa-code" aria-hidden="true"></i>
+                  </span>
+                </button>
+                <button class="share-item button buttonCircle" title="descargar" onclick="shareSaveAs(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
+                  <span class="buttonCircleSmall boton_efecto">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>`;
 
-  // OK - Esta función descarga los paquetes de datos para renderizar el gráfico.
-  function downloadChart(_chartData) {
-    let indicators = _chartData.indicators,
-        length = indicators.length - 1,
-        count = 0, promises = [];
+    component = document.createElement('div');
+    component.setAttribute('id', _chart.id);
+    component.classList.add('chart');
+    component.innerHTML = chart;
+    component.appendChild(addLoading());
+    component.append(addEmbebed(_indicatorId, _chart));
 
-    indicators.forEach((_indicator) => {
+    _container.append(component);
+
+    STORAGE.charts[_chart.id] = { container:  component };
+
+    downloadFilesToChart(_chart);
+  }
+  // Actualizado 18.08.2017 - Esta función descarga los paquetes de datos para renderizar el gráfico.
+  function downloadFilesToChart(_chart) {
+    let promises = [], url_ext, url_loc;
+
+    _chart.indicators.forEach((_indicator) => {
 
       if (!STORAGE[_indicator.id]) {
-        promises.push(
-          downloadFile({local: `./public/data/series/${ _indicator.id }.json`}, _indicator.id)
-        );
+
+        url_ext = `http://meconcd.mecon.gob.ar/public.php?service=files&t=e9cd25ad56afd6c53514d9c9d191f494&download&path=//${ _indicator.id }.json`;
+        url_loc = `./public/data/series/${ _indicator.id }.json`;
+
+        promises.push( downloadFile({ local: url_loc, external: url_ext }, _indicator.id) );
       }
     });
 
-    jQuery.when(...promises).then(() => { processData(_chartData); });
+    jQuery.when(...promises).then(() => { injectChartData(_chart); });
   }
-  // TODO - Esta función transforma el formato de la data para renderizar el gráfico.
-  function processData(_chartData) {
-    let group = {}, dataset = [], index;
+  // Actualizado 18.08.2017 - Esta función inyecta los datos recibidos y renderiza el gráfico.
+  function injectChartData(_chart) {
+    let container, component;
 
-    _chartData.indicators.forEach((_indicator) => {
-      STORAGE[_indicator.id].data.forEach((_value) => {
-        index = group[_value[0]];
-        if (index === undefined) {
-          group[_value[0]] = { date: new Date(_value[0]) };
-        }
-        group[_value[0]][_indicator.short_name] = _value[1];
-      });
+    _chart.indicators.forEach((_indicator) => {
+      container = document.querySelector(`#${ _chart.id } #references`);
+      component = document.createElement('p');
+      component.innerHTML = `<div class="reference-round-line" style="background-color: ${ _indicator.color }"></div> ${ _indicator.short_name }`;
+
+      container.append(component);
     });
 
-    // TODO - Utilziar otro método que no sea "for in"
-    for (let _item in group) {
-      dataset.push(group[_item]);
-    }
-
-    return renderCharts(_chartData, dataset);
+    renderChart(_chart);
   }
-  // Esta función renderiza el gráfico.
-  function renderCharts(_chartData, _data) {
-    let containerChart = STORAGE.charts[_chartData.id].container;
-        containerChart.querySelector('.loading').remove();
+  // Actualizado 18.08.2017 - Esta función genera un gráfico de lineas.
 
-    // Funciones Complementarias
-    ////////////////////////////////////////////////////////////////////////////
-    function addReferences(_chartData, _container) {
-      _chartData.indicators.forEach((_value) => {
-        let container = document.querySelector(`#${ _chartData.id } #references`),
-            reference = document.createElement('p');
-            reference.innerHTML = `<div class="reference-round-line" style="background-color: ${ _value.color }"></div> ${ _value.short_name }`;
-            container.append(reference);
+  // Funciones complementarias /////////////////////////////////////////////////
+  function normalDatos(_data, _indicatorId) {
+    let data_norm = _data
+      .filter((d) => (d[1] !== null))
+      .map((d) => {
+        let object = {};
+            object['date'] = new Date(d[0]);
+            object[_indicatorId] = roundNumber(d[1], 3);
+
+        return object;
       });
+
+    return data_norm;
+  }
+  function normalDatosLine(_data, _indicatorId) {
+    let data_norm = _data
+      .filter((d) => (d[1] !== null))
+      .map((d) => {
+        return {date: new Date(d[0]), value: roundNumber(d[1], 3)};
+      });
+
+    return data_norm;
+  }
+  function processData(_chart) {
+    let data = [], data_norm;
+
+    _chart.indicators.forEach((_indicator) => {
+
+      data_norm = normalDatos(STORAGE[_indicator.id].data, _indicator.id);
+
+      data_norm.forEach((row) => { data.push(row); });
+    });
+
+    data = _.toArray(_.map(_.groupBy(data, (row) => row.date), (row) => _.extend(...row)));
+
+    return data;
+  }
+  function processDataLines(_chart) {
+    let data_norm, data = [];
+
+    _chart.indicators.forEach((_indicator) => {
+      data_norm = normalDatosLine(STORAGE[_indicator.id].data, _indicator.id);
+      data.push(data_norm);
+    });
+
+    return data;
+  }
+  function calcMinRangeX(_data) {
+    return _.min(_.map(_data, (row) => row.date));
+  }
+  function calcMaxRangeX(_data) {
+    return _.max(_.map(_data, (row) => row.date));
+  }
+  function calcMinRangeY(_data) {
+    return _.min(_.map(_data, (row) => _.min(rowToValues(row))));
+  }
+  function calcMaxRangeY(_data) {
+    return _.max(_.map(_data, (row) => _.max(rowToValues(row))));
+  }
+  function rowToValues(_row) {
+    return _.values(_row).splice(1);
+  }
+  function searchProximityPoint(_data, _date) {
+    let distances = _data.map((v, k) => [Math.pow(moment(v.date).diff(_date), 2), v.date]); // [diff, date]
+        distances.sort((a, b) => { return (a[0] - b[0]); });
+
+    return distances[0][1];
+  }
+  function getValuesToDate(_data, _date) {
+    let values = d3.values(_data.filter((d) => d.date === _date)[0]);
+        values.splice(0, 1);
+
+    return values;
+  }
+
+  function updateTranslatePositionY(element) {
+    return element.getAttribute('transform').split('(')[1].split(')')[0].split(',').map((v) => parseFloat(v.trim()));
+  }
+  function orderAscPosition(a, b) {
+    var aPosition = updateTranslatePositionY(a)[1],
+        bPosition = updateTranslatePositionY(b)[1];
+
+    if (aPosition < bPosition) {
+      return 1;
+    } else {
+      return -1;
     }
+  }
+  function orderDescPosition(a, b) {
+    var aPosition = updateTranslatePositionY(a)[1],
+        bPosition = updateTranslatePositionY(b)[1];
+
+    if (aPosition > bPosition) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+  function tooltipsCollapse(_chart) {
+    // se seleccionan todos los indicadores del gráfico
+    var chartDom      = window.document.querySelector(`#${ _chart }`),
+        indicatorsDom = chartDom.querySelectorAll('.tooltip-indicator'),
+        elements_asc  = [], elements_desc = [];
+
+    indicatorsDom.forEach((_indicator) => {
+      // se resetean las posiciones
+      _indicator.querySelector('.boxText').setAttribute('transform', 'translate(0, 0)');
+      // se crean listas ordenadas con los indicadores
+      elements_asc.push(_indicator);
+      elements_desc.push(_indicator);
+    });
+    // se ordenan lista de indicadores segun posición
+    elements_asc.sort(orderDescPosition);
+    elements_desc.sort(orderAscPosition);
+
+    // se ordenan los indicadores ascendentemente
+    var count = 0, force = 0;
+
+    elements_asc.forEach((v, k) => {
+      if (k !== elements_asc.length - 1) {
+        let start         = elements_asc[k],
+            startPosition = updateTranslatePositionY(start)[1],
+            end           = elements_asc[k + 1],
+            endPosition   = updateTranslatePositionY(end)[1],
+            diff          = endPosition - startPosition,
+            minHeight     = 30;
+
+        if ((diff - count) < minHeight) {
+          count += (30 - diff);
+          elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', `translate(0, ${ count })`);
+        }
+      }
+    });
+
+    elements_desc.forEach((v, k) => {
+
+      if (k !== elements_desc.length - 1) {
+
+        let start = elements_desc[k], startAdd = start.querySelector('.boxText'),
+            end = elements_desc[k + 1], endAdd = end.querySelector('.boxText'),
+            startPosition = updateTranslatePositionY(start)[1] + updateTranslatePositionY(startAdd)[1],
+            endPosition = updateTranslatePositionY(end)[1] + updateTranslatePositionY(endAdd)[1],
+            diff = startPosition - endPosition, minHeight = 30, minPosY = 0, transform,
+            maxPosY = document.querySelector(`#${ _chart } .tooltip-rect-space`).getBoundingClientRect().height - minPosY;
+
+        // Si el último elemento se paso del limite, se define force con esa medida
+        if ((k === 0) && (startPosition > maxPosY)) {
+          force = startPosition - maxPosY;
+
+          transform = updateTranslatePositionY(startAdd); // se trae la posición.
+          transform[1] -= force; // se le resta la posición
+
+          startAdd.setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+          startPosition = updateTranslatePositionY(start)[1] + updateTranslatePositionY(startAdd)[1];
+        }
+
+        if (diff <= minHeight) {
+          transform = updateTranslatePositionY(endAdd); // se trae la posición.
+          transform[1] -= force; // se le resta la posición
+          endAdd.setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+        }
+      }
+    });
+  }
+
+  // Función principal /////////////////////////////////////////////////////////
+  function renderChart(_chart) {
+    var container, data, data_lines, data_chart, data_range,
+        totalWidth, chartWidth, rangeWidth, chartHeight, rangeHeight,
+        chartMargin, rangeMargin, chartScaleX, rangeScaleX, chartScaleY, rangeScaleY,
+        chartAxisX, rangeAxisX, chartAxisY, rangeAxisY, brush, minDate, maxDate,
+        laps, minValue, maxValue, totalHeight, chartLine, rangeLine, svg, defs,
+        background, chartContainer, chartLines, rangeContainer, rangeLines,
+        startBrush, endBrush, tooltipLine, tooltipIndicator, boxText, tooltipDate;
+
+    container = STORAGE.charts[_chart.id].container;
+    container.querySelector('.loading').remove(); // Se quita loading.
 
     ////////////////////////////////////////////////////////////////////////////
     // Render LineChart
     ////////////////////////////////////////////////////////////////////////////
 
-    // variables
-    ////////////////////////////////////////////////////////////////////////////
-    let totalHeight = 410,
-        chartMargin = {top: 0, right: 50, bottom: 112, left: 90},
-        rangeMargin = {top: 350, right: 50, bottom: 20, left: 90};
+    // Procesamiento de los datos //////////////////////////////////////////////
+    data       = processData(_chart);
+    data_chart = STORAGE.charts[_chart.id]['data_chart'] = $.extend(true, [], data);
+    data_range = STORAGE.charts[_chart.id]['data_range'] = $.extend(true, [], data);
+    data       = processDataLines(_chart);
+    data_lines = STORAGE.charts[_chart.id]['data_lines'] = $.extend(true, [], data);
+    laps       = (data_chart.length - _chart.laps >= 0)?(_chart.laps):(data_chart.length);
+    data_range = data_range.splice(data_chart.length - _chart.laps);
 
-    // parámetros
-    ////////////////////////////////////////////////////////////////////////////
+    // Definición de los parámetros de configuración ///////////////////////////
+    totalHeight = 410;
+    chartMargin = { top: 0, right: 50, bottom: 112, left: 90 };
+    rangeMargin = { top: 350, right: 50, bottom: 20, left: 90 };
+    totalWidth  = container.getBoundingClientRect().width;
+    minDate     = calcMinRangeX(data_chart);
+    maxDate     = calcMaxRangeX(data_chart);
+    minValue    = calcMinRangeY(data_chart);
+    maxValue    = calcMaxRangeY(data_chart);
 
-    let dataset = _chartData.indicators.map((d) => {
-      return {
-        name: d.short_name,
-        values: _data.filter((c) => typeof c[d.short_name] === 'number').map((c) => {
-          return {
-            date: c.date,
-            value: +c[d.short_name]
-          };
-        })
-      };
-    });
-    console.log('data', _data);
-    console.log('dataset', dataset);
-    STORAGE.charts[_chartData.id]['data'] = dataset;
-    STORAGE.charts[_chartData.id]['data_chart'] = _data;
-    STORAGE.charts[_chartData.id]['data_range'] = dataset;
+    // Generación de parámetros para el gráfico ////////////////////////////////
+    chartWidth  = totalWidth - chartMargin.left - chartMargin.right;
+    chartHeight = totalHeight - chartMargin.top - chartMargin.bottom;
+    chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_chart, (d) => d.date));
+    chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
+    chartAxisX  = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
+    chartAxisY  = d3.axisLeft(chartScaleY);
 
-    let totalWidth = containerChart.getBoundingClientRect().width,
-        minDate = d3.min(STORAGE.charts[_chartData.id].data, (c) => d3.min(c.values, (v) => v.date)),
-        maxDate = d3.max(STORAGE.charts[_chartData.id].data, (c) => d3.max(c.values, (v) => v.date));
+    // Generación de parámetros para el rango //////////////////////////////////
+    rangeWidth  = totalWidth - rangeMargin.left - rangeMargin.right;
+    rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom;
+    rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain());
+    rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain());
+    rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
+    rangeAxisY  = d3.axisLeft(rangeScaleY);
 
-    let indice = STORAGE.charts[_chartData.id].data[0].values.length - 1 - _chartData.laps;
-        indice = (indice < 0) ? (0) : (indice);
+    // Se define brush /////////////////////////////////////////////////////////
+    brush = d3.brushX().extent([[0, 0], [rangeWidth, rangeHeight]]).on('brush', brushed);
 
-    let date = STORAGE.charts[_chartData.id].data[0].values[indice].date;
+    // Se define el tipo de línea  /////////////////////////////////////////////
+    chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value));
+    rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
 
-    // console.log('breakpoint_1', STORAGE.charts[_chartData.id]);
-
-    // parámetros del gráfico
-    ////////////////////////////////////////////////////////////////////////////
-
-    let chartWidth  = totalWidth - chartMargin.left - chartMargin.right,
-        chartHeight = totalHeight - chartMargin.top - chartMargin.bottom,
-        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(_data, (d) => d.date)),
-        chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain(generateRangeYStatic(_chartData.id)),
-        chartAxisX  = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chartData.frequency, d, true)),
-        chartAxisY  = d3.axisLeft(chartScaleY);
-
-    // console.log('breakpoint_2');
-
-    // parámetros del rango dinámico
-    ////////////////////////////////////////////////////////////////////////////
-
-    let rangeWidth  = totalWidth - rangeMargin.left - rangeMargin.right,
-        rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom,
-        rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain()),
-        rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain()),
-        rangeAxisX  = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat((d) => parseFormatDate(_chartData.frequency, d, true)),
-        rangeAxisY  = d3.axisLeft(rangeScaleY);
-
-    // console.log('breakpoint_3');
-
-    // brush
-    ////////////////////////////////////////////////////////////////////////////
-
-    let brush = d3.brushX().extent([[0, 0], [rangeWidth, rangeHeight]]).on('brush', brushed);
-
-    // console.log('breakpoint_4');
-
-    // se definen lineas
-    ////////////////////////////////////////////////////////////////////////////
-
-    let chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)),
-        rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
-
-    // console.log('breakpoint_5');
-
-    // se crea SVG
-    ////////////////////////////////////////////////////////////////////////////
-    let svg, defs, background;
-
-    svg = d3.select(`#${ _chartData.id } .chart-svg`).append('svg')
+    // Se define svg ///////////////////////////////////////////////////////////
+    svg = d3.select(`#${ _chart.id } .chart-svg`).append('svg')
       .attr('width', chartWidth + chartMargin.left + chartMargin.right)
       .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
-
     defs = svg.append('defs').append('clipPath')
       .attr('id', 'clip')
       .append('rect')
-      // .attr('transform', `translate(${ chartMargin.left }, 0)`)
       .attr('width', chartWidth)
       .attr('height', chartHeight);
-
     background = svg.append('rect')
       .attr('class', 'chart-background')
       .attr('width', chartWidth + chartMargin.left + chartMargin. right)
       .attr('height', chartHeight + chartMargin.top + 30);
 
-    STORAGE.charts[_chartData.id]['svg'] = svg;
+    STORAGE.charts[_chart.id]['svg'] = svg;
 
-    // console.log('breakpoint_6');
-
-    // se crea contenedor del gráfico
-    ////////////////////////////////////////////////////////////////////////////
-    let chartContainer, chartLines, dots;
-
+    // se crea contenedor del gráfico //////////////////////////////////////////
     chartContainer = svg.append('g')
       .attr('class', 'chart-container')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
@@ -35675,54 +35845,36 @@ window.storage = STORAGE;
     chartContainer.append('g')
       .attr('class', 'chart-axis-y')
       .call(chartAxisY);
-
     chartLines = chartContainer.selectAll('.chart-line')
-      .data(STORAGE.charts[_chartData.id].data)
+      .data(data_lines)
       .enter().append('g')
       .attr('class', 'chart-line');
     chartLines.append('path')
-      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(_chartData.indicators[i].type); })
-      .attr('d', (d) => chartLine(d.values))
-      .style('stroke', (d, i) => _chartData.indicators[i].color)
+      .attr('id', (d, i) => {
+        return `${ _chart.id }&&${ i }`;
+      })
+      .attr('stroke-dasharray', (d, i) => { return parseTypeLine(_chart.indicators[i].type); })
+      .attr('d', chartLine)
+      .style('stroke', (d, i) => _chart.indicators[i].color)
       .attr('clip-path', 'url(#clip)');
 
-    // dots = chartContainer.selectAll('.chart-dots')
-    //   .data(STORAGE.charts[_chartData.id].data)
-    //   .enter().append('g')
-    //   .attr('class', 'chart-dots')
-    //   .style('fill', 'black')
-    //   .selectAll('circle')
-    //   .data((d) => d.values)
-    //   .enter().append('circle')
-    //   .attr('clip-path', 'url(#clip)')
-    //   .attr('cx', (d) => chartScaleX(d.date))
-    //   .attr('cy', (d) => chartScaleY(d.value));
-
-    // console.log('breakpoint_7');
-
-    // se crea contenedor del rango dinámico
-    ////////////////////////////////////////////////////////////////////////////
-    let rangeContainer, rangeLines, startBrush, endBrush;
-
+    // se crea contenedor del rango ////////////////////////////////////////////
     rangeContainer = svg.append('g')
       .attr('class', 'range-container')
       .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
-
     rangeContainer.append('g')
       .attr('class', 'range-axis-x')
       .attr('transform', `translate(0, ${ rangeHeight })`)
       .call(rangeAxisX);
-
     startBrush = rangeContainer.append('g')
       .attr('class', 'start-brush-date')
       .attr('text-anchor', 'end')
-      .attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 17.5 })`);
+      .attr('transform', `translate(${ rangeScaleX(data_range[0].date) }, ${ rangeHeight + 17.5 })`);
     startBrush.append('rect')
       .attr('height', '20px')
       .attr('transform', 'translate(0, -15)')
       .attr('fill', 'white');
     startBrush.append('text');
-
     endBrush = rangeContainer.append('g')
       .attr('class', 'end-brush-date')
       .attr('text-anchor', 'start')
@@ -35732,575 +35884,277 @@ window.storage = STORAGE;
       .attr('transform', 'translate(-7.5, -15)')
       .attr('fill', 'white');
     endBrush.append('text');
-
     rangeLines = rangeContainer.selectAll('.range-line')
-      .data(STORAGE.charts[_chartData.id].data)
+      .data(data_lines)
       .enter().append('g')
       .attr('class', 'range-line');
     rangeLines.append('path')
-      .attr('d', (d) => rangeLine(d.values))
-      .style('stroke', (d, i) => _chartData.indicators[i].color);
-
+      .attr('d', (d) => rangeLine(d))
+      .style('stroke', (d, i) => _chart.indicators[i].color);
     rangeContainer.append('g')
       .attr('class', 'range-brush')
       .call(brush)
-      .call(brush.move, [rangeScaleX(date), chartWidth]);
-    // console.log('breakpoint_8');
+      .call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
 
-    // se crea tooltip de linea vertical
-    ////////////////////////////////////////////////////////////////////////////
-
-    let tooltipLine = svg.append('g')
+    // se crea tooltip /////////////////////////////////////////////////////////
+    tooltipLine = svg.append('g')
       .attr('class', 'chart-tooltip')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
-
     tooltipLine.append('path')
       .attr('class', 'tooltip-line')
       .style('opacity', 0);
-
-    let tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
-      .data(STORAGE.charts[_chartData.id].data)
+    tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
+      .data(data_lines)
       .enter().append('g')
       .attr('class', 'tooltip-indicator')
       .style('opacity', 0);
-
     tooltipIndicator.append('circle')
       .attr('transform', 'translate(0, 2)')
-      .style('fill', (d, i) => _chartData.indicators[i].color);
-
-    let boxText = tooltipIndicator.append('g')
+      .style('fill', (d, i) => _chart.indicators[i].color);
+    boxText = tooltipIndicator.append('g')
       .attr('class', 'boxText');
-
     boxText.append('rect')
       .attr('rx', 15)
       .attr('ry', 15)
-      .style('fill', (d, i) => _chartData.indicators[i].color);
-
+      .style('fill', (d, i) => _chart.indicators[i].color);
     boxText.append('text');
-
-    let tooltipDate = tooltipLine.append('g')
+    tooltipDate = tooltipLine.append('g')
       .attr('class', 'tooltip-date')
       .attr('opacity', 0);
-
     tooltipDate.append('rect');
-
     tooltipDate.append('text');
-
     tooltipLine.append('rect')
       .attr('class', 'tooltip-rect-space')
       .attr('width', chartWidth)
       .attr('height', chartHeight)
       .attr('pointer-events', 'all')
-      .on('mouseover',  function() {
-        d3.select(this.parentNode).select('.tooltip-line').transition().style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.tooltip-indicator').transition().style('opacity', '1');
-        d3.select(this.parentNode).selectAll('.tooltip-date').transition().style('opacity', '1');
-      })
-      .on('mouseout',   function() {
-        d3.select(this.parentNode).select('.tooltip-line').transition().style('opacity', 0);
-        d3.select(this.parentNode).selectAll('.tooltip-indicator').transition().style('opacity', 0);
-        d3.select(this.parentNode).selectAll('.tooltip-date').transition().style('opacity', 0);
-      })
-      .on('mousemove',  function() {
-        let lines         = this.parentNode.parentNode.querySelectorAll('.chart-line path'),
-            chart_tooltip = d3.select(this.parentNode),
-            mouse         = d3.mouse(this),
-            dateMouse     = moment(chartScaleX.invert(mouse[0])),
-            date_event    = searchProximityPoint(dateMouse),
-            datePoint     = chartScaleX(date_event),
-            dateValues    = getValuesToDate(_data, date_event),
-            spaceWidth    = d3.select('.tooltip-rect-space').attr('width');
+      .on('mouseover', tooltipMouseOver)
+      .on('mouseout', tooltipMouseOut)
+      .on('mousemove', tooltipMouseMouve);
 
-        chart_tooltip.select('.tooltip-line')
-          .attr('d', () => `M ${ datePoint }, 0 V ${ chartHeight }`);
-        chart_tooltip.selectAll('.tooltip-indicator')
-          .attr('transform', (d, i) => {
-            if (typeof dateValues[i] === 'number') {
-              return `translate(${ datePoint }, ${ chartScaleY(dateValues[i]) })`;
-            } else {
-              return `translate(-9999, 0)`;
-            }
-          });
-        chart_tooltip.selectAll('.tooltip-indicator text')
-          .text((d, i) => `${ formatNumberD3(dateValues[i]) } - ${ d.name }`)
-          .attr('text-anchor', (datePoint < (spaceWidth / 2))?('start'):('end'))
-          .attr('transform', (datePoint < (spaceWidth / 2))?('translate(25, 7)'):('translate(-25, 7)'));
-        chart_tooltip.selectAll('.tooltip-indicator rect')
-          .attr('width', (d, i) => this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)
-          .attr('y', -10)
-          .attr('x', (d, i) => (datePoint < (spaceWidth / 2))?(10):(-(10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)));
-        chart_tooltip.select('.tooltip-date')
-          .attr('transform', `translate(${ datePoint }, ${ chartHeight + 5 })`);
-        chart_tooltip.select('.tooltip-date text')
-          .text(parseFormatDate(_chartData.frequency, date_event, true));
-        chart_tooltip.select('.tooltip-date rect')
-          .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30)
-          .attr('transform', `translate(-${ (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2}, -1)`);
-
-        tooltipsCollapse(_chartData.id);
-      });
-
-    // console.log('breakpoint_9');
-
-    // se agregan referencias
-    ////////////////////////////////////////////////////////////////////////////
-
-    addReferences(_chartData, containerChart);
-
-    // console.log('breakpoint_10');
-
-    function searchProximityPoint(date) {
-      let distances = _data.map((v, k) => [Math.pow(moment(v.date).diff(date), 2), v.date]); // [diff, date]
-          distances.sort((a, b) => { return (a[0] - b[0]); });
-
-      return distances[0][1];
+    function tooltipMouseOver() {
+      let element = d3.select(this.parentNode);
+          element.select('.tooltip-line').transition().style('opacity', '1');
+          element.selectAll('.tooltip-indicator').transition().style('opacity', '1');
+          element.selectAll('.tooltip-date').transition().style('opacity', '1');
     }
-    function getValuesToDate(data, date) {
-      let values = d3.values(data.filter((d) => d.date === date)[0]);
-          values.splice(0, 1);
-
-      return values;
+    function tooltipMouseOut() {
+      let element = d3.select(this.parentNode);
+          element.select('.tooltip-line').transition().style('opacity', 0);
+          element.selectAll('.tooltip-indicator').transition().style('opacity', 0);
+          element.selectAll('.tooltip-date').transition().style('opacity', 0);
     }
-    function tooltipsCollapse(chart) {
-      // console.log(chart);
-      function updateTranslatePositionY(element) {
-        return element.getAttribute('transform').split('(')[1].split(')')[0].split(',').map((v) => parseFloat(v.trim()));
-      }
-      function orderAscPosition(a, b) {
-        var aPosition = updateTranslatePositionY(a)[1],
-            bPosition = updateTranslatePositionY(b)[1];
+    function tooltipMouseMouve() {
+      var data = { date: {}, values: [] }, tooltipDom, mousePosition, mouseDate,
+          width;
 
-        if (aPosition < bPosition) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-      function orderDescPosition(a, b) {
-        var aPosition = updateTranslatePositionY(a)[1],
-            bPosition = updateTranslatePositionY(b)[1];
+      tooltipDom    = d3.select(this.parentNode);
+      mousePosition = d3.mouse(this);
+      mouseDate     = moment(chartScaleX.invert(mousePosition[0]));
+      width         = d3.select('.tooltip-rect-space').attr('width');
 
-        if (aPosition > bPosition) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
+      data.date['calendar'] = searchProximityPoint(STORAGE.charts[_chart.id].data_chart, mouseDate);
+      data.date['position'] = chartScaleX(data.date.calendar);
+      data.values = getValuesToDate(STORAGE.charts[_chart.id].data_chart, data.date.calendar);
 
-      // se seleccionan todos los indicadores del gráfico
-      var elements = document.querySelectorAll(`#${ chart } .tooltip-indicator`),
-          elements_asc = [], elements_desc = [];
+      tooltipDom.select('.tooltip-line').attr('d', `M ${ data.date.position }, 0 V ${ chartHeight }`);
+      tooltipDom.selectAll('.tooltip-indicator').attr('transform', (d, i) => (typeof data.values[i] === 'number')?(`translate(${ data.date.position }, ${ chartScaleY(data.values[i]) })`):('translate(-9999, -9999)'))
+        .select('text').text((d, i) => `${ formatNumberD3(data.values[i]) }`)
+        // .select('text').text((d, i) => `${ formatNumberD3(data.values[i]) } - ${ i }`)
+        .attr('text-anchor', (data.date.position < (width / 2))?('start'):('end'))
+        .attr('transform', (data.date.position < (width / 2))?('translate(25, 7)'):('translate(-25, 7)'));
+      tooltipDom.selectAll('.tooltip-indicator rect')
+        .attr('width', (d, i) => this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)
+        .attr('y', -10)
+        .attr('x', (d, i) => (data.date.position < (width / 2))?(10):(-(10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)));
+      tooltipDom.select('.tooltip-date')
+        .attr('transform', `translate(${ data.date.position }, ${ chartHeight + 5 })`);
+      tooltipDom.select('.tooltip-date text')
+        .text(parseFormatDate(_chart.frequency, data.date.calendar, true));
+      tooltipDom.select('.tooltip-date rect')
+        .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30)
+        .attr('transform', `translate(-${ (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2}, -1)`);
 
-      document.querySelectorAll(`#${ chart } .tooltip-indicator .boxText`).forEach((v) => {
-        v.setAttribute('transform', 'translate(0, 0)');
-      });
-
-      elements.forEach((v) => {
-        elements_asc.push(v);
-        elements_desc.push(v);
-      });
-
-      // se obtienen las posiciones de cada indicador
-      elements_asc.sort(orderDescPosition);
-      elements_desc.sort(orderAscPosition);
-
-      // console.log(elements_asc);
-      // console.log(elements_desc);
-
-      // se hace pasada 1
-      var count = 0;
-      var force = 0;
-
-      elements_asc.forEach((v, k) => {
-        if (k !== elements_asc.length - 1) {
-          let start         = elements_asc[k],
-              startPosition = updateTranslatePositionY(start)[1],
-              end           = elements_asc[k + 1],
-              endPosition   = updateTranslatePositionY(end)[1],
-              diff          = endPosition - startPosition,
-              minHeight     = 30;
-
-          // console.log('posicion original', startPosition, endPosition);
-          // console.log('diferencia', diff, 'acumulado', count);
-          // console.log('diferencia real', diff - count);
-          // console.log('resultado', (diff - count) < minHeight);
-
-          if ((diff - count) < minHeight) {
-            count += (30 - diff);
-            elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', `translate(0, ${ count })`);
-          }
-        }
-      });
-
-      // console.log(count);
-
-      // se hace pasada 2
-      elements_desc.forEach((v, k) => {
-        if (k !== elements_desc.length - 1) {
-          let start         = elements_desc[k],
-              startPosition = updateTranslatePositionY(start)[1],
-              end           = elements_desc[k + 1],
-              endPosition   = updateTranslatePositionY(end)[1],
-              diff          = startPosition - endPosition,
-              minHeight     = 30,
-              minPosY       = 0,
-              maxPosY       = document.querySelector(`#${ chart } .tooltip-rect-space`).getBoundingClientRect().height - minHeight / 2;
-          // console.log('Tengo G: ', v);
-          // console.log('posición del elemento actual', startPosition);
-          // console.log('posición del elemento siguiente', endPosition);
-          // console.log('diff', diff);
-          // console.log(v);
-          // console.log('limite', minPosY, maxPosY);
-          // console.log('posicion original', startPosition + count, endPosition + count);
-
-          if (k === 0) {
-            if ((startPosition + count) > maxPosY) {
-              force = (startPosition + count) - maxPosY;
-              // console.log('Lo movemos', force);
-            } else {
-              // console.log('No lo movemos')
-            }
-          }
-
-          // console.log('forzar', force);
-
-          // elements_desc[k].querySelector('.boxText').setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
-          // console.log('Entonces el texto quedó en', updateTranslatePositionY(elements_desc[k].querySelector('.boxText')));
-        } else {
-          // console.log('Tengo G: ', v);
-          // console.log('pasa una vez');
-        }
-        let transform = updateTranslatePositionY(elements_desc[k].querySelector('.boxText'));
-        transform[1] -= force;
-        elements_desc[k].querySelector('.boxText').setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
-        // console.log('Entonces el texto quedó en', updateTranslatePositionY(elements_desc[k].querySelector('.boxText')));
-      });
+      tooltipsCollapse(_chart.id);
     }
+
     function brushed() {
-      let position, range, min, max, minExt, maxExt;
-      // console.log('brush_1');
-      if (d3.event.selection) {
-        position = d3.event.selection;
-        range = position.map(rangeScaleX.invert, rangeScaleX);
-        // console.log('brush_2');
-        // Se actualiza rango-x
-        chartScaleX.domain(range);
-        // console.log('brush_3');
-        // Se actualizan fecha mínima y máxima del eje x en rangeContainer
-        let startBrush = d3.select(this.parentNode)
-          .select('.start-brush-date')
-          .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 17.5 })`);
-        // console.log('brush_4');
-        startBrush.select('.start-brush-date text')
-          .text(parseFormatDate(_chartData.frequency, range[0], true));
-        // console.log('brush_5');
-        let widthStartBrush = this.parentNode.querySelector('.start-brush-date text').getBBox().width;
-        // console.log('brush_6');
-        startBrush.select('.start-brush-date rect')
-            .attr('width', widthStartBrush + 15)
-            .attr('x', -((widthStartBrush + 15) / 2) - (widthStartBrush / 2));
-        // console.log('brush_7');
-        let endBrush = d3.select(this.parentNode)
-          .select('.end-brush-date')
-          .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
-        // console.log('brush_8');
-        endBrush.select('.end-brush-date text')
-          .text(parseFormatDate(_chartData.frequency, range[1], true));
-        // console.log('brush_9');
-        let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
-        // console.log('brush_10');
-        endBrush.select('.end-brush-date rect')
-            .attr('width', widthEndBrush + 15);
-        // console.log('brush_11');
 
-        // Se actualizan fecha mínima y máxima del eje x en rangeContainer
-        let dataFiltered = _data.filter((d) => (d.date < range[1] && d.date > range[0]));
-        STORAGE.charts[this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')].data_range = dataFiltered;
-
-        // Si el switch esta en on, hace algo, sino, hace otra cosa.
-        if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
-          // console.log(dataFiltered.length);
-          if (dataFiltered.length > 1) {
-
-            // Se actualiza rango-y
-            chartScaleY.domain(generateRangeYDinamic(this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')));
-
-            chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
-          }
-        }
-        // console.log('brush_12');
-        chartContainer.selectAll('.chart-line path').attr('d', (d) => chartLine(d.values));
-        // chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
-        chartContainer.select('.chart-axis-x').call(chartAxisX);
-        chartContainer.select('.chart-axis-y').call(chartAxisY);
-        // console.log('brush_13');
-      }
     }
+    // function brushed() {
+    //   let position, range, min, max, minExt, maxExt;
+    //   // console.log('brush_1');
+    //   if (d3.event.selection) {
+    //     position = d3.event.selection;
+    //     range = position.map(rangeScaleX.invert, rangeScaleX);
+    //     // console.log('brush_2');
+    //     // Se actualiza rango-x
+    //     chartScaleX.domain(range);
+    //     // console.log('brush_3');
+    //     // Se actualizan fecha mínima y máxima del eje x en rangeContainer
+    //     let startBrush = d3.select(this.parentNode)
+    //       .select('.start-brush-date')
+    //       .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 17.5 })`);
+    //     // console.log('brush_4');
+    //     startBrush.select('.start-brush-date text')
+    //       .text(parseFormatDate(_chart.frequency, range[0], true));
+    //     // console.log('brush_5');
+    //     let widthStartBrush = this.parentNode.querySelector('.start-brush-date text').getBBox().width;
+    //     // console.log('brush_6');
+    //     startBrush.select('.start-brush-date rect')
+    //         .attr('width', widthStartBrush + 15)
+    //         .attr('x', -((widthStartBrush + 15) / 2) - (widthStartBrush / 2));
+    //     // console.log('brush_7');
+    //     let endBrush = d3.select(this.parentNode)
+    //       .select('.end-brush-date')
+    //       .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
+    //     // console.log('brush_8');
+    //     endBrush.select('.end-brush-date text')
+    //       .text(parseFormatDate(_chart.frequency, range[1], true));
+    //     // console.log('brush_9');
+    //     let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
+    //     // console.log('brush_10');
+    //     endBrush.select('.end-brush-date rect')
+    //         .attr('width', widthEndBrush + 15);
+    //     // console.log('brush_11');
+    //
+    //     // Se actualizan fecha mínima y máxima del eje x en rangeContainer
+    //     let dataFiltered = _data.filter((d) => (d.date < range[1] && d.date > range[0]));
+    //     STORAGE.charts[this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')].data_range = dataFiltered;
+    //
+    //     // Si el switch esta en on, hace algo, sino, hace otra cosa.
+    //     if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
+    //       // console.log(dataFiltered.length);
+    //       if (dataFiltered.length > 1) {
+    //
+    //         // Se actualiza rango-y
+    //         chartScaleY.domain(generateRangeYDinamic(this.parentNode.parentNode.parentNode.parentNode.getAttribute('id')));
+    //
+    //         chartContainer.select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+    //       }
+    //     }
+    //     // console.log('brush_12');
+    //     chartContainer.selectAll('.chart-line path').attr('d', (d) => chartLine(d.values));
+    //     // chartContainer.selectAll('.chart-dots circle').attr('cx', (d) => chartScaleX(d.date)).attr('cy', (d) => chartScaleY(d.value));
+    //     chartContainer.select('.chart-axis-x').call(chartAxisX);
+    //     chartContainer.select('.chart-axis-y').call(chartAxisY);
+    //     // console.log('brush_13');
+    //   }
+    // }
     function redraw() {
       let charts;
+
       // se actualiza ancho total
-      totalWidth = document.querySelector('#chartsContainer').offsetWidth;
+      totalWidth = container.getBoundingClientRect().width;
       // se actualiza ancho del gráfico
       chartWidth  = totalWidth - chartMargin.left - chartMargin.right;
       // se actualiza ancho del rango
       rangeWidth  = totalWidth - rangeMargin.left - rangeMargin.right;
       // se actualiza escala en x del gráfico
-      chartScaleX.range([0, chartWidth]);
+      chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_chart, (d) => d.date));
       // se actualiza escala en x del rango
       rangeScaleX.range([0, rangeWidth]);
-
-      //chartAxisX = d3.axisBottom(chartScaleX);
-      //rangeAxisX = d3.axisBottom(rangeScaleX);
-
       // se actualiza brush component
       brush.extent([[0, 0], [rangeWidth, rangeHeight]]);
       // se actualiza el ancho de todos los gráficos
-      charts = d3.selectAll('.chart-svg svg');
+      charts = d3.select(container).select('.chart-svg svg');
       charts.attr('width', chartWidth + chartMargin.left + chartMargin.right);
       // se actualiza el ancho de todos los defs
-      charts.select('defs').attr('width', chartWidth);
+      charts.select('defs rect').attr('width', chartWidth);
       // se actualiza el ancho de todos los background
       charts.select('.chart-background').attr('width', chartWidth + chartMargin.left + chartMargin. right);
       // se actualiza la posición del gráfico
-      charts.select('.chart-container').attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+      // charts.select('.chart-container').attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
       // se actualiza el ancho de la linea en la posición 0 del eje y
       charts.select('.chart-container').select('.chart-line-0 line').attr('x2', chartWidth);
       // se actualiza el ancho de la linea del gráfico
-      charts.select('.chart-container').selectAll('.chart-line path').attr('d', (d) => chartLine(d.values));
+      charts.select('.chart-container').selectAll('.chart-line path').attr('d', chartLine).attr('d', chartLine);
       // se actualiza el ancho del axis en x del gráfico
+      chartAxisX  = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
       charts.select('.chart-container').select('.chart-axis-x').call(chartAxisX);
       // se actualiza la posición del rango
-      charts.select('.range-container').attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
+      // charts.select('.range-container').attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
       // se actualiza el ancho de la linea del rango
-      charts.select('.range-container').selectAll('.range-line path').attr('d', (d) => rangeLine(d.values));
+      charts.select('.range-container').selectAll('.range-line path').attr('d', (d) => rangeLine(d));
       // se actualiza el ancho del axis en x del rango
       charts.select('.range-container').select('.range-axis-x').call(rangeAxisX);
       // se actualiza la posición de la fecha inicial seleccionada en el rango
-      charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(date) }, ${ rangeHeight + 17.5 })`);
+      charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(data_range[0].date) }, ${ rangeHeight + 17.5 })`);
       // se actualiza la posición de la fecha final seleccionada en el rango
       charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
       // se actualiza el ancho del brush
-      charts.select('.range-container').select('.range-brush').call(brush).call(brush.move, [rangeScaleX(date), chartWidth]);
+      charts.select('.range-container').select('.range-brush').call(brush).call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
     }
-    function changeSwitchPosition(activeButton, id) {
-      let container = activeButton.parentNode,
-          state = container.getAttribute('state');
-      // console.log(state);
 
-      if (state === 'on') {
-        container.querySelectorAll('button')[0].setAttribute('state', 'active');
-        container.querySelectorAll('button')[1].setAttribute('state', '');
-        container.querySelector('.switch-effect').setAttribute('style', 'left: 2px;');
-        container.setAttribute('state', 'off');
-
-        updateAxisY(generateRangeYStatic(id.getAttribute('id')), id.getAttribute('id'));
-      } else {
-        container.querySelectorAll('button')[0].setAttribute('state', '');
-        container.querySelectorAll('button')[1].setAttribute('state', 'active');
-        container.querySelector('.switch-effect').setAttribute('style', 'left: calc(50% - 2px);');
-        container.setAttribute('state', 'on');
-
-        updateAxisY(generateRangeYDinamic(id.getAttribute('id')), id.getAttribute('id'));
-      }
-    }
-    window.changeSwitchPosition = changeSwitchPosition;
-    function updateAxisY(domain, id) {
-      // console.log('dominio', domain);
-      chartScaleY.domain(domain);
-
-      d3.select(`#${ id }`).select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
-      d3.select(`#${ id }`).select('.chart-axis-y').call(chartAxisY);
-      d3.select(`#${ id }`).selectAll('.chart-line path').attr('d', (d) => {return chartLine(d.values);});
-    }
-    function generateRangeYStatic(chart_id) {
-      let minValue = d3.min(STORAGE.charts[chart_id].data_chart, (c) => {
-            let values = d3.values(c);
-                values.splice(0, 1);
-
-            return d3.min(values);
-          }),
-          maxValue = d3.max(STORAGE.charts[chart_id].data_chart, (c) => {
-            let values = d3.values(c);
-              values.splice(0, 1);
-
-            return d3.max(values);
-          }),
-          minExtend = minValue - ((maxValue - minValue) / 15),
-          maxExtend = maxValue + ((maxValue - minValue) / 15);
-      // console.log('se calculó el rango total', [minExtend, maxExtend]);
-      return [minExtend, maxExtend];
-    }
-    function generateRangeYDinamic(chart_id) {
-      let minValue = d3.min(STORAGE.charts[chart_id].data_range, (c) => {
-            let values = d3.values(c);
-                values.splice(0, 1);
-
-            return d3.min(values);
-          }),
-          maxValue = d3.max(STORAGE.charts[chart_id].data_range, (c) => {
-            let values = d3.values(c);
-              values.splice(0, 1);
-
-            return d3.max(values);
-          }),
-          minExtend = minValue - ((maxValue - minValue) / 15),
-          maxExtend = maxValue + ((maxValue - minValue) / 15);
-      // console.log('se calculó el rango parcial', [minExtend, maxExtend]);
-      return [minExtend, maxExtend];
-    }
+    // function changeSwitchPosition(activeButton, id) {
+    //   let container = activeButton.parentNode,
+    //       state = container.getAttribute('state');
+    //   // console.log(state);
+    //
+    //   if (state === 'on') {
+    //     container.querySelectorAll('button')[0].setAttribute('state', 'active');
+    //     container.querySelectorAll('button')[1].setAttribute('state', '');
+    //     container.querySelector('.switch-effect').setAttribute('style', 'left: 2px;');
+    //     container.setAttribute('state', 'off');
+    //
+    //     updateAxisY(generateRangeYStatic(id.getAttribute('id')), id.getAttribute('id'));
+    //   } else {
+    //     container.querySelectorAll('button')[0].setAttribute('state', '');
+    //     container.querySelectorAll('button')[1].setAttribute('state', 'active');
+    //     container.querySelector('.switch-effect').setAttribute('style', 'left: calc(50% - 2px);');
+    //     container.setAttribute('state', 'on');
+    //
+    //     updateAxisY(generateRangeYDinamic(id.getAttribute('id')), id.getAttribute('id'));
+    //   }
+    // }
+    // window.changeSwitchPosition = changeSwitchPosition;
+    // function updateAxisY(domain, id) {
+    //   // console.log('dominio', domain);
+    //   chartScaleY.domain(domain);
+    //
+    //   d3.select(`#${ id }`).select('.chart-line-0 line').attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+    //   d3.select(`#${ id }`).select('.chart-axis-y').call(chartAxisY);
+    //   d3.select(`#${ id }`).selectAll('.chart-line path').attr('d', (d) => {return chartLine(d.values);});
+    // }
+    // function generateRangeYStatic(chart_id) {
+    //   let minValue = d3.min(STORAGE.charts[chart_id].data_chart, (c) => {
+    //         let values = d3.values(c);
+    //             values.splice(0, 1);
+    //
+    //         return d3.min(values);
+    //       }),
+    //       maxValue = d3.max(STORAGE.charts[chart_id].data_chart, (c) => {
+    //         let values = d3.values(c);
+    //           values.splice(0, 1);
+    //
+    //         return d3.max(values);
+    //       }),
+    //       minExtend = minValue - ((maxValue - minValue) / 15),
+    //       maxExtend = maxValue + ((maxValue - minValue) / 15);
+    //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
+    //   return [minExtend, maxExtend];
+    // }
+    // function generateRangeYDinamic(chart_id) {
+    //   let minValue = d3.min(STORAGE.charts[chart_id].data_range, (c) => {
+    //         let values = d3.values(c);
+    //             values.splice(0, 1);
+    //
+    //         return d3.min(values);
+    //       }),
+    //       maxValue = d3.max(STORAGE.charts[chart_id].data_range, (c) => {
+    //         let values = d3.values(c);
+    //           values.splice(0, 1);
+    //
+    //         return d3.max(values);
+    //       }),
+    //       minExtend = minValue - ((maxValue - minValue) / 15),
+    //       maxExtend = maxValue + ((maxValue - minValue) / 15);
+    //   // console.log('se calculó el rango parcial', [minExtend, maxExtend]);
+    //   return [minExtend, maxExtend];
+    // }
 
     window.addEventListener('resize', redraw);
   }
-
-function renderChart() {
-  let chartComponente = document.createElement('div');
-      chartComponente.setAttribute('id', _chart.id);
-      chartComponente.classList.add('chart');
-      chartComponente.innerHTML = `<div class="head">
-                                      <h3>${ _chart.title }</h3>
-                                      <div class="break-line"><br></div>
-                                      <p class="paragraph">${ _chart.description }</p>
-                                      <div class="break-line"><br><br></div>
-                                   </div>
-                                   <div class="referenceContainer">
-                                     <div class="break-line"><br></div>
-                                     <span id="references"></span>
-                                     <div class="break-line"><br></div>
-                                     <div class="break-line"><hr></div>
-                                   </div>
-                                   <div class="rangeButton">
-                                    <div class="break-line"><br></div>
-                                    <div class="rangeButton-component">
-                                      <div class="rangeButton-text">Escala:</div>
-                                      <div class="rangeButton-button" state="off">
-                                        <div class="switch-effect" style="left: 2px;"></div>
-                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
-                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
-                                      </div>
-                                    </div>
-                                    <div class="break-line"><br></div>
-                                   </div>
-                                   <div class="chart-svg"></div>
-                                   <div class="break-line"><br></div>
-                                   <div class="modal-share">
-                                      <input id="share-${ charts[_index].id }" type="checkbox" class="share-open">
-                                      <label for="share-${ charts[_index].id }" class="share-open-button hamburger-dark">
-                                        <span class="hamburger-1"></span>
-                                        <span class="hamburger-2"></span>
-                                        <span class="hamburger-3"></span>
-                                      </label>
-                                      <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this)" style="background-color: gray; color: white; right: 0px;">
-                                        <span class="buttonCircleSmall boton_efecto">
-                                          <i class="fa fa-code" aria-hidden="true"></i>
-                                        </span>
-                                      </button>
-                                      <button class="share-item button buttonCircle" title="descargar" onclick="shareSaveAs(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
-                                        <span class="buttonCircleSmall boton_efecto">
-                                          <i class="fa fa-download" aria-hidden="true"></i>
-                                        </span>
-                                      </button>
-                                    </div>
-                                    <div class="loading flex">
-                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                    </div>`;
-
-  _chartContiner.append(chartComponente);
-  addContainerEmbebed(_chartContiner, _card.id, _chart.id);
-
-  STORAGE.charts[_chart.id] = { container:  chartComponente };
-
-  downloadChart(_chart);
-}
-
-
-function previewChart(_cardData, _idIndicator) {
-  console.log(_cardData);
-  console.log(_idIndicator);
-  STORAGE.cards.forEach((_card) => {
-
-    if (_card.id === _idIndicator) {
-
-      _card.charts.forEach((_chart, _index) => { renderChart(); });
-    }
-  });
-}
-
-function previewOnlyChart(_chartContiner, _id) {
-  STORAGE.cards.forEach((_card) => {
-
-    if (_card.id === _id) {
-
-      _card.charts.forEach((_chart) => {
-        if (_chart.id === _chartId) {
-          renderChart();
-        }
-      })
-    }
-  });
-}
-
-function renderChart() {
-  let chartComponente = document.createElement('div');
-      chartComponente.setAttribute('id', _chart.id);
-      chartComponente.classList.add('chart');
-      chartComponente.innerHTML = `<div class="head">
-                                      <h3>${ _chart.title }</h3>
-                                      <div class="break-line"><br></div>
-                                      <p class="paragraph">${ _chart.description }</p>
-                                      <div class="break-line"><br><br></div>
-                                   </div>
-                                   <div class="referenceContainer">
-                                     <div class="break-line"><br></div>
-                                     <span id="references"></span>
-                                     <div class="break-line"><br></div>
-                                     <div class="break-line"><hr></div>
-                                   </div>
-                                   <div class="rangeButton">
-                                    <div class="break-line"><br></div>
-                                    <div class="rangeButton-component">
-                                      <div class="rangeButton-text">Escala:</div>
-                                      <div class="rangeButton-button" state="off">
-                                        <div class="switch-effect" style="left: 2px;"></div>
-                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="active">Estática</button>
-                                        <button onclick="changeSwitchPosition(this, ${ _chart.id })" state="">Dinámica</button>
-                                      </div>
-                                    </div>
-                                    <div class="break-line"><br></div>
-                                   </div>
-                                   <div class="chart-svg"></div>
-                                   <div class="break-line"><br></div>
-                                   <div class="modal-share">
-                                      <input id="share-${ charts[_index].id }" type="checkbox" class="share-open">
-                                      <label for="share-${ charts[_index].id }" class="share-open-button hamburger-dark">
-                                        <span class="hamburger-1"></span>
-                                        <span class="hamburger-2"></span>
-                                        <span class="hamburger-3"></span>
-                                      </label>
-                                      <button class="share-item button buttonCircle" title="embeber" onclick="shareEmbebed(this)" style="background-color: gray; color: white; right: 0px;">
-                                        <span class="buttonCircleSmall boton_efecto">
-                                          <i class="fa fa-code" aria-hidden="true"></i>
-                                        </span>
-                                      </button>
-                                      <button class="share-item button buttonCircle" title="descargar" onclick="shareSaveAs(this, '${ _chart.id }')" style="background-color: gray; color: white; right: 0px;">
-                                        <span class="buttonCircleSmall boton_efecto">
-                                          <i class="fa fa-download" aria-hidden="true"></i>
-                                        </span>
-                                      </button>
-                                    </div>
-                                    <div class="loading flex">
-                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                    </div>`;
-
-  _chartContiner.append(chartComponente);
-  addContainerEmbebed(_chartContiner, _card.id, _chart.id);
-
-  STORAGE.charts[_chart.id] = { container:  chartComponente };
-
-  downloadChart(_chart);
-}
-
-
-
 
 // Funciones para render de las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
@@ -36314,8 +36168,8 @@ function renderChart() {
       $('#chartsContainer').fadeOut(250);
     }
   }
-  // Actualizado 18.08.2017 - Esta función genera el html de todas las tarjetas.
-  function previewAllCards() {
+  // Actualizado 18.08.2017 - Esta función solicita el html de todas las tarjetas.
+  function requestAllCards() {
     STORAGE.cards.forEach((_card) => { previewCard(_card); });
   }
   // Actualizado 18.08.2017 - Esta función genera el html una tarjeta.
@@ -36334,19 +36188,17 @@ function renderChart() {
     card += `<div class="break-line"><br></div>`;
     card += `<div class="mini-chart"></div>`;
     card += `<div class="break-line"><br><br><br></div>`;
-    card += `<button class="button" onclick="changeView('charts'); generateCharts(this);">`;
+    card += `<button class="button" onclick="changeView('charts'); requestAllCharts(this);">`;
     card += `<span class="button-waves">Ver más gráficos</span>`;
     card += `</button>`;
     card += `<div class="break-line"><br></div>`;
     card += `<a href="${ _card.download_url }" class="link" download><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos</a>`;
-    card += `<div class="loading flex">`;
-    card += `<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>`;
-    card += `</div>`;
 
     component = document.createElement('div');
     component.setAttribute('id', _card.id);
     component.setAttribute('class', 'card');
     component.innerHTML = card;
+    component.append(addLoading());
 
     document.querySelector('#cardsContainer #cards').append(component);
 
@@ -36373,7 +36225,7 @@ function renderChart() {
 
     renderMiniChart(_card, component.querySelector('.mini-chart'));
   }
-  // Actualizado 18.08.2017 - Esta función genera un gráfico de linea en la tarjeta.
+  // Actualizado 18.08.2017 - Esta función genera un gráfico de linea.
   function renderMiniChart(_cardData, _element) {
     let data, container, margin, width, height, minValue, maxValue, chartWidth,
         chartHeight, scaleX, scaleY, line, svg, chartContainer;
@@ -36487,7 +36339,7 @@ function renderChart() {
   // Actualizado 17.08.2017 - Renderiza el sitio.
   function start(_card = null, _indicator = null) {
     if (_card === null || _indicator === null) {
-      downloadFile({local: './public/data/cards.json'}, 'cards').then(previewAllCards);
+      downloadFile({local: './public/data/cards.json'}, 'cards').then(requestAllCards);
     } else {
       downloadFile({local: './public/data/cards.json'}, 'cards').then(() => { previewChart(_card, _indicator); });
     }
