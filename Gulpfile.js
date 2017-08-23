@@ -30,7 +30,7 @@ const removeLogs       = require('gulp-removelogs'); // Plugin para quitar conso
 const imagemin         = require('gulp-imagemin'); // Plugin para optimizar imagenes
 
 // Entorno
-let entorno = 'prod';
+let entorno = 'dev';
 
 let config = { // opciones: dev, prod
   isProd: (entorno === 'prod') ? (true) : (false)
@@ -126,11 +126,11 @@ gulp.task('css_minify', () => {
 
   return gulp.src(routes)
     .pipe( plumber() )
-    .pipe( gulpif(!entorno.isProd, sourcemaps.init()) )
-    .pipe( gulpif(entorno.isProd, stripCssComments({ preserve: false })) )
-    .pipe( gulpif(entorno.isProd, postcss([ calc, zindex, mqpacker, combineSelectors, cssnano ])) )
+    .pipe( gulpif(!config.isProd, sourcemaps.init()) )
+    .pipe( gulpif(config.isProd, stripCssComments({ preserve: false })) )
+    .pipe( gulpif(config.isProd, postcss([ calc, zindex, mqpacker, combineSelectors, cssnano ])) )
     .pipe( rename({ basename: 'app', extname: '.min.css' }) )
-    .pipe( gulpif(!entorno.isProd, sourcemaps.write('.')) )
+    .pipe( gulpif(!config.isProd, sourcemaps.write('.')) )
     .pipe( gulp.dest('./public/styles/') )
     .pipe( browserSync.stream() );
 });
@@ -186,11 +186,11 @@ gulp.task('js_minify', () => {
 
   return gulp.src(routes)
     .pipe( plumber() )
-    .pipe( gulpif(!entorno.isProd, sourcemaps.init()) )
-    .pipe( gulpif(entorno.isProd, babel({ presets: ['babili'] }) ))
-    .pipe( gulpif(entorno.isProd, removeLogs()) )
+    .pipe( gulpif(!config.isProd, sourcemaps.init()) )
+    .pipe( gulpif(config.isProd, babel({ presets: ['babili'] }) ))
+    .pipe( gulpif(config.isProd, removeLogs()) )
     .pipe( rename({ basename: 'app', extname: '.min.js' }) )
-    .pipe( gulpif(!entorno.isProd, sourcemaps.write('.')) )
+    .pipe( gulpif(!config.isProd, sourcemaps.write('.')) )
     .pipe( gulp.dest('./public/scripts/') )
     .pipe( browserSync.stream() );
 });

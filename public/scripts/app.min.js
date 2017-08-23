@@ -35297,6 +35297,7 @@ return hooks;
 
 const STORAGE = {
   'charts': {}, // Se guarda información correspondiente a cada gráfico
+  'activeCard': {},
   'colors': {
     base: '#767676', base_dark: '#444444', base_light: '#FAFAFA',
     gobar_light: '#17B2F8', gobar_dark: '#0695D6',
@@ -35603,9 +35604,9 @@ window.storage = STORAGE;
   }
   function normalDatosLine(_data, _indicatorId) {
     let data_norm = _data
-      .filter((d) => (d[1] !== null))
+      // .filter((d) => (d[1] !== null))
       .map((d) => {
-        return {date: new Date(d[0]), value: roundNumber(d[1], 3)};
+        return {date: new Date(d[0]), value: (d[1] !== null)?(roundNumber(d[1], 3)):(null)};
       });
 
     return data_norm;
@@ -35808,7 +35809,7 @@ window.storage = STORAGE;
     brush = d3.brushX().extent([[0, 0], [rangeWidth, rangeHeight]]).on('brush', brushed);
 
     // Se define el tipo de línea  /////////////////////////////////////////////
-    chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value));
+    chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)).defined((d) => {console.log(typeof d.value);return d.value != null;});
     rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
 
     // Se define svg ///////////////////////////////////////////////////////////
@@ -35828,6 +35829,7 @@ window.storage = STORAGE;
     STORAGE.charts[_chart.id]['svg'] = svg;
 
     // se crea contenedor del gráfico //////////////////////////////////////////
+    console.log(data_lines);
     chartContainer = svg.append('g')
       .attr('class', 'chart-container')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
@@ -35897,6 +35899,8 @@ window.storage = STORAGE;
       .call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
 
     // se crea tooltip /////////////////////////////////////////////////////////
+    let activeChart = STORAGE.cards.filter((_v) => _v.id === STORAGE.activeCard)[0].charts.filter((_v) => _v.id === _chart.id)[0].indicators;
+
     tooltipLine = svg.append('g')
       .attr('class', 'chart-tooltip')
       .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
@@ -35911,6 +35915,7 @@ window.storage = STORAGE;
     tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
       .data(data_lines)
       .enter().append('g')
+      .attr('id', (d, i) => `${ _chart.id }_${ activeChart[i].id }`)
       .attr('class', 'tooltip-indicator')
       .style('opacity', 0);
     tooltipIndicator.append('circle')
@@ -35958,9 +35963,33 @@ window.storage = STORAGE;
       data.date['position'] = chartScaleX(data.date.calendar);
       data.values = getValuesToDate(STORAGE.charts[_chart.id].data_chart, data.date.calendar);
 
+      let activeChart = STORAGE.cards.filter((_v) => _v.id === STORAGE.activeCard)[0].charts.filter((_v) => _v.id === _chart.id)[0].indicators;
+
       tooltipDom.select('.tooltip-line').attr('d', `M ${ data.date.position }, 0 V ${ chartHeight }`);
-      tooltipDom.selectAll('.tooltip-indicator').attr('transform', (d, i) => (typeof data.values[i] === 'number')?(`translate(${ data.date.position }, ${ chartScaleY(data.values[i]) })`):('translate(-9999, -9999)'))
-        .select('text').text((d, i) => `${ formatNumberD3(data.values[i]) }`)
+      tooltipDom.selectAll('.tooltip-indicator')
+        .attr('transform', (d, i) => {
+          let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).toString() === moment(data.date.calendar).toString());
+
+          if (value[0]) {
+            if (typeof value[0][1] === 'number') {
+              return `translate(${ data.date.position }, ${ chartScaleY(value[0][1]) })`;
+            } else {
+              return 'translate(-9999, -9999)';
+            }
+          } else {
+            return 'translate(-9999, -9999)';
+          }
+          // return (typeof data.values[i] === 'number')?(`translate(${ data.date.position }, ${ chartScaleY(data.values[i]) })`):('translate(-9999, -9999)');
+        })
+        .select('text').text((d, i) => {
+          let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).toString() === moment(data.date.calendar).toString());
+
+          if (value[0]) {
+            return `${ formatNumberD3(value[0][1]) } - ${ activeChart[i].short_name }`;
+          } else {
+            return '';
+          }
+        })
         // .select('text').text((d, i) => `${ formatNumberD3(data.values[i]) } - ${ i }`)
         .attr('text-anchor', (data.date.position < (width / 2))?('start'):('end'))
         .attr('transform', (data.date.position < (width / 2))?('translate(25, 7)'):('translate(-25, 7)'));
@@ -36144,7 +36173,8 @@ window.storage = STORAGE;
 ////////////////////////////////////////////////////////////////////////////////
 
   // Actualizado 18.08.2017 - Esta función intercambia las vistas cards/charts.
-  function changeView(_container) {
+  function changeView(_container, _cardId) {
+    STORAGE.activeCard = _cardId;
 
     if (_container === 'charts') {
       $('#chartsContainer').show();
@@ -36172,7 +36202,7 @@ window.storage = STORAGE;
     card += `<div class="break-line"><br></div>`;
     card += `<div class="mini-chart"></div>`;
     card += `<div class="break-line"><br><br><br></div>`;
-    card += `<button class="button" onclick="changeView('charts'); requestAllCharts(this);">`;
+    card += `<button class="button" onclick="changeView('charts', '${ _card.id }'); requestAllCharts(this);">`;
     card += `<span class="button-waves">Ver más gráficos</span>`;
     card += `</button>`;
     card += `<div class="break-line"><br></div>`;
@@ -36300,14 +36330,15 @@ window.storage = STORAGE;
   }
   // Actualizado 17.08.2017 - Renderiza un iframe.
   function renderIframe(_indicator, _chart) {
+    // console.log(_indicator, _chart);
     // Se define el contenedor de los modulos
-    let container = window.document.querySelector('#app');
+    let container = window.document.getElementById('app');
         container.setAttribute('class', 'flex flex-column flex-align-end');
     // Se configurán estilos especiales
-    window.document.querySelector('#chartsContainer').style.display = 'block';
-    window.document.querySelector('#chartsContainer').style.position = 'relative';
+    window.document.getElementById('chartsContainer').style.display = 'block';
+    window.document.getElementById('chartsContainer').style.position = 'relative';
     // Se eliminan contenedores innecesarios
-    window.document.querySelector('#cardsContainer').remove();
+    window.document.getElementById('cardsContainer').remove();
     window.document.querySelector('.back-link').remove();
     // Se descargar créditos
     downloadFile({local: './public/data/createBy.json'}, 'createBy').then(() => {
