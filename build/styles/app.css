@@ -58,6 +58,10 @@ body {
     color: var(--gobarDark);
   }
 
+  & > .human_frecuency {
+    margin: 0;
+  }
+
   & > .units {
     margin: 0;
     font-size: 16px;

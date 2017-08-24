@@ -11,7 +11,7 @@ const STORAGE = {
   }
 };
 
-window.storage = STORAGE;
+// window.storage = STORAGE; // DEVELOPER
 
 // Funciones Globales
 ////////////////////////////////////////////////////////////////////////////////
@@ -115,6 +115,20 @@ window.storage = STORAGE;
 
 // Funciones de parseo de datos.
 ////////////////////////////////////////////////////////////////////////////////
+  function parseHumanFrecuency(_frecuency, _laps) {
+    let frecuency;
+
+    switch (_frecuency) {
+      case 'R/P1Y': frecuency = 'años'; break;
+      case 'R/P6M': frecuency = 'semestres'; break;
+      case 'R/P3M': frecuency = 'trimestres'; break;
+      case 'R/P1M': frecuency = 'meses'; break;
+      case 'R/P1D': frecuency = 'días'; break;
+      default: frecuency = 'frecuencia invalida';
+    }
+
+    return `Últimos ${ _laps } ${ frecuency }`;
+  }
 
   // Actualizado 17.08.2017 - Esta función parsea el el formato de tipo de linea.
   function parseTypeLine(type) {
@@ -907,7 +921,9 @@ window.storage = STORAGE;
     card += `<p class="units"></p>`;
     card += `<div class="break-line"><br></div>`;
     card += `<div class="mini-chart"></div>`;
-    card += `<div class="break-line"><br><br><br></div>`;
+    card += `<div class="break-line"><br></div>`;
+    card += `<p class="human_frecuency"></p>`;
+    card += `<div class="break-line"><br><br></div>`;
     card += `<button class="button" onclick="changeView('charts', '${ _card.id }'); requestAllCharts(this);">`;
     card += `<span class="button-waves">Ver más gráficos</span>`;
     card += `</button>`;
@@ -941,6 +957,7 @@ window.storage = STORAGE;
     component.querySelector('.frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0], true);
     component.querySelector('.units_representation').innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
     component.querySelector('.units').innerHTML = metadata.units;
+    component.querySelector('.human_frecuency').innerHTML = parseHumanFrecuency(metadata.frequency, _card.laps);
     component.querySelector('.loading').remove();
 
     renderMiniChart(_card, component.querySelector('.mini-chart'));
@@ -1006,67 +1023,70 @@ window.storage = STORAGE;
 // Inicio de la aplicación.
 ////////////////////////////////////////////////////////////////////////////////
 
-  // Actualizado 17.08.2017 - Devuelve un array con todos los parametros GET.
-  function getRequestToArray(search) {
-    let args       = search.substring(1).split('&'),
-        argsParsed = {}, i, arg, kvp, key, value;
+// Devuelve un array con todos los parametros GET.
+// (Optimized)(Update: 25.08.2017)
+function httpGetToArray(_search) {
+  var args = _search.substring(1).split('&'),
+      argsParsed = {}, i, kvp, key, value;
 
-    for (i = 0; i < args.length; i++) {
-      if (args[i].indexOf('=') === -1) {
-        argsParsed[decodeURIComponent(args[i]).trim()] = true;
-      } else {
-        kvp   = args[i].split('=');
-        key   = decodeURIComponent(kvp[0]).trim();
-        value = decodeURIComponent(kvp[1]).trim();
-        argsParsed[key] = value;
-      }
-    }
-
-    return argsParsed;
-  }
-  // Actualizado 17.08.2017 - Verifica si tiene que cargar el sitio o un iframe.
-  function checkGetRequest() {
-    let params = getRequestToArray(window.location.search);
-
-    if (params.hasOwnProperty('indicator') && params.hasOwnProperty('chart')) {
-      renderIframe(params.indicator, params.chart);
+  for (i = 0; i < args.length; i++) {
+    if (args[i].indexOf('=') === -1) {
+      argsParsed[decodeURIComponent(args[i]).trim()] = true;
     } else {
-      start();
+      kvp = args[i].split('=');
+      key = decodeURIComponent(kvp[0]).trim();
+      value = decodeURIComponent(kvp[1]).trim();
+      argsParsed[key] = value;
     }
   }
-  // Actualizado 17.08.2017 - Renderiza un iframe.
-  function renderIframe(_indicator, _chart) {
-    // console.log(_indicator, _chart);
-    // Se define el contenedor de los modulos
-    let container = window.document.getElementById('app');
-        container.setAttribute('class', 'flex flex-column flex-align-end');
-    // Se configurán estilos especiales
-    window.document.getElementById('chartsContainer').style.display = 'block';
-    window.document.getElementById('chartsContainer').style.position = 'relative';
-    // Se eliminan contenedores innecesarios
-    window.document.getElementById('cardsContainer').remove();
-    window.document.querySelector('.back-link').remove();
-    // Se descargar créditos
-    downloadFile({local: './public/data/createBy.json'}, 'createBy').then(() => {
-      let creditos = window.document.createElement('span');
-          creditos.innerHTML = `Desarrollado por <a href="${ STORAGE.createBy.redirect_url }" class="link">${ STORAGE.createBy.name }</a>`;
-          creditos.style.opacity = '0.5';
-      // Se agregan créditos
-      container.appendChild(creditos);
-    });
-    // Se renderizan todos los modulos
-    start(_indicator, _chart);
+
+  return argsParsed;
+}
+// Activa el modo iframe.
+// (Optimized)(Update: 25.08.2017)
+function iframeApp() {
+  function createCreditsElement() {
+    var credits = window.document.createelement('span');
+        credits.style.opacity = '0.5';
+        credits.innerHTML = `Desarrollado por <a href="${ STORAGE.createBy.redirect_url }" class="link">${ STORAGE.createBy.name }</a>`;
+
+    return credits;
   }
-  // Actualizado 17.08.2017 - Renderiza el sitio.
-  function start(_card = null, _indicator = null) {
-    if (_card === null || _indicator === null) {
-      downloadFile({local: './public/data/cards.json'}, 'cards').then(requestAllCards);
-    } else {
-      downloadFile({local: './public/data/cards.json'}, 'cards').then(() => { previewChart(_card, _indicator); });
-    }
+
+  var app = $('#app');
+      app.attr('class', 'flex flex-column flex-align-end');
+
+  var cards = $('#cardsContainer');
+      cards.remove();
+
+  var charts = $('#chartsContainer');
+      charts.css({ display: 'block', position: 'relative' });
+      charts.find('.back-link').remove();
+
+  downloadFile({ local: './public/data/createBy.json' }, 'createBy').then(() => { charts.append(createCreditsElement); });
+}
+// Valida la activación del modo iframe.
+// (Optimized)(Update: 25.08.2017)
+function httpGetCheck() {
+  var params = httpGetToArray(window.location.search);
+
+  if (params.hasOwnProperty('indicator') && params.hasOwnProperty('chart')) {
+    iframeApp();
+    start(params.indicator, params.chart);
+  } else {
+    start();
   }
+}
+// Inicia la app.
+// (Optimized)(Update: 25.08.2017)
+function start(_cardId, _indicatorId) {
+  var download = downloadFile({ local: './public/data/cards.json' }, 'cards');
+
+  if (_cardId === undefined || _indicatorId === undefined) { download.then(requestAllCards); }
+  else { download.then(() => { previewChart(_cardId, _indicatorId); }); }
+}
 
 // Is Document Ready
 ////////////////////////////////////////////////////////////////////////////////
 
-  window.document.onload = checkGetRequest();
+window.document.onload = httpGetCheck();

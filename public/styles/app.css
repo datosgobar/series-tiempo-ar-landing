@@ -4356,6 +4356,10 @@ body {
   color: #0695d6;
 }
 
+#cards .card > .human_frecuency {
+  margin: 0;
+}
+
 #cards .card > .units {
   margin: 0;
   font-size: 16px;
