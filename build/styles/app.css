@@ -120,7 +120,7 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 2;
+  z-index: 500;
   transition: display 0.25s ease-out;
 
   & > .back-link {
@@ -163,7 +163,7 @@ body {
     & > .referenceContainer {
       background-color: var(--baseLight);
 
-      & > #references {
+      & > .references {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -440,5 +440,16 @@ body {
     width: 100px;
     height: 44px;
     color: white;
+  }
+}
+
+.loading {
+  z-index: 100;
+
+  & > .error-message {
+    color: #a63232;
+    margin: 30px 10px 0;
+    text-align: center;
+    font-size: 14px;
   }
 }

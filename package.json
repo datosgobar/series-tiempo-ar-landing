@@ -1,7 +1,7 @@
 {
-  "name": "Modal",
+  "name": "visualización de datos",
   "version": "1.0.0",
-  "description": "Sistema de modularización de contenido",
+  "description": "Equipo de visualizaciones de datos del Ministerio de Modernización del Gobierno de la Nación",
   "dependencies": {
     "autoprefixer": "^7.1.2",
     "babel-preset-babili": "^0.1.4",

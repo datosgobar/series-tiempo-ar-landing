@@ -4425,7 +4425,7 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: 2;
+  z-index: 500;
   -webkit-transition: display 0.25s ease-out;
   transition: display 0.25s ease-out
 }
@@ -4484,7 +4484,7 @@ body {
   background-color: #fafafa;
 }
 
-#charts .chart > .referenceContainer > #references {
+#charts .chart > .referenceContainer > .references {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4499,7 +4499,7 @@ body {
   margin: 0 10px;
 }
 
-#charts .chart > .referenceContainer > #references > p {
+#charts .chart > .referenceContainer > .references > p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4513,7 +4513,7 @@ body {
   font-weight: 600;
 }
 
-#charts .chart > .referenceContainer > #references .reference-round-line {
+#charts .chart > .referenceContainer > .references .reference-round-line {
   width: 15px;
   height: 2px;
   border-radius: 2px;
@@ -4767,6 +4767,17 @@ body {
   width: 100px;
   height: 44px;
   color: white;
+}
+
+.loading {
+  z-index: 100
+}
+
+.loading > .error-message {
+  color: #a63232;
+  margin: 30px 10px 0;
+  text-align: center;
+  font-size: 14px;
 }
 
 .odometer.odometer-auto-theme, .odometer.odometer-theme-minimal {

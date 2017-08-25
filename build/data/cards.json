@@ -1,5 +1,5 @@
 [{
-    "id": "11.3_VIPAA_2004_M_31",
+    "id": "11.3_VIPAA_2004_M_31pepe",
     "title": "Nivel de actividad",
     "download_url": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
     "short_name": "EMAE",
@@ -121,7 +121,7 @@
         "description": "Tasas de actividad y empleo.",
         "type": "line",
         "indicators": [{
-            "id": "43.2_ECTAT_0_T_33",
+            "id": "43.2_ECTAT_0_T_33pepe",
             "short_name": "Tasa de Actividad",
             "color": "#FF6100",
             "type": "solid"
