@@ -156,7 +156,7 @@
   // Actualizado 17.08.2017 - Esta función parsea el formato de tipo de fecha.
   function parseFormatDate(format, date, short = false) {
       date = moment(date);
-
+      console.log(format, date);
       switch (format) {
           case 'R/P1Y':
               return date.format('YYYY');
@@ -1067,12 +1067,12 @@
   function injectCardData(_card) {
       var data = STORAGE[_card.id].data,
           metadata = STORAGE[_card.id].metadata,
-          cardComponent = document.getElementById(metadata.id);
+          cardComponent = document.getElementById(metadata.field_id);
 
-      cardComponent.querySelector('.frequency').innerHTML = parseFormatDate(metadata.frequency, data[data.length - 1][0], true);
+      cardComponent.querySelector('.frequency').innerHTML = parseFormatDate(metadata.distribution_index_frequency, data[data.length - 1][0], true);
       cardComponent.querySelector('.units_representation').innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
-      cardComponent.querySelector('.units').innerHTML = metadata.units;
-      cardComponent.querySelector('.human_frecuency').innerHTML = parseHumanFrecuency(metadata.frequency, _card.laps);
+      cardComponent.querySelector('.units').innerHTML = metadata.field_units;
+      cardComponent.querySelector('.human_frecuency').innerHTML = parseHumanFrecuency(metadata.distribution_index_frequency, _card.laps);
       cardComponent.querySelector('.loading').remove();
 
       renderMiniChart(_card, cardComponent.querySelector('.mini-chart'));
