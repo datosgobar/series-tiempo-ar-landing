@@ -587,7 +587,7 @@
 
       // Se define el tipo de línea  /////////////////////////////////////////////
       chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)).defined((d) => { console.log(typeof d.value); return d.value != null; });
-      rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
+      rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value)).defined((d) => { console.log(typeof d.value); return d.value != null; });
 
       // Se define svg ///////////////////////////////////////////////////////////
       svg = d3.select(`#${ _chart.id } .chart-svg`).append('svg')
@@ -615,7 +615,8 @@
           .attr('x1', 0)
           .attr('x2', chartWidth)
           .attr('y1', chartScaleY(0))
-          .attr('y2', chartScaleY(0));
+          .attr('y2', chartScaleY(0))
+          .attr('clip-path', 'url(#clip)');
       chartContainer.append('g')
           .attr('class', 'chart-axis-x')
           .attr('transform', `translate(0, ${ chartHeight })`)

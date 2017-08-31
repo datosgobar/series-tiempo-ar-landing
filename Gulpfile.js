@@ -47,7 +47,7 @@ gulp.task('server', () => browserSync.init({
     host: 'localhost',
     port: 9000,
     online: true,
-    browser: ['safari'],
+    browser: ['chrome'],
     logLevel: 'info',
     ui: false,
 }));

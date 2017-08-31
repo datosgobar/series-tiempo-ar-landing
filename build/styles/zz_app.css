@@ -46,7 +46,7 @@ body {
 
   & > .frequency {
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--base);
     font-weight: 600;
   }
@@ -64,7 +64,7 @@ body {
 
   & > .units {
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: var(--base);
   }
