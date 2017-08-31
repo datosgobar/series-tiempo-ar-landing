@@ -4696,6 +4696,7 @@ body {
           align-items: center;
   margin: 0 10px 5px 0;
   font-weight: 600;
+  font-size: 14px;
 }
 
 #charts .chart > .referenceContainer > .references .reference-round-line {
