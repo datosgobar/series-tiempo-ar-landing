@@ -95,9 +95,9 @@ En la ruta `./build/data` se encuentra el archivo `cards.json` que nos permite c
 ```
 
 - id: Define el indicador que se quiere mostrar en la tarjeta principal. IMPORTANTE: El id hace referencia al nombre del archivo del indicador.
-- title: Representa el titulo que se muestra en la tarjeta principal. Se recomienda restringir la cantidad de caracteres a XXXX.
+- title: Representa el titulo que se muestra en la tarjeta principal. Se recomienda restringir la cantidad de caracteres a 30.
 - download_url: Contiene la URL de descarga del archivo.
-- short_name: Representa el nombre del indicador. Se recomienda restringir la cantidad de caracteres a XXXX.
+- short_name: Representa el nombre del indicador. Se recomienda restringir la cantidad de caracteres a 20.
 - units_representation: Define la transformación del valor recibido por el indicador. Las opciones disponibles son:
     - "%" multiplica el valor * 100.
     - "1" no recibe ninguna transformación.
@@ -119,8 +119,8 @@ En la ruta `./build/data` se encuentra el archivo `cards.json` que nos permite c
 ```
 
 - id: Define un nombre único para representar el grafico.
-- title: Representa el titulo que se muestra en la tarjeta del gráfico. Se recomienda restringir la cantidad de caracteres a XXXX.
-- description: Representa el párrafo que se muestra en la tarjeta del gráfico. Se recomienda restringir la cantidad de caracteres a XXXX.
+- title: Representa el titulo que se muestra en la tarjeta del gráfico. Se recomienda restringir la cantidad de caracteres a 40.
+- description: Representa el párrafo que se muestra en la tarjeta del gráfico. Se recomienda restringir la cantidad de caracteres a 90.
 - type: Define el tipo de gráfico que se va a dibujar. Por el momento, `line` es el único valor disponible.
 - frequency: Define la frecuencia de datos del gráfico bajo el estandar [ISO 8601]('https://www.iso.org/iso-8601-date-and-time-format.html'). Las opciones disponibles son:
     - "R/P1Y" para frecuencias anuales.
@@ -143,7 +143,7 @@ En la ruta `./build/data` se encuentra el archivo `cards.json` que nos permite c
 ```
 
 - id: Define el indicador que se quiere graficar. IMPORTANTE: El id hace referencia al nombre del archivo del indicador.
-- short_name: Representa el nombre del indicador. Se recomienda restringir la cantidad de caracteres a XXXX.
+- short_name: Representa el nombre del indicador. Se recomienda restringir la cantidad de caracteres a 25.
 - color: Define el color del indicador en el gráfico. Se recomienda utilizar el siguiente criterio:
     - color 1
     - color 2
