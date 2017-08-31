@@ -1,1 +1,116 @@
-<!DOCTYPE html><html lang=es><title>$nombreProducto - $descripcionProducto</title><meta http-equiv=Content-Type content="text/html; charset=UTF-8"><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv=Content-Language content=es><meta name=description content=$descripcionProducto><meta name=keywords content=$palabrasclave><link href=./public/image/favicon.ico rel="shortcut icon" type=image/png><link rel=stylesheet href=./public/styles/app.min.css><script src=./public/scripts/app.min.js></script><h1 class=hide>$nombreProducto</h1><div id=app><section id=cardsContainer class=max-width><h2 class=hide>Categor&#237;as</h2><div id=cards class="flex flex-wrap"></div></section><section id=chartsContainer class=max-width style=display:none><h2 class=hide>Gr&#225;ficos</h2><a class="link back-link" onclick="changeView('cards');"><i class="fa fa-arrow-left" aria-hidden=true></i> Volver</a><div id=charts></div></section></div>
+<!DOCTYPE html>
+<html lang="es""">
+
+  <!-- { $nombreProducto      => '',
+         $descripcionProducto => '',
+         $palabrasclave       => '',
+         $gitHub              => 'landing-ied', } -->
+
+  <head>
+    <!-- Google Tag Manager -->
+    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PK7DG3');</script> -->
+    <!-- End Google Tag Manager -->
+    <title>$nombreProducto - $descripcionProducto</title>
+    <!-- Meta Data -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Language" content="es">
+    <meta name="description" content="$descripcionProducto">
+    <meta name="keywords" content="$palabrasclave">
+    <!-- FaceBook -->
+    <meta property="og:url" content="https://datosgobar.github.io/$gitHub">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="$nombreProducto">
+    <meta property="og:site_name" content="Datos Argentina">
+    <meta property="og:description" content="$descripcionProducto">
+    <meta property="og:image" content="https://datosgobar.github.io/$gitHub/public/images/meta_facebook.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="2400">
+    <meta property="og:image:height" content="1260">
+    <meta property="og:locale" content="es_ar">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@datosgobar">
+    <meta name="twitter:title" content="$nombreProducto">
+    <meta name="twitter:description" content="$descripcionProducto">
+    <meta name="twitter:image:src" content="https://datosgobar.github.io/$gitHub/public/images/meta_twitter.png">
+    <!-- Favicon -->
+    <link href="./public/image/favicon.ico" rel="shortcut icon" type="image/png">
+    <!-- App - CSS -->
+    <link rel="stylesheet" type="text/css" href="./public/styles/app.min.css">
+    <!-- App - JavaScript -->
+    <script type="text/javascript" src="./public/scripts/app.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager -->
+    <!-- <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KMSJQ8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KMSJQ8');</script> -->
+    <!-- Barra de Navegación - Last Update 31.07.2017 -->
+    <!-- <header id="header">
+      <div class="modal-responsive">
+        <div class="flex flex-justify-between max-width max-height">
+          <a href="#" class="flex">
+            <img src="./public/images/logo-gobar.svg" class="logo-modernizacion" alt="logo de argentina.gob.ar del gobierno de la nación">
+          </a>
+          <div id="header-share" class="max-height onlyWeb flex">
+            <span>COMPARTÍ</span>
+            <a href="javascript: window.open('https://www.facebook.com/sharer/sharer.php?u=https://datosgobar.github.io/$gitHub', 'pop', 'width=600, height=260, scrollbars=no');" target="_blank">
+              <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+            </a>
+            <a href="javascript: window.open('https://twitter.com/share?url=https://datosgobar.github.io/$gitHub')" target="_blank">
+              <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header> -->
+    <!-- Titulo del producto -->
+    <h1 class="hide">$nombreProducto</h1>
+    <!-- Contenido del sitio -->
+    <div id="app">
+      <!-- Cards Container -->
+      <section id="cardsContainer" class="max-width">
+        <h2 class="hide">Categorías</h2>
+        <div id="cards" class="flex flex-wrap"></div>
+      </section>
+      <!-- Charts Container -->
+      <section id="chartsContainer" class="max-width" style="display: none;">
+        <h2 class="hide">Gráficos</h2>
+        <a class="link back-link" onclick="changeView('cards');"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+        <div id="charts">
+
+        </div>
+      </section>
+    </div>
+    <!-- Footer - Last Update 31.07.2017 -->
+    <!-- <footer id="footer" class="flex">
+      <div class="modal-responsive">
+        <div class="footer-content">
+          <div class="footer-icons">
+            <div class="flex">
+              <a href="https://twitter.com/datosgobar" class="social-link" target="_blank"><i class="fa fa-twitter"></i></a>
+              <a href="https://medium.com/datos-argentina" class="social-link" target="_blank"><i class="fa fa-medium"></i></a>
+              <a href="https://github.com/datosgobar" class="social-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+              <a href="https://www.facebook.com/GobAbiertoAR/" class="social-link" target="_blank"><i class="fa fa-facebook"></i></a>
+            </div>
+            <a href="#" class="flex">
+              <img src="./public/images/logo-modernizacion.svg" class="logo-modernizacion" alt="logo del ministerio de modernización del gobierno de la nación">
+            </a>
+          </div>
+          <div class="footer-links">
+            <a href="mailto:datos@modernizacion.gob.ar" class="text-link">Contacto</a>
+            <a href="https://datosgobar.github.io/" class="text-link">Nuestro equipo</a>
+          </div>
+        </div>
+      </div>
+    </footer> -->
+  </body>
+
+</html>
