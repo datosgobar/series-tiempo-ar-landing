@@ -657,7 +657,7 @@
       endBrush = rangeContainer.append('g')
           .attr('class', 'end-brush-date')
           .attr('text-anchor', 'start')
-          .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+          .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 17.5 })`);
       endBrush.append('rect')
           .attr('height', '20px')
           .attr('transform', 'translate(-7.5, -15)')
@@ -813,7 +813,7 @@
 
               let endBrush = d3.select(this.parentNode)
                   .select('.end-brush-date')
-                  .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
+                  .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 17.5 })`);
 
               endBrush.select('.end-brush-date text')
                   .text(parseFormatDate(_chart.frequency, range[1], true));
@@ -821,7 +821,7 @@
               let widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
 
               endBrush.select('.end-brush-date rect')
-                  .attr('width', widthEndBrush + 15);
+                  .attr('width', widthEndBrush + 17.5);
 
               // Se actualizan fecha mínima y máxima del eje x en rangeContainer
               dataFiltered = $.extend(true, [], STORAGE.charts[_chart.id]['data_chart']);
@@ -890,7 +890,7 @@
           // se actualiza la posición de la fecha inicial seleccionada en el rango
           charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(data_range[0].date) }, ${ rangeHeight + 17.5 })`);
           // se actualiza la posición de la fecha final seleccionada en el rango
-          charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+          charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 17.5 })`);
           // se actualiza el ancho del brush
           // console.log('date_1', STORAGE.charts[_chart.id].data_range[0].date);
           // console.log('date_2', STORAGE.charts[_chart.id].data_range[1].date);

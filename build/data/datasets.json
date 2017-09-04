@@ -1,0 +1,11 @@
+[
+    {
+        "catalog_url": "./public/data/data.json",
+        "dataset_identifier": "184b7d35-0747-438b-896d-90475abdb560",
+        "dataset_landingPage": "...url definida por el usuario",
+        "distribution": [
+            {"identifier": "", "title": "Ventas de Comercializadores de GLP"},
+            {"identifier": "", "title": "Ventas de Distribuidor Envases de GLP"}
+        ]
+    }
+]

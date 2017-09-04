@@ -634,7 +634,7 @@ function renderChart(_chart) {
     startBrush = rangeContainer.append('g').attr('class', 'start-brush-date').attr('text-anchor', 'end').attr('transform', 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')');
     startBrush.append('rect').attr('height', '20px').attr('transform', 'translate(0, -15)').attr('fill', 'white');
     startBrush.append('text');
-    endBrush = rangeContainer.append('g').attr('class', 'end-brush-date').attr('text-anchor', 'start').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
+    endBrush = rangeContainer.append('g').attr('class', 'end-brush-date').attr('text-anchor', 'start').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 17.5) + ')');
     endBrush.append('rect').attr('height', '20px').attr('transform', 'translate(-7.5, -15)').attr('fill', 'white');
     endBrush.append('text');
     rangeLines = rangeContainer.selectAll('.range-line').data(data_lines).enter().append('g').attr('class', 'range-line');
@@ -775,13 +775,13 @@ function renderChart(_chart) {
 
             _startBrush.select('.start-brush-date rect').attr('width', widthStartBrush + 15).attr('x', -((widthStartBrush + 15) / 2) - widthStartBrush / 2);
 
-            var _endBrush = d3.select(this.parentNode).select('.end-brush-date').attr('transform', 'translate(' + position[1] + ', ' + (rangeHeight + 15) + ')');
+            var _endBrush = d3.select(this.parentNode).select('.end-brush-date').attr('transform', 'translate(' + position[1] + ', ' + (rangeHeight + 17.5) + ')');
 
             _endBrush.select('.end-brush-date text').text(parseFormatDate(_chart.frequency, range[1], true));
 
             var widthEndBrush = this.parentNode.querySelector('.end-brush-date text').getBBox().width;
 
-            _endBrush.select('.end-brush-date rect').attr('width', widthEndBrush + 15);
+            _endBrush.select('.end-brush-date rect').attr('width', widthEndBrush + 17.5);
 
             // Se actualizan fecha mínima y máxima del eje x en rangeContainer
             dataFiltered = $.extend(true, [], STORAGE.charts[_chart.id]['data_chart']);
@@ -855,7 +855,7 @@ function renderChart(_chart) {
         // se actualiza la posición de la fecha inicial seleccionada en el rango
         charts.select('.range-container').select('.start-brush-date').attr('transform', 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')');
         // se actualiza la posición de la fecha final seleccionada en el rango
-        charts.select('.range-container').select('.end-brush-date').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
+        charts.select('.range-container').select('.end-brush-date').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 17.5) + ')');
         // se actualiza el ancho del brush
         // console.log('date_1', STORAGE.charts[_chart.id].data_range[0].date);
         // console.log('date_2', STORAGE.charts[_chart.id].data_range[1].date);

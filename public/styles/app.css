@@ -4663,6 +4663,7 @@ body {
   margin: 0;
   font-size: 22px;
   font-weight: 600;
+  color: #444;
 }
 
 #charts .chart > .referenceContainer {
