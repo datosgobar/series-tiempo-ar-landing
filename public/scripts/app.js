@@ -27200,7 +27200,11 @@ var STORAGE = {
         base_light: '#FAFAFA',
         gobar_light: '#17B2F8',
         gobar_dark: '#0695D6',
-        palette: { color1: '', color2: '', color3: '' }
+        palette: {
+            color1: '',
+            color2: '',
+            color3: ''
+        }
     }
 };
 
@@ -27253,7 +27257,7 @@ function shareSaveAs(_element, _indicatorId) {
     domtoimage.toBlob(renderNode).then(function (blob) {
         window.saveAs(blob, 'indicator_' + _indicatorId + '_chart_' + renderNode.getAttribute('id') + '_' + moment().format('x') + '.png');
     }).catch(function (error) {
-        console.error('oops, algo sucedio mal!', error);
+        
     });
 }
 // Actualizado 17.08.2017 - Permite generar una imagen para embeber ese bloque de contenido.
@@ -27306,7 +27310,13 @@ function addEmbebed(_indicatorId, _chart) {
 }
 // Actualizado 17.08.2017 - Genera un div de loading.
 function addLoading() {
-    return makeDomElement('div', { className: 'loading flex flex-column' }, ['i', { className: 'fa fa-spinner fa-pulse fa-3x fa-fw' }], ['span', { className: 'error-message' }]);
+    return makeDomElement('div', {
+        className: 'loading flex flex-column'
+    }, ['i', {
+        className: 'fa fa-spinner fa-pulse fa-3x fa-fw'
+    }], ['span', {
+        className: 'error-message'
+    }]);
 }
 
 // Funciones de parseo de datos.
@@ -27345,7 +27355,7 @@ function parseTypeLine(type) {
         case 'dashed':
             return '5, 5';
         default:
-            console.error('El tipo de linea ' + type + ' no es v\xE1lido.');
+            
             return null;
     }
 }
@@ -27354,7 +27364,7 @@ function parseFormatDate(format, date) {
     var short = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     date = moment(date);
-    console.log(format, date);
+    // 
     switch (format) {
         case 'R/P1Y':
             return date.format('YYYY');
@@ -27417,11 +27427,37 @@ function requestAllCharts(_indicatorId) {
 function renderChartComponent(_indicatorId, _chart) {
     var container = document.querySelector('#chartsContainer #charts');
 
-    console.log(_indicatorId);
-    console.log(_chart);
-    console.log(container);
+    // 
+    // 
+    // 
 
-    var chartComponent = makeDomElement('div', { id: _chart.id, className: 'chart' }, ['div', { className: 'head' }, ['h3', _chart.title], ['div', { className: 'break-line' }, ['br']], ['p', { className: 'paragraph', innerHTML: _chart.description }], ['div', { className: 'break-line' }, ['br'], ['br']]], ['div', { className: 'referenceContainer' }, ['div', { className: 'break-line' }, ['br']], ['span', { className: 'references' }], ['div', { className: 'break-line' }, ['br']], ['div', { className: 'break-line' }, ['hr']]], ['div', { className: 'rangeButton' }, ['div', { className: 'break-line' }, ['br']],
+    var chartComponent = makeDomElement('div', {
+        id: _chart.id,
+        className: 'chart'
+    }, ['div', {
+        className: 'head'
+    }, ['h3', _chart.title], ['div', {
+        className: 'break-line'
+    }, ['br']], ['p', {
+        className: 'paragraph',
+        innerHTML: _chart.description
+    }], ['div', {
+        className: 'break-line'
+    }, ['br'], ['br']]], ['div', {
+        className: 'referenceContainer'
+    }, ['div', {
+        className: 'break-line'
+    }, ['br']], ['span', {
+        className: 'references'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br']], ['div', {
+        className: 'break-line'
+    }, ['hr']]], ['div', {
+        className: 'rangeButton'
+    }, ['div', {
+        className: 'break-line'
+    }, ['br']],
     // ['div', { className: 'rangeButton-component' },
     //   ['div', { className: 'rangeButton-text', innerHTML: 'Escala:' }],
     //   ['div', { className: 'rangeButton-button', state: 'off' }],
@@ -27429,17 +27465,66 @@ function renderChartComponent(_indicatorId, _chart) {
     //   ['button', { onclick: () => { changeSwitchPosition(this, _chart.id); }, state: 'active', innerHTML: 'Estática' }],
     //   ['button', { onclick: () => { changeSwitchPosition(this, _chart.id); }, state: '', innerHTML: 'Dinámica' }]
     // ],
-    ['div', { className: 'break-line' }, ['br']]], ['div', { className: 'chart-svg' }], ['div', { className: 'break-line' }, ['br']], ['div', { className: 'modal-share' }, ['input', { id: 'share-' + _chart.id, type: 'checkbox', className: 'share-open' }], ['label', { htmlFor: 'share-' + _chart.id, className: 'share-open-button hamburger-dark' }, ['span', { className: 'hamburger-1' }], ['span', { className: 'hamburger-2' }], ['span', { className: 'hamburger-3' }]], ['button', { className: 'share-item button buttonCircle', title: 'Embeber', onclick: function onclick(e) {
+    ['div', {
+        className: 'break-line'
+    }, ['br']]], ['div', {
+        className: 'chart-svg'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br']], ['div', {
+        className: 'modal-share'
+    }, ['input', {
+        id: 'share-' + _chart.id,
+        type: 'checkbox',
+        className: 'share-open'
+    }], ['label', {
+        htmlFor: 'share-' + _chart.id,
+        className: 'share-open-button hamburger-dark'
+    }, ['span', {
+        className: 'hamburger-1'
+    }], ['span', {
+        className: 'hamburger-2'
+    }], ['span', {
+        className: 'hamburger-3'
+    }]], ['button', {
+        className: 'share-item button buttonCircle',
+        title: 'Embeber',
+        onclick: function onclick(e) {
             shareEmbebed(e.currentTarget);
-        }, style: { backgroundColor: 'gray', color: 'white', right: '0px' } }, ['span', { className: 'buttonCircleSmall boton_efecto' }, ['i', { className: 'fa fa-code' }]]], ['button', { className: 'share-item button buttonCircle', title: 'Descargar', onclick: function onclick(e) {
+        },
+        style: {
+            backgroundColor: 'gray',
+            color: 'white',
+            right: '0px'
+        }
+    }, ['span', {
+        className: 'buttonCircleSmall boton_efecto'
+    }, ['i', {
+        className: 'fa fa-code'
+    }]]], ['button', {
+        className: 'share-item button buttonCircle',
+        title: 'Descargar',
+        onclick: function onclick(e) {
             shareSaveAs(e.currentTarget, _chart.id);
-        }, style: { backgroundColor: 'gray', color: 'white', right: '0px' } }, ['span', { className: 'buttonCircleSmall boton_efecto' }, ['i', { className: 'fa fa-download' }]]]]);
+        },
+        style: {
+            backgroundColor: 'gray',
+            color: 'white',
+            right: '0px'
+        }
+    }, ['span', {
+        className: 'buttonCircleSmall boton_efecto'
+    }, ['i', {
+        className: 'fa fa-download'
+    }]]]]);
 
     chartComponent.append(addLoading());
     chartComponent.append(addEmbebed(_indicatorId, _chart));
     container.append(chartComponent);
 
-    STORAGE.charts[_chart.id] = { container: chartComponent };
+    STORAGE.charts[_chart.id] = {
+        container: chartComponent
+    };
 
     if (_chart.indicators.length > 0) {
         downloadFilesToChart(_chart);
@@ -27468,7 +27553,10 @@ function downloadFilesToChart(_chart) {
             url_ext = STORAGE.params.path_files + _indicator.id + '.json';
             url_loc = './public/data/series/' + _indicator.id + '.json';
 
-            promises.push(downloadFile({ local: url_loc, external: url_ext }, _indicator.id));
+            promises.push(downloadFile({
+                local: url_loc,
+                external: url_ext
+            }, _indicator.id));
         }
     });
 
@@ -27501,7 +27589,14 @@ function downloadFilesToChart(_chart) {
 // (Update: 25.08.2017)
 function injectChartData(_chart) {
     _chart.indicators.forEach(function (_indicator) {
-        var component = makeDomElement('p', {}, ['div', { className: 'reference-round-line', style: { backgroundColor: _indicator.color } }], ['span', { innerHTML: _indicator.short_name }]);
+        var component = makeDomElement('p', {}, ['div', {
+            className: 'reference-round-line',
+            style: {
+                backgroundColor: _indicator.color
+            }
+        }], ['span', {
+            innerHTML: _indicator.short_name
+        }]);
 
         document.getElementById(_chart.id).querySelector('.references').append(component);
     });
@@ -27528,7 +27623,10 @@ function normalDatosLine(_data, _indicatorId) {
     var data_norm = _data
     // .filter((d) => (d[1] !== null))
     .map(function (d) {
-        return { date: new Date(d[0]), value: d[1] !== null ? roundNumber(d[1], 3) : null };
+        return {
+            date: new Date(d[0]),
+            value: d[1] !== null ? roundNumber(d[1], 3) : null
+        };
     });
 
     return data_norm;
@@ -27742,8 +27840,18 @@ function renderChart(_chart) {
 
     // Definición de los parámetros de configuración ///////////////////////////
     totalHeight = 410;
-    chartMargin = { top: 0, right: 50, bottom: 112, left: 90 };
-    rangeMargin = { top: 350, right: 50, bottom: 20, left: 90 };
+    chartMargin = {
+        top: 0,
+        right: 50,
+        bottom: 112,
+        left: 90
+    };
+    rangeMargin = {
+        top: 350,
+        right: 50,
+        bottom: 20,
+        left: 90
+    };
     totalWidth = container.getBoundingClientRect().width;
     minDate = calcMinRangeX(data_chart);
     maxDate = calcMaxRangeX(data_chart);
@@ -27781,14 +27889,16 @@ function renderChart(_chart) {
     }).y(function (d) {
         return chartScaleY(d.value);
     }).defined(function (d) {
-        console.log(_typeof(d.value));return d.value != null;
+        // 
+        return d.value != null;
     });
     rangeLine = d3.line().curve(d3.curveMonotoneX).x(function (d) {
         return rangeScaleX(d.date);
     }).y(function (d) {
         return rangeScaleY(d.value);
     }).defined(function (d) {
-        console.log(_typeof(d.value));return d.value != null;
+        // 
+        return d.value != null;
     });
 
     // Se define svg ///////////////////////////////////////////////////////////
@@ -27872,7 +27982,10 @@ function renderChart(_chart) {
     function tooltipMouseMouve() {
         var _this = this;
 
-        var data = { date: {}, values: [] },
+        var data = {
+            date: {},
+            values: []
+        },
             tooltipDom,
             mousePosition,
             mouseDate,
@@ -27976,7 +28089,7 @@ function renderChart(_chart) {
 
             // Si el switch esta en on, hace algo, sino, hace otra cosa.
             // if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
-            //   // console.log(dataFiltered.length);
+            //   // 
             //   if (dataFiltered.length > 1) {
             //
             //     // Se actualiza rango-y
@@ -28041,10 +28154,10 @@ function renderChart(_chart) {
         // se actualiza la posición de la fecha final seleccionada en el rango
         charts.select('.range-container').select('.end-brush-date').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 17.5) + ')');
         // se actualiza el ancho del brush
-        // console.log('date_1', STORAGE.charts[_chart.id].data_range[0].date);
-        // console.log('date_2', STORAGE.charts[_chart.id].data_range[1].date);
-        // console.log('pos_1', rangeScaleX(STORAGE.charts[_chart.id].data_range[0].date));
-        // console.log('pos_2', rangeScaleX(STORAGE.charts[_chart.id].data_range[1].date));
+        // 
+        // 
+        // 
+        // 
         // charts.select('.range-container').select('.range-brush').call(brushed);
 
         charts.select('.tooltip-rect-space').attr('width', chartWidth);
@@ -28053,7 +28166,7 @@ function renderChart(_chart) {
     // function changeSwitchPosition(activeButton, id) {
     //   let container = activeButton.parentNode,
     //       state = container.getAttribute('state');
-    //   // console.log(state);
+    //   // 
     //
     //   if (state === 'on') {
     //     container.querySelectorAll('button')[0].setAttribute('state', 'active');
@@ -28074,7 +28187,7 @@ function renderChart(_chart) {
     // window.changeSwitchPosition = changeSwitchPosition;
 
     // function updateAxisY(domain, id) {
-    //   console.log('dominio', domain);
+    //   
     //
     //   chartScaleY.domain(domain);
     //   chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value));
@@ -28088,14 +28201,14 @@ function renderChart(_chart) {
     //   let minValue = calcMinRangeY(STORAGE.charts[chart_id].data_chart),
     //       maxValue = calcMaxRangeY(STORAGE.charts[chart_id].data_chart);
     //
-    //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
+    //   // 
     //   return [minValue, maxValue];
     // }
     // function generateRangeYDinamic(chart_id) {
     //   let minValue = calcMinRangeY(STORAGE.charts[chart_id].data_range),
     //       maxValue = calcMaxRangeY(STORAGE.charts[chart_id].data_range);
     //
-    //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
+    //   // 
     //   return [minValue, maxValue];
     // }
 
@@ -28172,18 +28285,117 @@ function requestAllCards() {
         renderCardComponent(_card);
     });
 }
+
+function getDataset(_id) {
+    return STORAGE[_id].dataset.filter(function (_item) {
+        return _item.identifier === _id;
+    })[0];
+}
+
+function getDistributions(_distributions, _data) {
+    var distributions = [];
+
+    _distributions.map(function (_distribution) {
+        var result = null;
+
+        _data.forEach(function (_dataDist) {
+            if (_dataDist.identifier === _distribution.identifier || _dataDist.title === _distribution.title) {
+                distributions.push(_dataDist);
+            }
+        });
+    });
+
+    return distributions;
+}
+
+function renderDataset(_params) {
+    var dataset = getDataset(_params.dataset_identifier);
+    var distributions = getDistributions(_params.distribution, dataset.distribution);
+    var elementDom = [];
+
+    distributions.forEach(function (_dist) {
+        elementDom.push(['div', { className: 'max-width flex flex-justify-between flex-align-start distributionBlock' }, ['div', { className: 'flex flex-column flex-align-start max-width' }, ['h3', { innerHTML: _dist.title }], ['p', { innerHTML: _dist.description ? _dist.description : '' }]], ['button', { className: 'button', download: true }, ['span', { className: 'button-waves', innerHTML: 'Descargar', onclick: function onclick() {
+                window.open(_element.downloadURL);
+            } }]]], ['div', { className: 'break-line' }, ['br'], ['hr'], ['br'], ['br']]);
+    });
+    
+    var metaDataComponent = makeDomElement('div', {}, ['h2', {
+        innerHTML: '<a class="link" href="' + _params.dataset_landingPage + '" target="_blank">' + dataset.title + '</a>'
+    }], ['div', { className: 'break-line' }, ['br']], ['p', { innerHTML: dataset.description }], ['div', { className: 'break-line' }, ['br'], ['br']], ['h2', { innerHTML: 'Recursos del dataset' }], ['div', { className: 'break-line' }, ['br'], ['hr'], ['br'], ['br']], ['div', { className: 'flex flex-column' }].concat(elementDom));
+
+    $('#metaData').append(metaDataComponent);
+}
+
+function addMetadata() {
+    var data = STORAGE.datasets;
+
+    data.forEach(function (_dataset) {
+        downloadFile({
+            local: _dataset.catalog_url
+        }, _dataset.dataset_identifier).then(function () {
+            return renderDataset(_dataset);
+        });
+    });
+}
+
+function requestDatasets() {
+    downloadFile({
+        local: STORAGE.params.path_datasets
+    }, 'datasets').then(addMetadata);
+}
 // Genera el HTML de una tarjeta.
 // (Optimized)(Update: 25.08.2017)
 function renderCardComponent(_card) {
     var _arguments2 = arguments;
 
-    var cardComponent = makeDomElement('div', { id: _card.id, className: 'card' }, ['h3', { innerHTML: _card.title }], ['div', { className: 'break-line' }, ['br'], ['br'], ['hr'], ['br'], ['br']], ['h4', { innerHTML: _card.short_name }], ['div', { className: 'break-line' }, ['br']], ['p', { className: 'frequency' }], ['div', { className: 'break-line' }, ['br'], ['br']], ['p', { className: 'units_representation' }], ['div', { className: 'break-line' }, ['br']], ['p', { className: 'units' }], ['div', { className: 'break-line' }, ['br']], ['div', { className: 'mini-chart' }], ['div', { className: 'break-line' }, ['br']], ['p', { className: 'human_frecuency' }], ['div', { className: 'break-line' }, ['br'], ['br']], ['button', {
+    var cardComponent = makeDomElement('div', {
+        id: _card.id,
+        className: 'card'
+    }, ['h3', {
+        innerHTML: _card.title
+    }], ['div', {
+        className: 'break-line'
+    }, ['br'], ['br'], ['hr'], ['br'], ['br']], ['h4', {
+        innerHTML: _card.short_name
+    }], ['div', {
+        className: 'break-line'
+    }, ['br']], ['p', {
+        className: 'frequency'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br'], ['br']], ['p', {
+        className: 'units_representation'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br']], ['p', {
+        className: 'units'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br']], ['div', {
+        className: 'mini-chart'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br']], ['p', {
+        className: 'human_frecuency'
+    }], ['div', {
+        className: 'break-line'
+    }, ['br'], ['br']], ['button', {
         className: 'button',
         onclick: function onclick() {
             changeView('chartsContainer', _card.id);
             requestAllCharts(_card.id);
         }
-    }, ['span', { className: 'button-waves', innerHTML: 'Ver más gráficos' }]], ['div', { className: 'break-line' }, ['br']], ['a', { href: _card.download_url, className: 'link', download: true, innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos' }]);
+    }, ['span', {
+        className: 'button-waves',
+        innerHTML: 'Ver más gráficos'
+    }]], ['div', {
+        className: 'break-line'
+    }, ['br']], ['a', {
+        href: _card.download_url,
+        className: 'link',
+        download: true,
+        innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos'
+    }]);
 
     cardComponent.append(addLoading());
     document.querySelector('#cardsContainer #cards').append(cardComponent);
@@ -28191,7 +28403,10 @@ function renderCardComponent(_card) {
     var url_ext = STORAGE.params.path_files + _card.id + '.json',
         url_loc = './public/data/series/' + _card.id + '.json';
 
-    var promesa = downloadFile({ local: url_loc, external: url_ext }, _card.id);
+    var promesa = downloadFile({
+        local: url_loc,
+        external: url_ext
+    }, _card.id);
     promesa.catch(function (error) {
         var indicatorError = _arguments2['0'],
             domElement = document.getElementById(indicatorError.id);
@@ -28245,12 +28460,20 @@ function renderMiniChart(_cardData, _element) {
     data = data.filter(function (d) {
         return d[1] !== null;
     }).slice(-1 * parseInt(_cardData.laps <= data.length ? _cardData.laps : data.length)).map(function (d) {
-        return { date: new Date(d[0]), value: roundNumber(d[1], 3) };
+        return {
+            date: new Date(d[0]),
+            value: roundNumber(d[1], 3)
+        };
     });
 
     // Definición de los parámetros de configuración ///////////////////////////
     container = d3.select(_element);
-    margin = { top: 10, right: 10, bottom: 10, left: 10 };
+    margin = {
+        top: 10,
+        right: 10,
+        bottom: 10,
+        left: 10
+    };
     width = 100;
     height = 50;
 
@@ -28338,7 +28561,10 @@ function iframeApp() {
 
     var charts = $('#chartsContainer');
     charts.addClass('flex flex-column flex-align-end');
-    charts.css({ display: 'flex', position: 'relative' });
+    charts.css({
+        display: 'flex',
+        position: 'relative'
+    });
     charts.find('.back-link').remove();
     charts.find('#charts').addClass('max-width');
 
@@ -28360,10 +28586,12 @@ function httpGetCheck() {
 // Inicia la app.
 // (Optimized)(Update: 25.08.2017)
 function start(_cardId, _indicatorId) {
-    var download = downloadFile({ local: STORAGE.params.path_cards }, 'cards');
+    var download = downloadFile({
+        local: STORAGE.params.path_cards
+    }, 'cards');
 
     if (_cardId === undefined || _indicatorId === undefined) {
-        download.then(requestAllCards);
+        download.then(requestAllCards).then(requestDatasets);
     } else {
         download.then(function () {
             var chartData = STORAGE.cards.filter(function (_card) {
@@ -28381,7 +28609,9 @@ function start(_cardId, _indicatorId) {
 ////////////////////////////////////////////////////////////////////////////////
 
 $(function () {
-    downloadFile({ local: './public/data/params.json' }, 'params').then(httpGetCheck);
+    downloadFile({
+        local: './public/data/params.json'
+    }, 'params').then(httpGetCheck);
 });
 /*! dom-to-image 10-06-2017 */ ! function(a) {
   "use strict";

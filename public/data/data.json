@@ -6,8 +6,7 @@
     "mbox": "datos@modernizacion.gob.ar",
     "name": "Datos Argentina"
   },
-  "themeTaxonomy": [
-    {
+  "themeTaxonomy": [{
       "label": "Agroganader\u00eda, pesca y forestaci\u00f3n",
       "id": "agri",
       "description": "Por ejemplo: 'Lecher\u00eda: precio pagado al productor' o 'Superficie forestada'."
@@ -73,8 +72,7 @@
       "description": "Por ejemplo: 'Estad\u00edsticas viales'."
     }
   ],
-  "dataset": [
-    {
+  "dataset": [{
       "title": "Numeraci\u00f3n no geogr\u00e1fica",
       "description": "Es aquella numeraci\u00f3n que no tiene asociaci\u00f3n alguna con una zona geogr\u00e1fica, su destino puede estar en cualquier parte del pa\u00eds",
       "modified": "2017-08-31T03:28:32.798872",
@@ -90,8 +88,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/NUMER-NO-GEOGR/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Numeraci\u00f3n no geogr\u00e1fica",
@@ -137,8 +134,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/NUMER-GEOGR/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Numeraci\u00f3n geogr\u00e1fica",
@@ -184,8 +180,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/LISTA-DE-ESTAC-REPET/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Listado de estaciones repetidoras",
@@ -231,8 +226,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/HOMOL-DE-EQUIP-INSCR/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Homologaci\u00f3n de equipos inscriptos",
@@ -278,8 +272,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/LISTA-DE-RADIO-87358/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Listado de radioclubes",
@@ -325,8 +318,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/LISTA-DE-PREST-DE-TELEF/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Listado de prestadores de telefon\u00eda",
@@ -372,8 +364,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/HOMOL-DE-EMPRE-INSCR/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Homologaci\u00f3n de empresas inscriptas",
@@ -419,8 +410,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/REGIS-DE-PROVE-POSTA/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Registro de Proveedores Postales",
@@ -466,8 +456,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/LISTA-DE-RADIO/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Listado de Radioaficionados",
@@ -513,8 +502,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TOTAL-NACIO-DE-ACCES-A/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Total nacional de accesos a Internet fijo por tipo de tecnolog\u00eda",
@@ -560,8 +548,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PERSO-OCUPA-POR-TRIME-EN/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Personal ocupado por trimestre en el correo oficial y en operadores privados",
@@ -607,8 +594,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PENET-NACIO-DEL-INTER-FIJO/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Penetraci\u00f3n nacional del Internet fijo",
@@ -654,8 +640,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/CONEC-AL-SERVI-DE-INTER/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Conectividad al servicio de Internet",
@@ -701,8 +686,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TOTAL-NACIO-DE-ACCES-48866/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Total nacional de accesos a Internet fijo por banda ancha y banda angosta",
@@ -748,8 +732,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PENET-DEL-INTER-FIJO-POR/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Penetraci\u00f3n del Internet fijo por provincia (accesos por cada 100 habitantes)",
@@ -795,8 +778,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/INGRE-POR-LA-OPERA-DEL/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Ingresos por la operaci\u00f3n del servicio de Internet fijo",
@@ -842,8 +824,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TELEF-MOVIL-NUMER-DE-LLAMA/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Telefon\u00eda m\u00f3vil: n\u00famero de llamadas salientes",
@@ -889,8 +870,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/NUMER-DE-SMS-ENVIA/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "N\u00famero de SMS enviados",
@@ -936,8 +916,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TELEF-MOVIL-MINUT-SALIE-MILES/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Telefon\u00eda m\u00f3vil: minutos salientes (miles)",
@@ -983,8 +962,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TOTAL-NACIO-DE-ACCES-52199/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Total nacional de accesos a telefon\u00eda m\u00f3vil",
@@ -1030,8 +1008,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PENET-NACIO-DE-LA-TELEF/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Penetraci\u00f3n nacional de la telefon\u00eda m\u00f3vil (accesos por cada 100 habitantes)",
@@ -1077,8 +1054,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/INGRE-TRIME-POR-LA-PREST/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Ingresos trimestrales por la prestaci\u00f3n del servicio de telefon\u00eda m\u00f3vil",
@@ -1124,8 +1100,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TOTAL-NACIO-DE-ACCES-40941/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Total nacional de accesos a televisi\u00f3n por suscripci\u00f3n y televisi\u00f3n satelital",
@@ -1171,8 +1146,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PENET-TOTAL-NACIO-DE-55233/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Penetraci\u00f3n total nacional de la televisi\u00f3n por suscripci\u00f3n y satelital",
@@ -1218,8 +1192,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/INGRE-TRIME-POR-LA-86109/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Ingresos trimestrales por la prestaci\u00f3n de los servicios de televisi\u00f3n",
@@ -1265,8 +1238,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/FOMEC-MONTO-APROB-Y-PAGAD/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Fomeca: montos aprobados y pagados por entidad beneficiada",
@@ -1312,8 +1284,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/TOTAL-NACIO-DE-ACCES-18734/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Total nacional de accesos a telefon\u00eda fija",
@@ -1359,8 +1330,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PENET-TOTAL-NACIO-DE-LA/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Penetraci\u00f3n total nacional de la telefon\u00eda fija por trimestre",
@@ -1406,8 +1376,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/INGRE-TRIME-POR-LA-96059/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Ingresos trimestrales por la prestaci\u00f3n del servicio de telefon\u00eda fija",
@@ -1453,8 +1422,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/ACCES-DE-TELEV-POR-SUSCR/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Accesos de televisi\u00f3n por suscripci\u00f3n por provincia",
@@ -1500,8 +1468,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/LICEN-TIC/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Licenciatarios TIC",
@@ -1547,8 +1514,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/NUMER-MENSU-DE-DENUN/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Denuncias mensuales recibidas",
@@ -1594,8 +1560,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/RECLA-POR-OPERA-ANO-CORRI/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Reclamos por operador y motivo de reclamo",
@@ -1641,8 +1606,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/RECLA-MENSU-POR-TIPO-DE/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Reclamos mensuales por tipo de servicio",
@@ -1688,8 +1652,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/NUMER-MENSU-DE-RECLA-88502/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Reclamos mensuales recibidos por motivo de reclamo",
@@ -1735,8 +1698,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datosabiertos.enacom.gob.ar/api/v2/datastreams/PORTA-NUMER-MOVIL-ALTAS-Y/data.csv?auth_key=44a38fbffd39c9f7d84e8e7dd2e1d02f0950e611&download=1",
           "format": "CSV",
           "title": "Portabilidad num\u00e9rica m\u00f3vil: portaciones netas mensuales por operador",
@@ -1784,16 +1746,14 @@
         "fn": "Ministerio de Justicia. Subsecretar\u00eda de Asuntos Registrales. Direccion Nacional Registro Nacional de Reincidencia",
         "hasEmail": "mailto:mpolimeni@dnrec.jus.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/e042c362-ff39-476f-9328-056a9de753f0/resource/a95d0e79-08c4-49b9-88b8-d569484bf1d7/download/rebeldias-y-capturas.csv",
-          "format": "CSV",
-          "title": "Sistema de Consulta Nacional de Rebeld\u00edas y Capturas",
-          "description": "Sistema de Consulta Nacional de Rebeld\u00edas y Capturas (base Co.Na.R.C.) vigentes al 30-08-2017. Para optimizar los resultados de b\u00fasqueda ingresar por apellido y por documento.",
-          "issued": "2017-08-31T03:06:02.594946",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/e042c362-ff39-476f-9328-056a9de753f0/resource/a95d0e79-08c4-49b9-88b8-d569484bf1d7/download/rebeldias-y-capturas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/e042c362-ff39-476f-9328-056a9de753f0/resource/a95d0e79-08c4-49b9-88b8-d569484bf1d7/download/rebeldias-y-capturas.csv",
+        "format": "CSV",
+        "title": "Sistema de Consulta Nacional de Rebeld\u00edas y Capturas",
+        "description": "Sistema de Consulta Nacional de Rebeld\u00edas y Capturas (base Co.Na.R.C.) vigentes al 30-08-2017. Para optimizar los resultados de b\u00fasqueda ingresar por apellido y por documento.",
+        "issued": "2017-08-31T03:06:02.594946",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/e042c362-ff39-476f-9328-056a9de753f0/resource/a95d0e79-08c4-49b9-88b8-d569484bf1d7/download/rebeldias-y-capturas.csv"
+      }],
       "accrualPeriodicity": "R/P1D",
       "theme": [
         "Justicia, seguridad y legales"
@@ -1815,8 +1775,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/CANTI-DE-PERSO-POR-GEREN/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Personal por Gerencia",
@@ -1862,8 +1821,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/LISTA-DE-PROVE-79569/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Listado de Proveedores",
@@ -1909,8 +1867,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/DECLA-JURAD-DIREC-Y-GEREN/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Declaraciones Juradas Patrimoniales - Directorio y Gerentes",
@@ -1956,8 +1913,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/ESCUE-CONEC-CON-TECNO-GILLA/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Escuelas Conectadas con Tecnolog\u00eda Gillat",
@@ -2003,8 +1959,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/ODEON-ESTAD-DE-USO/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Datos de uso de la plataforma",
@@ -2050,8 +2005,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/NODOS-EN-SERVI-58179/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Puntos de conexi\u00f3n al Plan Federal de Internet",
@@ -2097,8 +2051,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/NODOS-PLANI/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Futuros puntos de conexi\u00f3n al Plan Federal de Internet",
@@ -2144,8 +2097,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/PLAN-FEDER-DE-INTER-MONTO/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Kil\u00f3metros de fibra \u00f3ptica previstos y localidades contempladas por provincia",
@@ -2191,8 +2143,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/SATEL-COBER-ARSAT-2-21886/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Datos del \u00e1rea de cobertura en Banda KU del sat\u00e9lite ARSAT-2 en Am\u00e9rica del Sur",
@@ -2238,8 +2189,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/SATEL-COBER-ARSAT-2-BANDA/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Datos del \u00e1rea de cobertura de la Banda C del sat\u00e9lite ARSAT-2 en Am\u00e9rica",
@@ -2285,8 +2235,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/SATEL-COBER-ARSAT-2-31319/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Datos del \u00e1rea de cobertura de la Banda KU del sat\u00e9lite ARSAT-2 en Norteam\u00e9rica",
@@ -2332,8 +2281,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/PLAN-DE-CONEC-DE-61064/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Escuelas conectadas",
@@ -2379,8 +2327,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/PLAN-DE-CONEC-DE-25724/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Escuelas de pr\u00f3xima conexi\u00f3n",
@@ -2426,8 +2373,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/LICIT-PUBLI/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Licitaciones",
@@ -2473,8 +2419,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/LISTA-DE-PERSO-98437/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Listado de Personal",
@@ -2520,8 +2465,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/PROME-DE-EDAD-Y-ANTIG/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Promedios de edad y antig\u00fcedad del personal",
@@ -2567,8 +2511,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/ESCAL-SALAR/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Categor\u00edas y escalas salariales",
@@ -2614,8 +2557,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/EJECU-PRESU-2016/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Ejecuciones Presupuestarias 2016",
@@ -2661,8 +2603,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/AUDIE-96185/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Registro de Audiencias",
@@ -2708,8 +2649,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/TDA-POLIG-DE-COBER/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "\u00c1reas de cobertura de la televisi\u00f3n digital abierta",
@@ -2755,8 +2695,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/PLAN-FEDER-DE-INTER-TRAZA/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Coordenadas de la red de fibra \u00f3ptica en servicio",
@@ -2802,8 +2741,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/FIBRA-OPTIC-PLANI/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Fibra \u00f3ptica planificada",
@@ -2849,8 +2787,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/FIBRA-OPTIC-PROXI-EN-OBRA/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Fibra \u00f3ptica en obra",
@@ -2896,8 +2833,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/FIBRA-OPTIC-TENDI/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Fibra \u00f3ptica tendida",
@@ -2943,8 +2879,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/TDA-ESTAC-DE-TRANS/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Datos de las estaciones transmisoras",
@@ -2990,8 +2925,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/TDA-ESTAC-PLANI/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Datos de las estaciones de transmisi\u00f3n en construcci\u00f3n o planificadas",
@@ -3037,8 +2971,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/FIBRA-OPTIC-DE-LA-EMPRE/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Fibra \u00f3ptica de la empresa Transener",
@@ -3084,8 +3017,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/HONOR-DE-DIREC/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Honorarios de Directores",
@@ -3133,8 +3065,7 @@
         "fn": "Agencia Nacional de materiales Controlados - Coordinaci\u00f3n de Sistemas",
         "hasEmail": "mailto:informatica@anmac.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/0a0c3def-3d81-4850-854c-7af25831250b/resource/3497e5de-5a1e-4248-bdd3-dd8bffff8d2a/download/solicitudes-condicion-legitimo-usuario-armas.csv",
           "format": "CSV",
           "title": "Solicitudes de Condici\u00f3n de Leg\u00edtimo Usuario de Armas de Fuego - 2017-08 quincena 1",
@@ -3318,8 +3249,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Subsecretar\u00eda de Acceso a la Justicia. Direcci\u00f3n Nacional de Mediaci\u00f3n y M\u00e9todos Participativos de Resoluci\u00f3n de Conflictos.",
         "hasEmail": "mailto:allamosa@jus.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/a9767469-d903-4158-aa76-b21dd37e8aff/resource/fee87e15-3d5b-4d30-a29f-2dd8815fc015/download/estadistica-mediaciones-prejudiciales-y-judiciales-2017-05.csv",
           "format": "CSV",
           "title": "Estad\u00edstica de mediaciones prejudiciales y judiciales 2017-05",
@@ -3367,8 +3297,7 @@
         "fn": "Agencia Nacional de Materiales Controlados - ANMaC. Coordinaci\u00f3n de Sistemas.",
         "hasEmail": "mailto:informatica@anmac.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/932019a8-e08a-4269-83e0-aa0b8191c21d/resource/2d3524d7-4add-45e6-b6d3-bef59c2ecb61/download/solicitudes-autorizacion-portacion-armas-fuego.csv",
           "format": "CSV",
           "title": "Solicitudes de Autorizaci\u00f3n de Portaci\u00f3n de Armas de Fuego - 2016-11 quincena 1",
@@ -3543,8 +3472,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n.Direcci\u00f3n de Gas Licuado."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/63ab43cc-7055-4969-87d3-6a969f1d5386/resource/e0853d15-124c-423a-bc1b-dca18e5a9449/download/ventas-de-comercializadores-de-glp.csv",
           "format": "CSV",
           "title": "Ventas de Comercializadores de GLP",
@@ -3603,8 +3531,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/b5681530-fb92-4fff-ae89-9a327f28120f/resource/24544233-8640-4982-ac31-37a6367e7607/download/transporte-hidrocarburos-ductos-troncales-propanoductos.zip",
           "format": "SHP",
           "title": "Transporte Hidrocarburos Ductos Troncales Propanoductos",
@@ -3643,8 +3570,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/72d74a8e-872e-4bc4-907a-c57b2d063158/resource/9a42614a-0a5c-4e6a-8e80-d1daeabd1827/download/transporte-hidrocarburos-ductos-troncales-poliductos.zip",
           "format": "SHP",
           "title": "Transporte Hidrocarburos Ductos Troncales Poliductos",
@@ -3683,8 +3609,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/61ce171c-cea4-45da-907a-dc64731be021/resource/c8357ca2-382f-4ff3-b190-3abadda61d8c/download/transporte-hidrocarburos-ductos-troncales-oleoductos.csv",
           "format": "CSV",
           "title": "Transporte Hidrocarburos Ductos Troncales Oleoductos",
@@ -3723,8 +3648,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/9ab57324-669c-4597-8f10-081f581629c1/resource/9fb6dff1-a8f8-4d73-9c2f-6754e399960e/download/transporte-hidrocarburos-ductos-troncales-jp-ducto.zip",
           "format": "SHP",
           "title": "Transporte Hidrocarburos Ductos Troncales JP Ducto",
@@ -3763,8 +3687,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/8758101a-1e0d-413f-8cc5-83e21ece6391/resource/259bea8d-d0e8-461f-a4db-f9f7e7b01ef1/download/transporte-hidrocarburos-ductos-troncales-gasoductos.zip",
           "format": "SHP",
           "title": "Transporte Hidrocarburos Ductos Troncales Gasoductos",
@@ -3803,16 +3726,14 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/53014951-6ee1-4e99-a830-c4d0eb373496/resource/e035f103-ad43-41f5-8041-987527ad5635/download/transporte-elctrico-at-lneas.zip",
-          "format": "SHP",
-          "title": "Transporte El\u00e9ctrico AT L\u00edneas",
-          "description": "Archivos prj, shp, shx, dbf, xml. Sistema de Proyecci\u00f3n EPSG:4326",
-          "issued": "2017-08-16T12:10:36.620039",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/53014951-6ee1-4e99-a830-c4d0eb373496/resource/e035f103-ad43-41f5-8041-987527ad5635/download/transporte-elctrico-at-lneas.zip"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/53014951-6ee1-4e99-a830-c4d0eb373496/resource/e035f103-ad43-41f5-8041-987527ad5635/download/transporte-elctrico-at-lneas.zip",
+        "format": "SHP",
+        "title": "Transporte El\u00e9ctrico AT L\u00edneas",
+        "description": "Archivos prj, shp, shx, dbf, xml. Sistema de Proyecci\u00f3n EPSG:4326",
+        "issued": "2017-08-16T12:10:36.620039",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/53014951-6ee1-4e99-a830-c4d0eb373496/resource/e035f103-ad43-41f5-8041-987527ad5635/download/transporte-elctrico-at-lneas.zip"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -3836,8 +3757,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/caf271e7-a89e-4c09-ac6c-1864eb8faf3a/resource/dc118559-3b77-40d8-944a-3148cdb74e78/download/transporte-elctrico-at-estructuras.csv",
           "format": "CSV",
           "title": "Transporte El\u00e9ctrico AT Estructuras",
@@ -3874,8 +3794,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/5ae5fbf9-5ab3-407b-a047-625bf27835aa/resource/cedb62c4-4a4c-4124-bdc9-48f611a59862/download/transporte-elctrico-at-estaciones-transformadoras.csv",
           "format": "CSV",
           "title": "Transporte El\u00e9ctrico AT Estaciones Transformadoras",
@@ -3913,15 +3832,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/21a54fa2-539d-4570-b1cd-679d54229d2f/resource/5ccaf9d2-d9a8-4482-b4fb-a4d7bcd225f2/download/padrn-de-operadores-autorizados.csv",
-          "format": "CSV",
-          "title": "Padr\u00f3n de Operadores Autorizados",
-          "issued": "2017-08-16T12:10:11.487576",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/21a54fa2-539d-4570-b1cd-679d54229d2f/resource/5ccaf9d2-d9a8-4482-b4fb-a4d7bcd225f2/download/padrn-de-operadores-autorizados.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/21a54fa2-539d-4570-b1cd-679d54229d2f/resource/5ccaf9d2-d9a8-4482-b4fb-a4d7bcd225f2/download/padrn-de-operadores-autorizados.csv",
+        "format": "CSV",
+        "title": "Padr\u00f3n de Operadores Autorizados",
+        "issued": "2017-08-16T12:10:11.487576",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/21a54fa2-539d-4570-b1cd-679d54229d2f/resource/5ccaf9d2-d9a8-4482-b4fb-a4d7bcd225f2/download/padrn-de-operadores-autorizados.csv"
+      }],
       "accrualPeriodicity": "R/PT1H",
       "theme": [
         "Energ\u00eda"
@@ -3944,15 +3861,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n. Direcci\u00f3n de Gas Licuado."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/7689a7b6-f12d-43f4-8a41-486ad7912b6c/resource/3aac94a8-d394-4cc9-91e2-2ea435a9a828/download/registro-de-tanques-mviles-de-glp.csv",
-          "format": "CSV",
-          "title": "Registro de Tanques M\u00f3viles de GLP",
-          "issued": "2017-08-16T12:10:03.075862",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/7689a7b6-f12d-43f4-8a41-486ad7912b6c/resource/3aac94a8-d394-4cc9-91e2-2ea435a9a828/download/registro-de-tanques-mviles-de-glp.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/7689a7b6-f12d-43f4-8a41-486ad7912b6c/resource/3aac94a8-d394-4cc9-91e2-2ea435a9a828/download/registro-de-tanques-mviles-de-glp.csv",
+        "format": "CSV",
+        "title": "Registro de Tanques M\u00f3viles de GLP",
+        "issued": "2017-08-16T12:10:03.075862",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/7689a7b6-f12d-43f4-8a41-486ad7912b6c/resource/3aac94a8-d394-4cc9-91e2-2ea435a9a828/download/registro-de-tanques-mviles-de-glp.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -3975,15 +3890,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/c9611150-ed6d-4751-9a61-2dbb6dcfebb7/resource/f5043aae-cdda-4b5a-b4ae-a5797769d637/download/registro-de-empresas-e-instalaciones-con-tanques-areos-de-hidrocarburos-lquidos.csv",
-          "format": "CSV",
-          "title": "Registro de empresas e instalaciones con tanques a\u00e9reos de hidrocarburos l\u00edquidos",
-          "issued": "2017-08-16T12:09:52.612803",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/c9611150-ed6d-4751-9a61-2dbb6dcfebb7/resource/f5043aae-cdda-4b5a-b4ae-a5797769d637/download/registro-de-empresas-e-instalaciones-con-tanques-areos-de-hidrocarburos-lquidos.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/c9611150-ed6d-4751-9a61-2dbb6dcfebb7/resource/f5043aae-cdda-4b5a-b4ae-a5797769d637/download/registro-de-empresas-e-instalaciones-con-tanques-areos-de-hidrocarburos-lquidos.csv",
+        "format": "CSV",
+        "title": "Registro de empresas e instalaciones con tanques a\u00e9reos de hidrocarburos l\u00edquidos",
+        "issued": "2017-08-16T12:09:52.612803",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/c9611150-ed6d-4751-9a61-2dbb6dcfebb7/resource/f5043aae-cdda-4b5a-b4ae-a5797769d637/download/registro-de-empresas-e-instalaciones-con-tanques-areos-de-hidrocarburos-lquidos.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -4006,15 +3919,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Transporte y Medici\u00f3n de Hidrocarburos."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/c126ad73-399a-4fa4-be8e-bd0142f3608c/resource/5e6dc33f-ccf1-4a14-af1d-0c78e9dd7c3a/download/registro-midstream-inscripciones-anuales.csv",
-          "format": "CSV",
-          "title": "Registro Midstream - Inscripciones Anuales",
-          "issued": "2017-08-16T12:09:43.209405",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/c126ad73-399a-4fa4-be8e-bd0142f3608c/resource/5e6dc33f-ccf1-4a14-af1d-0c78e9dd7c3a/download/registro-midstream-inscripciones-anuales.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/c126ad73-399a-4fa4-be8e-bd0142f3608c/resource/5e6dc33f-ccf1-4a14-af1d-0c78e9dd7c3a/download/registro-midstream-inscripciones-anuales.csv",
+        "format": "CSV",
+        "title": "Registro Midstream - Inscripciones Anuales",
+        "issued": "2017-08-16T12:09:43.209405",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/c126ad73-399a-4fa4-be8e-bd0142f3608c/resource/5e6dc33f-ccf1-4a14-af1d-0c78e9dd7c3a/download/registro-midstream-inscripciones-anuales.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -4037,8 +3948,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/2b227214-829d-4ef5-9f3e-c9bb49fa2f4c/resource/dec5cd65-8ac7-4f76-933c-aa6ae498fd3e/download/registro-de-empresas-petroleras-del-upstream-inscripciones-anuales.csv",
           "format": "CSV",
           "title": "Registro de Empresas Petroleras del Upstream - Inscripciones Anuales",
@@ -4083,8 +3993,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/a9eed347-78ab-45c0-a489-b227fe42ee1b/resource/4399cb2d-c221-4b9a-9799-8fc008cefd77/download/refinacin-hidrocarburos-refineras.zip",
           "format": "SHP",
           "title": "Refinaci\u00f3n Hidrocarburos Refiner\u00edas",
@@ -4123,8 +4032,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/8fc4e505-bd4d-431e-863e-1e44b4f6ee01/resource/f4a44571-73ae-4e91-b7e2-22f71b752bd6/download/refinacin-hidrocarburos-petroqumicas.csv",
           "format": "CSV",
           "title": "Refinaci\u00f3n Hidrocarburos Petroqu\u00edmicas",
@@ -4161,8 +4069,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/ff99e7be-7bab-4617-9588-9a74ae046a40/resource/8e905b25-0228-4817-9df0-3d4ae30f8d1a/download/redes-de-distribucin-elctrica-del-consejo-federal-jujuy-media-tensin-lneas.csv",
           "format": "CSV",
           "title": "Redes de distribuci\u00f3n el\u00e9ctrica del Consejo Federal - Jujuy - Media Tensi\u00f3n L\u00edneas",
@@ -4483,15 +4390,13 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/b33aca04-81d8-44ef-8842-162aa69330ca/resource/ddcd82c5-318e-4bf2-8a2c-c637048d4b03/download/inventario-de-textos-y-planos-correspondientes-a-proyectos-hidroelctricos.csv",
-          "format": "CSV",
-          "title": "Inventario de documentos y planos correspondientes a proyectos hidroel\u00e9ctricos",
-          "issued": "2017-08-16T12:08:54.852098",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/b33aca04-81d8-44ef-8842-162aa69330ca/resource/ddcd82c5-318e-4bf2-8a2c-c637048d4b03/download/inventario-de-textos-y-planos-correspondientes-a-proyectos-hidroelctricos.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/b33aca04-81d8-44ef-8842-162aa69330ca/resource/ddcd82c5-318e-4bf2-8a2c-c637048d4b03/download/inventario-de-textos-y-planos-correspondientes-a-proyectos-hidroelctricos.csv",
+        "format": "CSV",
+        "title": "Inventario de documentos y planos correspondientes a proyectos hidroel\u00e9ctricos",
+        "issued": "2017-08-16T12:08:54.852098",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/b33aca04-81d8-44ef-8842-162aa69330ca/resource/ddcd82c5-318e-4bf2-8a2c-c637048d4b03/download/inventario-de-textos-y-planos-correspondientes-a-proyectos-hidroelctricos.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -4514,8 +4419,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/tablas_dinamicas/upstream/Pronosticos_oil_gas.zip",
           "format": "ZIP",
           "title": "Pron\u00f3sticos de Producci\u00f3n de Petr\u00f3leo y Gas (Tablas Din\u00e1micas)",
@@ -4574,8 +4478,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/bd26f4e9-74cc-4444-ae6d-2dadcf491057/resource/3f13c499-cb5a-4998-a87a-c87d8367caec/download/produccin-hidrocarburos-yacimientos-segn-profundidad-promedio.csv",
           "format": "CSV",
           "title": "Producci\u00f3n Hidrocarburos Yacimientos Seg\u00fan Profundidad Promedio",
@@ -4614,8 +4517,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/7378520e-4d10-48a9-92e9-7e20e69a8277/resource/6130ac5d-e78e-4aef-9925-030db6434c56/download/produccin-hidrocarburos-yacimientos.csv",
           "format": "CSV",
           "title": "Producci\u00f3n Hidrocarburos Yacimientos",
@@ -4654,8 +4556,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/530bb019-32f4-4eaf-b550-1fc05f8b129f/resource/c3812323-0c38-43b7-8bc6-f05fb5113626/download/produccin-hidrocarburos-puntos-de-venteo-declarados.csv",
           "format": "CSV",
           "title": "Producci\u00f3n Hidrocarburos Puntos de Venteo Declarados",
@@ -4694,8 +4595,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/335210fc-64b6-4d75-8e31-211bf3291748/resource/6c4586d1-eacf-438c-8a77-38ab77e33b9f/download/produccin-hidrocarburos-productores-de-glp.zip",
           "format": "SHP",
           "title": "Producci\u00f3n Hidrocarburos Productores de GLP",
@@ -4734,8 +4634,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/dbed71cd-1f2b-461a-b05d-a1903bd0ef03/resource/a477baf5-3870-4b33-b4b3-37ab892d58c0/download/produccin-hidrocarburos-lotes-de-explotacin.zip",
           "format": "SHP",
           "title": "Producci\u00f3n Hidrocarburos Lotes de Explotaci\u00f3n",
@@ -4774,8 +4673,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/81cfad0a-4162-4f85-ad71-837f5a5fae57/resource/48a306a3-d5da-4f28-8ab5-7f80767ffdec/download/produccin-hidrocarburos-concesiones-de-explotacin.zip",
           "format": "SHP",
           "title": "Producci\u00f3n Hidrocarburos Concesiones de Explotaci\u00f3n",
@@ -4820,15 +4718,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/5210866d-2caf-43fd-95d8-085dc18f39cc/resource/0622e111-dbfd-45e9-bf94-bdce83b978c0/download/produccin-gas-natural-desde-1950.csv",
-          "format": "CSV",
-          "title": "Producci\u00f3n Gas Natural desde 1950",
-          "issued": "2017-08-16T12:07:39.075939",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/5210866d-2caf-43fd-95d8-085dc18f39cc/resource/0622e111-dbfd-45e9-bf94-bdce83b978c0/download/produccin-gas-natural-desde-1950.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/5210866d-2caf-43fd-95d8-085dc18f39cc/resource/0622e111-dbfd-45e9-bf94-bdce83b978c0/download/produccin-gas-natural-desde-1950.csv",
+        "format": "CSV",
+        "title": "Producci\u00f3n Gas Natural desde 1950",
+        "issued": "2017-08-16T12:07:39.075939",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/5210866d-2caf-43fd-95d8-085dc18f39cc/resource/0622e111-dbfd-45e9-bf94-bdce83b978c0/download/produccin-gas-natural-desde-1950.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -4851,8 +4747,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/tablas_dinamicas/upstream/sescoweb_produccion.zip",
           "format": "ZIP",
           "title": "Producci\u00f3n de Petr\u00f3leo y Gas - desde 2009 - Sesco\u00a0Web  (Tablas Din\u00e1micas)",
@@ -4981,8 +4876,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "https://www.se.gob.ar/datosupstream/main.php",
           "format": "PHP",
           "title": "Sistema de consulta de Cap\u00edtulo IV",
@@ -5123,15 +5017,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/f91e3405-2bd0-47eb-81bd-5d73835ec005/resource/1c527265-4ba5-4090-b2d0-d5d618c154c3/download/produccin-de-petrleo-desde-1950.csv",
-          "format": "CSV",
-          "title": "Producci\u00f3n de Petr\u00f3leo desde 1950",
-          "issued": "2017-08-16T12:07:08.581016",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/f91e3405-2bd0-47eb-81bd-5d73835ec005/resource/1c527265-4ba5-4090-b2d0-d5d618c154c3/download/produccin-de-petrleo-desde-1950.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/f91e3405-2bd0-47eb-81bd-5d73835ec005/resource/1c527265-4ba5-4090-b2d0-d5d618c154c3/download/produccin-de-petrleo-desde-1950.csv",
+        "format": "CSV",
+        "title": "Producci\u00f3n de Petr\u00f3leo desde 1950",
+        "issued": "2017-08-16T12:07:08.581016",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/f91e3405-2bd0-47eb-81bd-5d73835ec005/resource/1c527265-4ba5-4090-b2d0-d5d618c154c3/download/produccin-de-petrleo-desde-1950.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -5154,15 +5046,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n.Direcci\u00f3n de Gas Licuado."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/31f5df04-0028-46f1-8e98-b15948e0f206/resource/cc88749b-e155-496b-a665-ca815e4a0e24/download/produccion-de-productores-de-glp-por-planta.csv",
-          "format": "CSV",
-          "title": "Produccion de Productores de GLP por planta",
-          "issued": "2017-08-16T12:06:59.669215",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/31f5df04-0028-46f1-8e98-b15948e0f206/resource/cc88749b-e155-496b-a665-ca815e4a0e24/download/produccion-de-productores-de-glp-por-planta.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/31f5df04-0028-46f1-8e98-b15948e0f206/resource/cc88749b-e155-496b-a665-ca815e4a0e24/download/produccion-de-productores-de-glp-por-planta.csv",
+        "format": "CSV",
+        "title": "Produccion de Productores de GLP por planta",
+        "issued": "2017-08-16T12:06:59.669215",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/31f5df04-0028-46f1-8e98-b15948e0f206/resource/cc88749b-e155-496b-a665-ca815e4a0e24/download/produccion-de-productores-de-glp-por-planta.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Energ\u00eda"
@@ -5185,8 +5075,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/55b83784-8f04-4018-91c7-027163c615b3/resource/8ccafc38-252d-404f-b354-71465519a01f/download/produccin-de-glp-condensado-y-gasolina-estabilizada-produccin-de-glp.csv",
           "format": "CSV",
           "title": "Producci\u00f3n de GLP Condensado y Gasolina Estabilizada - Producci\u00f3n de GLP",
@@ -5223,15 +5112,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Direcci\u00f3n Nacional de Econom\u00eda de Hidrocarburos."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/c1c73b3a-0811-4441-9b65-e461fdce52e8/resource/c11f1dd3-c6e2-41fe-8100-19c5d6bea239/download/productos-elaborados-a-partir-del-petrleo.csv",
-          "format": "CSV",
-          "title": "Productos Elaborados a partir del Petr\u00f3leo",
-          "issued": "2017-08-16T12:06:44.014879",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/c1c73b3a-0811-4441-9b65-e461fdce52e8/resource/c11f1dd3-c6e2-41fe-8100-19c5d6bea239/download/productos-elaborados-a-partir-del-petrleo.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/c1c73b3a-0811-4441-9b65-e461fdce52e8/resource/c11f1dd3-c6e2-41fe-8100-19c5d6bea239/download/productos-elaborados-a-partir-del-petrleo.csv",
+        "format": "CSV",
+        "title": "Productos Elaborados a partir del Petr\u00f3leo",
+        "issued": "2017-08-16T12:06:44.014879",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/c1c73b3a-0811-4441-9b65-e461fdce52e8/resource/c11f1dd3-c6e2-41fe-8100-19c5d6bea239/download/productos-elaborados-a-partir-del-petrleo.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Energ\u00eda"
@@ -5254,15 +5141,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/6f15bd25-c036-47fd-88fc-84f53b4170d4/resource/a88223d5-a77d-4705-bfd4-3dd86e371342/download/principales-productos-exportados.csv",
-          "format": "CSV",
-          "title": "Principales productos exportados por rubro",
-          "issued": "2017-08-16T12:06:35.114566",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/6f15bd25-c036-47fd-88fc-84f53b4170d4/resource/a88223d5-a77d-4705-bfd4-3dd86e371342/download/principales-productos-exportados.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/6f15bd25-c036-47fd-88fc-84f53b4170d4/resource/a88223d5-a77d-4705-bfd4-3dd86e371342/download/principales-productos-exportados.csv",
+        "format": "CSV",
+        "title": "Principales productos exportados por rubro",
+        "issued": "2017-08-16T12:06:35.114566",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/6f15bd25-c036-47fd-88fc-84f53b4170d4/resource/a88223d5-a77d-4705-bfd4-3dd86e371342/download/principales-productos-exportados.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -5285,8 +5170,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos.Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/e095db78-a5df-451c-b966-971d0a6b7887/resource/7147dbd6-03c1-4da3-922e-f0b8645bf097/download/precios-en-surtidor-resolucin-3142016.csv",
           "format": "CSV",
           "title": "Precios vigentes en surtidor - Resoluci\u00f3n 314/2016",
@@ -5333,8 +5217,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Direcci\u00f3n Nacional de Econom\u00eda de Hidrocarburos."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/708f9ab4-829b-4f02-b507-f303c5bc4800/resource/d0d01143-fb95-4ee4-993e-0ff178e33aa8/download/precios-eess-2017.csv",
           "format": "CSV",
           "title": "Precios EESS 2017",
@@ -5455,16 +5338,14 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda. Secretar\u00eda de Recursos Hidrocarbur\u00edferos. Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n. Direcci\u00f3n de Biocombustibles."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/30fcb906-5374-4790-aa89-368c0d3ef314/resource/b68507ca-f6ff-406f-85cf-2d706a2b993f/download/biocombustible-precios-de-biodiesel.csv",
-          "format": "CSV",
-          "title": "Biocombustibles - Precios de biodiesel",
-          "description": "Precios por categor\u00eda de empresa, en AR$/t.",
-          "issued": "2017-08-16T12:06:06.401730",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/30fcb906-5374-4790-aa89-368c0d3ef314/resource/b68507ca-f6ff-406f-85cf-2d706a2b993f/download/biocombustible-precios-de-biodiesel.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/30fcb906-5374-4790-aa89-368c0d3ef314/resource/b68507ca-f6ff-406f-85cf-2d706a2b993f/download/biocombustible-precios-de-biodiesel.csv",
+        "format": "CSV",
+        "title": "Biocombustibles - Precios de biodiesel",
+        "description": "Precios por categor\u00eda de empresa, en AR$/t.",
+        "issued": "2017-08-16T12:06:06.401730",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/30fcb906-5374-4790-aa89-368c0d3ef314/resource/b68507ca-f6ff-406f-85cf-2d706a2b993f/download/biocombustible-precios-de-biodiesel.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Energ\u00eda"
@@ -5487,8 +5368,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda. Secretar\u00eda de Recursos Hidrocarbur\u00edferos. Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n. Direcci\u00f3n de Biocombustibles."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/227cd0b0-2b36-4d4f-8a12-36c9c0ec4875/resource/77d33231-3982-496a-8ba3-dd699964c89a/download/categoras-de-empresas.csv",
           "format": "CSV",
           "title": "Categor\u00edas de Empresas",
@@ -5527,8 +5407,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/4f43e690-4cac-4385-8a7a-89a163516dcc/resource/f58c290f-aea7-4c93-a075-c7cecf2ba2c1/download/produccin-hidrocarburos-pozos-de-petrleo-y-gas.csv",
           "format": "CSV",
           "title": "Producci\u00f3n Hidrocarburos Pozos de Petr\u00f3leo y Gas",
@@ -5566,8 +5445,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/7ea2ac77-d7a0-4129-9fbf-6f1a25d94e21/resource/7946dc4a-8421-4e06-b8f7-7a9c7dc37c60/download/pozos-en-perforacin-ant-a-2009.csv",
           "format": "CSV",
           "title": "Pozos en perforaci\u00f3n ant. a 2009",
@@ -5639,15 +5517,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/4d8592fc-0ced-4e58-8d6b-0e8548190c26/resource/0d2cae14-cbe4-4652-b941-5791fd9b8e5a/download/importacionesminerasporrubroshare.csv",
-          "format": "CSV",
-          "title": "Participaci\u00f3n de importaciones mineras por rubro",
-          "issued": "2017-08-16T12:05:27.188926",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/4d8592fc-0ced-4e58-8d6b-0e8548190c26/resource/0d2cae14-cbe4-4652-b941-5791fd9b8e5a/download/importacionesminerasporrubroshare.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/4d8592fc-0ced-4e58-8d6b-0e8548190c26/resource/0d2cae14-cbe4-4652-b941-5791fd9b8e5a/download/importacionesminerasporrubroshare.csv",
+        "format": "CSV",
+        "title": "Participaci\u00f3n de importaciones mineras por rubro",
+        "issued": "2017-08-16T12:05:27.188926",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/4d8592fc-0ced-4e58-8d6b-0e8548190c26/resource/0d2cae14-cbe4-4652-b941-5791fd9b8e5a/download/importacionesminerasporrubroshare.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -5670,8 +5546,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Direcci\u00f3n Nacional de Econom\u00eda de Hidrocarburos."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/bf070f3d-c983-42d6-901b-1e4b810203df/resource/47a8b39d-02be-4046-b706-9369c57bb28e/download/banderas.csv",
           "format": "CSV",
           "title": "Banderas",
@@ -5715,15 +5590,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Infraestructura Energ\u00e9tica."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/a94977b7-d6a2-4501-b422-a20c909cc60f/resource/2ada83a0-7fb1-4dca-a9cd-c6ac7f75d1b6/download/obras-electricas.csv",
-          "format": "CSV",
-          "title": "Obras de transmisi\u00f3n y distribuci\u00f3n",
-          "issued": "2017-08-16T12:05:08.885906",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/a94977b7-d6a2-4501-b422-a20c909cc60f/resource/2ada83a0-7fb1-4dca-a9cd-c6ac7f75d1b6/download/obras-electricas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/a94977b7-d6a2-4501-b422-a20c909cc60f/resource/2ada83a0-7fb1-4dca-a9cd-c6ac7f75d1b6/download/obras-electricas.csv",
+        "format": "CSV",
+        "title": "Obras de transmisi\u00f3n y distribuci\u00f3n",
+        "issued": "2017-08-16T12:05:08.885906",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/a94977b7-d6a2-4501-b422-a20c909cc60f/resource/2ada83a0-7fb1-4dca-a9cd-c6ac7f75d1b6/download/obras-electricas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -5746,15 +5619,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Infraestructura Energ\u00e9tica."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/84bf14b4-47bf-4efb-ad7c-0d70684a50d3/resource/535ed5fc-ca6d-463e-9f88-2fe33b7b3790/download/obras-generacion.csv",
-          "format": "CSV",
-          "title": "Obras de generaci\u00f3n de electricidad",
-          "issued": "2017-08-16T12:04:58.497732",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/84bf14b4-47bf-4efb-ad7c-0d70684a50d3/resource/535ed5fc-ca6d-463e-9f88-2fe33b7b3790/download/obras-generacion.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/84bf14b4-47bf-4efb-ad7c-0d70684a50d3/resource/535ed5fc-ca6d-463e-9f88-2fe33b7b3790/download/obras-generacion.csv",
+        "format": "CSV",
+        "title": "Obras de generaci\u00f3n de electricidad",
+        "issued": "2017-08-16T12:04:58.497732",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/84bf14b4-47bf-4efb-ad7c-0d70684a50d3/resource/535ed5fc-ca6d-463e-9f88-2fe33b7b3790/download/obras-generacion.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -5777,15 +5648,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Infraestructura Energ\u00e9tica."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/768d848f-22eb-4d6f-b878-77982fb5f65d/resource/b0db214e-f3a7-4e34-9089-dd64d5f74dfb/download/obras-gas.csv",
-          "format": "CSV",
-          "title": "Obras de GAS",
-          "issued": "2017-08-16T12:04:50.078811",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/768d848f-22eb-4d6f-b878-77982fb5f65d/resource/b0db214e-f3a7-4e34-9089-dd64d5f74dfb/download/obras-gas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/768d848f-22eb-4d6f-b878-77982fb5f65d/resource/b0db214e-f3a7-4e34-9089-dd64d5f74dfb/download/obras-gas.csv",
+        "format": "CSV",
+        "title": "Obras de GAS",
+        "issued": "2017-08-16T12:04:50.078811",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/768d848f-22eb-4d6f-b878-77982fb5f65d/resource/b0db214e-f3a7-4e34-9089-dd64d5f74dfb/download/obras-gas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -5808,8 +5677,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n.Direcci\u00f3n de Gas Licuado."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/ce3693c7-4cab-40a1-9705-5b25b3d9145c/resource/def306d4-6f94-412a-ae57-8c4da8d08778/download/multas-empresas-mercado-de-glp-resmen-de-actas-de-inspeccin.csv",
           "format": "CSV",
           "title": "Res\u00famen de Actas de Inspecci\u00f3n",
@@ -5853,8 +5721,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/df832dab-b67c-4952-9f37-1bd28136967a/resource/b0b2dc8e-a637-468a-a234-d5471d771a31/download/resolucin-318-medidores-empadronados.csv",
           "format": "CSV",
           "title": "Resoluci\u00f3n 318 - Medidores Empadronados",
@@ -5906,8 +5773,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/2d730da0-632f-4722-8e6f-4e4f5f40b9ab/resource/addaadc8-9e34-462e-b555-aa8b8c23e708/download/irradiancia-normal-directa.csv",
           "format": "CSV",
           "title": "Irradiancia normal directa",
@@ -5945,8 +5811,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/83fd2c3f-e0f5-4d56-a3ef-828eac226ba9/resource/c0bb56ec-7fcf-4dd0-aee6-0e075f756638/download/resolucin-2057-inversiones-realizadas-fin-de-concesin.csv",
           "format": "CSV",
           "title": "Resoluci\u00f3n 2057 - Inversiones realizadas fin de concesi\u00f3n",
@@ -5998,8 +5863,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/bf7914d6-1174-4766-a632-0e7d62068b25/resource/c34d2b0a-977a-4c30-b86b-8c9b9d5ed662/download/instalaciones-hidrocarburos-puertos-regasificadores-de-gnl.zip",
           "format": "SHP",
           "title": "Instalaciones de hidrocarburos - Puertos regasificadores de GNL",
@@ -6038,8 +5902,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/e5c525ff-6dbd-4e1e-a52e-14e9d742c4f1/resource/9029e1ae-77f2-4aee-8e40-c30943ac9d1b/download/instalaciones-hidrocarburos-instalaciones-res-319-93-p-caractersticos-.zip",
           "format": "SHP",
           "title": "Instalaciones Hidrocarburos Instalaciones Res.319 93 (P. Caracter\u00edsticos)",
@@ -6078,8 +5941,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/164e7197-3222-4d21-81df-9db30ccd3940/resource/f80f01ac-1e50-49d9-974c-8b89b7de8b43/download/instalaciones-hidrocarburos-instalaciones-res-318.csv",
           "format": "CSV",
           "title": "Instalaciones Hidrocarburos Instalaciones Res.318",
@@ -6118,8 +5980,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/84681f81-dbbb-49eb-be30-e61778736ad9/resource/857bd3ad-9a8b-4cf9-8e25-a8bc73f3282f/download/instalaciones-hidrocarburos-ductos-res-319-93.csv",
           "format": "CSV",
           "title": "Instalaciones Hidrocarburos Ductos Res. 319 93",
@@ -6157,15 +6018,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/847259dd-c788-463d-ac89-edad029dd767/resource/89ff97d7-7093-4ff7-ac83-72d93201377c/download/impo-mineria-por-rubro.csv",
-          "format": "CSV",
-          "title": "Importaciones mineras por rubro",
-          "issued": "2017-08-16T12:03:25.014911",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/847259dd-c788-463d-ac89-edad029dd767/resource/89ff97d7-7093-4ff7-ac83-72d93201377c/download/impo-mineria-por-rubro.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/847259dd-c788-463d-ac89-edad029dd767/resource/89ff97d7-7093-4ff7-ac83-72d93201377c/download/impo-mineria-por-rubro.csv",
+        "format": "CSV",
+        "title": "Importaciones mineras por rubro",
+        "issued": "2017-08-16T12:03:25.014911",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/847259dd-c788-463d-ac89-edad029dd767/resource/89ff97d7-7093-4ff7-ac83-72d93201377c/download/impo-mineria-por-rubro.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6188,15 +6047,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/0b2c26b8-7919-4ac6-8ffe-7f911b26fe58/resource/70f019bd-db28-48a4-936e-bfe2e44e1c37/download/impo-bs-capital-insumos-mineria.csv",
-          "format": "CSV",
-          "title": "Importaciones en el marco del r\u00e9gimen de inversiones mineras",
-          "issued": "2017-08-16T12:03:15.114931",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/0b2c26b8-7919-4ac6-8ffe-7f911b26fe58/resource/70f019bd-db28-48a4-936e-bfe2e44e1c37/download/impo-bs-capital-insumos-mineria.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/0b2c26b8-7919-4ac6-8ffe-7f911b26fe58/resource/70f019bd-db28-48a4-936e-bfe2e44e1c37/download/impo-bs-capital-insumos-mineria.csv",
+        "format": "CSV",
+        "title": "Importaciones en el marco del r\u00e9gimen de inversiones mineras",
+        "issued": "2017-08-16T12:03:15.114931",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/0b2c26b8-7919-4ac6-8ffe-7f911b26fe58/resource/70f019bd-db28-48a4-936e-bfe2e44e1c37/download/impo-bs-capital-insumos-mineria.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6220,8 +6077,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/b2b9f9b2-0282-4c84-b815-a2366326f92f/resource/a455e638-ff59-4e8e-9b0a-798cfddc5a44/download/glp-distancia-areas-urbanas-a-depsitos-y-fraccionadoras-glp.csv",
           "format": "CSV",
           "title": "GLP distancia entre \u00e1reas urbanas y dep\u00f3sitos y fraccionadoras de GLP",
@@ -6268,8 +6124,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.   Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/ac7f614e-622e-43d1-b480-7af68ef9d881/resource/3c0bbeee-883d-46ed-a4a0-8dd3135dbcf5/download/geologa-climatologa-yacimientos-minerales.zip",
           "format": "SHP",
           "title": "Geolog\u00eda Climatolog\u00eda Yacimientos Minerales",
@@ -6308,8 +6163,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/d4aaab4e-ea13-4fbd-9ca2-52adb1478284/resource/165e597e-7261-4c46-ae94-bba9c93c52b3/download/generacin-elctrica-pequeos-aprovechamientos-hidroelctricos.zip",
           "format": "SHP",
           "title": "Generaci\u00f3n El\u00e9ctrica Peque\u00f1os Aprovechamientos Hidroel\u00e9ctricos",
@@ -6348,8 +6202,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/c62df6c6-73af-4039-b956-db081ff6eebe/resource/512e8588-35dc-4b95-bf7a-89cd3bd00842/download/generacin-elctrica-centrales-de-generacin.zip",
           "format": "SHP",
           "title": "Generaci\u00f3n El\u00e9ctrica Centrales de Generaci\u00f3n",
@@ -6387,15 +6240,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/3933032d-779b-4653-a069-7ad230674e79/resource/1638a569-6895-4b9a-99b7-1d4f609629e2/download/serie-generacion-electrica-bruta.csv",
-          "format": "CSV",
-          "title": "Generaci\u00f3n El\u00e9ctrica Bruta Asociada a redes desde 1930",
-          "issued": "2017-08-16T12:02:27.417375",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/3933032d-779b-4653-a069-7ad230674e79/resource/1638a569-6895-4b9a-99b7-1d4f609629e2/download/serie-generacion-electrica-bruta.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/3933032d-779b-4653-a069-7ad230674e79/resource/1638a569-6895-4b9a-99b7-1d4f609629e2/download/serie-generacion-electrica-bruta.csv",
+        "format": "CSV",
+        "title": "Generaci\u00f3n El\u00e9ctrica Bruta Asociada a redes desde 1930",
+        "issued": "2017-08-16T12:02:27.417375",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/3933032d-779b-4653-a069-7ad230674e79/resource/1638a569-6895-4b9a-99b7-1d4f609629e2/download/serie-generacion-electrica-bruta.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6417,15 +6268,13 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/cd834454-ea20-4e41-8839-fc426d0b4211/resource/41caa09e-60fd-4533-b6e2-cc6b3eb2ba44/download/gas-entregado-por-tipo-de-usuario-y-terceros-total-en-miles-de-m3-de-9300-kcal-enargas.csv",
-          "format": "CSV",
-          "title": "Gas Entregado, por Tipo de Usuario y por cuenta de Terceros",
-          "issued": "2017-08-16T12:02:18.062142",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/cd834454-ea20-4e41-8839-fc426d0b4211/resource/41caa09e-60fd-4533-b6e2-cc6b3eb2ba44/download/gas-entregado-por-tipo-de-usuario-y-terceros-total-en-miles-de-m3-de-9300-kcal-enargas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/cd834454-ea20-4e41-8839-fc426d0b4211/resource/41caa09e-60fd-4533-b6e2-cc6b3eb2ba44/download/gas-entregado-por-tipo-de-usuario-y-terceros-total-en-miles-de-m3-de-9300-kcal-enargas.csv",
+        "format": "CSV",
+        "title": "Gas Entregado, por Tipo de Usuario y por cuenta de Terceros",
+        "issued": "2017-08-16T12:02:18.062142",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/cd834454-ea20-4e41-8839-fc426d0b4211/resource/41caa09e-60fd-4533-b6e2-cc6b3eb2ba44/download/gas-entregado-por-tipo-de-usuario-y-terceros-total-en-miles-de-m3-de-9300-kcal-enargas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6447,15 +6296,13 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/09aa1423-fde8-4141-b3f3-37ce2ded8a8e/resource/e80d38e2-91cc-494d-9a77-aebbbd04f9c0/download/gas-entregado-por-tipo-de-usuario-total-en-miles-de-m3-de-9300-kcal-enargas.csv",
-          "format": "CSV",
-          "title": "Gas Entregado, por Tipo de Usuario",
-          "issued": "2017-08-16T12:02:07.680264",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/09aa1423-fde8-4141-b3f3-37ce2ded8a8e/resource/e80d38e2-91cc-494d-9a77-aebbbd04f9c0/download/gas-entregado-por-tipo-de-usuario-total-en-miles-de-m3-de-9300-kcal-enargas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/09aa1423-fde8-4141-b3f3-37ce2ded8a8e/resource/e80d38e2-91cc-494d-9a77-aebbbd04f9c0/download/gas-entregado-por-tipo-de-usuario-total-en-miles-de-m3-de-9300-kcal-enargas.csv",
+        "format": "CSV",
+        "title": "Gas Entregado, por Tipo de Usuario",
+        "issued": "2017-08-16T12:02:07.680264",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/09aa1423-fde8-4141-b3f3-37ce2ded8a8e/resource/e80d38e2-91cc-494d-9a77-aebbbd04f9c0/download/gas-entregado-por-tipo-de-usuario-total-en-miles-de-m3-de-9300-kcal-enargas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6478,16 +6325,14 @@
         "@type": "vcard:Contact",
         "fn": "ENARGAS"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/c5d8e29a-912a-44ad-80d7-7a35cae0aeba/resource/f23a7256-9ff9-403e-a83d-8309cb989627/download/gas-entregado-por-provincia-enargas.csv",
-          "format": "CSV",
-          "title": "Gas natural entregado por provincia",
-          "description": "En miles de m<sup>3</sup> de 9.300 kcal.",
-          "issued": "2017-08-16T12:01:58.400660",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/c5d8e29a-912a-44ad-80d7-7a35cae0aeba/resource/f23a7256-9ff9-403e-a83d-8309cb989627/download/gas-entregado-por-provincia-enargas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/c5d8e29a-912a-44ad-80d7-7a35cae0aeba/resource/f23a7256-9ff9-403e-a83d-8309cb989627/download/gas-entregado-por-provincia-enargas.csv",
+        "format": "CSV",
+        "title": "Gas natural entregado por provincia",
+        "description": "En miles de m<sup>3</sup> de 9.300 kcal.",
+        "issued": "2017-08-16T12:01:58.400660",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/c5d8e29a-912a-44ad-80d7-7a35cae0aeba/resource/f23a7256-9ff9-403e-a83d-8309cb989627/download/gas-entregado-por-provincia-enargas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6509,16 +6354,14 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/ce7b5038-d07e-4334-a810-348bca859810/resource/7494c3a1-24b9-4252-8924-7b4e705e3e58/download/gas-entregado-por-area-en-miles-de-m3-de-9300-kcal-enargas.csv",
-          "format": "CSV",
-          "title": "Gas natural entregado por \u00e1rea de licencia",
-          "description": "En miles de m3 de 9300 kcal.",
-          "issued": "2017-08-16T12:01:50.558904",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/ce7b5038-d07e-4334-a810-348bca859810/resource/7494c3a1-24b9-4252-8924-7b4e705e3e58/download/gas-entregado-por-area-en-miles-de-m3-de-9300-kcal-enargas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/ce7b5038-d07e-4334-a810-348bca859810/resource/7494c3a1-24b9-4252-8924-7b4e705e3e58/download/gas-entregado-por-area-en-miles-de-m3-de-9300-kcal-enargas.csv",
+        "format": "CSV",
+        "title": "Gas natural entregado por \u00e1rea de licencia",
+        "description": "En miles de m3 de 9300 kcal.",
+        "issued": "2017-08-16T12:01:50.558904",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/ce7b5038-d07e-4334-a810-348bca859810/resource/7494c3a1-24b9-4252-8924-7b4e705e3e58/download/gas-entregado-por-area-en-miles-de-m3-de-9300-kcal-enargas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6540,16 +6383,14 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/7abff795-d834-4a19-aae5-6deafa2983ea/resource/970f826d-e60c-4c8e-a3be-a5910d884fff/download/gas-entregado-a-grandes-usuarios-industriales-por-provincia-total-en-miles-de-m3-de-9300-kcal-en.csv",
-          "format": "CSV",
-          "title": "Gas natural entregado a grandes usuarios por provincia",
-          "description": "En miles de m3 de 9300 kcal.",
-          "issued": "2017-08-16T12:01:40.721458",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/7abff795-d834-4a19-aae5-6deafa2983ea/resource/970f826d-e60c-4c8e-a3be-a5910d884fff/download/gas-entregado-a-grandes-usuarios-industriales-por-provincia-total-en-miles-de-m3-de-9300-kcal-en.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/7abff795-d834-4a19-aae5-6deafa2983ea/resource/970f826d-e60c-4c8e-a3be-a5910d884fff/download/gas-entregado-a-grandes-usuarios-industriales-por-provincia-total-en-miles-de-m3-de-9300-kcal-en.csv",
+        "format": "CSV",
+        "title": "Gas natural entregado a grandes usuarios por provincia",
+        "description": "En miles de m3 de 9300 kcal.",
+        "issued": "2017-08-16T12:01:40.721458",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/7abff795-d834-4a19-aae5-6deafa2983ea/resource/970f826d-e60c-4c8e-a3be-a5910d884fff/download/gas-entregado-a-grandes-usuarios-industriales-por-provincia-total-en-miles-de-m3-de-9300-kcal-en.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6571,16 +6412,14 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/4923ff1e-f3db-4664-be56-4fde6bc3eb61/resource/c79cf2f9-1407-4337-8c1c-ab70236543e1/download/gas-entregado-a-grandes-usuarios-industriales-por-distribuidora-total-en-miles-de-m3-de-9300-kca.csv",
-          "format": "CSV",
-          "title": "Gas natural entregado a grandes usuarios por distribuidora",
-          "description": "En miles de m3 de 9300 kcal.",
-          "issued": "2017-08-16T12:01:31.825081",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/4923ff1e-f3db-4664-be56-4fde6bc3eb61/resource/c79cf2f9-1407-4337-8c1c-ab70236543e1/download/gas-entregado-a-grandes-usuarios-industriales-por-distribuidora-total-en-miles-de-m3-de-9300-kca.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/4923ff1e-f3db-4664-be56-4fde6bc3eb61/resource/c79cf2f9-1407-4337-8c1c-ab70236543e1/download/gas-entregado-a-grandes-usuarios-industriales-por-distribuidora-total-en-miles-de-m3-de-9300-kca.csv",
+        "format": "CSV",
+        "title": "Gas natural entregado a grandes usuarios por distribuidora",
+        "description": "En miles de m3 de 9300 kcal.",
+        "issued": "2017-08-16T12:01:31.825081",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/4923ff1e-f3db-4664-be56-4fde6bc3eb61/resource/c79cf2f9-1407-4337-8c1c-ab70236543e1/download/gas-entregado-a-grandes-usuarios-industriales-por-distribuidora-total-en-miles-de-m3-de-9300-kca.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6603,15 +6442,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/dea26f6a-a016-40aa-87eb-09f624c240fa/resource/8f61956b-46ea-4152-8950-0857b4becbef/download/expo-mineria-por-rubro.csv",
-          "format": "CSV",
-          "title": "Exportaciones mineras por rubro",
-          "issued": "2017-08-16T12:01:22.925332",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/dea26f6a-a016-40aa-87eb-09f624c240fa/resource/8f61956b-46ea-4152-8950-0857b4becbef/download/expo-mineria-por-rubro.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/dea26f6a-a016-40aa-87eb-09f624c240fa/resource/8f61956b-46ea-4152-8950-0857b4becbef/download/expo-mineria-por-rubro.csv",
+        "format": "CSV",
+        "title": "Exportaciones mineras por rubro",
+        "issued": "2017-08-16T12:01:22.925332",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/dea26f6a-a016-40aa-87eb-09f624c240fa/resource/8f61956b-46ea-4152-8950-0857b4becbef/download/expo-mineria-por-rubro.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6634,15 +6471,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/0f1182d4-28a0-4ae3-85a4-cf806a59a8b7/resource/1999f7fe-a156-40dc-8cc8-431ffff38a01/download/expo-mineria-por-provincia.csv",
-          "format": "CSV",
-          "title": "Exportaciones minerales y derivados por provincia",
-          "issued": "2017-08-16T12:01:12.945455",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/0f1182d4-28a0-4ae3-85a4-cf806a59a8b7/resource/1999f7fe-a156-40dc-8cc8-431ffff38a01/download/expo-mineria-por-provincia.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/0f1182d4-28a0-4ae3-85a4-cf806a59a8b7/resource/1999f7fe-a156-40dc-8cc8-431ffff38a01/download/expo-mineria-por-provincia.csv",
+        "format": "CSV",
+        "title": "Exportaciones minerales y derivados por provincia",
+        "issued": "2017-08-16T12:01:12.945455",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/0f1182d4-28a0-4ae3-85a4-cf806a59a8b7/resource/1999f7fe-a156-40dc-8cc8-431ffff38a01/download/expo-mineria-por-provincia.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -6666,8 +6501,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/11540156-6454-47c8-9748-c8f8705f62c0/resource/dae27747-fb0b-49a2-9be0-712bfc0f6266/download/exploracin-hidrocarburos-ssmicas-3d.csv",
           "format": "CSV",
           "title": "Exploraci\u00f3n Hidrocarburos S\u00edsmicas 3D",
@@ -6706,8 +6540,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/66044d22-6657-47d1-b0bb-ecc7c1d37a44/resource/c33b6176-6025-41ee-b174-d4d7653735c3/download/exploracin-hidrocarburos-permisos-de-exploracin.csv",
           "format": "CSV",
           "title": "Exploraci\u00f3n Hidrocarburos Permisos de Exploraci\u00f3n",
@@ -6746,8 +6579,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/071b7a3e-0a34-426c-a605-d24e7bdef9a3/resource/fb01c3ae-dc61-4845-885a-457ea9c5f796/download/exploracin-hidrocarburos-lineas-ssmicas-2d.csv",
           "format": "CSV",
           "title": "Exploraci\u00f3n Hidrocarburos Lineas S\u00edsmicas 2D",
@@ -6786,8 +6618,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/0d4a18ee-9371-439a-8a94-4f53a9822664/resource/04263302-626d-4a81-9564-106e08b975a3/download/exploracin-hidrocarburos-cuencas-sedimentarias.csv",
           "format": "CSV",
           "title": "Exploraci\u00f3n Hidrocarburos Cuencas Sedimentarias",
@@ -6832,8 +6663,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/a6845008-51d9-481c-ad0f-899068e2bbc8/resource/0f0c67f1-5ec4-4e6c-8fbe-ef0c16983447/download/pozos-productivos-de-gas-ant-2009.csv",
           "format": "CSV",
           "title": "Pozos productivos de gas ant. 2009",
@@ -6877,8 +6707,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda. Secretar\u00eda de Recursos Hidrocarbur\u00edferos. Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n. Direcci\u00f3n de Biocombustibles."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://www.energia.gob.ar/contenidos/archivos/Reorganizacion/informacion_del_mercado/mercado_hidrocarburos/bio/estadisticas_biocombustibles.xls",
           "format": "XLS",
           "title": "Estad\u00edsticas de biodiesel y bioetanol",
@@ -6950,8 +6779,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/ab6c7e10-1b43-4e6f-a833-0adb996b0814/resource/48a2ea87-4ac7-49cf-98b2-ad37590cb9a6/download/energas-renovables-refineras-de-aceite-vegetal.csv",
           "format": "CSV",
           "title": "Energ\u00edas Renovables Refiner\u00edas de Aceite Vegetal",
@@ -6990,8 +6818,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/292d47b8-07f7-4acc-b37f-2544ee8c89b4/resource/6276cd24-3ffe-4aed-b4fe-f5d24d97486b/download/2015-septiembre.zip",
           "format": "SHP",
           "title": "2015 Septiembre",
@@ -7195,8 +7022,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/aaea4a47-34d3-4528-98ab-8cb33483eef9/resource/963b2a77-9653-416b-9145-5033638e438b/download/energas-renovables-puntos-de-inters-geotrmico.csv",
           "format": "CSV",
           "title": "Energ\u00edas Renovables Puntos de Inter\u00e9s Geot\u00e9rmico",
@@ -7235,8 +7061,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/bc71d6c7-677b-4fcd-807b-882747339fbf/resource/1265f393-b887-403d-beb1-d33b220ed920/download/energas-renovables-plantas-productoras-de-aceite-vegetal.csv",
           "format": "CSV",
           "title": "Energ\u00edas Renovables Plantas Productoras de Aceite Vegetal",
@@ -7275,8 +7100,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda. Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico. Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica. Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/eccce607-f934-4e93-a40b-1cca44fd6cd6/resource/d9b5c5b9-825a-4d23-9d4d-988ad1ede966/download/energas-renovables-plantas-biocombustibles.csv",
           "format": "CSV",
           "title": "Energ\u00edas Renovables Plantas Biocombustibles",
@@ -7315,8 +7139,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/d29ba763-7ae5-4e18-85bf-03c323bbd163/resource/a156f87a-0c24-47bb-962a-f401fdf8d52f/download/provincia-de-la-pampa.csv",
           "format": "CSV",
           "title": "Provincia de La Pampa",
@@ -7399,8 +7222,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Direcci\u00f3n Nacional de Econom\u00eda de Hidrocarburos."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/b7204bc6-6b63-46b8-93cf-730379bb8335/resource/e75b7fef-addb-4170-a503-cd70b8815887/download/procesamiento-de-petrleo-crudo-y-otras-cargas.csv",
           "format": "CSV",
           "title": "Procesamiento de Petr\u00f3leo Crudo y Otras Cargas",
@@ -7445,8 +7267,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/7e8aab1c-cacb-4739-bdef-a3932dcced99/resource/e2c61c57-9b2d-418d-b779-0076bec5d3e5/download/distribucin-gas-concesiones-de-empresas-distribuidoras.zip",
           "format": "SHP",
           "title": "Distribuci\u00f3n de gas natural - Concesiones de empresas distribuidoras",
@@ -7485,8 +7306,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/6cd06091-3498-457a-87cd-be1bf50f9e40/resource/7e586ac4-feac-4c7c-9528-61e5bfcf3378/download/distribucin-elctrica-edesur-at-lneas.csv",
           "format": "CSV",
           "title": "Distribuci\u00f3n El\u00e9ctrica Edesur Alta Tensi\u00f3n L\u00edneas",
@@ -7570,8 +7390,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/70f994f6-fde6-4e09-b3a4-72f5f7145181/resource/c7720f88-3959-4e31-ac80-cecb794c75cb/download/distribucin-elctrica-edenor-at-puentes-al-vuelo.csv",
           "format": "CSV",
           "title": "Distribuci\u00f3n El\u00e9ctrica Edenor Alta Tensi\u00f3n  Puentes Al Vuelo",
@@ -7715,8 +7534,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/2e0fe150-8cf4-4707-927d-94bfaf95bb53/resource/27c446ce-ca2b-47ed-b287-94c0c2024da4/download/distribucin-elctrica-edelap-at-cabeceras.csv",
           "format": "CSV",
           "title": "Distribuci\u00f3n El\u00e9ctrica Edelap Alta Tensi\u00f3n  Cabeceras",
@@ -7815,8 +7633,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/96d78704-874e-44eb-920b-2a13f346622c/resource/0862d65d-b90d-41cd-9c35-5c83bfecb6f3/download/distribucin-elctrica-concesiones-de-empresas-distribuidoras.zip",
           "format": "SHP",
           "title": "Distribuci\u00f3n El\u00e9ctrica - Concesiones de empresas distribuidoras",
@@ -7855,8 +7672,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/edefded9-3329-468a-9c56-bc377a703200/resource/9f433685-6771-48ba-bd32-a63ac3342384/download/distribucin-elctrica-reas-de-distribucin-de-cooperativas.zip",
           "format": "SHP",
           "title": "Distribuci\u00f3n El\u00e9ctrica \u00c1reas de Distribuci\u00f3n de Cooperativas",
@@ -7895,8 +7711,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/69feceec-2e8c-4baf-af45-dd00b202aca6/resource/a7d18c56-321b-46a6-9457-e453f06d7189/download/distribucin-elctrica-apelp-la-pampa-mt-lneas.zip",
           "format": "SHP",
           "title": "Distribuci\u00f3n El\u00e9ctrica Apelp La Pampa Media Tensi\u00f3n L\u00edneas",
@@ -7934,8 +7749,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/1de93a11-047b-4665-93b7-f2927fc50f89/resource/d9948c4a-c81b-4ad0-943e-c41a99c3e33c/download/distribucin-de-petrleo.csv",
           "format": "CSV",
           "title": "Distribuci\u00f3n de petr\u00f3leo",
@@ -7979,15 +7793,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/65101748-c98b-47f1-bf35-c282ba7b492a/resource/899f9397-838c-43ea-8bc8-2b6ec2753b1d/download/disponibilidad-de-petrleo-a-fin-de-mes.csv",
-          "format": "CSV",
-          "title": "Disponibilidad de petr\u00f3leo a fin de mes",
-          "issued": "2017-08-16T11:57:40.855807",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/65101748-c98b-47f1-bf35-c282ba7b492a/resource/899f9397-838c-43ea-8bc8-2b6ec2753b1d/download/disponibilidad-de-petrleo-a-fin-de-mes.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/65101748-c98b-47f1-bf35-c282ba7b492a/resource/899f9397-838c-43ea-8bc8-2b6ec2753b1d/download/disponibilidad-de-petrleo-a-fin-de-mes.csv",
+        "format": "CSV",
+        "title": "Disponibilidad de petr\u00f3leo a fin de mes",
+        "issued": "2017-08-16T11:57:40.855807",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/65101748-c98b-47f1-bf35-c282ba7b492a/resource/899f9397-838c-43ea-8bc8-2b6ec2753b1d/download/disponibilidad-de-petrleo-a-fin-de-mes.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Energ\u00eda"
@@ -8010,8 +7822,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n.Direcci\u00f3n de Gas Licuado."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/bada5328-3e7d-47b7-8fdc-85dbe2bc748e/resource/57bdab5b-783f-4277-a0e6-7bf199d57c2a/download/compras-de-distribuidor-envases-de-glp.csv",
           "format": "CSV",
           "title": "Compras de distribuidores de envases de GLP",
@@ -8084,8 +7895,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/075c393d-5ad1-4cb0-a653-e953c313796d/resource/f43f691f-8564-416d-ab89-8a40248241ae/download/comercializacin-hidrocarburos-glp-plantas-fraccionadoras.zip",
           "format": "SHP",
           "title": "Comercializaci\u00f3n Hidrocarburos GLP Plantas Fraccionadoras",
@@ -8124,8 +7934,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/315cbe4f-0de0-426a-90c7-8ca7533d4fac/resource/9845f41d-9d56-41bd-86e3-4dc6fd98acc5/download/comercializacin-hidrocarburos-glp-depsitos.zip",
           "format": "SHP",
           "title": "Comercializaci\u00f3n Hidrocarburos GLP Dep\u00f3sitos",
@@ -8164,8 +7973,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/99ba34a0-08f2-48e3-8d37-4d92542f740e/resource/60cc9937-e676-4535-a63e-91ae2b5bf3fa/download/comercializacin-hidrocarburos-combustibles-lquidos-terminales-de-despacho.zip",
           "format": "SHP",
           "title": "Comercializaci\u00f3n Hidrocarburos Combustibles L\u00edquidos Terminales de Despacho",
@@ -8204,8 +8012,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/4adf2cf0-621c-49e6-8434-9d787765d9ea/resource/b557e8ac-d149-4f9f-af9e-ee31cfb3a777/download/comercializacin-hidrocarburos-combustibles-lquidos-aeroplantas.zip",
           "format": "SHP",
           "title": "Comercializaci\u00f3n Hidrocarburos Combustibles L\u00edquidos Aeroplantas",
@@ -8244,8 +8051,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/669615be-17f4-41ad-9aad-4c438cb974f9/resource/e1933d80-e981-49b1-ab92-4715e978e32b/download/estaciones-de-servicio.zip",
           "format": "SHP",
           "title": "Estaciones de servicio",
@@ -8283,15 +8089,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/022eb3e3-e2ff-47e9-a770-7d54f6bcbefa/resource/50a81ccc-62c6-45cc-941f-297c1cad25fe/download/certificados-impo-mineria.csv",
-          "format": "CSV",
-          "title": "Certificados de importaci\u00f3n seg\u00fan r\u00e9gimen de inversiones mineras",
-          "issued": "2017-08-16T11:56:33.832630",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/022eb3e3-e2ff-47e9-a770-7d54f6bcbefa/resource/50a81ccc-62c6-45cc-941f-297c1cad25fe/download/certificados-impo-mineria.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/022eb3e3-e2ff-47e9-a770-7d54f6bcbefa/resource/50a81ccc-62c6-45cc-941f-297c1cad25fe/download/certificados-impo-mineria.csv",
+        "format": "CSV",
+        "title": "Certificados de importaci\u00f3n seg\u00fan r\u00e9gimen de inversiones mineras",
+        "issued": "2017-08-16T11:56:33.832630",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/022eb3e3-e2ff-47e9-a770-7d54f6bcbefa/resource/50a81ccc-62c6-45cc-941f-297c1cad25fe/download/certificados-impo-mineria.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -8313,15 +8117,13 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/eba8a57c-d9a7-40bc-b97a-dddb8d2ede55/resource/954f3e65-379b-47e4-81f7-aa9558568428/download/gas-numero-de-usuarios-total-por-tipo-de-usuario-y-terceros-enargas.csv",
-          "format": "CSV",
-          "title": "Cantidad de usuarios de redes de gas natural por tipo",
-          "issued": "2017-08-16T11:56:23.273738",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/eba8a57c-d9a7-40bc-b97a-dddb8d2ede55/resource/954f3e65-379b-47e4-81f7-aa9558568428/download/gas-numero-de-usuarios-total-por-tipo-de-usuario-y-terceros-enargas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/eba8a57c-d9a7-40bc-b97a-dddb8d2ede55/resource/954f3e65-379b-47e4-81f7-aa9558568428/download/gas-numero-de-usuarios-total-por-tipo-de-usuario-y-terceros-enargas.csv",
+        "format": "CSV",
+        "title": "Cantidad de usuarios de redes de gas natural por tipo",
+        "issued": "2017-08-16T11:56:23.273738",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/eba8a57c-d9a7-40bc-b97a-dddb8d2ede55/resource/954f3e65-379b-47e4-81f7-aa9558568428/download/gas-numero-de-usuarios-total-por-tipo-de-usuario-y-terceros-enargas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -8343,15 +8145,13 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/bcffc058-227b-426a-8a23-71a89ee73a21/resource/a9d5c8ce-26c7-44a5-8f8f-cc8ce0ad4b43/download/gas-numero-de-usuarios-total-por-provincia-enargas.csv",
-          "format": "CSV",
-          "title": "Cantidad de usuarios de redes de gas natural por provincia",
-          "issued": "2017-08-16T11:56:13.673208",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/bcffc058-227b-426a-8a23-71a89ee73a21/resource/a9d5c8ce-26c7-44a5-8f8f-cc8ce0ad4b43/download/gas-numero-de-usuarios-total-por-provincia-enargas.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/bcffc058-227b-426a-8a23-71a89ee73a21/resource/a9d5c8ce-26c7-44a5-8f8f-cc8ce0ad4b43/download/gas-numero-de-usuarios-total-por-provincia-enargas.csv",
+        "format": "CSV",
+        "title": "Cantidad de usuarios de redes de gas natural por provincia",
+        "issued": "2017-08-16T11:56:13.673208",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/bcffc058-227b-426a-8a23-71a89ee73a21/resource/a9d5c8ce-26c7-44a5-8f8f-cc8ce0ad4b43/download/gas-numero-de-usuarios-total-por-provincia-enargas.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -8375,8 +8175,7 @@
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos. Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica.Tecnolog\u00eda de la Informaci\u00f3n.",
         "hasEmail": "mailto:tienerg@minem.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/d850c7a4-e2cb-4a2e-9b15-666dd9e27398/resource/b5ee8eb9-2ff2-4408-a20c-b4ef0fbc27fa/download/cantidad-de-usuarios-de-gas-de-red-por-segmento-de-calle.csv",
           "format": "CSV",
           "title": "Cantidad de usuarios de gas natural de red por segmento de calle",
@@ -8414,15 +8213,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Miner\u00eda."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/838eb9d7-bfff-4b3d-9a51-ce1d1a77aeb9/resource/14a0686c-36ac-470b-9b33-48f63cd7befd/download/balanza-comercial-mineria.csv",
-          "format": "CSV",
-          "title": "Balanza comercial minera",
-          "issued": "2017-08-16T11:55:54.830785",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/838eb9d7-bfff-4b3d-9a51-ce1d1a77aeb9/resource/14a0686c-36ac-470b-9b33-48f63cd7befd/download/balanza-comercial-mineria.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/838eb9d7-bfff-4b3d-9a51-ce1d1a77aeb9/resource/14a0686c-36ac-470b-9b33-48f63cd7befd/download/balanza-comercial-mineria.csv",
+        "format": "CSV",
+        "title": "Balanza comercial minera",
+        "issued": "2017-08-16T11:55:54.830785",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/838eb9d7-bfff-4b3d-9a51-ce1d1a77aeb9/resource/14a0686c-36ac-470b-9b33-48f63cd7befd/download/balanza-comercial-mineria.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -8445,8 +8242,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Planeamiento Energ\u00e9tico Estrat\u00e9gico.Subsecretar\u00eda de Escenarios y Evaluaci\u00f3n de Proyectos.Direcci\u00f3n Nacional de Informaci\u00f3n Energ\u00e9tica."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "https://datosgobar.github.io/energia/",
           "format": "HTML",
           "title": "Diagramas Sankey de Balances Energ\u00e9ticos",
@@ -8930,15 +8726,13 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/875910da-b806-4f71-a5bf-112325581eea/resource/81e2ef52-87db-4a99-9d51-7cb5e2ef39a1/download/autoridades-desde-1944.xlsx",
-          "format": "XLS",
-          "title": "Autoridades desde 1944",
-          "issued": "2017-08-16T11:55:34.805001",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/875910da-b806-4f71-a5bf-112325581eea/resource/81e2ef52-87db-4a99-9d51-7cb5e2ef39a1/download/autoridades-desde-1944.xlsx"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/875910da-b806-4f71-a5bf-112325581eea/resource/81e2ef52-87db-4a99-9d51-7cb5e2ef39a1/download/autoridades-desde-1944.xlsx",
+        "format": "XLS",
+        "title": "Autoridades desde 1944",
+        "issued": "2017-08-16T11:55:34.805001",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/875910da-b806-4f71-a5bf-112325581eea/resource/81e2ef52-87db-4a99-9d51-7cb5e2ef39a1/download/autoridades-desde-1944.xlsx"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -8961,15 +8755,13 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Refinaci\u00f3n y Comercializaci\u00f3n."
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.minem.gob.ar/dataset/a20cc1db-1bd1-4706-9a6b-28d921af293b/resource/ca9dfa0d-2e7c-488e-ba92-4b545f5e060d/download/actas-de-verificacin-de-eess.csv",
-          "format": "CSV",
-          "title": "Actas de inspecciones de abastecimiento en instalaciones de combustibles l\u00edquidos",
-          "issued": "2017-08-16T11:55:26.442842",
-          "downloadURL": "http://datos.minem.gob.ar/dataset/a20cc1db-1bd1-4706-9a6b-28d921af293b/resource/ca9dfa0d-2e7c-488e-ba92-4b545f5e060d/download/actas-de-verificacin-de-eess.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.minem.gob.ar/dataset/a20cc1db-1bd1-4706-9a6b-28d921af293b/resource/ca9dfa0d-2e7c-488e-ba92-4b545f5e060d/download/actas-de-verificacin-de-eess.csv",
+        "format": "CSV",
+        "title": "Actas de inspecciones de abastecimiento en instalaciones de combustibles l\u00edquidos",
+        "issued": "2017-08-16T11:55:26.442842",
+        "downloadURL": "http://datos.minem.gob.ar/dataset/a20cc1db-1bd1-4706-9a6b-28d921af293b/resource/ca9dfa0d-2e7c-488e-ba92-4b545f5e060d/download/actas-de-verificacin-de-eess.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Energ\u00eda"
@@ -8992,8 +8784,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Energ\u00eda y Miner\u00eda.Secretar\u00eda de Recursos Hidrocarbur\u00edferos.Subsecretar\u00eda de Exploraci\u00f3n y Producci\u00f3n.Direcci\u00f3n Nacional de Exploraci\u00f3n y Producci\u00f3n"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.minem.gob.ar/dataset/d961b791-19b5-4ada-a64c-66cba740f532/resource/7b8583fe-8994-4efa-9fbf-79c4a3f2f467/download/listado-de-estudios-ambientales.csv",
           "format": "CSV",
           "title": "Listado de Estudios Ambientales",
@@ -9038,16 +8829,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Derechos Humanos y Pluralismo Cultural. Direcci\u00f3n Nacional de Asuntos Jur\u00eddicos en materia de Derechos Humanos. Unidad de Registro, Sistematizaci\u00f3n y Seguimiento de femicidios y de homicidios agravados por el g\u00e9nero",
         "hasEmail": "mailto:registro_femicidios@jus.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/27bb9b2c-521b-406c-bdf9-98110ef73f34/resource/9a06c428-8552-42fe-86e1-487bca9b712c/download/registro-de-femicidios---2017-08-10.csv",
-          "format": "CSV",
-          "title": "Registro, sistematizaci\u00f3n y seguimiento de  femicidios y homicidios agravados por el g\u00e9nero",
-          "description": "Esta base registra los femicidios y homicidios agravados por el g\u00e9nero desde el a\u00f1o 2012 a la fecha.",
-          "issued": "2017-08-16T03:57:43.500015",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/27bb9b2c-521b-406c-bdf9-98110ef73f34/resource/9a06c428-8552-42fe-86e1-487bca9b712c/download/registro-de-femicidios---2017-08-10.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/27bb9b2c-521b-406c-bdf9-98110ef73f34/resource/9a06c428-8552-42fe-86e1-487bca9b712c/download/registro-de-femicidios---2017-08-10.csv",
+        "format": "CSV",
+        "title": "Registro, sistematizaci\u00f3n y seguimiento de  femicidios y homicidios agravados por el g\u00e9nero",
+        "description": "Esta base registra los femicidios y homicidios agravados por el g\u00e9nero desde el a\u00f1o 2012 a la fecha.",
+        "issued": "2017-08-16T03:57:43.500015",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/27bb9b2c-521b-406c-bdf9-98110ef73f34/resource/9a06c428-8552-42fe-86e1-487bca9b712c/download/registro-de-femicidios---2017-08-10.csv"
+      }],
       "accrualPeriodicity": "R/P3M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -9071,8 +8860,7 @@
         "fn": "Direcci\u00f3n Nacional de Registros Nacionales de la Propiedad Automotor y Cr\u00e9ditos Prendarios",
         "hasEmail": "mailto:accesobd@dnrpa.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/72d85f23-b751-4d12-935b-25e32ed9445e/resource/5b682f0d-15d4-4db7-a2ba-a8baf2349781/download/estadistica-inscripciones-iniciales-motovehiculos.csv",
           "format": "CSV",
           "title": "Estad\u00edstica de inscripciones iniciales de motoveh\u00edculos",
@@ -9112,8 +8900,7 @@
         "fn": "Direcci\u00f3n Nacional de Registros Nacionales de la Propiedad Automotor y Cr\u00e9ditos Prendarios",
         "hasEmail": "mailto:accesobd@dnrpa.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/852b58b1-98b5-4f80-9f80-62e09cf3cfbb/resource/bfa8c33c-b8b8-45b8-b7a6-46f8b6da25d1/download/estadistica-transferencias-maquinarias.csv",
           "format": "CSV",
           "title": "Estad\u00edstica de transferencias de maquinarias",
@@ -9153,8 +8940,7 @@
         "fn": "Direcci\u00f3n Nacional de Registros Nacionales de la Propiedad Automotor y Cr\u00e9ditos Prendarios",
         "hasEmail": "mailto:accesobd@dnrpa.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/1ab0cc03-ab9b-4520-975c-5757d87d1061/resource/f868c24e-58ba-4b03-8071-b1ae634e6e68/download/estadistica-inscripciones-iniciales-automotores.csv",
           "format": "CSV",
           "title": "Estad\u00edstica de inscripciones iniciales de automotores",
@@ -9194,8 +8980,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Subsecretar\u00eda de Asuntos Registrales. Inspecci\u00f3n General de Justicia",
         "hasEmail": "mailto:dmiralles@jus.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/da045e06-35cb-4bdd-9b5e-ddee6712c86c/resource/c81a673f-50e4-4d3e-8ff5-8e623adf8161/download/igj-entidades.csv",
           "format": "CSV",
           "title": "IGJ. Entidades 2016-09",
@@ -9659,8 +9444,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Oficina Anticorrupci\u00f3n.",
         "hasEmail": "mailto:uniddjjoa@jus.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/4680199f-6234-4262-8a2a-8f7993bf784d/resource/b029969c-85a7-4adb-afe1-33165e835517/download/declaraciones-juradas-2015.csv",
           "format": "CSV",
           "title": "Declaraciones Juradas Patrimoniales Integrales para el a\u00f1o fiscal 2015",
@@ -9716,8 +9500,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Planificaci\u00f3n Estrat\u00e9gica. Direcci\u00f3n Nacional del Sistema Argentino de Informaci\u00f3n Jur\u00eddica",
         "hasEmail": "mailto:datosabiertos@saij.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/d9a963ea-8b1d-4ca3-9dd9-07a4773e8c23/resource/8db246a2-48dd-4f2f-b08e-ab6293747882/download/base-infoleg-normativa-nacional.csv",
           "format": "CSV",
           "title": "Base Infoleg de Normativa Nacional",
@@ -9765,8 +9548,7 @@
         "fn": "Ministerio del Interior, Obras P\u00fablicas y Vivienda, Secretar\u00eda del Interior. Registro Nacional de las Personas",
         "hasEmail": "mailto:informes@renaper.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.gob.ar/dataset/b8418d41-8e0c-4e85-8aa8-80d51a840132/resource/5e585bd4-bc7c-4ac6-b9a1-bcf44b85b28e/download/historico-nombres.zip",
           "format": "ZIP",
           "title": "Hist\u00f3rico de nombres",
@@ -9983,8 +9765,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Justicia. Subsecretar\u00eda de Relaciones con el Poder Judicial y Asuntos Penitenciarios. Oficina Decretos",
         "hasEmail": "mailto:oficinadecretos@jus.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/3c18d46e-729e-4973-8efd-f54cab18b7e3/resource/02405dca-f61b-4401-8fa5-dcdebf464277/download/magistrados-justicia-federal-nacional-2017-06-15.csv",
           "format": "CSV",
           "title": "Magistrados de la Justicia Federal y de la Justicia Nacional - 2017-06-15",
@@ -10039,8 +9820,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Justicia. Subsecretar\u00eda de Relaciones con el Poder Judicial y Asuntos Penitenciarios. Direcci\u00f3n Nacional del Servicio Penitenciario Federal"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/6d0e08b3-041c-40c1-9ea6-962db3747677/resource/47e53feb-ca88-4322-a663-e511485213a0/download/internos-spf-condenados-2016-09.csv",
           "format": "CSV",
           "title": "Internos del SPF - Condenados 2016-09",
@@ -10304,16 +10084,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Planificaci\u00f3n Estrat\u00e9gica. Direcci\u00f3n Nacional del Sistema Argentino de Informaci\u00f3n Jur\u00eddica",
         "hasEmail": "mailto:datosabiertos@saij.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/e41e8224-f868-4688-9fae-94d320f8ee5e/resource/0a823ec3-4609-41b6-8af8-93afd23aaf9c/download/tesauro-saij.rdf",
-          "format": "RDF",
-          "title": "Tesauro SAIJ de Derecho Argentino",
-          "description": "Tesauro SAIJ de Derecho Argentino",
-          "issued": "2017-07-26T16:14:42.451047",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/e41e8224-f868-4688-9fae-94d320f8ee5e/resource/0a823ec3-4609-41b6-8af8-93afd23aaf9c/download/tesauro-saij.rdf"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/e41e8224-f868-4688-9fae-94d320f8ee5e/resource/0a823ec3-4609-41b6-8af8-93afd23aaf9c/download/tesauro-saij.rdf",
+        "format": "RDF",
+        "title": "Tesauro SAIJ de Derecho Argentino",
+        "description": "Tesauro SAIJ de Derecho Argentino",
+        "issued": "2017-07-26T16:14:42.451047",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/e41e8224-f868-4688-9fae-94d320f8ee5e/resource/0a823ec3-4609-41b6-8af8-93afd23aaf9c/download/tesauro-saij.rdf"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -10337,8 +10115,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Justicia. Subsecretar\u00eda de Pol\u00edtica Criminal. Direcci\u00f3n Nacional de Pol\u00edtica Criminal en Materia de Justicia y Legislaci\u00f3n Penal.",
         "hasEmail": "mailto:CGonzalezGuerra@jus.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/6c03af36-6a1d-4306-b2a8-dd39ad73afb3/resource/b2c3f47c-b78d-4967-98be-0ab81dd0b415/download/sneep-2015.csv",
           "format": "CSV",
           "title": "Sistema Nacional de Estad\u00edsticas sobre Ejecuci\u00f3n de la Pena \u2013 SNEEP - 2015",
@@ -10474,8 +10251,7 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Derechos Humanos y Pluralismo Cultural. Registro Unificado de V\u00edctimas del Terrorismo de Estado",
         "hasEmail": "mailto:addhh@jus.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.jus.gob.ar/dataset/d43fa140-f43f-4cc2-8491-b1d8bb899de4/resource/c6b674bc-e178-41f3-81f5-0f10038e1688/download/victimas-accionar-represivo-ilegal.csv",
           "format": "CSV",
           "title": "Listado de v\u00edctimas del accionar represivo ilegal",
@@ -10515,16 +10291,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Subsecretar\u00eda de Acceso a la Justicia. Direcci\u00f3n Nacional de Acceso a la Justicia",
         "hasEmail": "mailto:rcoutenceau@jus.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/9775fcdf-99b9-47f6-87ae-6d46cfd15b40/resource/906a1daf-cb0c-4765-98d4-40b0f8caf48b/download/centros-acceso-justicia-activos.csv",
-          "format": "CSV",
-          "title": "Centros de Acceso a la Justicia (CAJ)",
-          "description": "Centros de Acceso a la Justicia activos",
-          "issued": "2017-07-26T16:12:37.697608",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/9775fcdf-99b9-47f6-87ae-6d46cfd15b40/resource/906a1daf-cb0c-4765-98d4-40b0f8caf48b/download/centros-acceso-justicia-activos.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/9775fcdf-99b9-47f6-87ae-6d46cfd15b40/resource/906a1daf-cb0c-4765-98d4-40b0f8caf48b/download/centros-acceso-justicia-activos.csv",
+        "format": "CSV",
+        "title": "Centros de Acceso a la Justicia (CAJ)",
+        "description": "Centros de Acceso a la Justicia activos",
+        "issued": "2017-07-26T16:12:37.697608",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/9775fcdf-99b9-47f6-87ae-6d46cfd15b40/resource/906a1daf-cb0c-4765-98d4-40b0f8caf48b/download/centros-acceso-justicia-activos.csv"
+      }],
       "accrualPeriodicity": "R/P3M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -10548,16 +10322,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Planificaci\u00f3n Estrat\u00e9gica. Direcci\u00f3n Nacional del Sistema Argentino de Informaci\u00f3n Jur\u00eddica",
         "hasEmail": "mailto:datosabiertos@saij.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/d59c2d29-d561-4ad2-a032-cc82b40db2d3/resource/0ebc70cc-0e71-4158-ab75-9759339e4cbd/download/base-saij-normativa-provincial.csv",
-          "format": "CSV",
-          "title": "Base SAIJ de Normativa Provincial",
-          "description": "Base de documentos digitales normativos provinciales: leyes,\r\ndecretos leyes, textos ordenados, c\u00f3digos y Constituciones\r\npublicados en el Bolet\u00edn Oficial de la Provincia\r\ncorrespondiente.",
-          "issued": "2017-07-26T16:12:28.725055",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/d59c2d29-d561-4ad2-a032-cc82b40db2d3/resource/0ebc70cc-0e71-4158-ab75-9759339e4cbd/download/base-saij-normativa-provincial.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/d59c2d29-d561-4ad2-a032-cc82b40db2d3/resource/0ebc70cc-0e71-4158-ab75-9759339e4cbd/download/base-saij-normativa-provincial.csv",
+        "format": "CSV",
+        "title": "Base SAIJ de Normativa Provincial",
+        "description": "Base de documentos digitales normativos provinciales: leyes,\r\ndecretos leyes, textos ordenados, c\u00f3digos y Constituciones\r\npublicados en el Bolet\u00edn Oficial de la Provincia\r\ncorrespondiente.",
+        "issued": "2017-07-26T16:12:28.725055",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/d59c2d29-d561-4ad2-a032-cc82b40db2d3/resource/0ebc70cc-0e71-4158-ab75-9759339e4cbd/download/base-saij-normativa-provincial.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -10581,8 +10353,7 @@
         "fn": "Sistema de Informaci\u00f3n de Ciencia y Tecnolog\u00eda Argentino (SICYTAR)",
         "hasEmail": "mailto:contactosicytar@mincyt.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.mincyt.gob.ar/datasets/dataset/2a9cef3e-2ba9-45a0-a02c-a988d7021c41/resource/763fd787-8b0a-4b52-8700-1c983c195982/download/personal-instituciones.csv",
           "format": "CSV",
           "title": "Instituciones del Sistema Nacional de Ciencia y Tecnolog\u00eda Argentino seg\u00fan tipo de instituci\u00f3n y provincia",
@@ -10622,8 +10393,7 @@
         "fn": "Sistema de Informaci\u00f3n de Ciencia y Tecnolog\u00eda Argentino (SICYTAR)",
         "hasEmail": "mailto:contactosicytar@mincyt.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.mincyt.gob.ar/datasets/dataset/bd660ae2-98ce-4f0f-8e90-127319cbe175/resource/1ec32c8e-6931-4f24-a2de-063097338621/download/equipos-sistemas-nacionales.csv",
           "format": "CSV",
           "title": "Equipamiento cient\u00edfico-tecnol\u00f3gico seg\u00fan tipo de instituci\u00f3n y provincia",
@@ -10663,8 +10433,7 @@
         "fn": "Sistema de Informaci\u00f3n de Ciencia y Tecnolog\u00eda Argentino (SICYTAR)",
         "hasEmail": "mailto:contactosicytar@mincyt.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.mincyt.gob.ar/datasets/dataset/0c8285cb-ecec-410c-accc-5261718b459d/resource/93b23e91-ba14-4146-8368-6a50b62b1890/download/recursos-humanos-cyt.csv",
           "format": "CSV",
           "title": "Recursos humanos en Ciencia y Tecnolog\u00eda",
@@ -10704,8 +10473,7 @@
         "fn": "Sistema de Informaci\u00f3n de Ciencia y Tecnolog\u00eda Argentino (SICYTAR)",
         "hasEmail": "mailto:contactosicytar@mincyt.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.mincyt.gob.ar/datasets/dataset/5e62bdac-52d9-4e66-ac6b-aa47dd219aa3/resource/641981b3-2ec4-402b-88ca-117f56500332/download/proyectos-cyt.csv",
           "format": "CSV",
           "title": "Proyectos de Ciencia Tecnolog\u00eda e Innovaci\u00f3n",
@@ -10745,8 +10513,7 @@
         "fn": "Sistema de Informaci\u00f3n de Ciencia y Tecnolog\u00eda Argentino (SICYTAR)",
         "hasEmail": "mailto:contactosicytar@mincyt.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.mincyt.gob.ar/datasets/dataset/6f44589b-5dc5-4585-abf2-98b759e406bf/resource/7bc7d092-a5ed-48ad-b7b0-3c626de64ed8/download/empresas-ejecutoras-proyectos.json",
           "format": "JSON",
           "title": "Empresas de ejecuci\u00f3n de proyectos de ciencia, tecnolog\u00eda e innovaci\u00f3n por provincia",
@@ -10786,8 +10553,7 @@
         "fn": "Ministerio del interior, Obras P\u00fablicas y Vivienda. Secretar\u00eda de Asuntos Pol\u00edticos e Institucionales. Subsecretar\u00eda de Asuntos Electorales. Direcci\u00f3n Nacional Electoral.",
         "hasEmail": "mailto:consultasdine@elecciones.gob.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "https://www.argentina.gob.ar/sites/default/files/pres_y_vice_2.zip",
           "format": "ZIP",
           "title": "Elecciones Generales 2015: Presidente y Vice",
@@ -10977,17 +10743,15 @@
         "fn": "Jefatura de Gabinete de Ministros. Agencia de Administraci\u00f3n de Bienes del Estado. Direcci\u00f3n Nacional del Registro de Bienes Inmuebles.",
         "hasEmail": "mailto:info_renabe@bienesdelestado.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.gob.ar/dataset/9a01a890-5f12-4079-bcc7-cae0f37db520/resource/6ab9d257-198d-4a9f-b9cc-2b927fc07d4e/download/inmuebles-estado-nacional.csv",
-          "format": "CSV",
-          "title": "Inmuebles Propios del Estado Nacional y Alquilados",
-          "description": "Informaci\u00f3n parcial de los Inmuebles propios del Estado Nacional y alquilados (Estado Nacional como locatario), validados por el Registro Nacional de Bienes Inmuebles de la Agencia de Administraci\u00f3n de Bienes del Estado. (RENABE, Decreto 1382/13) Mensualmente se agregar\u00e1n los inmuebles certificados por la Direcci\u00f3n Nacional del Registro de Bienes Inmuebles.",
-          "issued": "2017-07-19T18:45:53.360453",
-          "modified": "2017-07-19T18:45:53.334146",
-          "downloadURL": "http://datos.gob.ar/dataset/9a01a890-5f12-4079-bcc7-cae0f37db520/resource/6ab9d257-198d-4a9f-b9cc-2b927fc07d4e/download/inmuebles-estado-nacional.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.gob.ar/dataset/9a01a890-5f12-4079-bcc7-cae0f37db520/resource/6ab9d257-198d-4a9f-b9cc-2b927fc07d4e/download/inmuebles-estado-nacional.csv",
+        "format": "CSV",
+        "title": "Inmuebles Propios del Estado Nacional y Alquilados",
+        "description": "Informaci\u00f3n parcial de los Inmuebles propios del Estado Nacional y alquilados (Estado Nacional como locatario), validados por el Registro Nacional de Bienes Inmuebles de la Agencia de Administraci\u00f3n de Bienes del Estado. (RENABE, Decreto 1382/13) Mensualmente se agregar\u00e1n los inmuebles certificados por la Direcci\u00f3n Nacional del Registro de Bienes Inmuebles.",
+        "issued": "2017-07-19T18:45:53.360453",
+        "modified": "2017-07-19T18:45:53.334146",
+        "downloadURL": "http://datos.gob.ar/dataset/9a01a890-5f12-4079-bcc7-cae0f37db520/resource/6ab9d257-198d-4a9f-b9cc-2b927fc07d4e/download/inmuebles-estado-nacional.csv"
+      }],
       "accrualPeriodicity": "eventual",
       "theme": [
         "Gobierno y sector p\u00fablico"
@@ -11010,8 +10774,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Hacienda. Secretar\u00eda de Hacienda. Subsecretar\u00eda de Presupuesto."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_gastos_listado_general.zip",
           "format": "ZIP",
           "title": "Presupuesto de Gastos de la Administraci\u00f3n P\u00fablica Nacional del Ejercicio Vigente",
@@ -11067,8 +10830,7 @@
         "fn": "ARSAT",
         "hasEmail": "mailto:gcamporro@arsat.com.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://api.datos.arsat.com.ar/api/v2/datastreams/REFEF-CANTI-DE-CLIEN-Y/data.csv?auth_key=4b4d45f6f2b2805cad8cb6de5c8ef84dbb5febff&download=1",
           "format": "CSV",
           "title": "Megabits de velocidad entregados por provincia",
@@ -11116,8 +10878,7 @@
         "fn": "Jefatura de Gabinete de Ministros. Secretar\u00eda de Comunicaci\u00f3n P\u00fablica.",
         "hasEmail": "mailto:pautas@medios.gov.ar"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.gob.ar/dataset/122808ec-dcd1-4a9b-aafe-8fa80ac2a2f4/resource/6cc9c4b4-fbc4-41dd-8f01-7d1dedbed596/download/pauta-publicitaria-primer-semestre-2017.csv",
           "format": "CSV",
           "title": "Pauta Oficial Primer Semestre 2017",
@@ -11194,16 +10955,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Secretar\u00eda de Derechos Humanos y Pluralismo Cultural. Subsecretar\u00eda de Protecci\u00f3n de Derechos Humanos. Direcci\u00f3n Nacional de Pol\u00edticas contra la Violencia Institucional",
         "hasEmail": "mailto:dnpcvi@jus.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/c64b3899-65df-4024-afe8-bdf971f30dd8/resource/56dbd545-f102-4fbd-be48-0edb9b1f846c/download/violencia-institucional.csv",
-          "format": "CSV",
-          "title": "Seguimiento de hechos de violencia institucional",
-          "description": "Seguimientos de hechos de violencia institucional sobre la base de las presentaciones, denuncias e informaciones recibidas en el \u00e1mbito de la Secretar\u00eda de Derechos Humanos.",
-          "issued": "2017-06-22T20:52:56.914832",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/c64b3899-65df-4024-afe8-bdf971f30dd8/resource/56dbd545-f102-4fbd-be48-0edb9b1f846c/download/violencia-institucional.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/c64b3899-65df-4024-afe8-bdf971f30dd8/resource/56dbd545-f102-4fbd-be48-0edb9b1f846c/download/violencia-institucional.csv",
+        "format": "CSV",
+        "title": "Seguimiento de hechos de violencia institucional",
+        "description": "Seguimientos de hechos de violencia institucional sobre la base de las presentaciones, denuncias e informaciones recibidas en el \u00e1mbito de la Secretar\u00eda de Derechos Humanos.",
+        "issued": "2017-06-22T20:52:56.914832",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/c64b3899-65df-4024-afe8-bdf971f30dd8/resource/56dbd545-f102-4fbd-be48-0edb9b1f846c/download/violencia-institucional.csv"
+      }],
       "accrualPeriodicity": "R/P3M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -11227,16 +10986,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Oficina Anticorrupci\u00f3n.",
         "hasEmail": "mailto:aferrer@anticorrupcion.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/5ddf7915-47c7-44d1-9246-30573ec05f95/resource/4e1e49d5-686d-49bc-91d1-90bcf6d95658/download/registroviajesfinanciadosterceros.csv",
-          "format": "CSV",
-          "title": "Registro de viajes financiados por terceros",
-          "description": "Detalle del registro de viajes de los funcionarios p\u00fablicos financiados por terceros a partir de la implementaci\u00f3n del Decreto 1179/16, reglamentario de la Ley de \u00c9tica en el Ejercicio de la Funci\u00f3n P\u00fablica N\u00b0 25.188",
-          "issued": "2017-06-22T20:50:56.064111",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/5ddf7915-47c7-44d1-9246-30573ec05f95/resource/4e1e49d5-686d-49bc-91d1-90bcf6d95658/download/registroviajesfinanciadosterceros.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/5ddf7915-47c7-44d1-9246-30573ec05f95/resource/4e1e49d5-686d-49bc-91d1-90bcf6d95658/download/registroviajesfinanciadosterceros.csv",
+        "format": "CSV",
+        "title": "Registro de viajes financiados por terceros",
+        "description": "Detalle del registro de viajes de los funcionarios p\u00fablicos financiados por terceros a partir de la implementaci\u00f3n del Decreto 1179/16, reglamentario de la Ley de \u00c9tica en el Ejercicio de la Funci\u00f3n P\u00fablica N\u00b0 25.188",
+        "issued": "2017-06-22T20:50:56.064111",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/5ddf7915-47c7-44d1-9246-30573ec05f95/resource/4e1e49d5-686d-49bc-91d1-90bcf6d95658/download/registroviajesfinanciadosterceros.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -11260,16 +11017,14 @@
         "fn": "Ministerio de Justicia y Derechos Humanos. Oficina Anticorrupci\u00f3n.",
         "hasEmail": "mailto:aferrer@anticorrupcion.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/7c268f77-e007-43ba-8a18-d50ef022f8e3/resource/a861d92f-272b-4c9f-8f2f-52946558d337/download/reporteobsequiosfuncionariospublicos.csv",
-          "format": "CSV",
-          "title": "Registro de obsequios a funcionarios p\u00fablicos",
-          "description": "Conjunto de datos que detalla los obsequios a funcionarios p\u00fablicos registrados en el \u00e1mbito de la Oficina Anticorrupci\u00f3n",
-          "issued": "2017-06-22T20:50:47.670014",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/7c268f77-e007-43ba-8a18-d50ef022f8e3/resource/a861d92f-272b-4c9f-8f2f-52946558d337/download/reporteobsequiosfuncionariospublicos.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/7c268f77-e007-43ba-8a18-d50ef022f8e3/resource/a861d92f-272b-4c9f-8f2f-52946558d337/download/reporteobsequiosfuncionariospublicos.csv",
+        "format": "CSV",
+        "title": "Registro de obsequios a funcionarios p\u00fablicos",
+        "description": "Conjunto de datos que detalla los obsequios a funcionarios p\u00fablicos registrados en el \u00e1mbito de la Oficina Anticorrupci\u00f3n",
+        "issued": "2017-06-22T20:50:47.670014",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/7c268f77-e007-43ba-8a18-d50ef022f8e3/resource/a861d92f-272b-4c9f-8f2f-52946558d337/download/reporteobsequiosfuncionariospublicos.csv"
+      }],
       "accrualPeriodicity": "R/P1M",
       "theme": [
         "Justicia, seguridad y legales"
@@ -11292,8 +11047,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Modernizaci\u00f3n. Secretar\u00eda  de Empleo P\u00fablico."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.gob.ar/dataset/431381cc-3c5b-49ba-bf77-47bf658cd640/resource/c2a7e8bd-0f41-4401-a67f-f63c3bd3cdb8/download/salarios-2017.csv",
           "format": "CSV",
           "title": "Asignaci\u00f3n Salarial de las Autoridades del Poder Ejecutivo Nacional 2017",
@@ -11342,17 +11096,15 @@
         "fn": "Oficina Nacional de Empleo P\u00fablico",
         "hasEmail": "mailto:privadaonep@modernizacion.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.gob.ar/dataset/becaceb2-dbd0-4879-93bd-5f02bd3b8ca2/resource/bf2f67f4-9ab3-479b-a881-56b43565125e/download/contratos-2015.csv",
-          "format": "CSV",
-          "title": "Contratos 2015",
-          "description": "N\u00f3mina de contratos declarados correspondiente al a\u00f1o 2015, seg\u00fan lo informado a la ONEP por los sujetos obligados, incluyendo datos del personal contratado, la modalidad contractual y la jurisdicci\u00f3n u organismo descentralizado contratante.",
-          "issued": "2016-04-18T13:23:48.373988",
-          "modified": "2016-04-18T16:23:48.327889",
-          "downloadURL": "http://datos.gob.ar/dataset/becaceb2-dbd0-4879-93bd-5f02bd3b8ca2/resource/bf2f67f4-9ab3-479b-a881-56b43565125e/download/contratos-2015.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.gob.ar/dataset/becaceb2-dbd0-4879-93bd-5f02bd3b8ca2/resource/bf2f67f4-9ab3-479b-a881-56b43565125e/download/contratos-2015.csv",
+        "format": "CSV",
+        "title": "Contratos 2015",
+        "description": "N\u00f3mina de contratos declarados correspondiente al a\u00f1o 2015, seg\u00fan lo informado a la ONEP por los sujetos obligados, incluyendo datos del personal contratado, la modalidad contractual y la jurisdicci\u00f3n u organismo descentralizado contratante.",
+        "issued": "2016-04-18T13:23:48.373988",
+        "modified": "2016-04-18T16:23:48.327889",
+        "downloadURL": "http://datos.gob.ar/dataset/becaceb2-dbd0-4879-93bd-5f02bd3b8ca2/resource/bf2f67f4-9ab3-479b-a881-56b43565125e/download/contratos-2015.csv"
+      }],
       "keyword": [
         "Contratos",
         "Empleo P\u00fablico",
@@ -11382,8 +11134,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio de Modernizaci\u00f3n. Secretar\u00eda  de Empleo P\u00fablico. Subsecretar\u00eda de Planificaci\u00f3n de Empleo P\u00fablico"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://mapadelestado.modernizacion.gob.ar/dataset/gobiernoabierto/estructura_autoridades_apn.csv",
           "format": "CSV",
           "title": "Estructura Org\u00e1nica y Autoridades del PEN Vigentes",
@@ -11431,16 +11182,14 @@
         "fn": "Ministerio de Hacienda. Secretar\u00eda de Hacienda. Subsecretar\u00eda de Presupuesto.",
         "hasEmail": "mailto:sitiodelciudadano@mecon.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_recurso_completo.zip",
-          "format": "ZIP",
-          "title": "C\u00e1lculo de Recursos y su Ejecuci\u00f3n completo de la Administraci\u00f3n P\u00fablica Nacional del Ejercicio Vigente",
-          "description": "Contiene el c\u00e1lculo de Recursos y su ejecuci\u00f3n diaria acumulada con clasificadores completos correspondientes al Ejercicio Vigente. Los importes se encuentran expresados en millones de pesos. Sin Aplicaciones ni Fuentes Financieras ni Contribuciones y Gastos Figurativos.",
-          "issued": "2017-06-07T16:25:04.999357",
-          "downloadURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_recurso_completo.zip"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_recurso_completo.zip",
+        "format": "ZIP",
+        "title": "C\u00e1lculo de Recursos y su Ejecuci\u00f3n completo de la Administraci\u00f3n P\u00fablica Nacional del Ejercicio Vigente",
+        "description": "Contiene el c\u00e1lculo de Recursos y su ejecuci\u00f3n diaria acumulada con clasificadores completos correspondientes al Ejercicio Vigente. Los importes se encuentran expresados en millones de pesos. Sin Aplicaciones ni Fuentes Financieras ni Contribuciones y Gastos Figurativos.",
+        "issued": "2017-06-07T16:25:04.999357",
+        "downloadURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_recurso_completo.zip"
+      }],
       "accrualPeriodicity": "R/P1D",
       "theme": [
         "Econom\u00eda y finanzas",
@@ -11465,16 +11214,14 @@
         "fn": "Ministerio de Hacienda. Secretar\u00eda de Hacienda. Subsecretar\u00eda de Presupuesto.",
         "hasEmail": "mailto:sitiodelciudadano@mecon.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_credito_completo.zip",
-          "format": "ZIP",
-          "title": "Cr\u00e9dito y Gasto completo del Presupuesto de la Administraci\u00f3n P\u00fablica Nacional",
-          "description": "Contiene la distribuci\u00f3n diaria acumulada de los cr\u00e9ditos presupuestarios con clasificadores completos correspondientes al Ejercicio Vigente.",
-          "issued": "2017-06-07T16:15:46.104127",
-          "downloadURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_credito_completo.zip"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_credito_completo.zip",
+        "format": "ZIP",
+        "title": "Cr\u00e9dito y Gasto completo del Presupuesto de la Administraci\u00f3n P\u00fablica Nacional",
+        "description": "Contiene la distribuci\u00f3n diaria acumulada de los cr\u00e9ditos presupuestarios con clasificadores completos correspondientes al Ejercicio Vigente.",
+        "issued": "2017-06-07T16:15:46.104127",
+        "downloadURL": "http://sitiodelciudadano.mecon.gov.ar/datasets/dgsiaf_ejecucion_credito_completo.zip"
+      }],
       "keyword": [
         "cr\u00e9ditos",
         "econom\u00eda",
@@ -11506,16 +11253,14 @@
         "fn": "Ministerio de Modernizaci\u00f3n. Secretar\u00eda Pa\u00eds Digital. Programa Punto Digital.",
         "hasEmail": "mailto:info@puntodigital.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "https://servicios.puntodigital.paisdigital.modernizacion.gob.ar/ws/ws-eventos.php?method=getCsv",
-          "format": "CSV",
-          "title": "Ubicaci\u00f3n de los puntos digitales",
-          "description": "Listado de los puntos digitales y su ubicaci\u00f3n geogr\u00e1fica.",
-          "issued": "2017-05-31T13:26:47.107817",
-          "downloadURL": "https://servicios.puntodigital.paisdigital.modernizacion.gob.ar/ws/ws-eventos.php?method=getCsv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "https://servicios.puntodigital.paisdigital.modernizacion.gob.ar/ws/ws-eventos.php?method=getCsv",
+        "format": "CSV",
+        "title": "Ubicaci\u00f3n de los puntos digitales",
+        "description": "Listado de los puntos digitales y su ubicaci\u00f3n geogr\u00e1fica.",
+        "issued": "2017-05-31T13:26:47.107817",
+        "downloadURL": "https://servicios.puntodigital.paisdigital.modernizacion.gob.ar/ws/ws-eventos.php?method=getCsv"
+      }],
       "keyword": [
         "aprendizaje",
         "entretenimiento",
@@ -11548,17 +11293,15 @@
         "fn": "Jefatura de Gabinete de Ministros",
         "hasEmail": "mailto:barriospopulares@bienesdelestado.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.gob.ar/dataset/89fb68b6-fce4-4297-8dee-24f5de8f20a8/resource/36c3e63d-7f56-4241-88fd-6a9142b76538/download/barriospopulares.csv",
-          "format": "CSV",
-          "title": "Barrios Populares de Argentina",
-          "description": "Mapa de los barrios populares de Argentina.",
-          "issued": "2017-05-23T14:39:33.221612",
-          "modified": "2017-05-23T14:39:33.135890",
-          "downloadURL": "http://datos.gob.ar/dataset/89fb68b6-fce4-4297-8dee-24f5de8f20a8/resource/36c3e63d-7f56-4241-88fd-6a9142b76538/download/barriospopulares.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.gob.ar/dataset/89fb68b6-fce4-4297-8dee-24f5de8f20a8/resource/36c3e63d-7f56-4241-88fd-6a9142b76538/download/barriospopulares.csv",
+        "format": "CSV",
+        "title": "Barrios Populares de Argentina",
+        "description": "Mapa de los barrios populares de Argentina.",
+        "issued": "2017-05-23T14:39:33.221612",
+        "modified": "2017-05-23T14:39:33.135890",
+        "downloadURL": "http://datos.gob.ar/dataset/89fb68b6-fce4-4297-8dee-24f5de8f20a8/resource/36c3e63d-7f56-4241-88fd-6a9142b76538/download/barriospopulares.csv"
+      }],
       "keyword": [
         "asentamientos",
         "barrios populares",
@@ -11589,8 +11332,7 @@
       "contactPoint": {
         "@type": "vcard:Contact"
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.gob.ar/dataset/069b5833-e57d-4d7a-859b-67a80cfdff20/resource/1e90e421-8173-43bc-ae26-41ce8a7e701d/download/convocatorias-2016.csv",
           "format": "CSV",
           "title": "Convocatorias 2016",
@@ -11710,16 +11452,14 @@
         "fn": "Direcci\u00f3n Nacional de Registros Nacionales de la Propiedad Automotor y Cr\u00e9ditos Prendarios.",
         "hasEmail": "mailto:accesobd@dnrpa.gov.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.jus.gob.ar/dataset/bbdac295-c88e-4e2d-8f74-a845a2e93a61/resource/54bd9fa1-a059-4411-b146-457791e882f8/download/listado-registros-seccionales.csv",
-          "format": "CSV",
-          "title": "Listado de Registros Seccionales de todo el pa\u00eds",
-          "description": "Listado de Registros Seccionales de todo el pa\u00eds con competencia en automotores, motoveh\u00edculos, maquinaria agr\u00edcola, vial e industrial y cr\u00e9ditos prendarios.",
-          "issued": "2017-05-11T14:58:37.143581",
-          "downloadURL": "http://datos.jus.gob.ar/dataset/bbdac295-c88e-4e2d-8f74-a845a2e93a61/resource/54bd9fa1-a059-4411-b146-457791e882f8/download/listado-registros-seccionales.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.jus.gob.ar/dataset/bbdac295-c88e-4e2d-8f74-a845a2e93a61/resource/54bd9fa1-a059-4411-b146-457791e882f8/download/listado-registros-seccionales.csv",
+        "format": "CSV",
+        "title": "Listado de Registros Seccionales de todo el pa\u00eds",
+        "description": "Listado de Registros Seccionales de todo el pa\u00eds con competencia en automotores, motoveh\u00edculos, maquinaria agr\u00edcola, vial e industrial y cr\u00e9ditos prendarios.",
+        "issued": "2017-05-11T14:58:37.143581",
+        "downloadURL": "http://datos.jus.gob.ar/dataset/bbdac295-c88e-4e2d-8f74-a845a2e93a61/resource/54bd9fa1-a059-4411-b146-457791e882f8/download/listado-registros-seccionales.csv"
+      }],
       "keyword": [
         "automotores",
         "maquinarias",
@@ -11752,8 +11492,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio del Interior, Obras P\u00fablicas y Vivienda. Secretar\u00eda de Asuntos Pol\u00edticos y Fortalecimiento Institucional. Subsecretar\u00eda de Reforma Institucional y Fortalecimiento de la Democracia."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.gob.ar/dataset/8bc053c8-efc2-485d-97d3-915c476d2741/resource/e3cb1f09-ada6-46bf-a271-cff18ddd88c2/download/acceso-informacion-publica-2016.csv",
           "format": "CSV",
           "title": "Solicitudes de Acceso a la Informaci\u00f3n P\u00fablica 2016",
@@ -11804,17 +11543,15 @@
         "fn": "Ministerio de Modernizaci\u00f3n. Secretar\u00eda de Gesti\u00f3n e Innovaci\u00f3n P\u00fablica. Subsecretar\u00eda de Innovaci\u00f3n P\u00fablica y Gobierno Abierto.",
         "hasEmail": "mailto:datos@modernizacion.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.gob.ar/dataset/43c2e6ae-f0a7-4688-b5aa-2aa6f4811a9c/resource/e4b01622-dd69-4153-9b5b-0cd72c773d7d/download/planes-apertura-2016-2017.csv",
-          "format": "CSV",
-          "title": "Planes de Apertura 2016/17",
-          "description": "Planes de apertura de datos para los a\u00f1os 2016 y 2017.",
-          "issued": "2017-01-25T19:34:01.140848",
-          "modified": "2017-01-27T19:56:04.544860",
-          "downloadURL": "http://datos.gob.ar/dataset/43c2e6ae-f0a7-4688-b5aa-2aa6f4811a9c/resource/e4b01622-dd69-4153-9b5b-0cd72c773d7d/download/planes-apertura-2016-2017.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.gob.ar/dataset/43c2e6ae-f0a7-4688-b5aa-2aa6f4811a9c/resource/e4b01622-dd69-4153-9b5b-0cd72c773d7d/download/planes-apertura-2016-2017.csv",
+        "format": "CSV",
+        "title": "Planes de Apertura 2016/17",
+        "description": "Planes de apertura de datos para los a\u00f1os 2016 y 2017.",
+        "issued": "2017-01-25T19:34:01.140848",
+        "modified": "2017-01-27T19:56:04.544860",
+        "downloadURL": "http://datos.gob.ar/dataset/43c2e6ae-f0a7-4688-b5aa-2aa6f4811a9c/resource/e4b01622-dd69-4153-9b5b-0cd72c773d7d/download/planes-apertura-2016-2017.csv"
+      }],
       "keyword": [
         "apertura",
         "compromisos",
@@ -11847,17 +11584,15 @@
         "fn": "Jefatura de Gabinete de Ministros. Agencia de Administraci\u00f3n de Bienes del Estado. Direcci\u00f3n Nacional del Registro de Bienes Inmuebles.",
         "hasEmail": "mailto:info_renabe@bienesdelestado.gob.ar"
       },
-      "distribution": [
-        {
-          "accessURL": "http://datos.gob.ar/dataset/b9602e2a-163f-4d12-adcb-c0c92f3a49f0/resource/91219296-dc6a-4bdd-932b-7d0535def6f2/download/contratos-alquiler-estado-nacional-locador.csv",
-          "format": "CSV",
-          "title": "Contratos de alquiler ENA como locador",
-          "description": "Informaci\u00f3n de los contratos donde el Estado Nacional arrienda, como locador, inmuebles de su propiedad. Esta informaci\u00f3n se actualizar\u00e1 conforme los contratos sean digitalizados y cargados por la Agencia de Administraci\u00f3n de Bienes del Estado.",
-          "issued": "2016-10-24T11:48:41.794340",
-          "modified": "2016-11-14T13:36:34.959766",
-          "downloadURL": "http://datos.gob.ar/dataset/b9602e2a-163f-4d12-adcb-c0c92f3a49f0/resource/91219296-dc6a-4bdd-932b-7d0535def6f2/download/contratos-alquiler-estado-nacional-locador.csv"
-        }
-      ],
+      "distribution": [{
+        "accessURL": "http://datos.gob.ar/dataset/b9602e2a-163f-4d12-adcb-c0c92f3a49f0/resource/91219296-dc6a-4bdd-932b-7d0535def6f2/download/contratos-alquiler-estado-nacional-locador.csv",
+        "format": "CSV",
+        "title": "Contratos de alquiler ENA como locador",
+        "description": "Informaci\u00f3n de los contratos donde el Estado Nacional arrienda, como locador, inmuebles de su propiedad. Esta informaci\u00f3n se actualizar\u00e1 conforme los contratos sean digitalizados y cargados por la Agencia de Administraci\u00f3n de Bienes del Estado.",
+        "issued": "2016-10-24T11:48:41.794340",
+        "modified": "2016-11-14T13:36:34.959766",
+        "downloadURL": "http://datos.gob.ar/dataset/b9602e2a-163f-4d12-adcb-c0c92f3a49f0/resource/91219296-dc6a-4bdd-932b-7d0535def6f2/download/contratos-alquiler-estado-nacional-locador.csv"
+      }],
       "keyword": [
         "Alquileres",
         "Bienes inmuebles",
@@ -11887,8 +11622,7 @@
         "@type": "vcard:Contact",
         "fn": "Ministerio del Interior, Obras P\u00fablicas y Vivienda. Secretar\u00eda de Asuntos Pol\u00edticos y Fortalecimiento Institucional. Subsecretar\u00eda de Reforma Institucional y Fortalecimiento de la Democracia."
       },
-      "distribution": [
-        {
+      "distribution": [{
           "accessURL": "http://datos.gob.ar/dataset/2889b09e-31ca-4f90-912e-2a50db874e33/resource/dcc74a80-55fa-4e9c-b025-e0d321aa36ee/download/audiencias-historico.csv",
           "format": "CSV",
           "title": "Audiencias Hist\u00f3rico",
