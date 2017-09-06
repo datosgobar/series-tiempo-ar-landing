@@ -28313,10 +28313,17 @@ function renderDataset(_params) {
     var distributions = getDistributions(_params.distribution, dataset.distribution);
     var elementDom = [];
 
-    distributions.forEach(function (_dist) {
+    distributions.forEach(function (_dist, k) {
+        var endSpacing;
+
+        if (k === distributions.length - 1) {
+            endSpacing = ['div', { className: 'break-line' }, ['br'], ['hr']];
+        } else {
+            endSpacing = ['div', { className: 'break-line' }, ['br'], ['hr'], ['br'], ['br']];
+        }
         elementDom.push(['div', { className: 'max-width flex flex-justify-between flex-align-start distributionBlock' }, ['div', { className: 'flex flex-column flex-align-start max-width' }, ['h3', { innerHTML: _dist.title }], ['p', { innerHTML: _dist.description ? _dist.description : '' }]], ['button', { className: 'button', download: true }, ['span', { className: 'button-waves', innerHTML: 'Descargar', onclick: function onclick() {
                 window.open(_element.downloadURL);
-            } }]]], ['div', { className: 'break-line' }, ['br'], ['hr'], ['br'], ['br']]);
+            } }]]], endSpacing);
     });
     
     var metaDataComponent = makeDomElement('div', {}, ['h2', {

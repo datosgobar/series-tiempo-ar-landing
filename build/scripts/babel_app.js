@@ -1178,7 +1178,26 @@ function renderDataset(_params) {
     var distributions = getDistributions(_params.distribution, dataset.distribution);
     var elementDom = [];
 
-    distributions.forEach((_dist) => {
+    distributions.forEach((_dist, k) => {
+        var endSpacing;
+
+        if (k === distributions.length - 1) {
+            endSpacing = [
+                'div',
+                { className: 'break-line' },
+                ['br'],
+                ['hr']
+            ];
+        } else {
+            endSpacing = [
+                'div',
+                { className: 'break-line' },
+                ['br'],
+                ['hr'],
+                ['br'],
+                ['br']
+            ];
+        }
         elementDom.push(
             [
                 'div',
@@ -1203,15 +1222,7 @@ function renderDataset(_params) {
                         {className: 'button-waves', innerHTML: 'Descargar', onclick: () => {window.open(_element.downloadURL);}}
                     ]
                 ]
-            ],
-            [
-                'div',
-                {className: 'break-line'},
-                ['br'],
-                ['hr'],
-                ['br'],
-                ['br']
-            ]);
+            ], endSpacing);
     });
     console.log(_params);
     var metaDataComponent = makeDomElement(

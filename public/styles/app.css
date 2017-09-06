@@ -4994,6 +4994,7 @@ body {
   margin: 0;
   padding: 0;
   color: #767676;
+  font-weight: normal;
 }
 
 #metaData .distributionBlock p {
@@ -5019,6 +5020,6 @@ body {
   border-radius: 15px;
 }
 
-#metaDataContainer {
-  margin-top: 40px;
+#metaData > div {
+  margin-top: 50px;
 }

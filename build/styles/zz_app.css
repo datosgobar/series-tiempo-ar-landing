@@ -441,6 +441,7 @@ body {
       margin: 0;
       padding: 0;
       color: var(--base);
+      font-weight: normal;
     }
     & p {
       margin: 0;
@@ -465,6 +466,6 @@ body {
   }
 }
 
-#metaDataContainer {
-  margin-top: 40px;
+#metaData > div {
+  margin-top: 50px;
 }
