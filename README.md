@@ -6,17 +6,21 @@ Landing web modular y parametrizada para publicar datos y gráficos basados en b
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Indice
 
-- [[Landing de Series de Tiempo](http://datosgobar.github.io/landing-ied)](#landing-de-series-de-tiempohttpdatosgobargithubiolanding-ied)
-  - [Indice](#indice)
-  - [¿Qué es?](#%C2%BFqu%C3%A9-es)
-  - [Instalación y Compilación](#instalaci%C3%B3n-y-compilaci%C3%B3n)
-  - [Uso](#uso)
-    - [Composición de las tarjetas:](#composici%C3%B3n-de-las-tarjetas)
-    - [Composición de los gráficos:](#composici%C3%B3n-de-los-gr%C3%A1ficos)
-    - [Composición de los indicadores:](#composici%C3%B3n-de-los-indicadores)
-    - [Parametros utilizados:](#parametros-utilizados)
-  - [Contacto](#contacto)
-  - [Licencia](#licencia)
+- [Instalación y Compilación](#instalaci%C3%B3n-y-compilaci%C3%B3n)
+- [Esquema](#esquema)
+- [Uso](#uso)
+  - [cards.json](#cardsjson)
+    - [Composición de las tarjetas (objetos `card`)](#composici%C3%B3n-de-las-tarjetas-objetos-card)
+    - [Composición de los gráficos (objetos `chart`)](#composici%C3%B3n-de-los-gr%C3%A1ficos-objetos-chart)
+    - [Composición de los indicadores (objetos `indicator`)](#composici%C3%B3n-de-los-indicadores-objetos-indicator)
+  - [datasets.json](#datasetsjson)
+  - [params.json](#paramsjson)
+  - [Datos (series de tiempo)](#datos-series-de-tiempo)
+    - [Fuente](#fuente)
+    - [Estructura](#estructura)
+    - [Metadatos utilizados por la aplicación](#metadatos-utilizados-por-la-aplicaci%C3%B3n)
+- [Contacto](#contacto)
+- [Licencia](#licencia)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
