@@ -86,10 +86,9 @@ button {
 .break-line {
   width: 100%;
 
-  & > br {
-    content: "";
+  & > div.br {
     height: 10px;
-    display: block;
+    width: 100%;
   }
 
   & > hr {

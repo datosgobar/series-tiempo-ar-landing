@@ -30,7 +30,7 @@ const removeLogs = require('gulp-removelogs'); // Plugin para quitar console.log
 const imagemin = require('gulp-imagemin'); // Plugin para optimizar imagenes
 
 // Entorno
-let enviroment = 'dev';
+let enviroment = 'prod';
 
 let appConfig = { // opciones: dev, prod
     isProd: (enviroment === 'prod') ? (true) : (false),
@@ -239,7 +239,7 @@ function js_babel() {
     return gulp.src(routes.input)
         .pipe(plumber())
         .pipe(babel(config.babel))
-        .pipe(gulpif(appConfig.isProd, removeLogs()))
+        // .pipe(gulpif(appConfig.isProd, removeLogs()))
         .pipe(gulp.dest(routes.output));
 }
 // Esta functión compila y concatena todos los archivos de javascript.

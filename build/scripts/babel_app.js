@@ -156,7 +156,7 @@
   // Actualizado 17.08.2017 - Esta función parsea el formato de tipo de fecha.
   function parseFormatDate(format, date, short = false) {
       date = moment(date);
-      console.log(format, date);
+      //   console.log(format, date);
       switch (format) {
           case 'R/P1Y':
               return date.format('YYYY');
@@ -215,34 +215,34 @@
   function renderChartComponent(_indicatorId, _chart) {
       var container = document.querySelector('#chartsContainer #charts');
 
-      console.log(_indicatorId);
-      console.log(_chart);
-      console.log(container);
+      //   console.log(_indicatorId);
+      //   console.log(_chart);
+      //   console.log(container);
 
       var chartComponent = makeDomElement('div', { id: _chart.id, className: 'chart' }, ['div', { className: 'head' },
           ['h3', _chart.title],
           ['div', { className: 'break-line' },
-              ['br']
+              ['div', { className: 'br' }]
           ],
           ['p', { className: 'paragraph', innerHTML: _chart.description }],
           ['div', { className: 'break-line' },
-              ['br'],
-              ['br']
+              ['div', { className: 'br' }],
+              ['div', { className: 'br' }]
           ]
       ], ['div', { className: 'referenceContainer' },
           ['div', { className: 'break-line' },
-              ['br']
+              ['div', { className: 'br' }]
           ],
           ['span', { className: 'references' }],
           ['div', { className: 'break-line' },
-              ['br']
+              ['div', { className: 'br' }]
           ],
           ['div', { className: 'break-line' },
               ['hr']
           ]
       ], ['div', { className: 'rangeButton' },
           ['div', { className: 'break-line' },
-              ['br']
+              ['div', { className: 'br' }]
           ],
           // ['div', { className: 'rangeButton-component' },
           //   ['div', { className: 'rangeButton-text', innerHTML: 'Escala:' }],
@@ -252,10 +252,10 @@
           //   ['button', { onclick: () => { changeSwitchPosition(this, _chart.id); }, state: '', innerHTML: 'Dinámica' }]
           // ],
           ['div', { className: 'break-line' },
-              ['br']
+              ['div', { className: 'br' }]
           ]
       ], ['div', { className: 'chart-svg' }], ['div', { className: 'break-line' },
-          ['br']
+          ['div', { className: 'br' }]
       ], ['div', { className: 'modal-share' },
           ['input', { id: `share-${ _chart.id }`, type: 'checkbox', className: 'share-open' }],
           ['label', { htmlFor: `share-${ _chart.id }`, className: 'share-open-button hamburger-dark' },
@@ -586,7 +586,7 @@
       ]).on('brush', brushed);
 
       // Se define el tipo de línea  /////////////////////////////////////////////
-      chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)).defined((d) => { console.log(typeof d.value); return d.value != null; });
+      chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value)).defined((d) => d.value != null);
       rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value));
 
       // Se define svg ///////////////////////////////////////////////////////////
@@ -696,12 +696,14 @@
           .style('opacity', 0);
       tooltipIndicator.append('circle')
           .attr('transform', 'translate(0, 2)')
+          .attr('r', 4)
           .style('fill', (d, i) => _chart.indicators[i].color);
       boxText = tooltipIndicator.append('g')
           .attr('class', 'boxText');
       boxText.append('rect')
           .attr('rx', 15)
           .attr('ry', 15)
+          .attr('height', 25)
           .style('fill', (d, i) => _chart.indicators[i].color);
       boxText.append('text');
 
@@ -1014,25 +1016,25 @@
   // (Optimized)(Update: 25.08.2017)
   function renderCardComponent(_card) {
       var cardComponent = makeDomElement('div', { id: _card.id, className: 'card' }, ['h3', { innerHTML: _card.title }], ['div', { className: 'break-line' },
-          ['br'],
-          ['br'],
+          ['div', { className: 'br' }],
+          ['div', { className: 'br' }],
           ['hr'],
-          ['br'],
-          ['br']
+          ['div', { className: 'br' }],
+          ['div', { className: 'br' }]
       ], ['h4', { innerHTML: _card.short_name }], ['div', { className: 'break-line' },
-          ['br']
+          ['div', { className: 'br' }]
       ], ['p', { className: 'frequency' }], ['div', { className: 'break-line' },
-          ['br'],
-          ['br']
+          ['div', { className: 'br' }],
+          ['div', { className: 'br' }]
       ], ['p', { className: 'units_representation' }], ['div', { className: 'break-line' },
-          ['br']
+          ['div', { className: 'br' }]
       ], ['p', { className: 'units' }], ['div', { className: 'break-line' },
-          ['br']
+          ['div', { className: 'br' }]
       ], ['div', { className: 'mini-chart' }], ['div', { className: 'break-line' },
-          ['br']
+          ['div', { className: 'br' }]
       ], ['p', { className: 'human_frecuency' }], ['div', { className: 'break-line' },
-          ['br'],
-          ['br']
+          ['div', { className: 'br' }],
+          ['div', { className: 'br' }]
       ], ['button', {
               className: 'button',
               onclick: () => {
@@ -1042,7 +1044,7 @@
           },
           ['span', { className: 'button-waves', innerHTML: 'Ver más gráficos' }]
       ], ['div', { className: 'break-line' },
-          ['br']
+          ['div', { className: 'br' }]
       ], ['a', { href: _card.download_url, className: 'link', download: true, innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos' }]);
 
       cardComponent.append(addLoading());

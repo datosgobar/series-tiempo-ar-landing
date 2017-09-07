@@ -6,9 +6,11 @@ body {
   padding: 0;
   position: relative;
 
+  /*
   @media (--tablet) {
     padding: var(--headerHeight) 0 0 0;
   }
+  */
 }
 
 a {
