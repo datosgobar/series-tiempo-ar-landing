@@ -1,18 +1,18 @@
 [{
-        "id": "11.3_VIPAA_2004_M_31",
-        "title": "Nivel de actividad",
+        "id": "143.3_ICE_SERVIA_2004_A_25",
+        "title": "Nivel de Actividad",
         "download_url": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
         "short_name": "EMAE",
         "units_representation": "1",
         "laps": "5",
         "charts": [{
                 "id": "chart_1",
-                "title": "Producto Bruto Interno.",
-                "description": "En millones de pesos, a precios de 2004.",
+                "title": "Producto Interno Bruto",
+                "description": "Millones de pesos a precios de 2004, serie desestacionalizada",
                 "type": "line",
                 "indicators": [{
-                    "id": "4.2_OGP_2004_T_17",
-                    "short_name": "PBI",
+                    "id": "3.2_OGP_D_2004_T_17",
+                    "short_name": "PIB",
                     "color": "#FF6100",
                     "type": "solid"
                 }],
@@ -21,65 +21,34 @@
             },
             {
                 "id": "chart_2",
-                "title": "Oferta y Demanda Globales por componente.",
-                "description": "En millones de pesos, a precios de 2004.",
+                "title": "Consumo Privado",
+                "description": "Millones de pesos a precios de 2004, serie desestacionalizada",
                 "type": "line",
                 "indicators": [{
-                        "id": "4.2_MGCP_2004_T_25",
-                        "short_name": "Consumo Privado",
-                        "color": "#3E2723",
-                        "type": "solid"
-                    },
-                    {
-                        "id": "4.2_DGCP_2004_T_30",
-                        "short_name": "Consumo Publico",
-                        "color": "#733C0D",
-                        "type": "solid"
-                    },
-                    {
-                        "id": "4.2_DGE_2004_T_26",
-                        "short_name": "Exportaciones",
-                        "color": "#C81111",
-                        "type": "solid"
-                    },
-                    {
-                        "id": "4.2_OGI_2004_T_25",
-                        "short_name": "Importaciones",
-                        "color": "#FF8A80",
-                        "type": "solid"
-                    },
-                    {
-                        "id": "4.2_VE_2004_T_21",
-                        "short_name": "Variacion de Existencias",
-                        "color": "#FF6100",
-                        "type": "solid"
-                    },
-                    {
-                        "id": "4.2_DGIT_2004_T_25",
-                        "short_name": "IBIF",
-                        "color": "#F2BC1B",
-                        "type": "solid"
-                    }
-                ],
+                    "id": "3.2_DGCP_D_2004_T_30",
+                    "short_name": "Consumo Privado  ",
+                    "color": "#3E2723",
+                    "type": "solid"
+                }],
                 "frequency": "R/P3M",
                 "laps": "24"
             },
             {
                 "id": "chart_3",
-                "title": "Estimador mensual de la actividad económica.",
-                "description": "En millones de pesos, a precios de 2004.",
+                "title": "Estimador Mensual de Actividad Económica",
+                "description": "Índice 2004=100",
                 "type": "line",
                 "indicators": [{
-                        "id": "11.3_ITC_2004_M_22",
-                        "short_name": "EMAE Serie Tendencia Ciclo",
+                        "id": "143.3_NO_PR_2004_A_31",
+                        "short_name": "Serie Desestacionalizada",
                         "color": "#FF6100",
-                        "type": "dashed"
+                        "type": "solid"
                     },
                     {
-                        "id": "11.3_ISD_2004_M_31",
-                        "short_name": "EMAE Serie Desestacionalizada",
+                        "id": "143.3_NO_PR_2004_A_28",
+                        "short_name": "Serie Tendencia Ciclo",
                         "color": "#C81111",
-                        "type": "dashed"
+                        "type": "solid"
                     }
                 ],
                 "frequency": "R/P1M",
@@ -87,11 +56,11 @@
             },
             {
                 "id": "chart_4",
-                "title": "Actividad industrial y de la construcción.",
-                "description": "Variación anual porcentual.",
+                "title": "Industria y Construcción",
+                "description": "Variación Interanual",
                 "type": "line",
                 "indicators": [{
-                        "id": "12.3_E_2004_M_3",
+                        "id": "14.2_E_M_2004_0_3",
                         "short_name": "EMI",
                         "color": "#FF6100",
                         "type": "solid"
@@ -110,15 +79,15 @@
     },
     {
         "id": "45.2_ECTDT_0_T_33",
-        "title": "Empleo e ingresos",
+        "title": "Empleo e Ingresos",
         "download_url": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
         "short_name": "Desempleo",
         "units_representation": "%",
         "laps": "5",
         "charts": [{
-                "id": "chart_1",
-                "title": "Evolución del Empleo.",
-                "description": "Tasas de actividad y empleo.",
+                "id": "chart_5",
+                "title": "Empleo",
+                "description": "Tasas de Actividad y Empleo",
                 "type": "line",
                 "indicators": [{
                         "id": "43.2_ECTAT_0_T_33",
@@ -137,9 +106,9 @@
                 "laps": "24"
             },
             {
-                "id": "chart_2",
-                "title": "Evolución del Desempleo.",
-                "description": "Tasa de desempleo.",
+                "id": "chart_6",
+                "title": "Desempleo",
+                "description": "Tasa de desempleo",
                 "type": "line",
                 "indicators": [{
                     "id": "45.2_ECTDT_0_T_33",
@@ -153,16 +122,16 @@
         ]
     },
     {
-        "id": "115.3_TCRM_0_M_29",
-        "title": "Sector externo",
+        "id": "74.3_ISC_0_M_19",
+        "title": "Sector Externo",
         "download_url": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
-        "short_name": "TCRM",
+        "short_name": "Saldo comercial",
         "units_representation": "1",
         "laps": "5",
         "charts": [{
-                "id": "chart_1",
-                "title": "Evolución del Tipo de Cambio Real Multilateral y Bilaterales.",
-                "description": "Tipos de cambio real",
+                "id": "chart_17",
+                "title": "Tipo de Cambio Real",
+                "description": "Índice 17-dic-15=100",
                 "type": "line",
                 "indicators": [{
                         "id": "116.3_TCRMA_0_M_36",
@@ -187,38 +156,52 @@
                 "laps": "24"
             },
             {
-                "id": "chart_2",
-                "title": "Evolución de los Términos de Intercambio.",
-                "description": "En base: XXXX.",
+                "id": "chart_18",
+                "title": "Términos de Intercambio",
+                "description": "Índice 2004=100",
                 "type": "line",
                 "indicators": [{
-                    "id": "83.1_ITI_2004_A_27",
+                    "id": "82.2_ITI_2004_T_27",
                     "short_name": "Índice de Términos de Intercambio",
                     "color": "#00579B",
                     "type": "solid"
                 }],
-                "frequency": "R/P1Y",
+                "frequency": "R/P3M",
                 "laps": "24"
             },
             {
-                "id": "chart_4",
-                "title": "Evolución de las Importaciones y Exportaciones.",
-                "description": "Variación mensual porcentual.",
+                "id": "chart_19",
+                "title": "Saldo Comercial",
+                "description": "Millones de dólares",
                 "type": "line",
                 "indicators": [{
-                        "id": "74.3_IIT_0_M_25",
-                        "short_name": "Importaciones",
+                    "id": "74.3_ISC_0_M_19",
+                    "short_name": "Saldo Comercial",
+                    "color": "#FF6100",
+                    "type": "solid"
+                }],
+                "frequency": "R/P1M",
+                "laps": "24"
+            },
+            {
+                "id": "chart_20",
+                "title": "Exportaciones e Importaciones",
+                "description": "Millones de dólares",
+                "type": "line",
+                "indicators": [{
+                        "id": "74.1_IET_0_A_16",
+                        "short_name": "Exportaciones",
                         "color": "#FF6100",
                         "type": "solid"
                     },
                     {
-                        "id": "74.3_IET_0_M_16",
-                        "short_name": "Exportaciones",
+                        "id": "74.1_IIT_0_A_25",
+                        "short_name": "Importaciones",
                         "color": "#C81111",
                         "type": "solid"
                     }
                 ],
-                "frequency": "R/P1M",
+                "frequency": "R/P1Y",
                 "laps": "24"
             }
         ]
@@ -227,13 +210,13 @@
         "id": "87.3_IGC_1980_M_27",
         "title": "Economía Internacional",
         "download_url": "http://www.mecon.gov.ar/download/infoeco/internacional_ied.xlsx",
-        "short_name": "Commodities",
-        "units_representation": "",
+        "short_name": "Índice General de Commodities",
+        "units_representation": "1",
         "laps": "5",
         "charts": [{
-                "id": "chart_1",
-                "title": "Evolución de los commodities.",
-                "description": "Índice de precios de los commodities.",
+                "id": "chart_15",
+                "title": "Evolución de los commodities",
+                "description": "Índice de precios de los commodities",
                 "type": "line",
                 "indicators": [{
                     "id": "121.3_GC_0_0_19",
@@ -245,9 +228,9 @@
                 "laps": "24"
             },
             {
-                "id": "chart_2",
-                "title": "Tasas de Interés Internacionales.",
-                "description": "Principales tasas de interés.",
+                "id": "chart_16",
+                "title": "Tasas de Interés Internacionales",
+                "description": "Porcentaje",
                 "type": "line",
                 "indicators": [{
                         "id": "131.1_FET_0_0_12",
@@ -256,7 +239,7 @@
                         "type": "solid"
                     },
                     {
-                        "id": "131.1_MZT_0_0_18",
+                        "id": "131.1_MZT_0_0_17",
                         "short_name": "Eurozona",
                         "color": "#000026",
                         "type": "solid"
@@ -281,25 +264,19 @@
         "units_representation": "1",
         "laps": "5",
         "charts": [{
-                "id": "chart_1",
-                "title": "Tasas de Interés nacionales.",
-                "description": "Principales tasas de interés.",
+                "id": "chart_12",
+                "title": "Tasas de Interés nacionales",
+                "description": "Porcentaje",
                 "type": "line",
                 "indicators": [{
-                        "id": "89.1_TIP_0_0_19",
-                        "short_name": "PRIME",
+                        "id": "89.1_TIC_0_0_18",
+                        "short_name": "Call",
                         "color": "#00579B",
                         "type": "solid"
                     },
                     {
-                        "id": "89.1_TIAC_0_0_26",
-                        "short_name": "Adelantos en Cta Cte",
-                        "color": "#000026",
-                        "type": "solid"
-                    },
-                    {
                         "id": "89.1_TIB_0_0_20",
-                        "short_name": "Badlar",
+                        "short_name": "Badlar privada",
                         "color": "#00D5DE",
                         "type": "solid"
                     }
@@ -308,13 +285,13 @@
                 "laps": "24"
             },
             {
-                "id": "chart_2",
-                "title": "Evolución de los préstamos en pesos.",
-                "description": "En millones de pesos corrientes.",
+                "id": "chart_13",
+                "title": "Reservas Internacionales",
+                "description": "Millones de dólares",
                 "type": "line",
                 "indicators": [{
-                    "id": "91.1_PEFPT_0_0_45",
-                    "short_name": "Préstamos al Sector Privado en Pesos",
+                    "id": "92.1_RID_0_0_32",
+                    "short_name": "Reservas Internacionales",
                     "color": "#00579B",
                     "type": "solid"
                 }],
@@ -322,13 +299,13 @@
                 "laps": "24"
             },
             {
-                "id": "chart_3",
-                "title": "Evolución de los préstamos en dólares.",
-                "description": "En millones de pesos corrientes.",
+                "id": "chart_14",
+                "title": "Depósitos en dólares del Sector Privado",
+                "description": "Millones de dólares",
                 "type": "line",
                 "indicators": [{
-                    "id": "91.1_PEFPD_0_0_47",
-                    "short_name": "Préstamos al Sector Privado en Dólares",
+                    "id": "90.1_DTDPRI_0_0_33",
+                    "short_name": "Depósitos en dólares del Sector Privado",
                     "color": "#00579B",
                     "type": "solid"
                 }],
@@ -336,5 +313,23 @@
                 "laps": "24"
             }
         ]
+    },
+    {
+        "id": "145.3_INGNACUAL_DICI_M_38",
+        "title": "Precios",
+        "download_url": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
+        "short_name": "IPC Nacional",
+        "units_representation": "1",
+        "laps": "5",
+        "charts": []
+    },
+    {
+        "id": "142.3_TOTAL_2001_M_26",
+        "title": "Finanzas Públicas",
+        "download_url": "http://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
+        "short_name": "Recursos tributarios",
+        "units_representation": "1",
+        "laps": "5",
+        "charts": []
     }
 ]

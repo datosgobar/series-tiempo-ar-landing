@@ -27787,6 +27787,8 @@ function renderChart(_chart) {
         return rangeScaleX(d.date);
     }).y(function (d) {
         return rangeScaleY(d.value);
+    }).defined(function (d) {
+        return d.value != null;
     });
 
     // Se define svg ///////////////////////////////////////////////////////////
@@ -28150,6 +28152,71 @@ function makeDomElement(desc) {
 // Funciones para render de las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
 
+function requestDatasets() {
+    downloadFile({
+        local: STORAGE.params.path_datasets
+    }, 'datasets').then(addMetadata);
+}
+
+function addMetadata() {
+    var data = STORAGE.datasets;
+
+    data.forEach(function (_dataset) {
+        downloadFile({
+            local: _dataset.catalog_url
+        }, _dataset.dataset_identifier).then(function () {
+            return renderDataset(_dataset);
+        });
+    });
+}
+
+function getDataset(_id) {
+    return STORAGE[_id].dataset.filter(function (_item) {
+        return _item.identifier === _id;
+    })[0];
+}
+
+function getDistributions(_distributions, _data) {
+    var distributions = [];
+
+    _distributions.map(function (_distribution) {
+        var result = null;
+
+        _data.forEach(function (_dataDist) {
+            if (_dataDist.identifier === _distribution.identifier || _dataDist.title === _distribution.title) {
+                distributions.push(_dataDist);
+            }
+        });
+    });
+
+    return distributions;
+}
+
+function renderDataset(_params) {
+    var dataset = getDataset(_params.dataset_identifier);
+    var distributions = getDistributions(_params.distribution, dataset.distribution);
+    var elementDom = [];
+
+    distributions.forEach(function (_dist, k) {
+        var endSpacing;
+
+        if (k === distributions.length - 1) {
+            endSpacing = ['div', { className: 'break-line' }, ['br'], ['hr']];
+        } else {
+            endSpacing = ['div', { className: 'break-line' }, ['br'], ['hr'], ['br'], ['br']];
+        }
+        elementDom.push(['div', { className: 'max-width flex flex-justify-between flex-align-start distributionBlock' }, ['div', { className: 'flex flex-column flex-align-start max-width' }, ['h3', { innerHTML: _dist.title }], ['p', { innerHTML: _dist.description ? _dist.description : '' }]], ['button', { className: 'button', download: true }, ['span', { className: 'button-waves', innerHTML: 'Descargar', onclick: function onclick() {
+                window.open(_dist.downloadURL);
+            } }]]], endSpacing);
+    });
+
+    var metaDataComponent = makeDomElement('div', {}, ['h2', {
+        innerHTML: '<a class="link" href="' + _params.dataset_landingPage + '" target="_blank">' + dataset.title + '</a>'
+    }], ['div', { className: 'break-line' }, ['br']], ['p', { innerHTML: dataset.description }], ['div', { className: 'break-line' }, ['br'], ['br']], ['h2', { innerHTML: 'Recursos del dataset' }], ['div', { className: 'break-line' }, ['br'], ['hr'], ['br'], ['br']], ['div', { className: 'flex flex-column' }].concat(elementDom));
+
+    $('#metaData').append(metaDataComponent);
+}
+
 // Esta función intercambia las vistas cards/charts.
 // (Optimized)(Update: 25.08.2017)
 function changeView(_containerId, _cardId) {
@@ -28361,7 +28428,7 @@ function start(_cardId, _indicatorId) {
     var download = downloadFile({ local: STORAGE.params.path_cards }, 'cards');
 
     if (_cardId === undefined || _indicatorId === undefined) {
-        download.then(requestAllCards);
+        download.then(requestAllCards).then(requestDatasets);
     } else {
         download.then(function () {
             var chartData = STORAGE.cards.filter(function (_card) {

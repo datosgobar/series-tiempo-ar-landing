@@ -1,7 +1,7 @@
 {
     "credits": "Ministerio de Hacienda",
     "credits_url": "https://datosgobar.github.io/landing-ied/",
-    "path_files": "http://meconcd.mecon.gob.ar/public.php?service=files&t=e9cd25ad56afd6c53514d9c9d191f494&download&path=//",
+    "path_files": "http://www.example.com/",
     "path_cards": "./public/data/cards.json",
     "path_datasets": "./public/data/datasets.json"
 }
