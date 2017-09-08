@@ -15,7 +15,7 @@ server:
 	gulp server
 
 compile:
-	gulp server
+	gulp compile
 
 watch:
 	gulp watch
