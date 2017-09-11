@@ -82,7 +82,7 @@
         "title": "Empleo e Ingresos",
         "download_url": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
         "short_name": "Desempleo",
-        "units_representation": "%",
+        "units_representation": "1",
         "laps": "5",
         "charts": [{
                 "id": "chart_5",

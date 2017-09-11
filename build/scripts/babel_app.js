@@ -615,7 +615,8 @@ function renderChart(_chart) {
         .attr('x1', 0)
         .attr('x2', chartWidth)
         .attr('y1', chartScaleY(0))
-        .attr('y2', chartScaleY(0));
+        .attr('y2', chartScaleY(0))
+        .attr('clip-path', 'url(#clip)');;
     chartContainer.append('g')
         .attr('class', 'chart-axis-x')
         .attr('transform', `translate(0, ${ chartHeight })`)

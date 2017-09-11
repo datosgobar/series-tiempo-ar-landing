@@ -27800,7 +27800,7 @@ function renderChart(_chart) {
 
     // se crea contenedor del gráfico //////////////////////////////////////////
     chartContainer = svg.append('g').attr('class', 'chart-container').attr('transform', 'translate(' + chartMargin.left + ', ' + chartMargin.top + ')');
-    chartContainer.append('g').attr('class', 'chart-line-0').append('line').attr('x1', 0).attr('x2', chartWidth).attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0));
+    chartContainer.append('g').attr('class', 'chart-line-0').append('line').attr('x1', 0).attr('x2', chartWidth).attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0)).attr('clip-path', 'url(#clip)');;
     chartContainer.append('g').attr('class', 'chart-axis-x').attr('transform', 'translate(0, ' + chartHeight + ')').call(chartAxisX);
     chartContainer.append('g').attr('class', 'chart-axis-y').call(chartAxisY);
     chartLines = chartContainer.selectAll('.chart-line').data(data_lines).enter().append('g').attr('class', 'chart-line');
