@@ -3,7 +3,7 @@
         "title": "Nivel de Actividad",
         "download_url": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
         "short_name": "EMAE",
-        "units_representation": "1",
+        "units_representation": "%",
         "laps": "5",
         "charts": [{
                 "id": "chart_1",
@@ -82,7 +82,7 @@
         "title": "Empleo e Ingresos",
         "download_url": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
         "short_name": "Desempleo",
-        "units_representation": "1",
+        "units_representation": "%",
         "laps": "5",
         "charts": [{
                 "id": "chart_5",
@@ -319,7 +319,7 @@
         "title": "Precios",
         "download_url": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
         "short_name": "IPC Nacional",
-        "units_representation": "1",
+        "units_representation": "%",
         "laps": "5",
         "charts": []
     },

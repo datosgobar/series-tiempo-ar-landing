@@ -1,4 +1,4 @@
-# [Landing de Series de Tiempo](http://datosgobar.github.io/landing-ied)
+# [Landing de Series de Tiempo](http://datosgobar.github.io/series-tiempo-landing)
 
 Landing web modular y parametrizada para publicar datos y gráficos basados en bases de series de tiempo.
 

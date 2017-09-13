@@ -15,10 +15,10 @@ server:
 	gulp server
 
 compile:
-	gulp compile
+	gulp app_compile
 
 watch:
-	gulp watch
+	gulp app_watches
 
 doctoc: ## generate table of contents, doctoc command line tool required
         ## https://github.com/thlorenz/doctoc
