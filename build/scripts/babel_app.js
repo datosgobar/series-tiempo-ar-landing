@@ -61,7 +61,7 @@ function shareSaveAs(_element, _indicatorId) {
     renderNode.parentNode.querySelector('.share-open').checked = false;
 
     domtoimage.toBlob(renderNode).then((blob) => {
-        window.saveAs(blob, `indicator_${ _indicatorId }_chart_${ renderNode.getAttribute('id') }_${ moment().format('x') }.png`);
+        window.saveAs(blob, `indicator_${ _indicatorId }_chart_${ renderNode.getAttribute('id') }_${ moment().zone('+00:00').format('x') }.png`);
     }).catch(function(error) {
         console.error('oops, algo sucedio mal!', error);
     });
@@ -155,8 +155,8 @@ function parseTypeLine(type) {
 }
 // Actualizado 17.08.2017 - Esta función parsea el formato de tipo de fecha.
 function parseFormatDate(format, date, short = false) {
-    date = moment(date);
-    //   console.log(format, date);
+  date = moment(date).zone('+00:00');
+
     switch (format) {
         case 'R/P1Y':
             return date.format('YYYY');
@@ -347,7 +347,7 @@ function normalDatos(_data, _indicatorId) {
         .filter((d) => (d[1] !== null))
         .map((d) => {
             let object = {};
-            object['date'] = new Date(d[0]);
+            object['date'] = moment(d[0]).zone('+00:00');
             object[_indicatorId] = roundNumber(d[1], 3);
 
             return object;
@@ -360,7 +360,7 @@ function normalDatosLine(_data, _indicatorId) {
     let data_norm = _data
         // .filter((d) => (d[1] !== null))
         .map((d) => {
-            return { date: new Date(d[0]), value: (d[1] !== null) ? (roundNumber(d[1], 3)) : (null) };
+          return { date: moment(d[0]).zone('+00:00'), value: (d[1] !== null) ? (roundNumber(d[1], 3)) : (null) };
         });
 
     return data_norm;
@@ -414,7 +414,7 @@ function rowToValues(_row) {
 }
 
 function searchProximityPoint(_data, _date) {
-    let distances = _data.map((v, k) => [Math.pow(moment(v.date).diff(_date), 2), v.date]); // [diff, date]
+    let distances = _data.map((v, k) => [Math.pow(moment(v.date).zone('+00:00').diff(_date), 2), v.date]); // [diff, date]
     distances.sort((a, b) => { return (a[0] - b[0]); });
 
     return distances[0][1];
@@ -566,7 +566,8 @@ function renderChart(_chart) {
     // Generación de parámetros para el gráfico ////////////////////////////////
     chartWidth = totalWidth - chartMargin.left - chartMargin.right;
     chartHeight = totalHeight - chartMargin.top - chartMargin.bottom;
-    chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_chart, (d) => d.date));
+
+    chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], (d) => d.date));
     chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
     chartAxisX = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
     chartAxisY = d3.axisLeft(chartScaleY);
@@ -576,7 +577,7 @@ function renderChart(_chart) {
     rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom;
     rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain());
     rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain());
-    rangeAxisX = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
+    rangeAxisX = d3.axisBottom(rangeScaleX).tickValues([moment(minDate).zone('+00:00'), moment(maxDate).zone('+00:00')]).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
     rangeAxisY = d3.axisLeft(rangeScaleY);
 
     // Se define brush /////////////////////////////////////////////////////////
@@ -616,7 +617,7 @@ function renderChart(_chart) {
         .attr('x2', chartWidth)
         .attr('y1', chartScaleY(0))
         .attr('y2', chartScaleY(0))
-        .attr('clip-path', 'url(#clip)');;
+        .attr('clip-path', 'url(#clip)');
     chartContainer.append('g')
         .attr('class', 'chart-axis-x')
         .attr('transform', `translate(0, ${ chartHeight })`)
@@ -738,7 +739,7 @@ function renderChart(_chart) {
 
         tooltipDom = d3.select(this.parentNode);
         mousePosition = d3.mouse(this);
-        mouseDate = moment(chartScaleX.invert(mousePosition[0]));
+        mouseDate = moment(chartScaleX.invert(mousePosition[0])).zone('+00:00');
         width = d3.select('.tooltip-rect-space').attr('width');
 
         data.date['calendar'] = searchProximityPoint(STORAGE.charts[_chart.id].data_chart, mouseDate);
@@ -750,7 +751,7 @@ function renderChart(_chart) {
         tooltipDom.select('.tooltip-line').attr('d', `M ${ data.date.position }, 0 V ${ chartHeight }`);
         tooltipDom.selectAll('.tooltip-indicator')
             .attr('transform', (d, i) => {
-                let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).toString() === moment(data.date.calendar).toString());
+                let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).zone('+00:00').toString() === moment(data.date.calendar).zone('+00:00').toString());
 
                 if (value[0]) {
                     if (typeof value[0][1] === 'number') {
@@ -764,7 +765,7 @@ function renderChart(_chart) {
                 // return (typeof data.values[i] === 'number')?(`translate(${ data.date.position }, ${ chartScaleY(data.values[i]) })`):('translate(-9999, -9999)');
             })
             .select('text').text((d, i) => {
-                let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).toString() === moment(data.date.calendar).toString());
+                let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).zone('+00:00').toString() === moment(data.date.calendar).zone('+00:00').toString());
 
                 if (value[0]) {
                     return `${ formatNumberD3(value[0][1]) } - ${ activeChart[i].short_name }`;
@@ -781,6 +782,7 @@ function renderChart(_chart) {
             .attr('x', (d, i) => (data.date.position < (width / 2)) ? (10) : (-(10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)));
         tooltipDom.select('.tooltip-date')
             .attr('transform', `translate(${ data.date.position }, ${ chartHeight + 5 })`);
+
         tooltipDom.select('.tooltip-date text')
             .text(parseFormatDate(_chart.frequency, data.date.calendar, true));
         tooltipDom.select('.tooltip-date rect')
@@ -859,7 +861,7 @@ function renderChart(_chart) {
         // se actualiza ancho del rango
         rangeWidth = totalWidth - rangeMargin.left - rangeMargin.right;
         // se actualiza escala en x del gráfico
-        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_chart, (d) => d.date));
+        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], (d) => d.date));
         // se actualiza escala en x del rango
         rangeScaleX.range([0, rangeWidth]);
         // se actualiza brush component
@@ -1219,7 +1221,7 @@ function renderMiniChart(_cardData, _element) {
     data = data
         .filter((d) => (d[1] !== null))
         .slice(-1 * parseInt((_cardData.laps <= data.length) ? (_cardData.laps) : (data.length)))
-        .map((d) => { return { date: new Date(d[0]), value: roundNumber(d[1], 3) }; });
+        .map((d) => { return { date: moment(d[0]).zone('+00:00'), value: roundNumber(d[1], 3) }; });
 
     // Definición de los parámetros de configuración ///////////////////////////
     container = d3.select(_element);

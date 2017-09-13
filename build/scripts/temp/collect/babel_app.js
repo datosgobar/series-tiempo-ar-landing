@@ -67,7 +67,7 @@ function shareSaveAs(_element, _indicatorId) {
     renderNode.parentNode.querySelector('.share-open').checked = false;
 
     domtoimage.toBlob(renderNode).then(function (blob) {
-        window.saveAs(blob, 'indicator_' + _indicatorId + '_chart_' + renderNode.getAttribute('id') + '_' + moment().format('x') + '.png');
+        window.saveAs(blob, 'indicator_' + _indicatorId + '_chart_' + renderNode.getAttribute('id') + '_' + moment().zone('+00:00').format('x') + '.png');
     }).catch(function (error) {
         console.error('oops, algo sucedio mal!', error);
     });
@@ -169,8 +169,8 @@ function parseTypeLine(type) {
 function parseFormatDate(format, date) {
     var short = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    date = moment(date);
-    //   console.log(format, date);
+    date = moment(date).zone('+00:00');
+
     switch (format) {
         case 'R/P1Y':
             return date.format('YYYY');
@@ -331,7 +331,7 @@ function normalDatos(_data, _indicatorId) {
         return d[1] !== null;
     }).map(function (d) {
         var object = {};
-        object['date'] = new Date(d[0]);
+        object['date'] = moment(d[0]).zone('+00:00');
         object[_indicatorId] = roundNumber(d[1], 3);
 
         return object;
@@ -344,7 +344,7 @@ function normalDatosLine(_data, _indicatorId) {
     var data_norm = _data
     // .filter((d) => (d[1] !== null))
     .map(function (d) {
-        return { date: new Date(d[0]), value: d[1] !== null ? roundNumber(d[1], 3) : null };
+        return { date: moment(d[0]).zone('+00:00'), value: d[1] !== null ? roundNumber(d[1], 3) : null };
     });
 
     return data_norm;
@@ -416,7 +416,7 @@ function rowToValues(_row) {
 
 function searchProximityPoint(_data, _date) {
     var distances = _data.map(function (v, k) {
-        return [Math.pow(moment(v.date).diff(_date), 2), v.date];
+        return [Math.pow(moment(v.date).zone('+00:00').diff(_date), 2), v.date];
     }); // [diff, date]
     distances.sort(function (a, b) {
         return a[0] - b[0];
@@ -569,7 +569,8 @@ function renderChart(_chart) {
     // Generación de parámetros para el gráfico ////////////////////////////////
     chartWidth = totalWidth - chartMargin.left - chartMargin.right;
     chartHeight = totalHeight - chartMargin.top - chartMargin.bottom;
-    chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_chart, function (d) {
+
+    chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], function (d) {
         return d.date;
     }));
     chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
@@ -583,7 +584,7 @@ function renderChart(_chart) {
     rangeHeight = totalHeight - rangeMargin.top - rangeMargin.bottom;
     rangeScaleX = d3.scaleTime().range([0, rangeWidth]).domain(chartScaleX.domain());
     rangeScaleY = d3.scaleLinear().range([rangeHeight, 0]).domain(chartScaleY.domain());
-    rangeAxisX = d3.axisBottom(rangeScaleX).tickValues([new Date(minDate), new Date(maxDate)]).tickFormat(function (d) {
+    rangeAxisX = d3.axisBottom(rangeScaleX).tickValues([moment(minDate).zone('+00:00'), moment(maxDate).zone('+00:00')]).tickFormat(function (d) {
         return parseFormatDate(_chart.frequency, d, true);
     });
     rangeAxisY = d3.axisLeft(rangeScaleY);
@@ -616,7 +617,7 @@ function renderChart(_chart) {
 
     // se crea contenedor del gráfico //////////////////////////////////////////
     chartContainer = svg.append('g').attr('class', 'chart-container').attr('transform', 'translate(' + chartMargin.left + ', ' + chartMargin.top + ')');
-    chartContainer.append('g').attr('class', 'chart-line-0').append('line').attr('x1', 0).attr('x2', chartWidth).attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0)).attr('clip-path', 'url(#clip)');;
+    chartContainer.append('g').attr('class', 'chart-line-0').append('line').attr('x1', 0).attr('x2', chartWidth).attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0)).attr('clip-path', 'url(#clip)');
     chartContainer.append('g').attr('class', 'chart-axis-x').attr('transform', 'translate(0, ' + chartHeight + ')').call(chartAxisX);
     chartContainer.append('g').attr('class', 'chart-axis-y').call(chartAxisY);
     chartLines = chartContainer.selectAll('.chart-line').data(data_lines).enter().append('g').attr('class', 'chart-line');
@@ -696,7 +697,7 @@ function renderChart(_chart) {
 
         tooltipDom = d3.select(this.parentNode);
         mousePosition = d3.mouse(this);
-        mouseDate = moment(chartScaleX.invert(mousePosition[0]));
+        mouseDate = moment(chartScaleX.invert(mousePosition[0])).zone('+00:00');
         width = d3.select('.tooltip-rect-space').attr('width');
 
         data.date['calendar'] = searchProximityPoint(STORAGE.charts[_chart.id].data_chart, mouseDate);
@@ -712,7 +713,7 @@ function renderChart(_chart) {
         tooltipDom.select('.tooltip-line').attr('d', 'M ' + data.date.position + ', 0 V ' + chartHeight);
         tooltipDom.selectAll('.tooltip-indicator').attr('transform', function (d, i) {
             var value = STORAGE[activeChart[i].id].data.filter(function (_v) {
-                return moment(_v[0]).toString() === moment(data.date.calendar).toString();
+                return moment(_v[0]).zone('+00:00').toString() === moment(data.date.calendar).zone('+00:00').toString();
             });
 
             if (value[0]) {
@@ -727,7 +728,7 @@ function renderChart(_chart) {
             // return (typeof data.values[i] === 'number')?(`translate(${ data.date.position }, ${ chartScaleY(data.values[i]) })`):('translate(-9999, -9999)');
         }).select('text').text(function (d, i) {
             var value = STORAGE[activeChart[i].id].data.filter(function (_v) {
-                return moment(_v[0]).toString() === moment(data.date.calendar).toString();
+                return moment(_v[0]).zone('+00:00').toString() === moment(data.date.calendar).zone('+00:00').toString();
             });
 
             if (value[0]) {
@@ -744,6 +745,7 @@ function renderChart(_chart) {
             return data.date.position < width / 2 ? 10 : -(10 + _this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30);
         });
         tooltipDom.select('.tooltip-date').attr('transform', 'translate(' + data.date.position + ', ' + (chartHeight + 5) + ')');
+
         tooltipDom.select('.tooltip-date text').text(parseFormatDate(_chart.frequency, data.date.calendar, true));
         tooltipDom.select('.tooltip-date rect').attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30).attr('transform', 'translate(-' + (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2 + ', -1)');
 
@@ -819,7 +821,7 @@ function renderChart(_chart) {
         // se actualiza ancho del rango
         rangeWidth = totalWidth - rangeMargin.left - rangeMargin.right;
         // se actualiza escala en x del gráfico
-        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_chart, function (d) {
+        chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], function (d) {
             return d.date;
         }));
         // se actualiza escala en x del rango
@@ -1126,7 +1128,7 @@ function renderMiniChart(_cardData, _element) {
     data = data.filter(function (d) {
         return d[1] !== null;
     }).slice(-1 * parseInt(_cardData.laps <= data.length ? _cardData.laps : data.length)).map(function (d) {
-        return { date: new Date(d[0]), value: roundNumber(d[1], 3) };
+        return { date: moment(d[0]).zone('+00:00'), value: roundNumber(d[1], 3) };
     });
 
     // Definición de los parámetros de configuración ///////////////////////////
