@@ -655,7 +655,7 @@ function renderChart(_chart) {
 
     tooltipLine = svg.append('g').attr('class', 'chart-tooltip').attr('transform', 'translate(' + chartMargin.left + ', ' + chartMargin.top + ')');
     tooltipLine.append('path').attr('class', 'tooltip-line').style('opacity', 0);
-    tooltipDate = tooltipLine.append('g').attr('class', 'tooltip-date').attr('opacity', 0);
+    tooltipDate = tooltipLine.append('g').attr('class', 'tooltip-date').attr('height', '18px').attr('opacity', 0);
     tooltipDate.append('rect');
     tooltipDate.append('text');
     tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator').data(data_lines).enter().append('g').attr('id', function (d, i) {
@@ -670,7 +670,9 @@ function renderChart(_chart) {
     });
     boxText.append('text');
 
-    tooltipLine.append('rect').attr('class', 'tooltip-rect-space').attr('width', chartWidth).attr('height', chartHeight).attr('pointer-events', 'all').on('mouseover', tooltipMouseOver).on('mouseout', tooltipMouseOut).on('mousemove', tooltipMouseMouve);
+    tooltipLine.append('rect').attr('class', 'tooltip-rect-space').attr('width', chartWidth).attr('height', chartHeight).attr('pointer-events', 'all').on('mouseover', tooltipMouseOver)
+    // .on('mouseout', tooltipMouseOut)
+    .on('mousemove', tooltipMouseMouve);
 
     function tooltipMouseOver() {
         var element = d3.select(this.parentNode);
@@ -747,7 +749,7 @@ function renderChart(_chart) {
         tooltipDom.select('.tooltip-date').attr('transform', 'translate(' + data.date.position + ', ' + (chartHeight + 5) + ')');
 
         tooltipDom.select('.tooltip-date text').text(parseFormatDate(_chart.frequency, data.date.calendar, true));
-        tooltipDom.select('.tooltip-date rect').attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30).attr('transform', 'translate(-' + (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2 + ', -1)');
+        tooltipDom.select('.tooltip-date rect').attr('height', '18px').attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30 + 'px').attr('transform', 'translate(-' + (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2 + ', -1)');
 
         tooltipsCollapse(_chart.id);
     }
@@ -1040,6 +1042,8 @@ function renderDataset(_params) {
 function changeView(_containerId, _cardId) {
     var container = '#' + _containerId,
         node = $('#chartsContainer');
+
+    $('html, body').scrollTop(0);
 
     if (container === '#chartsContainer') {
         STORAGE.activeCard = _cardId;

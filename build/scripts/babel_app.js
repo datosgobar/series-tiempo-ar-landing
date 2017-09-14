@@ -687,6 +687,7 @@ function renderChart(_chart) {
         .style('opacity', 0);
     tooltipDate = tooltipLine.append('g')
         .attr('class', 'tooltip-date')
+        .attr('height', '18px')
         .attr('opacity', 0);
     tooltipDate.append('rect');
     tooltipDate.append('text');
@@ -715,7 +716,7 @@ function renderChart(_chart) {
         .attr('height', chartHeight)
         .attr('pointer-events', 'all')
         .on('mouseover', tooltipMouseOver)
-        .on('mouseout', tooltipMouseOut)
+        // .on('mouseout', tooltipMouseOut)
         .on('mousemove', tooltipMouseMouve);
 
     function tooltipMouseOver() {
@@ -786,7 +787,8 @@ function renderChart(_chart) {
         tooltipDom.select('.tooltip-date text')
             .text(parseFormatDate(_chart.frequency, data.date.calendar, true));
         tooltipDom.select('.tooltip-date rect')
-            .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30)
+            .attr('height', '18px')
+            .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30 + 'px')
             .attr('transform', `translate(-${ (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2}, -1)`);
 
         tooltipsCollapse(_chart.id);
@@ -1129,6 +1131,8 @@ function renderDataset(_params) {
 function changeView(_containerId, _cardId) {
     var container = `#${ _containerId }`,
         node = $('#chartsContainer');
+
+    $('html, body').scrollTop(0);
 
     if (container === '#chartsContainer') {
         STORAGE.activeCard = _cardId;
