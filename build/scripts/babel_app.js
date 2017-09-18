@@ -1,6 +1,5 @@
 // Se define una constante en donde se va a alojar toda la data.
 ////////////////////////////////////////////////////////////////////////////////
-
 const STORAGE = {
     'charts': {}, // Se guarda información correspondiente a cada gráfico
     'activeCard': {},
@@ -61,7 +60,7 @@ function shareSaveAs(_element, _indicatorId) {
     renderNode.parentNode.querySelector('.share-open').checked = false;
 
     domtoimage.toBlob(renderNode).then((blob) => {
-        window.saveAs(blob, `indicator_${ _indicatorId }_chart_${ renderNode.getAttribute('id') }_${ moment().zone('+00:00').format('x') }.png`);
+        window.saveAs(blob, 'indicator_' + _indicatorId + '_chart_' + renderNode.getAttribute('id') + '_' + moment().zone('+00:00').format('x') + '.png');
     }).catch(function(error) {
         console.error('oops, algo sucedio mal!', error);
     });
@@ -87,15 +86,15 @@ function embebedContainerHide(_component) {
 function addEmbebed(_indicatorId, _chart) {
     let component, callToAction, iframe, input, button, exit, title;
 
-    iframe = `<iframe src="${ window.location.origin }?indicator=${ _indicatorId }&chart=${ _chart.id }" width="100%" height="100%" frameborder=0 scrolling="no"></iframe>`;
-    input = `<input value='${ iframe }'></input>`;
-    button = `<button class="button buttonBig buttonSquare" onclick="copyText(this)"><span class="button-waves"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copiar</span></button>`;
+    iframe = '<iframe src=' + (window.location.href + '?indicator=' + _indicatorId + '&chart=' + _chart.id) + ' width=100% height=100% frameborder=0 scrolling=no></iframe>';
+    input = '<input value="' + iframe + '"></input>';
+    button = '<button class="button buttonBig buttonSquare" onclick="copyText(this)"><span class="button-waves"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copiar</span></button>';
 
     callToAction = window.document.createElement('div');
     callToAction.setAttribute('class', 'flex');
     callToAction.innerHTML = input + button;
 
-    exit = `<span class="btn-exit flex" onclick="embebedContainerHide(this)"><i class="fa fa-times" aria-hidden="true"></i></span>`;
+    exit = '<span class="btn-exit flex" onclick="embebedContainerHide(this)"><i class="fa fa-times" aria-hidden="true"></i></span>';
     title = '<span class="embebed-text-info">Copie el siguiente código y peguelo en su sitio.</span>';
 
     component = window.document.createElement('div');
@@ -138,7 +137,7 @@ function parseHumanFrecuency(_frecuency, _laps) {
             frecuency = 'frecuencia invalida';
     }
 
-    return `Últimos ${ _laps } ${ frecuency }`;
+    return 'Últimos ' + _laps + ' ' + frecuency;
 }
 // Actualizado 17.08.2017 - Esta función parsea el el formato de tipo de linea.
 function parseTypeLine(type) {
@@ -149,7 +148,7 @@ function parseTypeLine(type) {
         case 'dashed':
             return '5, 5';
         default:
-            console.error(`El tipo de linea ${ type } no es válido.`);
+            console.error('El tipo de linea ' + type + ' no es válido.');
             return null;
     }
 }
@@ -164,9 +163,9 @@ function parseFormatDate(format, date, short = false) {
             let semester = Math.ceil(date.format('M') / 6);
 
             if (short) {
-                return `${ semester }S ${ date.format('YY') }`;
+                return semester + 'S ' + date.format('YY');
             } else {
-                return `${ semester }º semestre de ${ date.format('YYYY') }`;
+                return semester + 'º semestre de ' + date.format('YYYY');
             }
 
             break;
@@ -174,9 +173,9 @@ function parseFormatDate(format, date, short = false) {
             let trimester = Math.ceil(date.format('M') / 3);
 
             if (short) {
-                return `${ trimester }T ${ date.format('YY') }`;
+                return trimester + 'T ' + date.format('YY');
             } else {
-                return `${ trimester }º trimestre de ${ date.format('YYYY') }`;
+                return trimester + 'º trimestre de ' + date.format('YYYY');
             }
 
             break;
@@ -192,7 +191,7 @@ function parseFormatDate(format, date, short = false) {
 function parseValueIndicator(format, value) {
     switch (format) {
         case '%':
-            return `${ formatNumberD3(value * 100) }%`;
+            return formatNumberD3(value * 100) + '%';
         default:
             return formatNumberD3(value);
     }
@@ -215,9 +214,9 @@ function requestAllCharts(_indicatorId) {
 function renderChartComponent(_indicatorId, _chart) {
     var container = document.querySelector('#chartsContainer #charts');
 
-    //   console.log(_indicatorId);
-    //   console.log(_chart);
-    //   console.log(container);
+      // console.log(_indicatorId);
+      // console.log(_chart);
+      // console.log(container);
 
     var chartComponent = makeDomElement('div', { id: _chart.id, className: 'chart' }, ['div', { className: 'head' },
         ['h3', _chart.title],
@@ -257,8 +256,8 @@ function renderChartComponent(_indicatorId, _chart) {
     ], ['div', { className: 'chart-svg' }], ['div', { className: 'break-line' },
         ['div', { className: 'br' }]
     ], ['div', { className: 'modal-share' },
-        ['input', { id: `share-${ _chart.id }`, type: 'checkbox', className: 'share-open' }],
-        ['label', { htmlFor: `share-${ _chart.id }`, className: 'share-open-button hamburger-dark' },
+        ['input', { id: 'share-' + _chart.id, type: 'checkbox', className: 'share-open' }],
+        ['label', { htmlFor: 'share-' + _chart.id, className: 'share-open-button hamburger-dark' },
             ['span', { className: 'hamburger-1' }],
             ['span', { className: 'hamburger-2' }],
             ['span', { className: 'hamburger-3' }]
@@ -275,9 +274,10 @@ function renderChartComponent(_indicatorId, _chart) {
         ]
     ]);
 
-    chartComponent.append(addLoading());
-    chartComponent.append(addEmbebed(_indicatorId, _chart));
-    container.append(chartComponent);
+    chartComponent.appendChild(addLoading());
+    chartComponent.appendChild(addEmbebed(_indicatorId, _chart));
+
+    container.appendChild(chartComponent);
 
     STORAGE.charts[_chart.id] = { container: chartComponent };
 
@@ -302,7 +302,7 @@ function downloadFilesToChart(_chart) {
         if (!STORAGE[_indicator.id]) {
 
             url_ext = STORAGE.params.path_files + _indicator.id + '.json';
-            url_loc = `./public/data/series/${ _indicator.id }.json`;
+            url_loc = './public/data/series/' + _indicator.id + '.json';
 
             promises.push(downloadFile({ local: url_loc, external: url_ext }, _indicator.id));
         }
@@ -321,7 +321,7 @@ function downloadFilesToChart(_chart) {
 
         domElement.querySelector('.loading .fa').setAttribute('class', 'fa fa-exclamation');
         domElement.querySelector('.loading .fa').setAttribute('style', 'font-size: 70px;');
-        domElement.querySelector('.loading .error-message').innerHTML = `Uno o más indicadores no existen: ${ indicators }`;
+        domElement.querySelector('.loading .error-message').innerHTML = 'Uno o más indicadores no existen: ' + indicators;
     });
 
     promises.then(() => {
@@ -402,15 +402,18 @@ function calcMaxRangeX(_data) {
 }
 
 function calcMinRangeY(_data) {
-    return _.min(_.map(_data, (row) => _.min(rowToValues(row))));
+  return _.min(_.map(_data, (row) => _.min(rowToValues(row))));
 }
 
 function calcMaxRangeY(_data) {
-    return _.max(_.map(_data, (row) => _.max(rowToValues(row))));
+  return _.max(_.map(_data, (row) => _.max(rowToValues(row))));
 }
 
 function rowToValues(_row) {
-    return _.values(_row).splice(1);
+  var result = _.values(_row);
+      result.shift();
+
+  return result;
 }
 
 function searchProximityPoint(_data, _date) {
@@ -455,7 +458,7 @@ function orderDescPosition(a, b) {
 
 function tooltipsCollapse(_chart) {
     // se seleccionan todos los indicadores del gráfico
-    var chartDom = window.document.querySelector(`#${ _chart }`),
+    var chartDom = window.document.querySelector('#' + _chart),
         indicatorsDom = chartDom.querySelectorAll('.tooltip-indicator'),
         elements_asc = [],
         elements_desc = [];
@@ -486,7 +489,7 @@ function tooltipsCollapse(_chart) {
 
             if ((diff - count) < minHeight) {
                 count += (30 - diff);
-                elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', `translate(0, ${ count })`);
+                elements_asc[k + 1].querySelector('.boxText').setAttribute('transform', 'translate(0, ' + count + ')');
             }
         }
     });
@@ -505,7 +508,7 @@ function tooltipsCollapse(_chart) {
                 minHeight = 30,
                 minPosY = 0,
                 transform,
-                maxPosY = document.querySelector(`#${ _chart } .tooltip-rect-space`).getBoundingClientRect().height - minPosY;
+                maxPosY = document.querySelector('#' + _chart + ' .tooltip-rect-space').getBoundingClientRect().height - minPosY;
 
             // Si el último elemento se paso del limite, se define force con esa medida
             if ((k === 0) && (startPosition > maxPosY)) {
@@ -514,14 +517,14 @@ function tooltipsCollapse(_chart) {
                 transform = updateTranslatePositionY(startAdd); // se trae la posición.
                 transform[1] -= force; // se le resta la posición
 
-                startAdd.setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+                startAdd.setAttribute('transform', 'translate(' + transform[0] + ', ' + transform[1] + ')');
                 startPosition = updateTranslatePositionY(start)[1] + updateTranslatePositionY(startAdd)[1];
             }
 
             if (diff <= minHeight) {
                 transform = updateTranslatePositionY(endAdd); // se trae la posición.
                 transform[1] -= force; // se le resta la posición
-                endAdd.setAttribute('transform', `translate(${ transform[0] }, ${ transform[1] })`);
+                endAdd.setAttribute('transform', 'translate(' + transform[0] + ', ' + transform[1] + ')');
             }
         }
     });
@@ -529,6 +532,7 @@ function tooltipsCollapse(_chart) {
 
 // Función principal /////////////////////////////////////////////////////////
 function renderChart(_chart) {
+
     var container, data, data_lines, data_chart, data_range,
         totalWidth, chartWidth, rangeWidth, chartHeight, rangeHeight,
         chartMargin, rangeMargin, chartScaleX, rangeScaleX, chartScaleY, rangeScaleY,
@@ -551,7 +555,7 @@ function renderChart(_chart) {
     data = processDataLines(_chart);
     data_lines = STORAGE.charts[_chart.id]['data_lines'] = $.extend(true, [], data);
     laps = (data_chart.length - _chart.laps >= 0) ? (_chart.laps) : (data_chart.length);
-    data_range = data_range.splice(data_chart.length - _chart.laps);
+    data_range = data_range.splice(data_chart.length - _chart.laps, (data_range.length - 1));
 
     // Definición de los parámetros de configuración ///////////////////////////
     totalHeight = 410;
@@ -591,7 +595,7 @@ function renderChart(_chart) {
     rangeLine = d3.line().curve(d3.curveMonotoneX).x((d) => rangeScaleX(d.date)).y((d) => rangeScaleY(d.value)).defined((d) => d.value != null);
 
     // Se define svg ///////////////////////////////////////////////////////////
-    svg = d3.select(`#${ _chart.id } .chart-svg`).append('svg')
+    svg = d3.select('#' + _chart.id + ' .chart-svg').append('svg')
         .attr('width', chartWidth + chartMargin.left + chartMargin.right)
         .attr('height', chartHeight + chartMargin.top + chartMargin.bottom);
     defs = svg.append('defs').append('clipPath')
@@ -609,7 +613,8 @@ function renderChart(_chart) {
     // se crea contenedor del gráfico //////////////////////////////////////////
     chartContainer = svg.append('g')
         .attr('class', 'chart-container')
-        .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+        .attr('transform', 'translate(' + chartMargin.left + ', ' + chartMargin.top + ')');
+
     chartContainer.append('g')
         .attr('class', 'chart-line-0')
         .append('line')
@@ -618,20 +623,24 @@ function renderChart(_chart) {
         .attr('y1', chartScaleY(0))
         .attr('y2', chartScaleY(0))
         .attr('clip-path', 'url(#clip)');
+
     chartContainer.append('g')
         .attr('class', 'chart-axis-x')
-        .attr('transform', `translate(0, ${ chartHeight })`)
+        .attr('transform', 'translate(0, ' + chartHeight + ')')
         .call(chartAxisX);
+
     chartContainer.append('g')
         .attr('class', 'chart-axis-y')
         .call(chartAxisY);
+
     chartLines = chartContainer.selectAll('.chart-line')
         .data(data_lines)
         .enter().append('g')
         .attr('class', 'chart-line');
+
     chartLines.append('path')
         .attr('id', (d, i) => {
-            return `${ _chart.id }&&${ i }`;
+            return _chart.id + '&&' + i;
         })
         .attr('stroke-dasharray', (d, i) => { return parseTypeLine(_chart.indicators[i].type); })
         .attr('d', chartLine)
@@ -641,28 +650,38 @@ function renderChart(_chart) {
     // se crea contenedor del rango ////////////////////////////////////////////
     rangeContainer = svg.append('g')
         .attr('class', 'range-container')
-        .attr('transform', `translate(${ rangeMargin.left }, ${ rangeMargin.top })`);
+        .attr('transform', 'translate(' + rangeMargin.left + ', ' + rangeMargin.top + ')');
+        console.log('paso7_1');
     rangeContainer.append('g')
         .attr('class', 'range-axis-x')
-        .attr('transform', `translate(0, ${ rangeHeight })`)
+        .attr('transform', 'translate(0, ' + rangeHeight + ')')
         .call(rangeAxisX);
+        console.log('paso7_2');
     startBrush = rangeContainer.append('g')
         .attr('class', 'start-brush-date')
         .attr('text-anchor', 'end')
-        .attr('transform', `translate(${ rangeScaleX(data_range[0].date) }, ${ rangeHeight + 17.5 })`);
+        .attr('transform', function() {
+          console.log(data_range);
+          return 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')';
+        });
+        console.log('paso7_3');
     startBrush.append('rect')
         .attr('height', '20px')
         .attr('transform', 'translate(0, -15)')
         .attr('fill', 'white');
+        console.log('paso7_4');
     startBrush.append('text');
+    console.log('paso7_5');
     endBrush = rangeContainer.append('g')
         .attr('class', 'end-brush-date')
         .attr('text-anchor', 'start')
-        .attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+        .attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
+        console.log('paso7_6');
     endBrush.append('rect')
         .attr('height', '20px')
         .attr('transform', 'translate(-7.5, -15)')
         .attr('fill', 'white');
+        console.log('paso7_7');
     endBrush.append('text');
     rangeLines = rangeContainer.selectAll('.range-line')
         .data(data_lines)
@@ -675,13 +694,13 @@ function renderChart(_chart) {
         .attr('class', 'range-brush')
         .call(brush)
         .call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
-
+console.log('paso8');
     // se crea tooltip /////////////////////////////////////////////////////////
     let activeChart = STORAGE.cards.filter((_v) => _v.id === STORAGE.activeCard)[0].charts.filter((_v) => _v.id === _chart.id)[0].indicators;
 
     tooltipLine = svg.append('g')
         .attr('class', 'chart-tooltip')
-        .attr('transform', `translate(${ chartMargin.left }, ${ chartMargin.top })`);
+        .attr('transform', 'translate(' + chartMargin.left + ', ' + chartMargin.top + ')');
     tooltipLine.append('path')
         .attr('class', 'tooltip-line')
         .style('opacity', 0);
@@ -694,7 +713,7 @@ function renderChart(_chart) {
     tooltipIndicator = tooltipLine.selectAll('.tooltip-indicator')
         .data(data_lines)
         .enter().append('g')
-        .attr('id', (d, i) => `${ _chart.id }_${ activeChart[i].id }`)
+        .attr('id', (d, i) => _chart.id + '_' + activeChart[i].id)
         .attr('class', 'tooltip-indicator')
         .style('opacity', 0);
     tooltipIndicator.append('circle')
@@ -716,7 +735,7 @@ function renderChart(_chart) {
         .attr('height', chartHeight)
         .attr('pointer-events', 'all')
         .on('mouseover', tooltipMouseOver)
-        // .on('mouseout', tooltipMouseOut)
+        .on('mouseout', tooltipMouseOut)
         .on('mousemove', tooltipMouseMouve);
 
     function tooltipMouseOver() {
@@ -749,14 +768,14 @@ function renderChart(_chart) {
 
         let activeChart = STORAGE.cards.filter((_v) => _v.id === STORAGE.activeCard)[0].charts.filter((_v) => _v.id === _chart.id)[0].indicators;
 
-        tooltipDom.select('.tooltip-line').attr('d', `M ${ data.date.position }, 0 V ${ chartHeight }`);
+        tooltipDom.select('.tooltip-line').attr('d', 'M ' + data.date.position + ', 0 V ' + chartHeight);
         tooltipDom.selectAll('.tooltip-indicator')
             .attr('transform', (d, i) => {
                 let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).zone('+00:00').toString() === moment(data.date.calendar).zone('+00:00').toString());
 
                 if (value[0]) {
                     if (typeof value[0][1] === 'number') {
-                        return `translate(${ data.date.position }, ${ chartScaleY(value[0][1]) })`;
+                        return 'translate(' + data.date.position + ', ' + chartScaleY(value[0][1]) + ')';
                     } else {
                         return 'translate(-9999, -9999)';
                     }
@@ -769,7 +788,7 @@ function renderChart(_chart) {
                 let value = STORAGE[activeChart[i].id].data.filter((_v) => moment(_v[0]).zone('+00:00').toString() === moment(data.date.calendar).zone('+00:00').toString());
 
                 if (value[0]) {
-                    return `${ formatNumberD3(value[0][1]) } - ${ activeChart[i].short_name }`;
+                    return formatNumberD3(value[0][1]) + '-' + activeChart[i].short_name;
                 } else {
                     return '';
                 }
@@ -782,14 +801,14 @@ function renderChart(_chart) {
             .attr('y', -10)
             .attr('x', (d, i) => (data.date.position < (width / 2)) ? (10) : (-(10 + this.parentNode.querySelectorAll('.tooltip-indicator text')[i].getBBox().width + 30)));
         tooltipDom.select('.tooltip-date')
-            .attr('transform', `translate(${ data.date.position }, ${ chartHeight + 5 })`);
+            .attr('transform', 'translate(' + data.date.position + ', ' + (chartHeight + 5) + ')');
 
         tooltipDom.select('.tooltip-date text')
             .text(parseFormatDate(_chart.frequency, data.date.calendar, true));
         tooltipDom.select('.tooltip-date rect')
             .attr('height', '18px')
             .attr('width', this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30 + 'px')
-            .attr('transform', `translate(-${ (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2}, -1)`);
+            .attr('transform', 'translate(-' + (this.parentNode.querySelector('.tooltip-date text').getBBox().width + 30) / 2 + ', -1)');
 
         tooltipsCollapse(_chart.id);
     }
@@ -807,7 +826,7 @@ function renderChart(_chart) {
             // Se actualizan fecha mínima y máxima del eje x en rangeContainer
             let startBrush = d3.select(this.parentNode)
                 .select('.start-brush-date')
-                .attr('transform', `translate(${ position[0] }, ${ rangeHeight + 17.5 })`);
+                .attr('transform', 'translate(' + position[0] + ', ' + (rangeHeight + 17.5) + ')');
 
             startBrush.select('.start-brush-date text').text(parseFormatDate(_chart.frequency, range[0], true));
 
@@ -819,7 +838,7 @@ function renderChart(_chart) {
 
             let endBrush = d3.select(this.parentNode)
                 .select('.end-brush-date')
-                .attr('transform', `translate(${ position[1] }, ${ rangeHeight + 15 })`);
+                .attr('transform', 'translate(' + position[1] + ', ' + (rangeHeight + 15) + ')');
 
             endBrush.select('.end-brush-date text')
                 .text(parseFormatDate(_chart.frequency, range[1], true));
@@ -894,9 +913,9 @@ function renderChart(_chart) {
         // se actualiza el ancho del axis en x del rango
         charts.select('.range-container').select('.range-axis-x').call(rangeAxisX);
         // se actualiza la posición de la fecha inicial seleccionada en el rango
-        charts.select('.range-container').select('.start-brush-date').attr('transform', `translate(${ rangeScaleX(data_range[0].date) }, ${ rangeHeight + 17.5 })`);
+        charts.select('.range-container').select('.start-brush-date').attr('transform', 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')');
         // se actualiza la posición de la fecha final seleccionada en el rango
-        charts.select('.range-container').select('.end-brush-date').attr('transform', `translate(${ chartWidth }, ${ rangeHeight + 15 })`);
+        charts.select('.range-container').select('.end-brush-date').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
         // se actualiza el ancho del brush
         // console.log('date_1', STORAGE.charts[_chart.id].data_range[0].date);
         // console.log('date_2', STORAGE.charts[_chart.id].data_range[1].date);
@@ -1093,7 +1112,7 @@ function renderDataset(_params) {
         'div', {}, [
             'h2',
             {
-                innerHTML: `<a class="link" href="${_params.dataset_landingPage}" target="_blank">${dataset.title}</a>`
+                innerHTML: '<a class="link" href="' + _params.dataset_landingPage + '" target="_blank">' + dataset.title + '</a>'
             }
         ], [
             'div',
@@ -1129,7 +1148,7 @@ function renderDataset(_params) {
 // Esta función intercambia las vistas cards/charts.
 // (Optimized)(Update: 25.08.2017)
 function changeView(_containerId, _cardId) {
-    var container = `#${ _containerId }`,
+    var container = '#' + _containerId,
         node = $('#chartsContainer');
 
     $('html, body').scrollTop(0);
@@ -1147,6 +1166,27 @@ function requestAllCards() {
 // Genera el HTML de una tarjeta.
 // (Optimized)(Update: 25.08.2017)
 function renderCardComponent(_card) {
+  var button = ['button', {
+          className: 'button',
+          onclick: () => {
+              changeView('chartsContainer', _card.id);
+              requestAllCharts(_card.id);
+          }
+      },
+      ['span', { className: 'button-waves', innerHTML: 'Ver más gráficos' }]
+  ];
+
+  if (_card.button.text !== '' && _card.button.urll !== '') {
+    button = ['button', {
+            className: 'button',
+            onclick: () => {
+                window.open(_card.button.url, '_blank');
+            }
+        },
+        ['span', { className: 'button-waves', innerHTML: _card.button.text }]
+    ];
+  }
+
     var cardComponent = makeDomElement('div', { id: _card.id, className: 'card' }, ['h3', { innerHTML: _card.title }], ['div', { className: 'break-line' },
         ['div', { className: 'br' }],
         ['div', { className: 'br' }],
@@ -1167,23 +1207,15 @@ function renderCardComponent(_card) {
     ], ['p', { className: 'human_frecuency' }], ['div', { className: 'break-line' },
         ['div', { className: 'br' }],
         ['div', { className: 'br' }]
-    ], ['button', {
-            className: 'button',
-            onclick: () => {
-                changeView('chartsContainer', _card.id);
-                requestAllCharts(_card.id);
-            }
-        },
-        ['span', { className: 'button-waves', innerHTML: 'Ver más gráficos' }]
-    ], ['div', { className: 'break-line' },
+    ], button, ['div', { className: 'break-line' },
         ['div', { className: 'br' }]
     ], ['a', { href: _card.download_url, className: 'link', download: true, innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos' }]);
 
-    cardComponent.append(addLoading());
-    document.querySelector('#cardsContainer #cards').append(cardComponent);
+    cardComponent.appendChild(addLoading());
+    document.querySelector('#cardsContainer #cards').appendChild(cardComponent);
 
     var url_ext = STORAGE.params.path_files + _card.id + '.json',
-        url_loc = `./public/data/series/${ _card.id }.json`;
+        url_loc = './public/data/series/' + _card.id + '.json';
 
     let promesa = downloadFile({ local: url_loc, external: url_ext }, _card.id);
     promesa.catch((error) => {
@@ -1192,7 +1224,7 @@ function renderCardComponent(_card) {
 
         domElement.querySelector('.loading .fa').setAttribute('class', 'fa fa-exclamation');
         domElement.querySelector('.loading .fa').setAttribute('style', 'font-size: 70px;');
-        domElement.querySelector('.loading .error-message').innerHTML = `El indicador ${ indicatorError.id } no existe.`;
+        domElement.querySelector('.loading .error-message').innerHTML = 'El indicador ' + indicatorError.id + ' no existe.';
     });
     promesa.then((values) => { injectCardData(_card); });
 }
@@ -1201,15 +1233,15 @@ function renderCardComponent(_card) {
 function injectCardData(_card) {
     var data = STORAGE[_card.id].data,
         metadata = STORAGE[_card.id].metadata,
-        cardComponent = document.getElementById(metadata.field_id);
+        cardComponent = $(document.getElementById(metadata.field_id));
 
-    cardComponent.querySelector('.frequency').innerHTML = parseFormatDate(metadata.distribution_index_frequency, data[data.length - 1][0], true);
-    cardComponent.querySelector('.units_representation').innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
-    cardComponent.querySelector('.units').innerHTML = metadata.field_units;
-    cardComponent.querySelector('.human_frecuency').innerHTML = parseHumanFrecuency(metadata.distribution_index_frequency, _card.laps);
-    cardComponent.querySelector('.loading').remove();
+    cardComponent.find('.frequency')[0].innerHTML = parseFormatDate(metadata.distribution_index_frequency, data[data.length - 1][0], true);
+    cardComponent.find('.units_representation')[0].innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
+    cardComponent.find('.units')[0].innerHTML = metadata.field_units;
+    cardComponent.find('.human_frecuency')[0].innerHTML = parseHumanFrecuency(metadata.distribution_index_frequency, _card.laps);
+    cardComponent.find('.loading').remove();
 
-    renderMiniChart(_card, cardComponent.querySelector('.mini-chart'));
+    renderMiniChart(_card, cardComponent.find('.mini-chart'));
 }
 // Actualizado 18.08.2017 - Esta función genera un gráfico de linea.
 function renderMiniChart(_cardData, _element) {
@@ -1228,7 +1260,7 @@ function renderMiniChart(_cardData, _element) {
         .map((d) => { return { date: moment(d[0]).zone('+00:00'), value: roundNumber(d[1], 3) }; });
 
     // Definición de los parámetros de configuración ///////////////////////////
-    container = d3.select(_element);
+    container = d3.select(_element[0]);
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
     width = 100;
     height = 50;
@@ -1254,7 +1286,7 @@ function renderMiniChart(_cardData, _element) {
 
     // se crea contenedor del gráfico //////////////////////////////////////////
     chartContainer = svg.append('g')
-        .attr('transform', `translate(${ margin.left }, ${ margin.top })`);
+        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
     // se genera gráfico ///////////////////////////////////////////////////////
     chartContainer.append('path')
@@ -1299,7 +1331,7 @@ function iframeApp() {
         var credits = window.document.createElement('span');
         credits.style.opacity = '0.5';
         credits.style.margin = '0 10px 0 0';
-        credits.innerHTML = `Desarrollado por <a href="${ STORAGE.params.credits_url }" class="link">${ STORAGE.params.credits }</a>`;
+        credits.innerHTML = 'Desarrollado por <a href="' + STORAGE.params.credits_url + '" class="link"> ' + STORAGE.params.credits + '</a>';
 
         return credits;
     }

@@ -4376,9 +4376,9 @@ function brush$1(dim) {
 			group.selectAll(".hangle-hamburger")
 				.style("display", null)
 				.attr('transform', function(d) {
-					let x = (d.type === 'e')?(selection[1][0]):(selection[0][0] - 10);
+					var x = (d.type === 'e')?(selection[1][0]):(selection[0][0] - 10);
 
-					return `translate(${ x }, 12.5)`;
+					return 'translate(' + x + ', 12.5)';
 				});
 
       group.selectAll(".handle")

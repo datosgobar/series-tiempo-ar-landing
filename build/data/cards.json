@@ -5,6 +5,10 @@
         "short_name": "EMAE",
         "units_representation": "%",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": [{
                 "id": "chart_1",
                 "title": "Producto Interno Bruto",
@@ -84,6 +88,10 @@
         "short_name": "Desempleo",
         "units_representation": "%",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": [{
                 "id": "chart_5",
                 "title": "Empleo",
@@ -128,6 +136,10 @@
         "short_name": "Saldo comercial",
         "units_representation": "1",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": [{
                 "id": "chart_17",
                 "title": "Tipo de Cambio Real",
@@ -213,6 +225,10 @@
         "short_name": "Índice General de Commodities",
         "units_representation": "1",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": [{
                 "id": "chart_15",
                 "title": "Evolución de los commodities",
@@ -263,6 +279,10 @@
         "short_name": "BADLAR",
         "units_representation": "1",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": [{
                 "id": "chart_12",
                 "title": "Tasas de Interés nacionales",
@@ -321,6 +341,10 @@
         "short_name": "IPC Nacional",
         "units_representation": "%",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": []
     },
     {
@@ -330,6 +354,10 @@
         "short_name": "Recursos tributarios",
         "units_representation": "1",
         "laps": "5",
+        "button": {
+          "text": "",
+          "url": ""
+        },
         "charts": []
     }
 ]

@@ -14630,9 +14630,9 @@ function brush$1(dim) {
 			group.selectAll(".hangle-hamburger")
 				.style("display", null)
 				.attr('transform', function(d) {
-					let x = (d.type === 'e')?(selection[1][0]):(selection[0][0] - 10);
+					var x = (d.type === 'e')?(selection[1][0]):(selection[0][0] - 10);
 
-					return `translate(${ x }, 12.5)`;
+					return 'translate(' + x + ', 12.5)';
 				});
 
       group.selectAll(".handle")
@@ -27190,7 +27190,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 // Se define una constante en donde se va a alojar toda la data.
 ////////////////////////////////////////////////////////////////////////////////
-
 var STORAGE = {
     'charts': {}, // Se guarda información correspondiente a cada gráfico
     'activeCard': {},
@@ -27283,8 +27282,8 @@ function addEmbebed(_indicatorId, _chart) {
         exit = void 0,
         title = void 0;
 
-    iframe = '<iframe src="' + window.location.origin + '?indicator=' + _indicatorId + '&chart=' + _chart.id + '" width="100%" height="100%" frameborder=0 scrolling="no"></iframe>';
-    input = '<input value=\'' + iframe + '\'></input>';
+    iframe = '<iframe src=' + (window.location.href + '?indicator=' + _indicatorId + '&chart=' + _chart.id) + ' width=100% height=100% frameborder=0 scrolling=no></iframe>';
+    input = '<input value="' + iframe + '"></input>';
     button = '<button class="button buttonBig buttonSquare" onclick="copyText(this)"><span class="button-waves"><i class="fa fa-clone" aria-hidden="true"></i>&nbsp;Copiar</span></button>';
 
     callToAction = window.document.createElement('div');
@@ -27334,7 +27333,7 @@ function parseHumanFrecuency(_frecuency, _laps) {
             frecuency = 'frecuencia invalida';
     }
 
-    return '\xDAltimos ' + _laps + ' ' + frecuency;
+    return 'Últimos ' + _laps + ' ' + frecuency;
 }
 // Actualizado 17.08.2017 - Esta función parsea el el formato de tipo de linea.
 function parseTypeLine(type) {
@@ -27345,7 +27344,7 @@ function parseTypeLine(type) {
         case 'dashed':
             return '5, 5';
         default:
-            console.error('El tipo de linea ' + type + ' no es v\xE1lido.');
+            console.error('El tipo de linea ' + type + ' no es válido.');
             return null;
     }
 }
@@ -27364,7 +27363,7 @@ function parseFormatDate(format, date) {
             if (short) {
                 return semester + 'S ' + date.format('YY');
             } else {
-                return semester + '\xBA semestre de ' + date.format('YYYY');
+                return semester + 'º semestre de ' + date.format('YYYY');
             }
 
             break;
@@ -27374,7 +27373,7 @@ function parseFormatDate(format, date) {
             if (short) {
                 return trimester + 'T ' + date.format('YY');
             } else {
-                return trimester + '\xBA trimestre de ' + date.format('YYYY');
+                return trimester + 'º trimestre de ' + date.format('YYYY');
             }
 
             break;
@@ -27417,9 +27416,9 @@ function requestAllCharts(_indicatorId) {
 function renderChartComponent(_indicatorId, _chart) {
     var container = document.querySelector('#chartsContainer #charts');
 
-    //   console.log(_indicatorId);
-    //   console.log(_chart);
-    //   console.log(container);
+    // console.log(_indicatorId);
+    // console.log(_chart);
+    // console.log(container);
 
     var chartComponent = makeDomElement('div', { id: _chart.id, className: 'chart' }, ['div', { className: 'head' }, ['h3', _chart.title], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'paragraph', innerHTML: _chart.description }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }]]], ['div', { className: 'referenceContainer' }, ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['span', { className: 'references' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['div', { className: 'break-line' }, ['hr']]], ['div', { className: 'rangeButton' }, ['div', { className: 'break-line' }, ['div', { className: 'br' }]],
     // ['div', { className: 'rangeButton-component' },
@@ -27435,9 +27434,10 @@ function renderChartComponent(_indicatorId, _chart) {
             shareSaveAs(e.currentTarget, _chart.id);
         }, style: { backgroundColor: 'gray', color: 'white', right: '0px' } }, ['span', { className: 'buttonCircleSmall boton_efecto' }, ['i', { className: 'fa fa-download' }]]]]);
 
-    chartComponent.append(addLoading());
-    chartComponent.append(addEmbebed(_indicatorId, _chart));
-    container.append(chartComponent);
+    chartComponent.appendChild(addLoading());
+    chartComponent.appendChild(addEmbebed(_indicatorId, _chart));
+
+    container.appendChild(chartComponent);
 
     STORAGE.charts[_chart.id] = { container: chartComponent };
 
@@ -27489,7 +27489,7 @@ function downloadFilesToChart(_chart) {
 
         domElement.querySelector('.loading .fa').setAttribute('class', 'fa fa-exclamation');
         domElement.querySelector('.loading .fa').setAttribute('style', 'font-size: 70px;');
-        domElement.querySelector('.loading .error-message').innerHTML = 'Uno o m\xE1s indicadores no existen: ' + indicators;
+        domElement.querySelector('.loading .error-message').innerHTML = 'Uno o más indicadores no existen: ' + indicators;
     });
 
     promises.then(function () {
@@ -27595,7 +27595,10 @@ function calcMaxRangeY(_data) {
 }
 
 function rowToValues(_row) {
-    return _.values(_row).splice(1);
+    var result = _.values(_row);
+    result.shift();
+
+    return result;
 }
 
 function searchProximityPoint(_data, _date) {
@@ -27722,6 +27725,7 @@ function tooltipsCollapse(_chart) {
 
 // Función principal /////////////////////////////////////////////////////////
 function renderChart(_chart) {
+
     var container, data, data_lines, data_chart, data_range, totalWidth, chartWidth, rangeWidth, chartHeight, rangeHeight, chartMargin, rangeMargin, chartScaleX, rangeScaleX, chartScaleY, rangeScaleY, chartAxisX, rangeAxisX, chartAxisY, rangeAxisY, brush, minDate, maxDate, laps, minValue, maxValue, totalHeight, chartLine, rangeLine, svg, defs, background, chartContainer, chartLines, rangeContainer, rangeLines, startBrush, endBrush, tooltipLine, tooltipIndicator, boxText, tooltipDate;
 
     container = STORAGE.charts[_chart.id].container;
@@ -27738,7 +27742,7 @@ function renderChart(_chart) {
     data = processDataLines(_chart);
     data_lines = STORAGE.charts[_chart.id]['data_lines'] = $.extend(true, [], data);
     laps = data_chart.length - _chart.laps >= 0 ? _chart.laps : data_chart.length;
-    data_range = data_range.splice(data_chart.length - _chart.laps);
+    data_range = data_range.splice(data_chart.length - _chart.laps, data_range.length - 1);
 
     // Definición de los parámetros de configuración ///////////////////////////
     totalHeight = 410;
@@ -27801,10 +27805,15 @@ function renderChart(_chart) {
 
     // se crea contenedor del gráfico //////////////////////////////////////////
     chartContainer = svg.append('g').attr('class', 'chart-container').attr('transform', 'translate(' + chartMargin.left + ', ' + chartMargin.top + ')');
+
     chartContainer.append('g').attr('class', 'chart-line-0').append('line').attr('x1', 0).attr('x2', chartWidth).attr('y1', chartScaleY(0)).attr('y2', chartScaleY(0)).attr('clip-path', 'url(#clip)');
+
     chartContainer.append('g').attr('class', 'chart-axis-x').attr('transform', 'translate(0, ' + chartHeight + ')').call(chartAxisX);
+
     chartContainer.append('g').attr('class', 'chart-axis-y').call(chartAxisY);
+
     chartLines = chartContainer.selectAll('.chart-line').data(data_lines).enter().append('g').attr('class', 'chart-line');
+
     chartLines.append('path').attr('id', function (d, i) {
         return _chart.id + '&&' + i;
     }).attr('stroke-dasharray', function (d, i) {
@@ -27815,12 +27824,22 @@ function renderChart(_chart) {
 
     // se crea contenedor del rango ////////////////////////////////////////////
     rangeContainer = svg.append('g').attr('class', 'range-container').attr('transform', 'translate(' + rangeMargin.left + ', ' + rangeMargin.top + ')');
+    console.log('paso7_1');
     rangeContainer.append('g').attr('class', 'range-axis-x').attr('transform', 'translate(0, ' + rangeHeight + ')').call(rangeAxisX);
-    startBrush = rangeContainer.append('g').attr('class', 'start-brush-date').attr('text-anchor', 'end').attr('transform', 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')');
+    console.log('paso7_2');
+    startBrush = rangeContainer.append('g').attr('class', 'start-brush-date').attr('text-anchor', 'end').attr('transform', function () {
+        console.log(data_range);
+        return 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')';
+    });
+    console.log('paso7_3');
     startBrush.append('rect').attr('height', '20px').attr('transform', 'translate(0, -15)').attr('fill', 'white');
+    console.log('paso7_4');
     startBrush.append('text');
+    console.log('paso7_5');
     endBrush = rangeContainer.append('g').attr('class', 'end-brush-date').attr('text-anchor', 'start').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
+    console.log('paso7_6');
     endBrush.append('rect').attr('height', '20px').attr('transform', 'translate(-7.5, -15)').attr('fill', 'white');
+    console.log('paso7_7');
     endBrush.append('text');
     rangeLines = rangeContainer.selectAll('.range-line').data(data_lines).enter().append('g').attr('class', 'range-line');
     rangeLines.append('path').attr('d', function (d) {
@@ -27829,7 +27848,7 @@ function renderChart(_chart) {
         return _chart.indicators[i].color;
     });
     rangeContainer.append('g').attr('class', 'range-brush').call(brush).call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
-
+    console.log('paso8');
     // se crea tooltip /////////////////////////////////////////////////////////
     var activeChart = STORAGE.cards.filter(function (_v) {
         return _v.id === STORAGE.activeCard;
@@ -27854,9 +27873,7 @@ function renderChart(_chart) {
     });
     boxText.append('text');
 
-    tooltipLine.append('rect').attr('class', 'tooltip-rect-space').attr('width', chartWidth).attr('height', chartHeight).attr('pointer-events', 'all').on('mouseover', tooltipMouseOver)
-    // .on('mouseout', tooltipMouseOut)
-    .on('mousemove', tooltipMouseMouve);
+    tooltipLine.append('rect').attr('class', 'tooltip-rect-space').attr('width', chartWidth).attr('height', chartHeight).attr('pointer-events', 'all').on('mouseover', tooltipMouseOver).on('mouseout', tooltipMouseOut).on('mousemove', tooltipMouseMouve);
 
     function tooltipMouseOver() {
         var element = d3.select(this.parentNode);
@@ -27918,7 +27935,7 @@ function renderChart(_chart) {
             });
 
             if (value[0]) {
-                return formatNumberD3(value[0][1]) + ' - ' + activeChart[i].short_name;
+                return formatNumberD3(value[0][1]) + '-' + activeChart[i].short_name;
             } else {
                 return '';
             }
@@ -28248,16 +28265,27 @@ function requestAllCards() {
 function renderCardComponent(_card) {
     var _arguments2 = arguments;
 
-    var cardComponent = makeDomElement('div', { id: _card.id, className: 'card' }, ['h3', { innerHTML: _card.title }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }], ['hr'], ['div', { className: 'br' }], ['div', { className: 'br' }]], ['h4', { innerHTML: _card.short_name }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'frequency' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }]], ['p', { className: 'units_representation' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'units' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['div', { className: 'mini-chart' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'human_frecuency' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }]], ['button', {
+    var button = ['button', {
         className: 'button',
         onclick: function onclick() {
             changeView('chartsContainer', _card.id);
             requestAllCharts(_card.id);
         }
-    }, ['span', { className: 'button-waves', innerHTML: 'Ver más gráficos' }]], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['a', { href: _card.download_url, className: 'link', download: true, innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos' }]);
+    }, ['span', { className: 'button-waves', innerHTML: 'Ver más gráficos' }]];
 
-    cardComponent.append(addLoading());
-    document.querySelector('#cardsContainer #cards').append(cardComponent);
+    if (_card.button.text !== '' && _card.button.urll !== '') {
+        button = ['button', {
+            className: 'button',
+            onclick: function onclick() {
+                window.open(_card.button.url, '_blank');
+            }
+        }, ['span', { className: 'button-waves', innerHTML: _card.button.text }]];
+    }
+
+    var cardComponent = makeDomElement('div', { id: _card.id, className: 'card' }, ['h3', { innerHTML: _card.title }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }], ['hr'], ['div', { className: 'br' }], ['div', { className: 'br' }]], ['h4', { innerHTML: _card.short_name }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'frequency' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }]], ['p', { className: 'units_representation' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'units' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['div', { className: 'mini-chart' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['p', { className: 'human_frecuency' }], ['div', { className: 'break-line' }, ['div', { className: 'br' }], ['div', { className: 'br' }]], button, ['div', { className: 'break-line' }, ['div', { className: 'br' }]], ['a', { href: _card.download_url, className: 'link', download: true, innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos' }]);
+
+    cardComponent.appendChild(addLoading());
+    document.querySelector('#cardsContainer #cards').appendChild(cardComponent);
 
     var url_ext = STORAGE.params.path_files + _card.id + '.json',
         url_loc = './public/data/series/' + _card.id + '.json';
@@ -28280,15 +28308,15 @@ function renderCardComponent(_card) {
 function injectCardData(_card) {
     var data = STORAGE[_card.id].data,
         metadata = STORAGE[_card.id].metadata,
-        cardComponent = document.getElementById(metadata.field_id);
+        cardComponent = $(document.getElementById(metadata.field_id));
 
-    cardComponent.querySelector('.frequency').innerHTML = parseFormatDate(metadata.distribution_index_frequency, data[data.length - 1][0], true);
-    cardComponent.querySelector('.units_representation').innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
-    cardComponent.querySelector('.units').innerHTML = metadata.field_units;
-    cardComponent.querySelector('.human_frecuency').innerHTML = parseHumanFrecuency(metadata.distribution_index_frequency, _card.laps);
-    cardComponent.querySelector('.loading').remove();
+    cardComponent.find('.frequency')[0].innerHTML = parseFormatDate(metadata.distribution_index_frequency, data[data.length - 1][0], true);
+    cardComponent.find('.units_representation')[0].innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
+    cardComponent.find('.units')[0].innerHTML = metadata.field_units;
+    cardComponent.find('.human_frecuency')[0].innerHTML = parseHumanFrecuency(metadata.distribution_index_frequency, _card.laps);
+    cardComponent.find('.loading').remove();
 
-    renderMiniChart(_card, cardComponent.querySelector('.mini-chart'));
+    renderMiniChart(_card, cardComponent.find('.mini-chart'));
 }
 // Actualizado 18.08.2017 - Esta función genera un gráfico de linea.
 function renderMiniChart(_cardData, _element) {
@@ -28320,7 +28348,7 @@ function renderMiniChart(_cardData, _element) {
     });
 
     // Definición de los parámetros de configuración ///////////////////////////
-    container = d3.select(_element);
+    container = d3.select(_element[0]);
     margin = { top: 10, right: 10, bottom: 10, left: 10 };
     width = 100;
     height = 50;
@@ -28396,7 +28424,7 @@ function iframeApp() {
         var credits = window.document.createElement('span');
         credits.style.opacity = '0.5';
         credits.style.margin = '0 10px 0 0';
-        credits.innerHTML = 'Desarrollado por <a href="' + STORAGE.params.credits_url + '" class="link">' + STORAGE.params.credits + '</a>';
+        credits.innerHTML = 'Desarrollado por <a href="' + STORAGE.params.credits_url + '" class="link"> ' + STORAGE.params.credits + '</a>';
 
         return credits;
     }
@@ -35968,340 +35996,3 @@ return hooks;
     });
   }
 }());
-
-/*!
- * Waves v0.6.4
- * http://fian.my.id/Waves
- *
- * Copyright 2014 Alfiana E. Sibuea and other contributors
- * Released under the MIT license
- * https://github.com/fians/Waves/blob/master/LICENSE
- */
-
-(function(window) {
-    var Waves = Waves || {};
-    var $$ = document.querySelectorAll.bind(document);
-
-    // Find exact position of element
-    function isWindow(obj) {
-        return obj !== null && obj === obj.window;
-    }
-
-    function getWindow(elem) {
-        return isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
-    }
-
-    function offset(elem) {
-        var docElem, win,
-            box = {top: 0, left: 0},
-            doc = elem && elem.ownerDocument;
-
-        docElem = doc.documentElement;
-
-        if (typeof elem.getBoundingClientRect !== typeof undefined) {
-            box = elem.getBoundingClientRect();
-        }
-        win = getWindow(doc);
-        return {
-            top: box.top + win.pageYOffset - docElem.clientTop,
-            left: box.left + win.pageXOffset - docElem.clientLeft
-        };
-    }
-
-    function convertStyle(obj) {
-        var style = '';
-
-        for (var a in obj) {
-            if (obj.hasOwnProperty(a)) {
-                style += (a + ':' + obj[a] + ';');
-            }
-        }
-
-        return style;
-    }
-
-    var Effect = {
-
-        // Effect delay
-        duration: 750,
-
-        show: function(e, element) {
-
-            // Disable right click
-            if (e.button === 2) {
-                return false;
-            }
-
-            var el = element || this;
-
-            // Create ripple
-            var ripple = document.createElement('div');
-            ripple.className = 'waves-ripple';
-            el.appendChild(ripple);
-
-            // Get click coordinate and element witdh
-            var pos         = offset(el);
-            var relativeY   = (e.pageY - pos.top);
-            var relativeX   = (e.pageX - pos.left);
-            var scale       = 'scale('+((el.clientWidth / 100) * 10)+')';
-
-            // Support for touch devices
-            if ('touches' in e) {
-              relativeY   = (e.touches[0].pageY - pos.top);
-              relativeX   = (e.touches[0].pageX - pos.left);
-            }
-
-            // Attach data to element
-            ripple.setAttribute('data-hold', Date.now());
-            ripple.setAttribute('data-scale', scale);
-            ripple.setAttribute('data-x', relativeX);
-            ripple.setAttribute('data-y', relativeY);
-
-            // Set ripple position
-            var rippleStyle = {
-                'top': relativeY+'px',
-                'left': relativeX+'px'
-            };
-
-            ripple.className = ripple.className + ' waves-notransition';
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-            ripple.className = ripple.className.replace('waves-notransition', '');
-
-            // Scale the ripple
-            rippleStyle['-webkit-transform'] = scale;
-            rippleStyle['-moz-transform'] = scale;
-            rippleStyle['-ms-transform'] = scale;
-            rippleStyle['-o-transform'] = scale;
-            rippleStyle.transform = scale;
-            rippleStyle.opacity   = '1';
-
-            rippleStyle['-webkit-transition-duration'] = Effect.duration + 'ms';
-            rippleStyle['-moz-transition-duration']    = Effect.duration + 'ms';
-            rippleStyle['-o-transition-duration']      = Effect.duration + 'ms';
-            rippleStyle['transition-duration']         = Effect.duration + 'ms';
-
-            rippleStyle['-webkit-transition-timing-function'] = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-            rippleStyle['-moz-transition-timing-function']    = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-            rippleStyle['-o-transition-timing-function']      = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-            rippleStyle['transition-timing-function']         = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
-
-            ripple.setAttribute('style', convertStyle(rippleStyle));
-        },
-
-        hide: function(e) {
-            TouchHandler.touchup(e);
-
-            var el = this;
-            var width = el.clientWidth * 1.4;
-
-            // Get first ripple
-            var ripple = null;
-            var ripples = el.getElementsByClassName('waves-ripple');
-            if (ripples.length > 0) {
-                ripple = ripples[ripples.length - 1];
-            } else {
-                return false;
-            }
-
-            var relativeX   = ripple.getAttribute('data-x');
-            var relativeY   = ripple.getAttribute('data-y');
-            var scale       = ripple.getAttribute('data-scale');
-
-            // Get delay beetween mousedown and mouse leave
-            var diff = Date.now() - Number(ripple.getAttribute('data-hold'));
-            var delay = 350 - diff;
-
-            if (delay < 0) {
-                delay = 0;
-            }
-
-            // Fade out ripple after delay
-            setTimeout(function() {
-                var style = {
-                    'top': relativeY+'px',
-                    'left': relativeX+'px',
-                    'opacity': '0',
-
-                    // Duration
-                    '-webkit-transition-duration': Effect.duration + 'ms',
-                    '-moz-transition-duration': Effect.duration + 'ms',
-                    '-o-transition-duration': Effect.duration + 'ms',
-                    'transition-duration': Effect.duration + 'ms',
-                    '-webkit-transform': scale,
-                    '-moz-transform': scale,
-                    '-ms-transform': scale,
-                    '-o-transform': scale,
-                    'transform': scale,
-                };
-
-                ripple.setAttribute('style', convertStyle(style));
-
-                setTimeout(function() {
-                    try {
-                        el.removeChild(ripple);
-                    } catch(e) {
-                        return false;
-                    }
-                }, Effect.duration);
-            }, delay);
-        },
-
-        // Little hack to make <input> can perform waves effect
-        wrapInput: function(elements) {
-            for (var a = 0; a < elements.length; a++) {
-                var el = elements[a];
-
-                if (el.tagName.toLowerCase() === 'input') {
-                    var parent = el.parentNode;
-
-                    // If input already have parent just pass through
-                    if (parent.tagName.toLowerCase() === 'i' && parent.className.indexOf('button-waves') !== -1) {
-                        continue;
-                    }
-
-                    // Put element class and style to the specified parent
-                    var wrapper = document.createElement('i');
-                    wrapper.className = el.className + ' waves-input-wrapper';
-
-                    var elementStyle = el.getAttribute('style');
-
-                    if (!elementStyle) {
-                        elementStyle = '';
-                    }
-
-                    wrapper.setAttribute('style', elementStyle);
-
-                    el.className = 'waves-button-input';
-                    el.removeAttribute('style');
-
-                    // Put element as child
-                    parent.replaceChild(wrapper, el);
-                    wrapper.appendChild(el);
-                }
-            }
-        }
-    };
-
-
-    /**
-     * Disable mousedown event for 500ms during and after touch
-     */
-    var TouchHandler = {
-        /* uses an integer rather than bool so there's no issues with
-         * needing to clear timeouts if another touch event occurred
-         * within the 500ms. Cannot mouseup between touchstart and
-         * touchend, nor in the 500ms after touchend. */
-        touches: 0,
-        allowEvent: function(e) {
-            var allow = true;
-
-            if (e.type === 'touchstart') {
-                TouchHandler.touches += 1; //push
-            } else if (e.type === 'touchend' || e.type === 'touchcancel') {
-                setTimeout(function() {
-                    if (TouchHandler.touches > 0) {
-                        TouchHandler.touches -= 1; //pop after 500ms
-                    }
-                }, 500);
-            } else if (e.type === 'mousedown' && TouchHandler.touches > 0) {
-                allow = false;
-            }
-
-            return allow;
-        },
-        touchup: function(e) {
-            TouchHandler.allowEvent(e);
-        }
-    };
-
-
-    /**
-     * Delegated click handler for .button-waves element.
-     * returns null when .button-waves element not in "click tree"
-     */
-    function getWavesEffectElement(e) {
-        if (TouchHandler.allowEvent(e) === false) {
-            return null;
-        }
-
-        var element = null;
-        var target = e.target || e.srcElement;
-
-        while (target.parentElement !== null) {
-            if (!(target instanceof SVGElement) && target.className.indexOf('button-waves') !== -1) {
-                element = target;
-                break;
-            } else if (target.classList.contains('button-waves')) {
-                element = target;
-                break;
-            }
-            target = target.parentElement;
-        }
-
-        return element;
-    }
-
-    /**
-     * Bubble the click and show effect if .button-waves elem was found
-     */
-    function showEffect(e) {
-        var element = getWavesEffectElement(e);
-
-        if (element !== null) {
-            Effect.show(e, element);
-
-            if ('ontouchstart' in window) {
-                element.addEventListener('touchend', Effect.hide, false);
-                element.addEventListener('touchcancel', Effect.hide, false);
-            }
-
-            element.addEventListener('mouseup', Effect.hide, false);
-            element.addEventListener('mouseleave', Effect.hide, false);
-        }
-    }
-
-    Waves.displayEffect = function(options) {
-        options = options || {};
-
-        if ('duration' in options) {
-            Effect.duration = options.duration;
-        }
-
-        //Wrap input inside <i> tag
-        Effect.wrapInput($$('.button-waves'));
-
-        if ('ontouchstart' in window) {
-            document.body.addEventListener('touchstart', showEffect, false);
-        }
-
-        document.body.addEventListener('mousedown', showEffect, false);
-    };
-
-    /**
-     * Attach Waves to an input element (or any element which doesn't
-     * bubble mouseup/mousedown events).
-     *   Intended to be used with dynamically loaded forms/inputs, or
-     * where the user doesn't want a delegated click handler.
-     */
-    Waves.attach = function(element) {
-        //FUTURE: automatically add waves classes and allow users
-        // to specify them with an options param? Eg. light/classic/button
-        if (element.tagName.toLowerCase() === 'input') {
-            Effect.wrapInput([element]);
-            element = element.parentElement;
-        }
-
-        if ('ontouchstart' in window) {
-            element.addEventListener('touchstart', showEffect, false);
-        }
-
-        element.addEventListener('mousedown', showEffect, false);
-    };
-
-    window.Waves = Waves;
-
-    document.addEventListener('DOMContentLoaded', function() {
-        Waves.displayEffect();
-    }, false);
-
-})(window);

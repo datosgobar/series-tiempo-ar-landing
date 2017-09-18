@@ -55,7 +55,7 @@ function server() {
       logPrefix: 'Modernización',
       host: 'localhost',
       port: 9000,
-      online: false,
+      online: true,
       browser: [
         'chrome'
       ],
