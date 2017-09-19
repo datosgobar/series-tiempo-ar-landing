@@ -1021,6 +1021,7 @@ function makeDomElement(desc) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function requestDatasets() {
+  console.log('paso_1', STORAGE.params.path_datasets);
     downloadFile({
         local: STORAGE.params.path_datasets,
     }, 'datasets').then(addMetadata);
@@ -1028,8 +1029,9 @@ function requestDatasets() {
 
 function addMetadata() {
     var data = STORAGE.datasets;
-
+    console.log('paso_2', data);
     data.forEach((_dataset) => {
+      console.log(_dataset.catalog_url, _dataset.dataset_identifier);
         downloadFile({
             local: _dataset.catalog_url
         }, _dataset.dataset_identifier).then(() => renderDataset(_dataset));
@@ -1057,9 +1059,11 @@ function getDistributions(_distributions, _data) {
 }
 
 function renderDataset(_params) {
+  console.log('paso_3', params);
     var dataset = getDataset(_params.dataset_identifier);
     var distributions = getDistributions(_params.distribution, dataset.distribution);
     var elementDom = [];
+    console.log(dataset, distributions);
 
     distributions.forEach((_dist, k) => {
         var endSpacing;

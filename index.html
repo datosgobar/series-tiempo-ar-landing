@@ -1,1 +1,46 @@
-<!DOCTYPE html><html lang=es><title>$nombreProducto - $descripcionProducto</title><meta http-equiv=Content-Type content="text/html; charset=UTF-8"><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv=Content-Language content=es><meta name=description content=$descripcionProducto><meta name=keywords content=$palabrasclave><link href=./public/image/favicon.ico rel="shortcut icon" type=image/png><link rel=stylesheet href=./public/styles/app.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js></script><script src=https://www.promisejs.org/polyfills/promise-6.1.0.js></script><script src=./public/scripts/app.min.js></script><h1 class=hide>$nombreProducto</h1><div id=app><section id=cardsContainer class=max-width><h2 class=hide>Categor&#237;as</h2><div id=cards class="flex flex-wrap"></div></section><section id=chartsContainer class=max-width style=display:none><h2 class=hide>Gr&#225;ficos</h2><a class="link back-link" onclick="changeView('cards');"><i class="fa fa-arrow-left" aria-hidden=true></i> Volver</a><div id=charts></div></section><section id=metaDataContainer class=max-width><div id=metaData class="flex flex-wrap"></div></section></div>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>$nombreProducto - $descripcionProducto</title>
+    <!-- Meta Data -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Language" content="es" />
+    <meta name="description" content="$descripcionProducto" />
+    <meta name="keywords" content="$palabrasclave" />
+    <!-- Favicon -->
+    <link href="./public/image/favicon.ico" rel="shortcut icon" type="image/png" />
+    <!-- App - CSS -->
+    <link rel="stylesheet" type="text/css" href="./public/styles/app.min.css">
+    <!-- App - JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.min.js"></script>
+    <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+    <script type="text/javascript" src="./public/scripts/app.min.js"></script>
+</head>
+
+<body>
+    <!-- Titulo del producto -->
+    <h1 class="hide">$nombreProducto</h1>
+    <!-- Contenido del sitio -->
+    <div id="app">
+        <!-- Cards Container -->
+        <section id="cardsContainer" class="max-width">
+            <h2 class="hide">Categorías</h2>
+            <div id="cards" class="flex flex-wrap"></div>
+        </section>
+        <!-- Charts Container -->
+        <section id="chartsContainer" class="max-width" style="display: none;">
+            <h2 class="hide">Gráficos</h2>
+            <a class="link back-link" onclick="changeView('cards');"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+            <div id="charts"></div>
+        </section>
+        <!-- Metadata Container -->
+        <section id="metaDataContainer" class="max-width">
+            <div id="metaData" class="flex flex-wrap"></div>
+        </section>
+    </div>
+</body>
+
+</html>

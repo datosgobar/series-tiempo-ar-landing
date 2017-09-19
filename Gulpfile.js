@@ -35,7 +35,7 @@ const removeLogs = require('gulp-removelogs'); // Plugin para quitar console.log
 const imagemin = require('gulp-imagemin'); // Plugin para optimizar imagenes
 
 // Entorno
-var enviroment = 'prod';
+var enviroment = 'dev';
 
 let appConfig = { // opciones: dev, prod
   isProd: (enviroment === 'prod') ? (true) : (false),

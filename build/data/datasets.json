@@ -1,31 +1,32 @@
 [
     {
-        "catalog_url": "./public/data/data.json",
-        "dataset_identifier": "184b7d35-0747-438b-896d-90475abdb560",
-        "dataset_landingPage": "http://www.example.com",
+        "catalog_url": "http://181.209.63.242/data.json",
+        "dataset_identifier": "b8de87ee-cd7e-48ae-be7b-d921c7a4f106",
+        "dataset_landingPage": "http://181.209.63.242/dataset/base-series-tiempo-administracion-publica-nacional",
         "distribution": [
             {
                 "identifier": "",
-                "title": "Ventas de Comercializadores de GLP"
+                "title": "Base de Series de Tiempo: metadatos e indicadores descriptivos de las series (CSV)"
             },
             {
                 "identifier": "",
-                "title": "Ventas de Distribuidor Envases de GLP"
-            }
-        ]
-    }, 
-    {
-        "catalog_url": "./public/data/data.json",
-        "dataset_identifier": "184b7d35-0747-438b-896d-90475abdb560",
-        "dataset_landingPage": "http://www.example.com",
-        "distribution": [
-            {
-                "identifier": "",
-                "title": "Ventas de Comercializadores de GLP"
+                "title": "Base de Series de Tiempo: observaciones (CSV)"
             },
             {
                 "identifier": "",
-                "title": "Ventas de Distribuidor Envases de GLP"
+                "title": "Base de Series de Tiempo: metadatos e indicadores descriptivos de las series (XLSX)"
+            },
+            {
+                "identifier": "",
+                "title": "Base de Series de Tiempo: observaciones (XLSX)"
+            },
+            {
+                "identifier": "",
+                "title": "Base de Series de Tiempo: metadatos e indicadores descriptivos de las series (DTA)"
+            },
+            {
+                "identifier": "",
+                "title": "Base de Series de Tiempo: observaciones (DTA)"
             }
         ]
     }
