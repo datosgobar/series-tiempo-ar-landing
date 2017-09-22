@@ -99,6 +99,10 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     "short_name": "EMAE",
     "units_representation": "1",
     "laps": "5",
+    "button": {
+      "text": "Ver informes",
+      "url": "http://www.prueba.com"
+    },
     "charts": [{
         "id": "chart_1",
         "title": "Producto Bruto Interno.",
@@ -136,6 +140,10 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     "short_name":           "EMAE",
     "units_representation": "1",
     "laps":                 "5",
+    "button": {
+      "text":               "Ver informes",
+      "url":                "http://www.prueba.com"
+    },
     "charts":               []
 }
 ```
@@ -148,6 +156,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     - "%" multiplica el valor * 100.
     - "1" no recibe ninguna transformación.
 - **laps**: Define la cantidad de períodos a graficar en la tarjeta. Estos periodos se corresponden con la unidad de frecuencia y toman los datos más actualizados. Ej.: Una serie de frecuencia mensual (R/P1M) con un laps = 24 graficará los últimos 24 meses con datos disponibles.
+- **button**: Permite definir un texto y una url personalizada para el botón de la tarjeta.
 - **charts**: Es un `array` que contiene "objetos chart" que definen un conjunto de propiedades necesarias para generar un gráfico.
 
 #### Composición de los gráficos (objetos `chart`)
@@ -199,11 +208,27 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
 
 ### datasets.json
 
-TODO: Describir el uso y configuración de objetos `dataset`
+En la ruta `./build/data` se encuentra el archivo `datasets.json` que nos permite configurar todos los párametros ... ?. El archivo contiene una estructura de `objetos` similar a la siguiente:
+
+```bash
+[
+    {
+        "catalog_url": "",
+        "dataset_identifier": "",
+        "dataset_landingPage": "",
+        "distribution": [
+          {
+            "identifier": "",
+            "title": ""
+          }
+        ]
+    }
+]
+```
 
 ### params.json
 
-En la ruta `./build/data` se encuentra el archivo `params.json` que nos permite configurar todos los párametros de configuración de la aplicación. El archivo contiene una estructura de `objetos` similar a la siguiente:
+En la ruta `./build/data` se encuentra el archivo `params.json` que nos permite configurar todos los párametros de la aplicación. El archivo contiene una estructura de `objetos` similar a la siguiente:
 
 ```bash
 {

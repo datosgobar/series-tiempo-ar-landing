@@ -52,10 +52,10 @@ function downloadFile(_path, _name) {
     }
 
     function tryLocal() {
-      $.getJSON(_path.local).then(saveDataAndCallSuccess).fail(error);
+      $.get(_path.local).then(saveDataAndCallSuccess).fail(error);
     }
 
-    $.getJSON(_path.external ? _path.external : _path.local).then(saveDataAndCallSuccess).fail(tryLocal);
+    $.get(_path.external ? _path.external : _path.local).then(saveDataAndCallSuccess).fail(tryLocal);
   });
 }
 // Actualizado 17.08.2017 - Guarda en el portapapeles el texto de un elemento.
@@ -241,10 +241,6 @@ function requestAllCharts(_indicatorId) {
 // (Optimized)(Update: 25.08.2017)
 function renderChartComponent(_indicatorId, _chart) {
   var container = document.querySelector('#chartsContainer #charts');
-
-  // console.log(_indicatorId);
-  // console.log(_chart);
-  // console.log(container);
 
   var chartComponent = makeDomElement('div', {
     id: _chart.id,
@@ -765,22 +761,14 @@ function renderChart(_chart) {
 
   // se crea contenedor del rango ////////////////////////////////////////////
   rangeContainer = svg.append('g').attr('class', 'range-container').attr('transform', 'translate(' + rangeMargin.left + ', ' + rangeMargin.top + ')');
-  console.log('paso7_1');
   rangeContainer.append('g').attr('class', 'range-axis-x').attr('transform', 'translate(0, ' + rangeHeight + ')').call(rangeAxisX);
-  console.log('paso7_2');
   startBrush = rangeContainer.append('g').attr('class', 'start-brush-date').attr('text-anchor', 'end').attr('transform', function () {
-    console.log(data_range);
     return 'translate(' + rangeScaleX(data_range[0].date) + ', ' + (rangeHeight + 17.5) + ')';
   });
-  console.log('paso7_3');
   startBrush.append('rect').attr('height', '20px').attr('transform', 'translate(0, -15)').attr('fill', 'white');
-  console.log('paso7_4');
   startBrush.append('text');
-  console.log('paso7_5');
   endBrush = rangeContainer.append('g').attr('class', 'end-brush-date').attr('text-anchor', 'start').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
-  console.log('paso7_6');
   endBrush.append('rect').attr('height', '20px').attr('transform', 'translate(-7.5, -15)').attr('fill', 'white');
-  console.log('paso7_7');
   endBrush.append('text');
   rangeLines = rangeContainer.selectAll('.range-line').data(data_lines).enter().append('g').attr('class', 'range-line');
   rangeLines.append('path').attr('d', function (d) {
@@ -789,7 +777,6 @@ function renderChart(_chart) {
     return _chart.indicators[i].color;
   });
   rangeContainer.append('g').attr('class', 'range-brush').call(brush).call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
-  console.log('paso8');
   // se crea tooltip /////////////////////////////////////////////////////////
   var activeChart = STORAGE.cards.filter(function (_v) {
     return _v.id === STORAGE.activeCard;
@@ -941,7 +928,6 @@ function renderChart(_chart) {
 
       // Si el switch esta en on, hace algo, sino, hace otra cosa.
       // if (this.parentNode.parentNode.parentNode.parentNode.querySelector('.rangeButton-button').getAttribute('state') === 'on') {
-      //   // console.log(dataFiltered.length);
       //   if (dataFiltered.length > 1) {
       //
       //     // Se actualiza rango-y
@@ -1006,10 +992,6 @@ function renderChart(_chart) {
     // se actualiza la posición de la fecha final seleccionada en el rango
     charts.select('.range-container').select('.end-brush-date').attr('transform', 'translate(' + chartWidth + ', ' + (rangeHeight + 15) + ')');
     // se actualiza el ancho del brush
-    // console.log('date_1', STORAGE.charts[_chart.id].data_range[0].date);
-    // console.log('date_2', STORAGE.charts[_chart.id].data_range[1].date);
-    // console.log('pos_1', rangeScaleX(STORAGE.charts[_chart.id].data_range[0].date));
-    // console.log('pos_2', rangeScaleX(STORAGE.charts[_chart.id].data_range[1].date));
     // charts.select('.range-container').select('.range-brush').call(brushed);
 
     charts.select('.tooltip-rect-space').attr('width', chartWidth);
@@ -1018,7 +1000,6 @@ function renderChart(_chart) {
   // function changeSwitchPosition(activeButton, id) {
   //   let container = activeButton.parentNode,
   //       state = container.getAttribute('state');
-  //   // console.log(state);
   //
   //   if (state === 'on') {
   //     container.querySelectorAll('button')[0].setAttribute('state', 'active');
@@ -1039,7 +1020,6 @@ function renderChart(_chart) {
   // window.changeSwitchPosition = changeSwitchPosition;
 
   // function updateAxisY(domain, id) {
-  //   console.log('dominio', domain);
   //
   //   chartScaleY.domain(domain);
   //   chartLine = d3.line().curve(d3.curveMonotoneX).x((d) => chartScaleX(d.date)).y((d) => chartScaleY(d.value));
@@ -1053,14 +1033,12 @@ function renderChart(_chart) {
   //   let minValue = calcMinRangeY(STORAGE.charts[chart_id].data_chart),
   //       maxValue = calcMaxRangeY(STORAGE.charts[chart_id].data_chart);
   //
-  //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
   //   return [minValue, maxValue];
   // }
   // function generateRangeYDinamic(chart_id) {
   //   let minValue = calcMinRangeY(STORAGE.charts[chart_id].data_range),
   //       maxValue = calcMaxRangeY(STORAGE.charts[chart_id].data_range);
   //
-  //   // console.log('se calculó el rango total', [minExtend, maxExtend]);
   //   return [minValue, maxValue];
   // }
 
@@ -1118,17 +1096,16 @@ function makeDomElement(desc) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function requestDatasets() {
-  console.log('paso_1', STORAGE.params.path_datasets);
-  downloadFile({
+  var download = downloadFile({
     local: STORAGE.params.path_datasets
-  }, 'datasets').then(addMetadata);
+  }, 'datasets');
+
+  download.then(addMetadata);
 }
 
 function addMetadata() {
   var data = STORAGE.datasets;
-  console.log('paso_2', data);
   data.forEach(function (_dataset) {
-    console.log(_dataset.catalog_url, _dataset.dataset_identifier);
     downloadFile({
       local: _dataset.catalog_url
     }, _dataset.dataset_identifier).then(function () {
@@ -1160,11 +1137,9 @@ function getDistributions(_distributions, _data) {
 }
 
 function renderDataset(_params) {
-  console.log('paso_3', params);
   var dataset = getDataset(_params.dataset_identifier);
   var distributions = getDistributions(_params.distribution, dataset.distribution);
   var elementDom = [];
-  console.log(dataset, distributions);
 
   distributions.forEach(function (_dist, k) {
     var endSpacing;
@@ -1480,7 +1455,6 @@ function httpGetToArray(_search) {
 // Activa el modo iframe.
 // (Optimized)(Update: 25.08.2017)
 function iframeApp() {
-  console.log('Se renderiza iframe');
   function createCreditsElement() {
     var credits = window.document.createElement('span');
     credits.style.opacity = '0.5';
@@ -1510,7 +1484,7 @@ function iframeApp() {
 // Valida la activación del modo iframe.
 // (Optimized)(Update: 25.08.2017)
 function httpGetCheck() {
-  console.log('Se revisa solicitud GET');
+
   var params = httpGetToArray(window.location.search);
 
   if (params.hasOwnProperty('indicator') && params.hasOwnProperty('chart')) {
@@ -1524,7 +1498,7 @@ function httpGetCheck() {
 // Inicia la app.
 // (Optimized)(Update: 25.08.2017)
 function start(_cardId, _indicatorId) {
-  console.log('Se descarga información');
+
   var download = downloadFile({
     local: STORAGE.params.path_cards
   }, 'cards');
@@ -1551,7 +1525,7 @@ $.ajaxSetup({
 });
 
 $(function () {
-  console.log('Comienza la aplicación');
+
   downloadFile({
     local: './public/data/params.json'
   }, 'params').then(httpGetCheck);

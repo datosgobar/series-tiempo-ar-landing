@@ -261,7 +261,7 @@ button {
   height: $height;
   top: 20px;
   right: 20px;
-  filter: url('#shadowed-goo');
+  /*filter: url('#shadowed-goo');*/
   transition: all 0.2s ease-in-out;
 
   .share-open {

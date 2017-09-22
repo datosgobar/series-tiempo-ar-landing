@@ -3900,8 +3900,7 @@ button {
   height: 37px;
   top: 20px;
   right: 20px;
-  -webkit-filter: url('#shadowed-goo');
-          filter: url('#shadowed-goo');
+  /*filter: url('#shadowed-goo');*/
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
