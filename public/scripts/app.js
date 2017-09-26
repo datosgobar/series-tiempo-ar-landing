@@ -28347,7 +28347,7 @@ function renderDataset(_params) {
       innerHTML: _dist.description ? _dist.description : ''
     }]], ['button', {
       className: 'button',
-      download: true
+      download: ''
     }, ['span', {
       className: 'button-waves',
       innerHTML: 'Descargar',
@@ -28488,7 +28488,7 @@ function renderCardComponent(_card) {
   }]], ['a', {
     href: _card.download_url,
     className: 'link',
-    download: true,
+    download: '',
     innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos'
   }]);
 
