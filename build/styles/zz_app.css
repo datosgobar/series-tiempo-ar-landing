@@ -5,7 +5,6 @@ body {
   margin: 0 auto;
 }
 
-
 /*
   //////////////////////////////////////////////////////////////////////////////
   // Contenedor Tarjetas
@@ -15,7 +14,6 @@ body {
 #cardsContainer {
   z-index: 1;
 }
-
 
 /*
   //////////////////////////////////////////////////////////////////////////////
@@ -32,45 +30,53 @@ body {
   box-sizing: border-box;
   margin: 10px;
   position: relative;
-  &>h3 {
+
+  & > h3 {
     margin: 0;
     font-size: 22px;
     color: var(--gobarDark);
     font-weight: 500;
     height: calc(25px * 2);
   }
-  &>h4 {
+
+  & > h4 {
     margin: 0;
     font-size: 19px;
     color: var(--baseDark);
     font-weight: 800;
   }
-  &>.frequency {
+
+  & > .frequency {
     margin: 0;
     font-size: 16px;
     color: var(--base);
     font-weight: 600;
   }
-  &>.units_representation {
+
+  & > .units_representation {
     margin: 0;
     font-size: 32px;
     font-weight: 600;
     color: var(--gobarDark);
   }
-  &>.human_frecuency {
+
+  & > .human_frecuency {
     margin: 0;
   }
-  &>.units {
+
+  & > .units {
     margin: 0;
     font-size: 14px;
     font-weight: 400;
     color: var(--base);
   }
-  &>img {
+
+  & > img {
     margin: 0;
     width: 50%;
   }
-  &>button {
+
+  & > button {
     margin: 0;
     width: 100%;
     padding: 0;
@@ -80,18 +86,21 @@ body {
     font-size: 16px;
     color: white;
     font-weight: 500;
-    &>span {
+
+    & > span {
       border-radius: 15px;
     }
   }
-  &>.link {
+
+  & > .link {
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px;
   }
-  &>.loading {
+
+  & > .loading {
     position: absolute;
     top: 0;
     left: 0;
@@ -101,7 +110,6 @@ body {
     border-radius: 4px;
   }
 }
-
 
 /*
   //////////////////////////////////////////////////////////////////////////////
@@ -118,12 +126,12 @@ body {
   width: 100%;
   z-index: 500;
   transition: display 0.25s ease-out;
-  &>.back-link {
+
+  & > .back-link {
     display: block;
     margin: 10px 20px;
   }
 }
-
 
 /*
   //////////////////////////////////////////////////////////////////////////////
@@ -133,6 +141,7 @@ body {
 
 #charts {
   margin: 0 10px;
+
   & .chart {
     width: 100%;
     box-shadow: 0 0 2px var(--base);
@@ -140,13 +149,15 @@ body {
     position: relative;
     margin: 0 0 20px;
     background-color: white;
-    &>.head {
+
+    & > .head {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
       padding: 20px 10px 0;
-      &>h3 {
+
+      & > h3 {
         text-align: left;
         margin: 0;
         font-size: 22px;
@@ -154,15 +165,18 @@ body {
         color: var(--baseDark);
       }
     }
-    &>.referenceContainer {
+
+    & > .referenceContainer {
       background-color: var(--baseLight);
-      &>.references {
+
+      & > .references {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         flex-wrap: wrap;
         margin: 0 10px;
-        &>p {
+
+        & > p {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -170,6 +184,7 @@ body {
           font-weight: 600;
           font-size: 14px;
         }
+
         & .reference-round-line {
           width: 15px;
           height: 2px;
@@ -178,16 +193,20 @@ body {
         }
       }
     }
-    &>.rangeButton {
+
+    & > .rangeButton {
       background-color: var(--baseLight);
-      &>.rangeButton-component {
+
+      & > .rangeButton-component {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        &>.rangeButton-text {
+
+        & > .rangeButton-text {
           margin: 0 10px;
         }
-        &>.rangeButton-button {
+
+        & > .rangeButton-button {
           border-radius: 50px;
           border: 1px solid silver;
           padding: 2px;
@@ -196,7 +215,8 @@ body {
           box-sizing: border-box;
           width: 190px;
           height: 32px;
-          &>button {
+
+          & > button {
             position: absolute;
             width: 50%;
             border: none;
@@ -206,20 +226,25 @@ body {
             font-size: 14px;
             font-weight: 400;
             transition: font-weight 0.25s ease-out;
+
             &:first-of-type {
               left: 0;
             }
+
             &:last-of-type {
               right: 0;
             }
+
             &[state="active"] {
               font-weight: 600;
             }
+
             &:hover {
               font-weight: 600;
             }
           }
-          &>.switch-effect {
+
+          & > .switch-effect {
             background: #b8e1f4;
             width: 50%;
             height: calc(100% - 4px);
@@ -231,10 +256,12 @@ body {
         }
       }
     }
+
     & .paragraph {
       margin: 0;
     }
-    &>.loading {
+
+    & > .loading {
       position: absolute;
       top: 0;
       left: 0;
@@ -255,28 +282,34 @@ body {
     fill: none;
     stroke: var(--baseDark);
   }
+
   & .chart-axis-x {
-    &>path {
+    & > path {
       stroke: var(--baseDark);
     }
-    &>.tick text {
+
+    & > .tick text {
       font-size: 12px;
       color: var(--base);
     }
   }
+
   & .chart-axis-y {
-    &>path {
+    & > path {
       stroke: none;
     }
-    &>.tick text {
+
+    & > .tick text {
       font-size: 12px;
       color: var(--base);
     }
   }
+
   & .chart-line path {
     fill: none;
     stroke-width: 2px;
   }
+
   & .chart-dots circle {
     r: 2;
   }
@@ -287,16 +320,20 @@ body {
     fill: none;
     stroke-width: 2px;
   }
+
   & .range-axis-x {
     stroke: none;
-    &>.tick {
+
+    & > .tick {
       & text {
         font-size: 12px;
         color: var(--base);
       }
+
       &:first-of-type text {
         text-anchor: end;
       }
+
       &:last-of-type text {
         text-anchor: start;
       }
@@ -308,18 +345,22 @@ body {
   & .tooltip-line {
     stroke: var(--baseDark);
   }
+
   & .tooltip-indicator {
     & circle {
       r: 4;
     }
+
     & rect {
       height: 25px;
     }
+
     & text {
       font-size: 12px;
       fill: white;
     }
   }
+
   & .tooltip-date {
     x: 0;
     y: 0;
@@ -327,6 +368,7 @@ body {
     ry: 15;
     height: 25px;
     fill: var(--baseLight);
+
     & text {
       font-size: 14px;
       transform: translate(0, 12px);
@@ -334,11 +376,13 @@ body {
       text-anchor: middle;
       font-weight: 600;
     }
+
     & rect {
       fill: var(--baseLight);
       height: 18px;
     }
   }
+
   & .tooltip-rect-space {
     fill: none;
   }
@@ -346,12 +390,11 @@ body {
 
 .start-brush-date,
 .end-brush-date {
-  &>text {
+  & > text {
     fill: var(--base);
     font-size: 12px;
   }
 }
-
 
 /*
   //////////////////////////////////////////////////////////////////////////////
@@ -368,7 +411,8 @@ body {
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 99999999;
   transition: all 0.5s ease;
-  &>.btn-exit {
+
+  & > .btn-exit {
     font-size: 20px;
     width: 35px;
     height: 35px;
@@ -379,22 +423,26 @@ body {
     cursor: pointer;
     border-radius: 100%;
     transition: font-size 0.2s ease-in-out;
+
     &:hover {
       font-size: 30px;
     }
   }
+
   & .embebed-text-info {
     color: white;
     font-size: 24px;
     font-weight: 300;
     margin-bottom: 40px;
   }
+
   & input {
     width: 320px;
     padding: 14px;
     border-radius: 4px;
     border: none;
   }
+
   & button {
     background-color: var(--gobarDark);
     margin-left: 10px;
@@ -406,7 +454,8 @@ body {
 
 .loading {
   z-index: 100;
-  &>.error-message {
+
+  & > .error-message {
     color: #a63232;
     margin: 30px 10px 0;
     text-align: center;
@@ -421,11 +470,12 @@ body {
       padding: 0;
       color: var(--base);
       font-size: 22px;
-      
+
       &:first-of-type {
         color: var(--gobarDark);
       }
     }
+
     & > p {
       margin: 0;
       padding: 0;
@@ -433,9 +483,8 @@ body {
       color: var(--baseDark);
     }
   }
-  
+
   & .distributionBlock {
-    
     & h3 {
       font-size: 18px;
       margin: 0;
@@ -443,12 +492,14 @@ body {
       color: var(--base);
       font-weight: normal;
     }
+
     & p {
       margin: 0;
-      padding: 0;
+      padding: 0 20px 0 0;
       font-size: 16px;
       color: var(--baseDark);
     }
+
     & button {
       margin: 0;
       width: 110px;
@@ -459,7 +510,8 @@ body {
       font-size: 16px;
       color: white;
       font-weight: 500;
-      &>span {
+
+      & > span {
         border-radius: 15px;
       }
     }

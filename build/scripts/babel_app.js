@@ -1221,7 +1221,7 @@ function renderDataset(_params) {
         [
           'div',
           {
-            className: 'flex flex-column flex-align-start max-width'
+            className: 'flex flex-column flex-align-start flex-wrap max-width'
           },
           [
             'h3',
@@ -1237,20 +1237,24 @@ function renderDataset(_params) {
           ]
         ],
         [
-          'button',
+          'a',
           {
-            className: 'button',
+            href: _dist.downloadURL,
             download: ''
           },
           [
-            'span',
+            'button',
             {
-              className: 'button-waves',
-              innerHTML: 'Descargar',
-              onclick: () => {
-                window.open(_dist.downloadURL);
+              className: 'button',
+              download: ''
+            },
+            [
+              'span',
+              {
+                className: 'button-waves',
+                innerHTML: 'Descargar'
               }
-            }
+            ]
           ]
         ]
       ], endSpacing);

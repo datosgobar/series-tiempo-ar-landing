@@ -4511,7 +4511,7 @@ body {
   position: relative
 }
 
-#cards .card>h3 {
+#cards .card > h3 {
   margin: 0;
   font-size: 22px;
   color: #0695d6;
@@ -4519,44 +4519,44 @@ body {
   height: calc(25px * 2);
 }
 
-#cards .card>h4 {
+#cards .card > h4 {
   margin: 0;
   font-size: 19px;
   color: #444;
   font-weight: 800;
 }
 
-#cards .card>.frequency {
+#cards .card > .frequency {
   margin: 0;
   font-size: 16px;
   color: #767676;
   font-weight: 600;
 }
 
-#cards .card>.units_representation {
+#cards .card > .units_representation {
   margin: 0;
   font-size: 32px;
   font-weight: 600;
   color: #0695d6;
 }
 
-#cards .card>.human_frecuency {
+#cards .card > .human_frecuency {
   margin: 0;
 }
 
-#cards .card>.units {
+#cards .card > .units {
   margin: 0;
   font-size: 14px;
   font-weight: 400;
   color: #767676;
 }
 
-#cards .card>img {
+#cards .card > img {
   margin: 0;
   width: 50%;
 }
 
-#cards .card>button {
+#cards .card > button {
   margin: 0;
   width: 100%;
   padding: 0;
@@ -4568,11 +4568,11 @@ body {
   font-weight: 500;
 }
 
-#cards .card>button>span {
+#cards .card > button > span {
   border-radius: 15px;
 }
 
-#cards .card>.link {
+#cards .card > .link {
   height: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4586,7 +4586,7 @@ body {
   font-size: 16px;
 }
 
-#cards .card>.loading {
+#cards .card > .loading {
   position: absolute;
   top: 0;
   left: 0;
@@ -4614,7 +4614,7 @@ body {
   transition: display 0.25s ease-out
 }
 
-#chartsContainer>.back-link {
+#chartsContainer > .back-link {
   display: block;
   margin: 10px 20px;
 }
@@ -4640,7 +4640,7 @@ body {
   background-color: white;
 }
 
-#charts .chart>.head {
+#charts .chart > .head {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4657,7 +4657,7 @@ body {
   padding: 20px 10px 0;
 }
 
-#charts .chart>.head>h3 {
+#charts .chart > .head > h3 {
   text-align: left;
   margin: 0;
   font-size: 22px;
@@ -4665,11 +4665,11 @@ body {
   color: #444;
 }
 
-#charts .chart>.referenceContainer {
+#charts .chart > .referenceContainer {
   background-color: #fafafa;
 }
 
-#charts .chart>.referenceContainer>.references {
+#charts .chart > .referenceContainer > .references {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4684,7 +4684,7 @@ body {
   margin: 0 10px;
 }
 
-#charts .chart>.referenceContainer>.references>p {
+#charts .chart > .referenceContainer > .references > p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4699,18 +4699,18 @@ body {
   font-size: 14px;
 }
 
-#charts .chart>.referenceContainer>.references .reference-round-line {
+#charts .chart > .referenceContainer > .references .reference-round-line {
   width: 15px;
   height: 2px;
   border-radius: 2px;
   margin-right: 5px;
 }
 
-#charts .chart>.rangeButton {
+#charts .chart > .rangeButton {
   background-color: #fafafa;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component {
+#charts .chart > .rangeButton > .rangeButton-component {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4722,11 +4722,11 @@ body {
           align-items: center;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-text {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-text {
   margin: 0 10px;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button {
   border-radius: 50px;
   border: 1px solid silver;
   padding: 2px;
@@ -4738,7 +4738,7 @@ body {
   height: 32px;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button>button {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button {
   position: absolute;
   width: 50%;
   border: none;
@@ -4751,23 +4751,23 @@ body {
   transition: font-weight 0.25s ease-out;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button>button:first-of-type {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button:first-of-type {
   left: 0;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button>button:last-of-type {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button:last-of-type {
   right: 0;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button>button[state="active"] {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button[state="active"] {
   font-weight: 600;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button>button:hover {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > button:hover {
   font-weight: 600;
 }
 
-#charts .chart>.rangeButton>.rangeButton-component>.rangeButton-button>.switch-effect {
+#charts .chart > .rangeButton > .rangeButton-component > .rangeButton-button > .switch-effect {
   background: #b8e1f4;
   width: 50%;
   height: calc(100% - 4px);
@@ -4782,7 +4782,7 @@ body {
   margin: 0;
 }
 
-#charts .chart>.loading {
+#charts .chart > .loading {
   position: absolute;
   top: 0;
   left: 0;
@@ -4801,20 +4801,20 @@ body {
   stroke: #444;
 }
 
-.chart-container .chart-axis-x>path {
+.chart-container .chart-axis-x > path {
   stroke: #444;
 }
 
-.chart-container .chart-axis-x>.tick text {
+.chart-container .chart-axis-x > .tick text {
   font-size: 12px;
   color: #767676;
 }
 
-.chart-container .chart-axis-y>path {
+.chart-container .chart-axis-y > path {
   stroke: none;
 }
 
-.chart-container .chart-axis-y>.tick text {
+.chart-container .chart-axis-y > .tick text {
   font-size: 12px;
   color: #767676;
 }
@@ -4837,16 +4837,16 @@ body {
   stroke: none;
 }
 
-.range-container .range-axis-x>.tick text {
+.range-container .range-axis-x > .tick text {
   font-size: 12px;
   color: #767676;
 }
 
-.range-container .range-axis-x>.tick:first-of-type text {
+.range-container .range-axis-x > .tick:first-of-type text {
   text-anchor: end;
 }
 
-.range-container .range-axis-x>.tick:last-of-type text {
+.range-container .range-axis-x > .tick:last-of-type text {
   text-anchor: start;
 }
 
@@ -4894,7 +4894,7 @@ body {
   fill: none;
 }
 
-.start-brush-date>text, .end-brush-date>text {
+.start-brush-date > text, .end-brush-date > text {
   fill: #767676;
   font-size: 12px;
 }
@@ -4917,7 +4917,7 @@ body {
   transition: all 0.5s ease
 }
 
-.embebedContainer>.btn-exit {
+.embebedContainer > .btn-exit {
   font-size: 20px;
   width: 35px;
   height: 35px;
@@ -4931,7 +4931,7 @@ body {
   transition: font-size 0.2s ease-in-out;
 }
 
-.embebedContainer>.btn-exit:hover {
+.embebedContainer > .btn-exit:hover {
   font-size: 30px;
 }
 
@@ -4961,7 +4961,7 @@ body {
   z-index: 100
 }
 
-.loading>.error-message {
+.loading > .error-message {
   color: #a63232;
   margin: 30px 10px 0;
   text-align: center;
@@ -4996,7 +4996,7 @@ body {
 
 #metaData .distributionBlock p {
   margin: 0;
-  padding: 0;
+  padding: 0 20px 0 0;
   font-size: 16px;
   color: #444;
 }
@@ -5013,7 +5013,7 @@ body {
   font-weight: 500;
 }
 
-#metaData .distributionBlock button>span {
+#metaData .distributionBlock button > span {
   border-radius: 15px;
 }
 

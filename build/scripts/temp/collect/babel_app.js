@@ -1156,21 +1156,21 @@ function renderDataset(_params) {
     elementDom.push(['div', {
       className: 'max-width flex flex-justify-between flex-align-start distributionBlock'
     }, ['div', {
-      className: 'flex flex-column flex-align-start max-width'
+      className: 'flex flex-column flex-align-start flex-wrap max-width'
     }, ['h3', {
       innerHTML: _dist.title
     }], ['p', {
       innerHTML: _dist.description ? _dist.description : ''
-    }]], ['button', {
+    }]], ['a', {
+      href: _dist.downloadURL,
+      download: ''
+    }, ['button', {
       className: 'button',
       download: ''
     }, ['span', {
       className: 'button-waves',
-      innerHTML: 'Descargar',
-      onclick: function onclick() {
-        window.open(_dist.downloadURL);
-      }
-    }]]], endSpacing);
+      innerHTML: 'Descargar'
+    }]]]], endSpacing);
   });
 
   var metaDataComponent = makeDomElement('div', {}, ['h2', {
