@@ -1,5 +1,3 @@
-// Se define una constante en donde se va a alojar toda la data.
-////////////////////////////////////////////////////////////////////////////////
 const STORAGE = {
   'charts': {}, // Se guarda información correspondiente a cada gráfico
   'activeCard': {},
@@ -17,8 +15,6 @@ const STORAGE = {
   }
 };
 
-// window.storage = STORAGE; // DEVELOPER
-
 // Funciones Globales
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -26,31 +22,14 @@ const STORAGE = {
 function roundNumber(_number, _decimals) {
   return Number(Math.round(_number + 'e' + _decimals) + 'e-' + _decimals);
 }
-
 function formatNumberD3(_number) {
   return d3.format((parseInt(_number) === _number) ? (',') : (',.2f'))(_number);
 }
-
 function formatNumberJS(_number, _precision, _miles, _decimales) {
   let r = '\\d(?=(\\d{3})+' + (_precision > 0 ? '\\D' : '$') + ')',
-    v = _number.toFixed(Math.max(0, _precision));
+      v = _number.toFixed(Math.max(0, _precision));
+
   return (_decimales ? v.replace('.', _decimales) : v).replace(new RegExp(r, 'g'), '$&' + (_miles || ','));
-}
-// Actualizado 17.08.2017 - Permite descargar un archivo y devolver una promesa.
-function downloadFile(_path, _name) {
-
-  return new Promise((resolve, error) => {
-    function saveDataAndCallSuccess(_data) {
-      STORAGE[_name] = _data;
-      resolve();
-    }
-
-    function tryLocal() {
-      $.get(_path.local).then(saveDataAndCallSuccess).fail(error);
-    }
-
-    $.get((_path.external) ? (_path.external) : (_path.local)).then(saveDataAndCallSuccess).fail(tryLocal);
-  });
 }
 // Actualizado 17.08.2017 - Guarda en el portapapeles el texto de un elemento.
 function copyText(_element) {
@@ -394,8 +373,11 @@ function renderChartComponent(_indicatorId, _chart) {
     domElement.querySelector('.loading .error-message').innerHTML = 'No hay indicadores definidos para este gráfico.';
   }
 }
-// Descarga los paquetes de datos para renderizar la tarjeta de los gráficos.
-// (Update: 25.08.2017)
+
+function inyectValueToUrl(_url, _value) {
+  return _url.replace("{serie_id}", _value);
+}
+
 function downloadFilesToChart(_chart) {
   var promises = [],
     url_ext, url_loc;
@@ -404,7 +386,7 @@ function downloadFilesToChart(_chart) {
 
     if (!STORAGE[_indicator.id]) {
 
-      url_ext = STORAGE.params.path_files + _indicator.id + '.json';
+      url_ext = inyectValueToUrl(STORAGE.params.path_files, _indicator.id),
       url_loc = './public/data/series/' + _indicator.id + '.json';
 
       promises.push(downloadFile({
@@ -705,7 +687,13 @@ function renderChart(_chart) {
   chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], (d) => d.date));
   chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
   chartAxisX = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
-  chartAxisY = d3.axisLeft(chartScaleY);
+  chartAxisY = d3.axisLeft(chartScaleY).tickFormat((d) => {
+    if (_chart.units_representation === "%") {
+      return formatNumberD3(d * 100);
+    } else {
+      return d;
+    }
+  });
 
   // Generación de parámetros para el rango //////////////////////////////////
   rangeWidth = totalWidth - rangeMargin.left - rangeMargin.right;
@@ -1143,7 +1131,6 @@ function makeDomElement(desc) {
   return el;
 }
 
-// Funciones para render de las tarjetas.
 ////////////////////////////////////////////////////////////////////////////////
 
 function requestDatasets() {
@@ -1230,6 +1217,13 @@ function renderDataset(_params) {
             },
           ],
           [
+            'div',
+            {
+              className: 'break-line'
+            },
+            ['br']
+          ],
+          [
             'p',
             {
               innerHTML: (_dist.description) ? (_dist.description) : ('')
@@ -1309,170 +1303,25 @@ function renderDataset(_params) {
   $('#metaData').append(metaDataComponent);
 }
 
-// Esta función intercambia las vistas cards/charts.
-// (Optimized)(Update: 25.08.2017)
-function changeView(_containerId, _cardId) {
-  var container = '#' + _containerId,
-    node = $('#chartsContainer');
+function changeView(_nameView, _cardId) {
+  var container_charts   = $("#chartsContainer"),
+      container_cards    = $("#cardsContainer"),
+      container_metaData = $("#metaDataContainer");
 
   $('html, body').scrollTop(0);
 
-  if (container === '#chartsContainer') {
+  if (_nameView === 'chartsContainer') {
     STORAGE.activeCard = _cardId;
-    node.show();
+    container_charts.show();
+    container_cards.hide();
+    container_metaData.hide();
   } else {
-    node.fadeOut(250);
+    container_charts.fadeOut(250);
+    container_cards.show();
+    container_metaData.show();
   }
 }
-// Solicitud de render de las tarjetas.
-// (Optimized)(Update: 25.08.2017)
-function requestAllCards() {
-  STORAGE.cards.forEach((_card) => {
-    renderCardComponent(_card);
-  });
-}
-// Genera el HTML de una tarjeta.
-// (Optimized)(Update: 25.08.2017)
-function renderCardComponent(_card) {
-  var button = ['button', {
-      className: 'button',
-      onclick: () => {
-        changeView('chartsContainer', _card.id);
-        requestAllCharts(_card.id);
-      }
-    },
-    ['span', {
-      className: 'button-waves',
-      innerHTML: 'Ver más gráficos'
-    }]
-  ];
 
-  if (_card.button.text !== '' && _card.button.urll !== '') {
-    button = ['button', {
-        className: 'button',
-        onclick: () => {
-          window.open(_card.button.url, '_blank');
-        }
-      },
-      ['span', {
-        className: 'button-waves',
-        innerHTML: _card.button.text
-      }]
-    ];
-  }
-
-  var cardComponent = makeDomElement('div', {
-    id: _card.id,
-    className: 'card'
-  }, ['h3', {
-    innerHTML: _card.title
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }],
-    ['div', {
-      className: 'br'
-    }],
-    ['hr'],
-    ['div', {
-      className: 'br'
-    }],
-    ['div', {
-      className: 'br'
-    }]
-  ], ['h4', {
-    innerHTML: _card.short_name
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }]
-  ], ['p', {
-    className: 'frequency'
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }],
-    ['div', {
-      className: 'br'
-    }]
-  ], ['p', {
-    className: 'units_representation'
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }]
-  ], ['p', {
-    className: 'units'
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }]
-  ], ['div', {
-    className: 'mini-chart'
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }]
-  ], ['p', {
-    className: 'human_frecuency'
-  }], ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }],
-    ['div', {
-      className: 'br'
-    }]
-  ], button, ['div', {
-      className: 'break-line'
-    },
-    ['div', {
-      className: 'br'
-    }]
-  ], ['a', {
-    href: _card.download_url,
-    className: 'link',
-    download: '',
-    innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos'
-  }]);
-
-  cardComponent.appendChild(addLoading());
-  document.querySelector('#cardsContainer #cards').appendChild(cardComponent);
-
-  var url_ext = STORAGE.params.path_files + _card.id + '.json',
-    url_loc = './public/data/series/' + _card.id + '.json';
-
-  let promesa = downloadFile({
-    local: url_loc,
-    external: url_ext
-  }, _card.id);
-  promesa.catch((error) => {
-    var indicatorError = arguments['0'],
-      domElement = document.getElementById(indicatorError.id);
-
-    domElement.querySelector('.loading .fa').setAttribute('class', 'fa fa-exclamation');
-    domElement.querySelector('.loading .fa').setAttribute('style', 'font-size: 70px;');
-    domElement.querySelector('.loading .error-message').innerHTML = 'El indicador ' + indicatorError.id + ' no existe.';
-  });
-  promesa.then((values) => {
-    injectCardData(_card);
-  });
-}
-// Completa la tarjeta con la metadata del indicador.
-// (Update: 25.08.2017)
 function injectCardData(_card) {
   var data = STORAGE[_card.id].data,
     metadata = STORAGE[_card.id].metadata,
@@ -1486,7 +1335,7 @@ function injectCardData(_card) {
 
   renderMiniChart(_card, cardComponent.find('.mini-chart'));
 }
-// Actualizado 18.08.2017 - Esta función genera un gráfico de linea.
+
 function renderMiniChart(_cardData, _element) {
   let data, container, margin, width, height, minValue, maxValue, chartWidth,
     chartHeight, scaleX, scaleY, line, svg, chartContainer;
@@ -1554,12 +1403,205 @@ function renderMiniChart(_cardData, _element) {
     .attr('cy', (d) => scaleY(data[data.length - 1].value));
 }
 
-// Inicio de la aplicación.
 ////////////////////////////////////////////////////////////////////////////////
 
-// Devuelve un array con todos los parametros GET.
-// (Optimized)(Update: 25.08.2017)
-function httpGetToArray(_search) {
+function renderCardComponent(_card) {
+  let button;
+
+  if (_card.button.text !== '' && _card.button.urll !== '') {
+    button = ['button', {
+        className: 'button',
+        onclick: () => {
+          window.open(_card.button.url, '_blank');
+        }
+      },
+      ['span', {
+        className: 'button-waves',
+        innerHTML: _card.button.text
+      }]
+    ];
+  } else {
+    button = ['button', {
+        className: 'button',
+        onclick: () => {
+          changeView('chartsContainer', _card.id);
+          requestAllCharts(_card.id);
+        }
+      },
+      ['span', {
+        className: 'button-waves',
+        innerHTML: 'Ver más gráficos'
+      }]
+    ];
+  }
+
+  var cardComponent = makeDomElement('div', {id: _card.id, className: 'card'},
+    [
+      'h3',
+      {innerHTML: _card.title}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      ['div', {className: 'br'}],
+      ['div', {className: 'br'}],
+      ['hr'],
+      ['div', {className: 'br'}],
+      ['div', {className: 'br'}]
+    ],
+    [
+      'h4',
+      {innerHTML: _card.short_name}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    [
+      'p',
+      {className: 'frequency'}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ],
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    [
+      'p',
+      {className: 'units_representation'}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    [
+      'p',
+      {className: 'units'}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    [
+      'div',
+      {className: 'mini-chart'}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    [
+      'p',
+      {className: 'human_frecuency'}
+    ],
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ],
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    button,
+    [
+      'div',
+      {className: 'break-line'},
+      [
+        'div',
+        {className: 'br'}
+      ]
+    ],
+    [
+      'a',
+      {href: _card.download_url, className: 'link', download: '', innerHTML: '<i class="fa fa-download" aria-hidden="true"></i>&nbsp;Descargar datos'}
+    ]
+  );
+
+  cardComponent.appendChild(addLoading());
+  document.querySelector('#cardsContainer #cards').appendChild(cardComponent);
+
+  var url_ext = inyectValueToUrl(STORAGE.params.path_files, _card.id),
+      url_loc = './public/data/series/' + _card.id + '.json';
+
+  let promesa = downloadFile({
+    local: url_loc,
+    external: url_ext
+  }, _card.id);
+  promesa.catch((error) => {
+    var indicatorError = arguments['0'],
+      domElement = document.getElementById(indicatorError.id);
+
+    domElement.querySelector('.loading .fa').setAttribute('class', 'fa fa-exclamation');
+    domElement.querySelector('.loading .fa').setAttribute('style', 'font-size: 70px;');
+    domElement.querySelector('.loading .error-message').innerHTML = 'El indicador ' + indicatorError.id + ' no existe.';
+  });
+  promesa.then((values) => {
+    injectCardData(_card);
+  });
+}
+
+function renderNormalMode() {
+  STORAGE.cards.forEach((_card) => {
+    renderCardComponent(_card);
+  });
+}
+
+function renderIframeMode() {
+  let app, cards, credits, charts;
+
+  app = $('#app');
+  app.attr('class', 'flex flex-column flex-align-end');
+
+  cards = $('#cardsContainer');
+  cards.remove();
+
+  credits = window.document.createElement('span');
+  credits.style.opacity = '0.5';
+  credits.style.margin = '0 10px 0 0';
+  credits.innerHTML = 'Desarrollado por <a href="' + STORAGE.params.credits_url + '" class="link"> ' + STORAGE.params.credits + '</a>';
+
+  charts = $('#chartsContainer');
+  charts.addClass('flex flex-column flex-align-end');
+  charts.css({display: 'flex', position: 'relative'});
+  charts.find('.back-link').remove();
+  charts.find('#charts').addClass('max-width');
+  charts.append(credits);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+function exist_param(_params, _param){
+  return _params.hasOwnProperty(_param);
+}
+
+function httpGetFormat(_search) {
   var args = _search.substring(1).split('&'),
     argsParsed = {},
     i, kvp, key, value;
@@ -1577,77 +1619,85 @@ function httpGetToArray(_search) {
 
   return argsParsed;
 }
-// Activa el modo iframe.
-// (Optimized)(Update: 25.08.2017)
-function iframeApp() {
-  function createCreditsElement() {
-    var credits = window.document.createElement('span');
-    credits.style.opacity = '0.5';
-    credits.style.margin = '0 10px 0 0';
-    credits.innerHTML = 'Desarrollado por <a href="' + STORAGE.params.credits_url + '" class="link"> ' + STORAGE.params.credits + '</a>';
 
-    return credits;
+function httpGetParams() {
+  var params_http   = window.location.search,
+      params_format = httpGetFormat(params_http);
+
+  return params_format;
+}
+
+function filterIndicator (_cardId, _indicatorId) {
+  var data = STORAGE.cards;
+      data = data.filter((_card) => _card.id === _cardId);
+      data = data[0].charts;
+      data = data.filter((_chart) => _chart.id === _indicatorId);
+      data = data[0];
+
+  return data;
+}
+
+function downloadIndicators(_download, start_mode) {
+
+  switch (start_mode) {
+    case "normal":
+      return _download.then(renderNormalMode).then(requestDatasets);
+      break;
+    case "iframe":
+      let params = httpGetParams(),
+          data;
+
+      return _download.then(renderIframeMode)
+        .then(() => data = filterIndicator(params.indicator, params.chart))
+        .then(() => renderChartComponent(params.indicator, data));
+      break;
+    default:
+      return _download.then(renderNormalMode).then(requestDatasets);
+  }
+}
+
+function defineModeApp() {
+  var params     = httpGetParams(),
+      validation = exist_param(params, "indicator") && exist_param(params, "chart"),
+      modeApp    = "normal";
+
+  if (validation) {
+    modeApp = "iframe";
   }
 
-  var app = $('#app');
-  app.attr('class', 'flex flex-column flex-align-end');
+  return modeApp;
+};
 
-  var cards = $('#cardsContainer');
-  cards.remove();
+function initApp() {
+  let pathFile   = {local: STORAGE.params.path_cards},
+      download   = downloadFile(pathFile, 'cards'),
+      start_mode = defineModeApp();
 
-  var charts = $('#chartsContainer');
-  charts.addClass('flex flex-column flex-align-end');
-  charts.css({
-    display: 'flex',
-    position: 'relative'
+  console.info("La aplicación se inicio en modo: " + start_mode);
+  downloadIndicators(download, start_mode);
+}
+
+function downloadFile(_path, _name) {
+
+  return new Promise((resolve, error) => {
+    function saveDataAndCallSuccess(_data) {
+      STORAGE[_name] = _data;
+      resolve();
+    }
+    function tryLocal() {
+      $.get(_path.local).then(saveDataAndCallSuccess).fail(error);
+    }
+
+    $.get((_path.external) ? (_path.external) : (_path.local)).then(saveDataAndCallSuccess).fail(tryLocal);
   });
-  charts.find('.back-link').remove();
-  charts.find('#charts').addClass('max-width');
-
-  charts.append(createCreditsElement);
-}
-// Valida la activación del modo iframe.
-// (Optimized)(Update: 25.08.2017)
-function httpGetCheck() {
-
-  var params = httpGetToArray(window.location.search);
-
-  if (params.hasOwnProperty('indicator') && params.hasOwnProperty('chart')) {
-
-    iframeApp();
-    start(params.indicator, params.chart);
-  } else {
-    start();
-  }
-}
-// Inicia la app.
-// (Optimized)(Update: 25.08.2017)
-function start(_cardId, _indicatorId) {
-
-  var download = downloadFile({
-    local: STORAGE.params.path_cards
-  }, 'cards');
-
-  if (_cardId === undefined || _indicatorId === undefined) {
-    download.then(requestAllCards).then(requestDatasets);
-  } else {
-    download.then(() => {
-      var chartData = STORAGE.cards.filter((_card) => _card.id === _cardId)[0].charts.filter((_chart) => _chart.id === _indicatorId)[0];
-
-      renderChartComponent(_cardId, chartData);
-    });
-  }
 }
 
 // Is Document Ready
-////////////////////////////////////////////////////////////////////////////////
-$.ajaxSetup({
-  cache: false
-});
 
 $(function() {
+  let pathFile = {
+    local: "./public/data/params.json"
+  };
 
-  downloadFile({
-    local: './public/data/params.json'
-  }, 'params').then(httpGetCheck);
+  downloadFile(pathFile, 'params').then(initApp);
 });

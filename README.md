@@ -108,6 +108,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
         "title": "Producto Bruto Interno.",
         "description": "En millones de pesos, a precios de 2004.",
         "type": "line",
+        "units_representation": "1",
         "indicators": [
             {"id": "4.2_OGP_2004_T_17", "short_name": "PBI", "color": "#FF6100", "type": "solid"},
             {"id": "4.2_OGP_2004_T_18", "short_name": "PBI", "color": "#FF6100", "type": "solid"}
@@ -119,6 +120,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
         "title": "Oferta y Demanda Globales por componente.",
         "description": "En millones de pesos, a precios de 2004.",
         "type": "line",
+        "units_representation": "1",
         "indicators": [
             {"id": "4.2_OGP_2004_T_17", "short_name": "PBI", "color": "#FF6100", "type": "solid"},
             {"id": "4.2_OGP_2004_T_18", "short_name": "PBI", "color": "#FF6100", "type": "solid"}
@@ -167,6 +169,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     "title": "Producto Bruto Interno.",
     "description": "En millones de pesos, a precios de 2004.",
     "type": "line",
+    "units_representation": "1",
     "frequency": "R/P3M",
     "laps": "24",
     "indicators": []
@@ -177,6 +180,9 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
 - **title**: Representa el titulo que se muestra en la tarjeta del gráfico. Se recomienda restringir la cantidad de caracteres a 40.
 - **description**: Representa el párrafo que se muestra en la tarjeta del gráfico. Se recomienda restringir la cantidad de caracteres a 90.
 - **type**: Define el tipo de gráfico que se va a dibujar. Por el momento, `line` es el único valor disponible.
+- **units_representation**: Define la transformación del valor recibido por el indicador. Las opciones disponibles son:
+    - "%" multiplica el valor * 100.
+    - "1" no recibe ninguna transformación.
 - **frequency**: Define la frecuencia de datos del gráfico bajo el estandar [ISO 8601]('https://www.iso.org/iso-8601-date-and-time-format.html'). Las opciones disponibles son:
     - "R/P1Y" para frecuencias anuales.
     - "R/P6M" para frecuencias semestrales.
@@ -242,7 +248,7 @@ En la ruta `./build/data` se encuentra el archivo `params.json` que nos permite 
 
 - **credits**: Representa el texto del enlace que se muestra cuando se genera un iframe.
 - **credits_url**: Contiene la url a la que apunta en enlace del iframe.
-- **path_files**: Contiene la ruta de acceso a los archivos de indicadores (la fuente de los datos).
+- **path_files**: Contiene la ruta de acceso a los archivos de indicadores (la fuente de los datos). Es importante mencionar que en la ruta de acceso, se debe reemplazar el ID del indicador por el string `{serie_id}`. Por ejemplo, `http://www.example.com/{serie_id}.json`.
 - **path_cards**: Contiene la ruta de acceso al archivo de configuración de las tarjetas.
 - **path_datasets**: Contiene la ruta de acceso al archivo de configuración de los datasets.
 

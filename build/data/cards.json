@@ -14,6 +14,7 @@
         "title": "Producto Interno Bruto",
         "description": "Millones de pesos a precios de 2004, serie desestacionalizada. Fuente: INDEC",
         "type": "line",
+        "units_representation": "%",
         "indicators": [{
           "id": "3.2_OGP_D_2004_T_17",
           "short_name": "PIB",
@@ -28,6 +29,7 @@
         "title": "Consumo Privado",
         "description": "Millones de pesos a precios de 2004, serie desestacionalizada. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "3.2_DGCP_D_2004_T_30",
           "short_name": "Consumo Privado",
@@ -42,6 +44,7 @@
         "title": "Estimador Mensual de Actividad Económica",
         "description": "Índice 2004=100. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "143.3_NO_PR_2004_A_31",
             "short_name": "Serie Desestacionalizada",
@@ -63,6 +66,7 @@
         "title": "Industria y Construcción",
         "description": "Variación Interanual. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "14.2_E_M_2004_0_3",
             "short_name": "EMI",
@@ -97,6 +101,7 @@
         "title": "Trabajadores Registrados",
         "description": "Trabajadores Registrados. Fuente: MTEySS",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "151.1_TL_ESTADAD_2012_M_20",
             "short_name": "Serie Original",
@@ -118,6 +123,7 @@
         "title": "Asalariados Registrados Privados",
         "description": "Asalariados Registrados Privados. Fuente: MTEySS",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "152.1_TL_ESTEST_2009_M_9",
             "short_name": "Serie Original",
@@ -139,6 +145,7 @@
         "title": "Empleo Asalariado por Aglomerado",
         "description": "Índice ago-01=100. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "51.3_ICE_GRARES_0_M_24",
             "short_name": "Gran Buenos Aires",
@@ -172,6 +179,7 @@
         "title": "Distribución Funcional del Ingreso",
         "description": "Respecto del PIB a costo de factores. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "53.1_TRTA_0_0_37",
             "short_name": "Remuneración al trabajo asalariado",
@@ -218,6 +226,7 @@
         "title": "Tipo de Cambio Real",
         "description": "Índice 17-dic-15=100. Fuente: BCRA",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "116.3_TCRMA_0_M_36",
             "short_name": "Tipo de Cambio Multilateral",
@@ -245,6 +254,7 @@
         "title": "Términos de Intercambio",
         "description": "Índice 2004=100. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "82.2_ITI_2004_T_27",
           "short_name": "Índice de Términos de Intercambio",
@@ -259,6 +269,7 @@
         "title": "Saldo Comercial",
         "description": "Millones de dólares. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "74.3_ISC_0_M_19",
           "short_name": "Saldo Comercial",
@@ -273,6 +284,7 @@
         "title": "Exportaciones e Importaciones",
         "description": "Millones de dólares. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "74.1_IET_0_A_16",
             "short_name": "Exportaciones",
@@ -307,6 +319,7 @@
         "title": "Precios de las Materias Primas",
         "description": "Índice de precios de Materias Primas. Fuente: FMI",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "121.3_GC_0_0_19",
           "short_name": "Índice de precios de Materias Primas.",
@@ -321,6 +334,7 @@
         "title": "Tasas de Interés Internacionales",
         "description": "Porcentaje. Fuente: Bancos Centrales",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "131.1_FET_0_0_12",
             "short_name": "FED Funds",
@@ -348,6 +362,7 @@
         "title": "Participación en el comercio internacional de la Argentina",
         "description": "Porcentaje. Fuente: BCRA",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "140.1_A_0_M_9",
             "short_name": "Brasil",
@@ -394,6 +409,7 @@
         "title": "Tasas de Interés nacionales",
         "description": "Porcentaje. Fuente: BCRA",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "89.2_TS_INTEALL_0_D_18",
             "short_name": "Call",
@@ -421,6 +437,7 @@
         "title": "Reservas Internacionales",
         "description": "Millones de dólares. Fuente: BCRA",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "92.1_RID_0_0_32",
           "short_name": "Reservas Internacionales",
@@ -435,6 +452,7 @@
         "title": "Depósitos en dólares del Sector Privado",
         "description": "Millones de dólares. Fuente: BCRA",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "90.1_DTDPRI_0_0_33",
           "short_name": "Depósitos en dólares del Sector Privado",
@@ -462,6 +480,7 @@
         "title": "IPC Nacional",
         "description": "Variación Mensual. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "145.3_INGNACUAL_DICI_M_38",
             "short_name": "Nivel General",
@@ -483,6 +502,7 @@
         "title": "Precios Mayoristas",
         "description": "Variación Mensual. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
             "id": "106.4_I1NGVM_2015_M_41",
             "short_name": "Precios Mayoristas",
@@ -510,6 +530,7 @@
         "title": "Costo de la Construcción",
         "description": "Variación Interanual. Fuente: INDEC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "109.3_I1NGVA_1993_A_38",
           "short_name": "Costo de la construcción",
@@ -537,6 +558,7 @@
         "title": "Índice Merval",
         "description": "Puntos. Fuente: IAMC",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "169.1_MALVAL_0_0_6",
           "short_name": "Merval",
@@ -551,6 +573,7 @@
         "title": "Futuros de Dólar a tres meses",
         "description": "Pesos. Fuente: ROFEX y BCRA",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "168.1_FRO_ROF3M_D_0_0_19",
           "short_name": "Futuro ROFEX USD 3M",
@@ -570,6 +593,7 @@
         "title": "Patrimonio de los Fondos Comunes de Inversión",
         "description": "Millones de pesos. Fuente: CAFCI",
         "type": "line",
+        "units_representation": "1",
         "indicators": [{
           "id": "171.3_FPATRIMTAL_0_0_25",
           "short_name": "Patrimonio Neto Total",
@@ -597,6 +621,7 @@
       "title": "Recaudación Nacional",
       "description": "Variación Interanual. Fuente: Ministerio de Hacienda",
       "type": "line",
+      "units_representation": "1",
       "indicators": [{
           "id": "172.3_TL_RECA_IA_M_0_0_24",
           "short_name": "Recaudación Total",
@@ -617,6 +642,7 @@
       "title": "Recaudación Nacional",
       "description": "Variación Interanual. Fuente: Ministerio de Hacienda",
       "type": "line",
+      "units_representation": "1",
       "indicators": [{
           "id": "172.3_TL_RECA_IA_M_0_0_24",
           "short_name": "Recaudación Total",
@@ -637,6 +663,7 @@
       "title": "Recaudación Nacional",
       "description": "Variación Interanual. Fuente: Ministerio de Hacienda",
       "type": "line",
+      "units_representation": "1",
       "indicators": [{
           "id": "172.3_TL_RECA_IA_M_0_0_24",
           "short_name": "Recaudación Total",
@@ -657,6 +684,7 @@
       "title": "Gasto Total del Sector Público Argentino",
       "description": "En Porcentaje del PIB. Fuente: Ministerio de Hacienda",
       "type": "line",
+      "units_representation": "1",
       "indicators": [{
         "id": "172.1_GO_TOTAPIB_0_0_51",
         "short_name": "Gasto Total",
