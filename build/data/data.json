@@ -3,97 +3,89 @@
         "mbox": "datos@modernizacion.gob.ar",
         "name": "Ministerio de Modernización"
     },
-    "identifier": "modernizacion",
     "description": "Catálogo de datos abiertos del Ministerio de Modernización",
     "license": "Open Database License (ODbL) v1.0",
     "superThemeTaxonomy": "http://datos.gob.ar/superThemeTaxonomy.json",
     "issued": "2017-09-25T00:00:00",
-    "title": "Datos Modernización",
-    "modified": "2017-09-13T16:11:44.853001-03:00",
     "themeTaxonomy": [
         {
-            "label": "Agroganadería, pesca y forestación",
             "id": "agri",
-            "description": "Por ejemplo: 'Lechería: precio pagado al productor' o 'Superficie forestada'."
+            "description": "Por ejemplo: 'Lechería: precio pagado al productor' o 'Superficie forestada'.",
+            "label": "Agroganadería, pesca y forestación"
         },
         {
-            "label": "Economía y finanzas",
             "id": "econ",
-            "description": "Por ejemplo: 'Deuda pública'."
+            "description": "Por ejemplo: 'Deuda pública'.",
+            "label": "Economía y finanzas"
         },
         {
-            "label": "Educación, cultura y deportes",
             "id": "educ",
-            "description": "Por ejemplo: “Registro de Establecimientos Educativos”."
+            "description": "Por ejemplo: “Registro de Establecimientos Educativos”.",
+            "label": "Educación, cultura y deportes"
         },
         {
-            "label": "Energía",
             "id": "ener",
-            "description": "Por ejemplo: 'Productos mineros exportados' o 'Precios del GNC'."
+            "description": "Por ejemplo: 'Productos mineros exportados' o 'Precios del GNC'.",
+            "label": "Energía"
         },
         {
-            "label": "Medio ambiente",
             "id": "envi",
-            "description": "Por ejemplo: 'Operadores de residuos peligrosos'."
+            "description": "Por ejemplo: 'Operadores de residuos peligrosos'.",
+            "label": "Medio ambiente"
         },
         {
-            "label": "Gobierno y sector público",
             "id": "gove",
-            "description": "Por ejemplo: 'Inmuebles del estado Nacional'."
+            "description": "Por ejemplo: 'Inmuebles del estado Nacional'.",
+            "label": "Gobierno y sector público"
         },
         {
-            "label": "Salud",
             "id": "heal",
-            "description": "Por ejemplo: 'Estadísticas nacionales de VIH/SIDA'."
+            "description": "Por ejemplo: 'Estadísticas nacionales de VIH/SIDA'.",
+            "label": "Salud"
         },
         {
-            "label": "Asuntos internacionales",
             "id": "intr",
-            "description": "Por ejemplo: 'Representaciones argentinas en el exterior'."
+            "description": "Por ejemplo: 'Representaciones argentinas en el exterior'.",
+            "label": "Asuntos internacionales"
         },
         {
-            "label": "Justicia, seguridad y legales",
             "id": "just",
-            "description": "Por ejemplo: 'Censo penitenciario'."
+            "description": "Por ejemplo: 'Censo penitenciario'.",
+            "label": "Justicia, seguridad y legales"
         },
         {
-            "label": "Regiones y ciudades",
             "id": "regi",
-            "description": "Por ejemplo: 'Departamentos de la provincia de Río Negro'."
+            "description": "Por ejemplo: 'Departamentos de la provincia de Río Negro'.",
+            "label": "Regiones y ciudades"
         },
         {
-            "label": "Población y sociedad",
             "id": "soci",
-            "description": "Por ejemplo: 'Turistas residentes que viajan por Argentina'."
+            "description": "Por ejemplo: 'Turistas residentes que viajan por Argentina'.",
+            "label": "Población y sociedad"
         },
         {
-            "label": "Ciencia y tecnología",
             "id": "tech",
-            "description": "Por ejemplo: 'Recursos humanos en ciencia y tecnología'."
+            "description": "Por ejemplo: 'Recursos humanos en ciencia y tecnología'.",
+            "label": "Ciencia y tecnología"
         },
         {
-            "label": "Transporte",
             "id": "tran",
-            "description": "Por ejemplo: 'Estadísticas viales'."
+            "description": "Por ejemplo: 'Estadísticas viales'.",
+            "label": "Transporte"
         }
     ],
-    "language": [
-        "SPA"
-    ],
-    "spatial": "ARG",
+    "title": "Datos Modernización",
+    "modified": "2017-09-13T16:11:44.853001-03:00",
     "dataset": [
         {
-            "publisher": {
-                "mbox": "datos@modernizacion.gob.ar",
-                "name": "Ministerio de Modernización. Subsecretaría de Innovación Pública y Gobierno Abierto."
-            },
-            "landingPage": "http://datos.gob.ar/dataset/base-series-tiempo-administracion-publica-nacional",
+            "issued": "2017-09-25T16:11:44.853001-03:00",
             "keyword": [
                 "series de tiempo",
                 "información económica al día",
                 "estadísticas históricas",
                 "IED"
             ],
+            "accessLevel": "ABIERTO",
             "superTheme": [
                 "AGRI",
                 "ECON",
@@ -103,11 +95,6 @@
                 "SOCI"
             ],
             "title": "Base de Series de Tiempo de la Administración Pública Nacional",
-            "language": [
-                "SPA"
-            ],
-            "issued": "2017-09-25T16:11:44.853001-03:00",
-            "modified": "2017-09-25T16:11:44.853001-03:00",
             "source": "Múltiples fuentes primarias",
             "theme": [
                 "AGRI",
@@ -117,23 +104,103 @@
                 "REGI",
                 "SOCI"
             ],
-            "accrualPeriodicity": "R/P1D",
             "spatial": "ARG",
-            "identifier": "1",
-            "license": "Open Database License (ODbL) v1.0",
+            "description": "Base de series de tiempo de distintas fuentes primarias y secundarias de la Administración Pública Nacional, compilada por el Ministerio de Modernización. Estas series son normalizadas por organismos de la APN de acuerdo a los estandares propuestos por Modernización.",
             "contactPoint": {
                 "hasEmail": "datos@modernizacion.gob.ar",
                 "fn": "Ministerio de Modernización. Subsecretaría de Innovación Pública y Gobierno Abierto. Dirección Nacional de Datos e Información Pública."
             },
-            "accessLevel": "ABIERTO",
+            "landingPage": "http://datos.gob.ar/dataset/base-series-tiempo-administracion-publica-nacional",
             "distribution": [
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.1/download/series-tiempo-csv.zip",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        }
+                    ],
                     "description": "Valores y metadatos básicos de las series (CSV). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base, enriquecidos con sus metadatos básicos.",
-                    "format": "ZIP",
+                    "title": "Valores y metadatos (CSV)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores y metadatos (CSV)",
+                    "format": "ZIP",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-csv.zip",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.1/download/series-tiempo-csv.zip",
@@ -142,11 +209,123 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.2/download/series-tiempo-metadatos.csv",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_inicio",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_final",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Cantidad de observaciones contenidas en la serie.",
+                            "title": "serie_valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Días transcurridos desde el final del último período de tiempo para el que la serie tiene observaciones hasta la última fecha de actualización de la base de series de tiempo. Es una medida del período de tiempo más reciente no cubierto por las observaciones de la serie.",
+                            "title": "serie_dias_no_cubiertos",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Indicación estimativa de que el último valor de la serie está relativamente actualizado con respecto a la última fecha de actualización de la base.\n\nSe considera que una serie está desactualizada cuando su último valor pertenece a una fecha 14 días anterior (serie diaria), 3 meses anterior (serie mensual) o 2 períodos anterior (para el resto de las frecuencias posibles).",
+                            "title": "serie_actualizada",
+                            "type": "boolean"
+                        },
+                        {
+                            "description": "Última observación disponible de la serie.",
+                            "title": "serie_valor_ultimo",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Anteúltima observación disponible de la serie.",
+                            "title": "serie_valor_anterior",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Variación porcentual de la última observación disponible de la serie respecto de la anteúltima observación (la inmediatamente anterior).",
+                            "title": "serie_var_pct_anterior",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Listado de las series de tiempo disponibles en la base (CSV). Contiene los metadatos básicos de la series enriquecidos con indicadores descriptivos actualizados al día de la fecha.",
-                    "format": "CSV",
+                    "title": "Metadatos enriquecidos de las series (CSV)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: metadatos enriquecidos de las series (CSV)",
+                    "format": "CSV",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-metadatos.csv",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.2/download/series-tiempo-metadatos.csv",
@@ -155,11 +334,43 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.3/download/series-tiempo-valores.csv",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Valores de las series (CSV). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base.",
-                    "format": "CSV",
+                    "title": "Valores (CSV)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores (CSV)",
+                    "format": "CSV",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-valores.csv",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.3/download/series-tiempo-valores.csv",
@@ -168,11 +379,38 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.4/download/series-tiempo-fuentes.csv",
+                    "field": [
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece una serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Cantidad de series de la fuente primaria presentes en la base.",
+                            "title": "series_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Cantidad de observaciones de la fuente primaria presentes en la base.",
+                            "title": "valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_primer_valor",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_ultimo_valor",
+                            "type": "date"
+                        }
+                    ],
                     "description": "Fuentes primarias de las series (CSV). Contiene la cantidad de series y valores presentes en la base de cada una de las fuentes primarias compiladas.",
-                    "format": "CSV",
+                    "title": "Fuentes (CSV)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: fuentes (CSV)",
+                    "format": "CSV",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-fuentes.csv",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.4/download/series-tiempo-fuentes.csv",
@@ -181,11 +419,93 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.5/download/series-tiempo.xlsx",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        }
+                    ],
                     "description": "Valores y metadatos básicos de las series (XLSX). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base, enriquecidos con sus metadatos básicos.",
-                    "format": "XLSX",
+                    "title": "Valores y metadatos (XLSX)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores y metadatos (XLSX)",
+                    "format": "XLSX",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo.xlsx",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.5/download/series-tiempo.xlsx",
@@ -194,11 +514,123 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.6/download/series-tiempo-metadatos.xlsx",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_inicio",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_final",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Cantidad de observaciones contenidas en la serie.",
+                            "title": "serie_valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Días transcurridos desde el final del último período de tiempo para el que la serie tiene observaciones hasta la última fecha de actualización de la base de series de tiempo. Es una medida del período de tiempo más reciente no cubierto por las observaciones de la serie.",
+                            "title": "serie_dias_no_cubiertos",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Indicación estimativa de que el último valor de la serie está relativamente actualizado con respecto a la última fecha de actualización de la base.\n\nSe considera que una serie está desactualizada cuando su último valor pertenece a una fecha 14 días anterior (serie diaria), 3 meses anterior (serie mensual) o 2 períodos anterior (para el resto de las frecuencias posibles).",
+                            "title": "serie_actualizada",
+                            "type": "boolean"
+                        },
+                        {
+                            "description": "Última observación disponible de la serie.",
+                            "title": "serie_valor_ultimo",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Anteúltima observación disponible de la serie.",
+                            "title": "serie_valor_anterior",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Variación porcentual de la última observación disponible de la serie respecto de la anteúltima observación (la inmediatamente anterior).",
+                            "title": "serie_var_pct_anterior",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Listado de las series de tiempo disponibles en la base (XLSX). Contiene los metadatos básicos de la series enriquecidos con indicadores descriptivos actualizados al día de la fecha.",
-                    "format": "XLSX",
+                    "title": "Metadatos enriquecidos de las series (XLSX)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: metadatos enriquecidos de las series (XLSX)",
+                    "format": "XLSX",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-metadatos.xlsx",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.6/download/series-tiempo-metadatos.xlsx",
@@ -207,11 +639,43 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.7/download/series-tiempo-valores.xlsx",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Valores de las series (XLSX). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base.",
-                    "format": "XLSX",
+                    "title": "Valores (XLSX)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores (XLSX)",
+                    "format": "XLSX",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-valores.xlsx",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.7/download/series-tiempo-valores.xlsx",
@@ -220,11 +684,38 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.8/download/series-tiempo-fuentes.xlsx",
+                    "field": [
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece una serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Cantidad de series de la fuente primaria presentes en la base.",
+                            "title": "series_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Cantidad de observaciones de la fuente primaria presentes en la base.",
+                            "title": "valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_primer_valor",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_ultimo_valor",
+                            "type": "date"
+                        }
+                    ],
                     "description": "Fuentes primarias de las series (XLSX). Contiene la cantidad de series y valores presentes en la base de cada una de las fuentes primarias compiladas.",
-                    "format": "XLSX",
+                    "title": "Fuentes (XLSX)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: fuentes (XLSX)",
+                    "format": "XLSX",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-fuentes.xlsx",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.8/download/series-tiempo-fuentes.xlsx",
@@ -233,11 +724,83 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.9/download/series-tiempo-dta.zip",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        }
+                    ],
                     "description": "Valores y metadatos básicos de las series (DTA). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base, enriquecidos con sus metadatos básicos.",
-                    "format": "ZIP",
+                    "title": "Valores y metadatos (DTA)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores y metadatos (DTA)",
+                    "format": "ZIP",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-dta.zip",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.9/download/series-tiempo-dta.zip",
@@ -246,11 +809,123 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.10/download/series-tiempo-metadatos.dta",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_inicio",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_final",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Cantidad de observaciones contenidas en la serie.",
+                            "title": "serie_valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Días transcurridos desde el final del último período de tiempo para el que la serie tiene observaciones hasta la última fecha de actualización de la base de series de tiempo. Es una medida del período de tiempo más reciente no cubierto por las observaciones de la serie.",
+                            "title": "serie_dias_no_cubiertos",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Indicación estimativa de que el último valor de la serie está relativamente actualizado con respecto a la última fecha de actualización de la base.\n\nSe considera que una serie está desactualizada cuando su último valor pertenece a una fecha 14 días anterior (serie diaria), 3 meses anterior (serie mensual) o 2 períodos anterior (para el resto de las frecuencias posibles).",
+                            "title": "serie_actualizada",
+                            "type": "boolean"
+                        },
+                        {
+                            "description": "Última observación disponible de la serie.",
+                            "title": "serie_valor_ultimo",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Anteúltima observación disponible de la serie.",
+                            "title": "serie_valor_anterior",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Variación porcentual de la última observación disponible de la serie respecto de la anteúltima observación (la inmediatamente anterior).",
+                            "title": "serie_var_pct_anterior",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Listado de las series de tiempo disponibles en la base (DTA). Contiene los metadatos básicos de la series enriquecidos con indicadores descriptivos actualizados al día de la fecha.",
-                    "format": "DTA",
+                    "title": "Metadatos enriquecidos de las series (DTA)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: metadatos enriquecidos de las series (DTA)",
+                    "format": "DTA",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-metadatos.dta",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.10/download/series-tiempo-metadatos.dta",
@@ -259,11 +934,43 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.11/download/series-tiempo-valores.dta",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Valores de las series (DTA). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base.",
-                    "format": "DTA",
+                    "title": "Valores (DTA)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores (DTA)",
+                    "format": "DTA",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-valores.dta",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.11/download/series-tiempo-valores.dta",
@@ -272,11 +979,38 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.12/download/series-tiempo-fuentes.dta",
+                    "field": [
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece una serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Cantidad de series de la fuente primaria presentes en la base.",
+                            "title": "series_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Cantidad de observaciones de la fuente primaria presentes en la base.",
+                            "title": "valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_primer_valor",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_ultimo_valor",
+                            "type": "date"
+                        }
+                    ],
                     "description": "Fuentes primarias de las series (DTA). Contiene la cantidad de series y valores presentes en la base de cada una de las fuentes primarias compiladas.",
-                    "format": "DTA",
+                    "title": "Fuentes (DTA)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: fuentes (DTA)",
+                    "format": "DTA",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-fuentes.dta",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.12/download/series-tiempo-fuentes.dta",
@@ -285,11 +1019,93 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.13/download/series-tiempo-db.zip",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        }
+                    ],
                     "description": "Valores y metadatos básicos de las series (DB). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base, enriquecidos con sus metadatos básicos.",
-                    "format": "ZIP",
+                    "title": "Valores y metadatos (DB)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores y metadatos (DB)",
+                    "format": "ZIP",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-db.zip",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.13/download/series-tiempo-db.zip",
@@ -298,11 +1114,123 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.14/download/series-tiempo-metadatos.db",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Frecuencia de las observaciones de la serie en formato ISO 8601 para intervalos repetidos (Ej.: \"R/P3M\" significa \"cada 3 meses\" y marca que una serie es trimestral).",
+                            "title": "indice_tiempo_frecuencia",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Nombre normalizado corto de la serie compatible con su uso seguro en distintas aplicaciones. Tiene 60 caracteres como máximo y está compuesto por letras minúsculas de la \"a\" a la \"z\" sin caracteres especiales (sin tildes y sin la \"ñ\"), números y guiones bajos \"_\".",
+                            "title": "serie_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Unidades en las que están expresados los valores de la serie (Ej.: \"Millones de pesos de 1993\").",
+                            "title": "serie_unidades",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la serie.",
+                            "title": "serie_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título de la distribución a la que pertenece la serie.",
+                            "title": "distribucion_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene la distribución a la que pertenece la serie.",
+                            "title": "distribucion_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Responsable de la publicación del dataset.",
+                            "title": "dataset_responsable",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece la serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Título del dataset al que pertenece la serie.",
+                            "title": "dataset_titulo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Descripción completa de la información que contiene el dataset al que pertenece la serie.",
+                            "title": "dataset_descripcion",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_inicio",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la serie en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "serie_indice_final",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Cantidad de observaciones contenidas en la serie.",
+                            "title": "serie_valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Días transcurridos desde el final del último período de tiempo para el que la serie tiene observaciones hasta la última fecha de actualización de la base de series de tiempo. Es una medida del período de tiempo más reciente no cubierto por las observaciones de la serie.",
+                            "title": "serie_dias_no_cubiertos",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Indicación estimativa de que el último valor de la serie está relativamente actualizado con respecto a la última fecha de actualización de la base.\n\nSe considera que una serie está desactualizada cuando su último valor pertenece a una fecha 14 días anterior (serie diaria), 3 meses anterior (serie mensual) o 2 períodos anterior (para el resto de las frecuencias posibles).",
+                            "title": "serie_actualizada",
+                            "type": "boolean"
+                        },
+                        {
+                            "description": "Última observación disponible de la serie.",
+                            "title": "serie_valor_ultimo",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Anteúltima observación disponible de la serie.",
+                            "title": "serie_valor_anterior",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Variación porcentual de la última observación disponible de la serie respecto de la anteúltima observación (la inmediatamente anterior).",
+                            "title": "serie_var_pct_anterior",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Listado de las series de tiempo disponibles en la base (DB). Contiene los metadatos básicos de la series enriquecidos con indicadores descriptivos actualizados al día de la fecha.",
-                    "format": "DB",
+                    "title": "Metadatos enriquecidos de las series (DB)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: metadatos enriquecidos de las series (DB)",
+                    "format": "DB",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-metadatos.db",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.14/download/series-tiempo-metadatos.db",
@@ -311,11 +1239,43 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.15/download/series-tiempo-valores.db",
+                    "field": [
+                        {
+                            "description": "Identificador del catálogo al que pertenece la serie. Un catálogo es la unidad de documentación de activos de datos de un nodo.",
+                            "title": "catalogo_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador del dataset al que pertenece la serie. Es único dentro del catálogo al que pertenece el dataset.",
+                            "title": "dataset_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la distribución a la que pertenece la serie. Es único dentro del catálogo al que pertenece la distribución.",
+                            "title": "distribucion_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Identificador de la serie. Es único dentro de toda base de series de tiempo.",
+                            "title": "serie_id",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Fecha de la observación en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "indice_tiempo",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Valor numérico de la observación de una serie para una fecha determinada.",
+                            "title": "valor",
+                            "type": "number"
+                        }
+                    ],
                     "description": "Valores de las series (DB). Contiene todos los pares (fecha, valor) que componen cada una de las series de la base.",
-                    "format": "DB",
+                    "title": "Valores (DB)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: valores (DB)",
+                    "format": "DB",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-valores.db",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.15/download/series-tiempo-valores.db",
@@ -324,11 +1284,38 @@
                 },
                 {
                     "accessURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.16/download/series-tiempo-fuentes.db",
+                    "field": [
+                        {
+                            "description": "Fuente primaria de los datos contenidos en el dataset al que pertenece una serie.",
+                            "title": "dataset_fuente",
+                            "type": "string"
+                        },
+                        {
+                            "description": "Cantidad de series de la fuente primaria presentes en la base.",
+                            "title": "series_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Cantidad de observaciones de la fuente primaria presentes en la base.",
+                            "title": "valores_cant",
+                            "type": "number"
+                        },
+                        {
+                            "description": "Fecha de la primera observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_primer_valor",
+                            "type": "date"
+                        },
+                        {
+                            "description": "Fecha de la última observación de la fuente primaria en formato ISO 8601 sin horas, minutos ni segundos (YYYY-MM-DD). La fecha siempre indica el primer día del período al que hace referencia la observación (Ej.: \"2017-04-01\" hace referencia al segundo trimestre de 2017).",
+                            "title": "fecha_ultimo_valor",
+                            "type": "date"
+                        }
+                    ],
                     "description": "Fuentes primarias de las series (DB). Contiene la cantidad de series y valores presentes en la base de cada una de las fuentes primarias compiladas.",
-                    "format": "DB",
+                    "title": "Fuentes (DB)",
                     "dataset_identifier": "1",
                     "issued": "2017-09-25T16:11:44.853001-03:00",
-                    "title": "Base de Series de Tiempo: fuentes (DB)",
+                    "format": "DB",
                     "modified": "2017-09-25T16:11:44.853001-03:00",
                     "fileName": "series-tiempo-fuentes.db",
                     "downloadURL": "http://infra.datos.gob.ar/catalog/modernizacion/dataset/1/distribution/1.16/download/series-tiempo-fuentes.db",
@@ -336,7 +1323,22 @@
                     "identifier": "1.16"
                 }
             ],
-            "description": "Base de series de tiempo de distintas fuentes primarias y secundarias de la Administración Pública Nacional, compilada por el Ministerio de Modernización. Estas series son normalizadas por organismos de la APN de acuerdo a los estandares propuestos por Modernización."
+            "publisher": {
+                "mbox": "datos@modernizacion.gob.ar",
+                "name": "Ministerio de Modernización. Subsecretaría de Innovación Pública y Gobierno Abierto."
+            },
+            "language": [
+                "SPA"
+            ],
+            "license": "Open Data Commons Open Database License (ODbL)",
+            "modified": "2017-09-28T16:11:44.853001-03:00",
+            "accrualPeriodicity": "R/P1D",
+            "identifier": "1"
         }
-    ]
+    ],
+    "language": [
+        "SPA"
+    ],
+    "spatial": "ARG",
+    "identifier": "modernizacion"
 }

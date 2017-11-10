@@ -190,7 +190,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     - "R/P1M" para frecuencias mensuales.
     - "R/P1D" para frecuencias diarias.
 - **laps**: Define la cantidad de períodos a graficar en el gráfico. Estos periodos se corresponden con la unidad de frecuencia y toman los datos más actualizados. Ej.: Una serie de frecuencia mensual (R/P1M) con un laps = 24 graficará los últimos 24 meses con datos disponibles.
-- **indicators**: Es un `array` que contiene "objetos indicator" que definen un conjunto de propiedades necesarias para generar un indicador.
+- **indicators**: Es un `array` que contiene "objetos indicator" que definen un conjunto de propiedades necesarias para generar un indicador. Es importante tener en cuenta que todos los indicadores del gráfico, deben tener la misma unidad de medida.
 
 #### Composición de los indicadores (objetos `indicator`)
 

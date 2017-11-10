@@ -27869,7 +27869,7 @@ function renderChart(_chart) {
   });
   chartAxisY = d3.axisLeft(chartScaleY).tickFormat(function (d) {
     if (_chart.units_representation === "%") {
-      return formatNumberD3(d * 100);
+      return formatNumberD3(d * 100) + " %";
     } else {
       return d;
     }
@@ -28275,6 +28275,7 @@ function requestDatasets() {
 
 function addMetadata() {
   var data = STORAGE.datasets;
+
   data.forEach(function (_dataset) {
     downloadFile({
       local: _dataset.catalog_url
@@ -28650,7 +28651,7 @@ function initApp() {
       download = downloadFile(pathFile, 'cards'),
       start_mode = defineModeApp();
 
-  console.info("La aplicación se inicio en modo: " + start_mode);
+  // console.info("La aplicación se inicio en modo: " + start_mode);
   downloadIndicators(download, start_mode);
 }
 

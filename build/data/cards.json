@@ -1,10 +1,10 @@
 [{
     "id": "143.3_ICE_SERVIA_2004_A_25",
     "title": "Nivel de Actividad",
-    "download_url": "http://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/actividad_ied.xlsx",
     "short_name": "EMAE",
-    "units_representation": "1",
-    "laps": "5",
+    "units_representation": "%",
+    "laps": "12",
     "button": {
       "text": "",
       "url": ""
@@ -14,15 +14,15 @@
         "title": "Producto Interno Bruto",
         "description": "Millones de pesos a precios de 2004, serie desestacionalizada. Fuente: INDEC",
         "type": "line",
-        "units_representation": "%",
+        "units_representation": "1",
         "indicators": [{
           "id": "3.2_OGP_D_2004_T_17",
           "short_name": "PIB",
-          "color": "#FF6100",
+          "color": "#119C94",
           "type": "solid"
         }],
         "frequency": "R/P3M",
-        "laps": "24"
+        "laps": "48"
       },
       {
         "id": "chart_2",
@@ -33,11 +33,11 @@
         "indicators": [{
           "id": "3.2_DGCP_D_2004_T_30",
           "short_name": "Consumo Privado",
-          "color": "#3E2723",
+          "color": "#EA7980",
           "type": "solid"
         }],
         "frequency": "R/P3M",
-        "laps": "24"
+        "laps": "48"
       },
       {
         "id": "chart_3",
@@ -48,18 +48,18 @@
         "indicators": [{
             "id": "143.3_NO_PR_2004_A_31",
             "short_name": "Serie Desestacionalizada",
-            "color": "#FF6100",
+            "color": "#144F97",
             "type": "solid"
           },
           {
             "id": "143.3_NO_PR_2004_A_28",
             "short_name": "Serie Tendencia Ciclo",
-            "color": "#C81111",
+            "color": "#889712",
             "type": "solid"
           }
         ],
         "frequency": "R/P1M",
-        "laps": "24"
+        "laps": "12"
       },
       {
         "id": "chart_4",
@@ -70,25 +70,25 @@
         "indicators": [{
             "id": "14.2_E_M_2004_0_3",
             "short_name": "EMI",
-            "color": "#FF6100",
+            "color": "#DA8D03",
             "type": "solid"
           },
           {
             "id": "33.2_I_2004_M_4",
             "short_name": "ISAC",
-            "color": "#C81111",
+            "color": "#889712",
             "type": "solid"
           }
         ],
         "frequency": "R/P1M",
-        "laps": "24"
+        "laps": "12"
       }
     ]
   },
   {
     "id": "45.2_ECTDT_0_T_33",
     "title": "Empleo e Ingresos",
-    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/apendice3a.xlsx",
     "short_name": "Desempleo",
     "units_representation": "%",
     "laps": "5",
@@ -105,7 +105,7 @@
         "indicators": [{
             "id": "151.1_TL_ESTADAD_2012_M_20",
             "short_name": "Serie Original",
-            "color": "#FF6100",
+            "color": "#119C94",
             "type": "solid"
           },
           {
@@ -127,13 +127,13 @@
         "indicators": [{
             "id": "152.1_TL_ESTEST_2009_M_9",
             "short_name": "Serie Original",
-            "color": "#FF6100",
+            "color": "#866EAA",
             "type": "solid"
           },
           {
             "id": "152.1_TL_SIN_EST_2009_M_13",
             "short_name": "Serie Desestacionalizada",
-            "color": "#FF6100",
+            "color": "#DA8D03",
             "type": "solid"
           }
         ],
@@ -149,25 +149,25 @@
         "indicators": [{
             "id": "51.3_ICE_GRARES_0_M_24",
             "short_name": "Gran Buenos Aires",
-            "color": "#FF6100",
+            "color": "#144F97",
             "type": "solid"
           },
           {
             "id": "51.3_ICE_GRAOBA_0_M_19",
             "short_name": "Gran Córdoba",
-            "color": "#FF6100",
+            "color": "#EA7980",
             "type": "solid"
           },
           {
             "id": "51.3_ICE_GRARIO_0_M_19",
             "short_name": "Gran Rosario",
-            "color": "#FF6100",
+            "color": "#889712",
             "type": "solid"
           },
           {
             "id": "51.3_ICE_GRAOZA_0_M_19",
             "short_name": "Gran Mendoza",
-            "color": "#FF6100",
+            "color": "#119C94",
             "type": "solid"
           }
         ],
@@ -183,25 +183,25 @@
         "indicators": [{
             "id": "53.1_TRTA_0_0_37",
             "short_name": "Remuneración al trabajo asalariado",
-            "color": "#FF6100",
+            "color": "#144F97",
             "type": "solid"
           },
           {
             "id": "53.1_TIMB_0_0_25",
             "short_name": "Ingreso Bruto Mixto",
-            "color": "#FF6100",
+            "color": "#866EAA",
             "type": "solid"
           },
           {
             "id": "53.1_EBE_0_0_27",
             "short_name": "Excedente bruto de explotación",
-            "color": "#FF6100",
+            "color": "#EA7980",
             "type": "solid"
           },
           {
             "id": "53.1_TINSA_0_0_41",
             "short_name": "Impuestos netos de subsidios a la actividad",
-            "color": "#FF6100",
+            "color": "#DA8D03",
             "type": "solid"
           }
         ],
@@ -213,10 +213,10 @@
   {
     "id": "74.3_ISC_0_M_19",
     "title": "Sector Externo",
-    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/apendice5.xlsx",
     "short_name": "Saldo comercial",
     "units_representation": "1",
-    "laps": "5",
+    "laps": "6",
     "button": {
       "text": "",
       "url": ""
@@ -230,24 +230,24 @@
         "indicators": [{
             "id": "116.3_TCRMA_0_M_36",
             "short_name": "Tipo de Cambio Multilateral",
-            "color": "#FF6100",
+            "color": "#889712",
             "type": "solid"
           },
           {
             "id": "116.3_TCRB_0_M_23",
             "short_name": "Tipo de Cambio Brasil",
-            "color": "#C81111",
+            "color": "#119C94",
             "type": "solid"
           },
           {
             "id": "116.3_TCREU_0_M_31",
             "short_name": "Tipo de Cambio EEUU",
-            "color": "#F2BC1B",
+            "color": "#EA7980",
             "type": "solid"
           }
         ],
         "frequency": "R/P1M",
-        "laps": "24"
+        "laps": "48"
       },
       {
         "id": "chart_20",
@@ -258,11 +258,11 @@
         "indicators": [{
           "id": "82.2_ITI_2004_T_27",
           "short_name": "Índice de Términos de Intercambio",
-          "color": "#00579B",
+          "color": "#144F97",
           "type": "solid"
         }],
         "frequency": "R/P3M",
-        "laps": "24"
+        "laps": "48"
       },
       {
         "id": "chart_21",
@@ -273,11 +273,11 @@
         "indicators": [{
           "id": "74.3_ISC_0_M_19",
           "short_name": "Saldo Comercial",
-          "color": "#FF6100",
+          "color": "#DA8D03",
           "type": "solid"
         }],
         "frequency": "R/P1M",
-        "laps": "24"
+        "laps": "36"
       },
       {
         "id": "chart_22",
@@ -288,13 +288,13 @@
         "indicators": [{
             "id": "74.1_IET_0_A_16",
             "short_name": "Exportaciones",
-            "color": "#FF6100",
+            "color": "#866EAA",
             "type": "solid"
           },
           {
             "id": "74.1_IIT_0_A_25",
             "short_name": "Importaciones",
-            "color": "#C81111",
+            "color": "#889712",
             "type": "solid"
           }
         ],
@@ -306,10 +306,10 @@
   {
     "id": "131.1_FET_0_0_12",
     "title": "Economía Internacional",
-    "download_url": "http://www.mecon.gov.ar/download/infoeco/internacional_ied.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/internacional_ied.xlsx",
     "short_name": "Fed Funds",
     "units_representation": "1",
-    "laps": "5",
+    "laps": "6",
     "button": {
       "text": "",
       "url": ""
@@ -323,7 +323,7 @@
         "indicators": [{
           "id": "121.3_GC_0_0_19",
           "short_name": "Índice de precios de Materias Primas.",
-          "color": "#00579B",
+          "color": "#119C94",
           "type": "solid"
         }],
         "frequency": "R/P1M",
@@ -338,19 +338,19 @@
         "indicators": [{
             "id": "131.1_FET_0_0_12",
             "short_name": "FED Funds",
-            "color": "#00579B",
+            "color": "#EA7980",
             "type": "solid"
           },
           {
             "id": "131.1_MZT_0_0_18",
             "short_name": "Eurozona",
-            "color": "#000026",
+            "color": "#144F97",
             "type": "solid"
           },
           {
             "id": "131.1_SBT_0_0_17",
             "short_name": "Selic Brasil",
-            "color": "#00D5DE",
+            "color": "#889712",
             "type": "solid"
           }
         ],
@@ -366,25 +366,25 @@
         "indicators": [{
             "id": "140.1_A_0_M_9",
             "short_name": "Brasil",
-            "color": "#00579B",
+            "color": "#DA8D03",
             "type": "solid"
           },
           {
             "id": "140.1_E_0_M_8",
             "short_name": "Estados Unidos",
-            "color": "#000026",
+            "color": "#889712",
             "type": "solid"
           },
           {
             "id": "140.1_P_0_M_8",
             "short_name": "China",
-            "color": "#00D5DE",
+            "color": "#119C94",
             "type": "solid"
           },
           {
             "id": "140.1_C_0_M_5",
             "short_name": "Eurozona",
-            "color": "#00D5DE",
+            "color": "#866EAA",
             "type": "solid"
           }
         ],
@@ -396,10 +396,10 @@
   {
     "id": "89.2_TS_INTE_PM_0_D_16",
     "title": "Dinero y Bancos",
-    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/apendice8.xlsx",
     "short_name": "Tasa de política monetaria",
     "units_representation": "1",
-    "laps": "5",
+    "laps": "30",
     "button": {
       "text": "",
       "url": ""
@@ -413,19 +413,19 @@
         "indicators": [{
             "id": "89.2_TS_INTEALL_0_D_18",
             "short_name": "Call",
-            "color": "#00579B",
+            "color": "#DA8D03",
             "type": "solid"
           },
           {
             "id": "89.2_TS_INTE_PM_0_D_16",
             "short_name": "Tasa de Política Monetaria",
-            "color": "#000026",
+            "color": "#144F97",
             "type": "solid"
           },
           {
             "id": "89.2_TS_INTELAR_0_D_20",
             "short_name": "Badlar privada",
-            "color": "#00D5DE",
+            "color": "#EA7980",
             "type": "solid"
           }
         ],
@@ -441,7 +441,7 @@
         "indicators": [{
           "id": "92.1_RID_0_0_32",
           "short_name": "Reservas Internacionales",
-          "color": "#00579B",
+          "color": "#889712",
           "type": "solid"
         }],
         "frequency": "R/P1M",
@@ -456,7 +456,7 @@
         "indicators": [{
           "id": "90.1_DTDPRI_0_0_33",
           "short_name": "Depósitos en dólares del Sector Privado",
-          "color": "#00579B",
+          "color": "#119C94",
           "type": "solid"
         }],
         "frequency": "R/P1M",
@@ -467,10 +467,10 @@
   {
     "id": "145.3_INGNACUAL_DICI_M_38",
     "title": "Precios",
-    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/apendice4.xlsx",
     "short_name": "IPC Nacional",
     "units_representation": "%",
-    "laps": "5",
+    "laps": "6",
     "button": {
       "text": "",
       "url": ""
@@ -484,13 +484,13 @@
         "indicators": [{
             "id": "145.3_INGNACUAL_DICI_M_38",
             "short_name": "Nivel General",
-            "color": "#00579B",
+            "color": "#144F97",
             "type": "solid"
           },
           {
             "id": "173.1_INUCLEOLEO_DIC-_0_10",
             "short_name": "Núcleo",
-            "color": "#000026",
+            "color": "#866EAA",
             "type": "solid"
           }
         ],
@@ -506,19 +506,19 @@
         "indicators": [{
             "id": "106.4_I1NGVM_2015_M_41",
             "short_name": "Precios Mayoristas",
-            "color": "#00579B",
+            "color": "#EA7980",
             "type": "solid"
           },
           {
             "id": "107.4_I1NGVM_2015_M_41",
             "short_name": "Precios Básicos Mayoristas",
-            "color": "#000026",
+            "color": "#DA8D03",
             "type": "solid"
           },
           {
             "id": "108.4_I1NGVM_2015_M_40",
             "short_name": "Precios Básicos al Productor",
-            "color": "#00D5DE",
+            "color": "#889712",
             "type": "solid"
           }
         ],
@@ -534,7 +534,7 @@
         "indicators": [{
           "id": "109.3_I1NGVA_1993_A_38",
           "short_name": "Costo de la construcción",
-          "color": "#00579B",
+          "color": "#119C94",
           "type": "solid"
         }],
         "frequency": "R/P1M",
@@ -545,10 +545,10 @@
   {
     "id": "169.1_MALVAL_0_0_6",
     "title": "Finanzas",
-    "download_url": "http://www.mecon.gov.ar/download/infoeco/apendice-financiero.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/apendice-financiero.xlsx",
     "short_name": "Índice Merval",
     "units_representation": "1",
-    "laps": "5",
+    "laps": "30",
     "button": {
       "text": "",
       "url": ""
@@ -562,11 +562,11 @@
         "indicators": [{
           "id": "169.1_MALVAL_0_0_6",
           "short_name": "Merval",
-          "color": "#00579B",
+          "color": "#EA7980",
           "type": "solid"
         }],
         "frequency": "R/P1D",
-        "laps": "24"
+        "laps": "60"
       },
       {
         "id": "chart_27",
@@ -577,16 +577,16 @@
         "indicators": [{
           "id": "168.1_FRO_ROF3M_D_0_0_19",
           "short_name": "Futuro ROFEX USD 3M",
-          "color": "#00579B",
+          "color": "#144F97",
           "type": "solid"
         }, {
           "id": "168.1_T_CAMBI500_D_0_0_17",
           "short_name": "Tipo de Cambio A3500",
-          "color": "#00579B",
+          "color": "#DA8D03",
           "type": "solid"
         }],
         "frequency": "R/P1D",
-        "laps": "24"
+        "laps": "60"
       },
       {
         "id": "chart_28",
@@ -597,7 +597,7 @@
         "indicators": [{
           "id": "171.3_FPATRIMTAL_0_0_25",
           "short_name": "Patrimonio Neto Total",
-          "color": "#00579B",
+          "color": "#866EAA",
           "type": "solid"
         }],
         "frequency": "R/P1M",
@@ -608,10 +608,10 @@
   {
     "id": "172.3_TL_RECA_IA_M_0_0_24",
     "title": "Finanzas Públicas",
-    "download_url": "http://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
+    "download_url": "https://www.economia.gob.ar/download/infoeco/apendice6.xlsx",
     "short_name": "Recursos tributarios",
     "units_representation": "%",
-    "laps": "5",
+    "laps": "6",
     "button": {
       "text": "",
       "url": ""
@@ -625,19 +625,20 @@
       "indicators": [{
           "id": "172.3_TL_RECA_IA_M_0_0_24",
           "short_name": "Recaudación Total",
-          "color": "#00579B",
+          "color": "#889712",
           "type": "solid"
         },
         {
           "id": "172.3_SOTAL_D_IA_M_0_0_19",
           "short_name": "Recaudación DGI",
-          "color": "#00579B",
+          "color": "#119C94",
           "type": "solid"
         }
       ],
       "frequency": "R/P1M",
       "laps": "24"
-    }, {
+    },
+    {
       "id": "chart_10",
       "title": "Recaudación Nacional",
       "description": "Variación Interanual. Fuente: Ministerio de Hacienda",
@@ -646,19 +647,21 @@
       "indicators": [{
           "id": "172.3_TL_RECA_IA_M_0_0_24",
           "short_name": "Recaudación Total",
-          "color": "#00579B",
+          "color": "#EA7980",
           "type": "solid"
         },
         {
-          "id": "172.3_SOTAL_D_IA_M_0_0_19",
+          "id": "172.3_SOTAL_D_IAR_M_0_0_19",
           "short_name": "Recaudación DGA",
-          "color": "#00579B",
+          "color": "#144F97",
           "type": "solid"
         }
       ],
       "frequency": "R/P1M",
       "laps": "24"
-    }, {
+    },
+
+    {
       "id": "chart_11",
       "title": "Recaudación Nacional",
       "description": "Variación Interanual. Fuente: Ministerio de Hacienda",
@@ -667,13 +670,13 @@
       "indicators": [{
           "id": "172.3_TL_RECA_IA_M_0_0_24",
           "short_name": "Recaudación Total",
-          "color": "#00579B",
+          "color": "#DA8D03",
           "type": "solid"
         },
         {
           "id": "172.3_SRIDAD_IA_M_0_0_23",
           "short_name": "Recaudación Seguridad Social",
-          "color": "#00579B",
+          "color": "#889712",
           "type": "solid"
         }
       ],
@@ -688,11 +691,37 @@
       "indicators": [{
         "id": "172.1_GO_TOTAPIB_0_0_51",
         "short_name": "Gasto Total",
-        "color": "#00579B",
+        "color": "#119C94",
         "type": "solid"
       }],
       "frequency": "R/P1Y",
       "laps": "24"
     }]
+  },
+  {
+      "id":                   "38.3_CEM_1994_M_7",
+      "title":                "Cadenas Productivas",
+    "download_url":         "/catalogo-sspmi/dataset/dataset-indicadores-sectoriales.zip",
+      "short_name":           "Despachos de Cemento",
+      "units_representation": "1",
+      "laps":                 "6",
+      "button": {
+        "text":               "Ver informes",
+        "url":                "https://www.minhacienda.gob.ar/secretarias/politica-economica/programacion-microeconomica/informes-de-cadenas-productivas/"
+      },
+      "charts":               []
+  },
+  {
+      "id":                   "154.2_COBAOBA_S_0_0_7",
+      "title":                "Provincias",
+    "download_url":         "/catalogo-sspmi/provincias/99_indicadoresprovinciales_dataset.xlsx",
+      "short_name":           "Asalariados Provincia de Córdoba",
+      "units_representation": "1",
+      "laps":                 "6",
+      "button": {
+        "text":               "Ver informes",
+        "url":                "https://www.minhacienda.gob.ar/secretarias/politica-economica/programacion-microeconomica/informes-productivos-provinciales/"
+      },
+      "charts":               []
   }
 ]

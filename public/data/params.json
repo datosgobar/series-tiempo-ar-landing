@@ -1,7 +1,7 @@
 {
-    "credits": "Ministerio de Hacienda",
-    "credits_url": "https://datosgobar.github.io/landing-ied/",
-    "path_files": "http://www.example.com/{serie_id}.json",
-    "path_cards": "./public/data/cards.json",
-    "path_datasets": "./public/data/datasets.json"
+  "credits": "Ministerio de Hacienda",
+  "credits_url": "https://datosgobar.github.io/landing-ied/",
+  "path_files": "http://www.example.com/{serie_id}.json",
+  "path_cards": "./public/data/cards.json",
+  "path_datasets": "./public/data/datasets.json"
 }
