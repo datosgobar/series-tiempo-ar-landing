@@ -119,19 +119,19 @@ function parseHumanFrecuency(_frecuency, _laps) {
   var frecuency = void 0;
 
   switch (_frecuency) {
-    case 'R/P1Y':
+    case 'year':
       frecuency = 'años';
       break;
-    case 'R/P6M':
+    case 'semester':
       frecuency = 'semestres';
       break;
-    case 'R/P3M':
+    case 'quarter':
       frecuency = 'trimestres';
       break;
-    case 'R/P1M':
+    case 'month':
       frecuency = 'meses';
       break;
-    case 'R/P1D':
+    case 'day':
       frecuency = 'días';
       break;
     default:
@@ -160,9 +160,9 @@ function parseFormatDate(format, date) {
   date = moment(date).zone('+00:00');
 
   switch (format) {
-    case 'R/P1Y':
+    case 'year':
       return date.format('YYYY');
-    case 'R/P6M':
+    case 'semester':
       var semester = Math.ceil(date.format('M') / 6);
 
       if (short) {
@@ -172,7 +172,7 @@ function parseFormatDate(format, date) {
       }
 
       break;
-    case 'R/P3M':
+    case 'quarter':
       var trimester = Math.ceil(date.format('M') / 3);
 
       if (short) {
@@ -182,9 +182,9 @@ function parseFormatDate(format, date) {
       }
 
       break;
-    case 'R/P1M':
+    case 'month':
       return date.format('MMM YY');
-    case 'R/P1D':
+    case 'day':
       return date.format('D MMM YY');
     default:
       return 'Frecuencia no soportada'; // TODO ##0001 - Definir valor por defecto
@@ -1202,13 +1202,13 @@ function changeView(_nameView, _cardId) {
 
 function injectCardData(_card) {
   var data = STORAGE[_card.id].data,
-      metadata = STORAGE[_card.id].metadata,
-      cardComponent = $(document.getElementById(metadata.field_id));
+      metadata = STORAGE[_card.id].meta,
+      cardComponent = $(document.getElementById(metadata[1]['field']['id']));
 
-  cardComponent.find('.frequency')[0].innerHTML = parseFormatDate(metadata.distribution_index_frequency, data[data.length - 1][0], true);
+  cardComponent.find('.frequency')[0].innerHTML = parseFormatDate(metadata[0]['frequency'], data[data.length - 1][0], true);
   cardComponent.find('.units_representation')[0].innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
-  cardComponent.find('.units')[0].innerHTML = metadata.field_units;
-  cardComponent.find('.human_frecuency')[0].innerHTML = parseHumanFrecuency(metadata.distribution_index_frequency, _card.laps);
+  cardComponent.find('.units')[0].innerHTML = metadata[1]['field']['units'];
+  cardComponent.find('.human_frecuency')[0].innerHTML = parseHumanFrecuency(metadata[0]['frequency'], _card.laps);
   cardComponent.find('.loading').remove();
 
   renderMiniChart(_card, cardComponent.find('.mini-chart'));

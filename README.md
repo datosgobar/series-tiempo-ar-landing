@@ -56,13 +56,13 @@ $ gulp server
 Para modificar el código, usar los archivos del directorio `./build/` y luego compilar con `Gulp`:
 
 ```bash
-$ gulp compile
+$ gulp app_compile
 ```
 
 También se puede generar watches con el comando:
 
 ```bash
-$ gulp watch
+$ gulp app_watches
 ```
 
 Los archivos compilados se guardan en el directorio `./public/`.
