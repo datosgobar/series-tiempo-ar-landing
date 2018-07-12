@@ -113,7 +113,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
             {"id": "4.2_OGP_2004_T_17", "short_name": "PBI", "color": "#FF6100", "type": "solid"},
             {"id": "4.2_OGP_2004_T_18", "short_name": "PBI", "color": "#FF6100", "type": "solid"}
         ],
-        "frequency": "R/P3M",
+        "frequency": "quarter",
         "laps": "24"
     }, {
         "id": "chart_2",
@@ -125,7 +125,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
             {"id": "4.2_OGP_2004_T_17", "short_name": "PBI", "color": "#FF6100", "type": "solid"},
             {"id": "4.2_OGP_2004_T_18", "short_name": "PBI", "color": "#FF6100", "type": "solid"}
         ],
-        "frequency": "R/P3M",
+        "frequency": "quarter",
         "laps": "24"
     }]
 }]
@@ -157,7 +157,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
 - **units_representation**: Define la transformación del valor recibido por el indicador. Las opciones disponibles son:
     - "%" multiplica el valor * 100.
     - "1" no recibe ninguna transformación.
-- **laps**: Define la cantidad de períodos a graficar en la tarjeta. Estos periodos se corresponden con la unidad de frecuencia y toman los datos más actualizados. Ej.: Una serie de frecuencia mensual (R/P1M) con un laps = 24 graficará los últimos 24 meses con datos disponibles.
+- **laps**: Define la cantidad de períodos a graficar en la tarjeta. Estos periodos se corresponden con la unidad de frecuencia y toman los datos más actualizados. Ej.: Una serie de frecuencia mensual (month) con un laps = 24 graficará los últimos 24 meses con datos disponibles.
 - **button**: Permite definir un texto y una url personalizada para el botón de la tarjeta.
 - **charts**: Es un `array` que contiene "objetos chart" que definen un conjunto de propiedades necesarias para generar un gráfico.
 
@@ -170,7 +170,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     "description": "En millones de pesos, a precios de 2004.",
     "type": "line",
     "units_representation": "1",
-    "frequency": "R/P3M",
+    "frequency": "quarter",
     "laps": "24",
     "indicators": []
 }
@@ -184,12 +184,12 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     - "%" multiplica el valor * 100.
     - "1" no recibe ninguna transformación.
 - **frequency**: Define la frecuencia de datos del gráfico bajo el estandar [ISO 8601]('https://www.iso.org/iso-8601-date-and-time-format.html'). Las opciones disponibles son:
-    - "R/P1Y" para frecuencias anuales.
-    - "R/P6M" para frecuencias semestrales.
-    - "R/P3M" para frecuencias trimestrales.
-    - "R/P1M" para frecuencias mensuales.
-    - "R/P1D" para frecuencias diarias.
-- **laps**: Define la cantidad de períodos a graficar en el gráfico. Estos periodos se corresponden con la unidad de frecuencia y toman los datos más actualizados. Ej.: Una serie de frecuencia mensual (R/P1M) con un laps = 24 graficará los últimos 24 meses con datos disponibles.
+    - "year" para frecuencias anuales.
+    - "semester" para frecuencias semestrales.
+    - "trimester" para frecuencias trimestrales.
+    - "month" para frecuencias mensuales.
+    - "day" para frecuencias diarias.
+- **laps**: Define la cantidad de períodos a graficar en el gráfico. Estos periodos se corresponden con la unidad de frecuencia y toman los datos más actualizados. Ej.: Una serie de frecuencia mensual (month) con un laps = 24 graficará los últimos 24 meses con datos disponibles.
 - **indicators**: Es un `array` que contiene "objetos indicator" que definen un conjunto de propiedades necesarias para generar un indicador. Es importante tener en cuenta que todos los indicadores del gráfico, deben tener la misma unidad de medida.
 
 #### Composición de los indicadores (objetos `indicator`)
@@ -276,7 +276,7 @@ Al solicitar un archivo de indicador se espera encontrar, al menos, que estén l
     ],
     "metadata": {
         "field_units": "Millones de pesos a precios de 2004"
-        "distribution_index_frequency": "R/P3M",
+        "distribution_index_frequency": "trimester",
         "field_id": "4.2_DGCP_2004_T_30",
     }
 }
