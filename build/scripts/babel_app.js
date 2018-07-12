@@ -1328,8 +1328,8 @@ function injectCardData(_card) {
     metadata = STORAGE[_card.id].meta,
     cardComponent = $(document.getElementById(metadata[1]['field']['id']));
 
-  cardComponent.find('.frequency')[0].innerHTML = parseFormatDate(metadata[0]['frequency'], data[data.length - 1][0], true);
-  cardComponent.find('.units_representation')[0].innerHTML = parseValueIndicator(_card.units_representation, data[data.length - 1][1]);
+  cardComponent.find('.frequency')[0].innerHTML = parseFormatDate(metadata[0]['frequency'], data[0][0], true);
+  cardComponent.find('.units_representation')[0].innerHTML = parseValueIndicator(_card.units_representation, data[0][1]);
   cardComponent.find('.units')[0].innerHTML = metadata[1]['field']['units'];
   cardComponent.find('.human_frecuency')[0].innerHTML = parseHumanFrecuency(metadata[0]['frequency'], _card.laps);
   cardComponent.find('.loading').remove();
@@ -1349,7 +1349,7 @@ function renderMiniChart(_cardData, _element) {
   data = STORAGE[_cardData.id].data;
   data = data
     .filter((d) => (d[1] !== null))
-    .slice(-1 * parseInt((_cardData.laps <= data.length) ? (_cardData.laps) : (data.length)))
+    .slice(0, parseInt((_cardData.laps <= data.length) ? (_cardData.laps) : (data.length)))
     .map((d) => {
       return {
         date: moment(d[0]).zone('+00:00'),
@@ -1400,8 +1400,8 @@ function renderMiniChart(_cardData, _element) {
   chartContainer.append('circle')
     .style('fill', STORAGE.colors.gobar_dark)
     .attr('r', 4)
-    .attr('cx', (d) => scaleX(data[data.length - 1].date))
-    .attr('cy', (d) => scaleY(data[data.length - 1].value));
+    .attr('cx', (d) => scaleX(data[0].date))
+    .attr('cy', (d) => scaleY(data[0].value));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
