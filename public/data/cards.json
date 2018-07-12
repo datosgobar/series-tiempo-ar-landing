@@ -21,7 +21,7 @@
           "color": "#119C94",
           "type": "solid"
         }],
-        "frequency": "R/P3M",
+        "frequency": "quarter",
         "laps": "48"
       },
       {
@@ -36,7 +36,7 @@
           "color": "#EA7980",
           "type": "solid"
         }],
-        "frequency": "R/P3M",
+        "frequency": "quarter",
         "laps": "48"
       },
       {
@@ -58,7 +58,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "12"
       },
       {
@@ -80,7 +80,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "12"
       }
     ]
@@ -115,7 +115,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -137,7 +137,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -171,7 +171,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -205,7 +205,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P3M",
+        "frequency": "quarter",
         "laps": "8"
       }
     ]
@@ -246,7 +246,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "48"
       },
       {
@@ -261,7 +261,7 @@
           "color": "#144F97",
           "type": "solid"
         }],
-        "frequency": "R/P3M",
+        "frequency": "quarter",
         "laps": "48"
       },
       {
@@ -276,7 +276,7 @@
           "color": "#DA8D03",
           "type": "solid"
         }],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "36"
       },
       {
@@ -298,7 +298,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1Y",
+        "frequency": "year",
         "laps": "24"
       }
     ]
@@ -326,7 +326,7 @@
           "color": "#119C94",
           "type": "solid"
         }],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -354,7 +354,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -388,7 +388,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       }
     ]
@@ -429,7 +429,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1D",
+        "frequency": "day",
         "laps": "24"
       },
       {
@@ -444,7 +444,7 @@
           "color": "#889712",
           "type": "solid"
         }],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -459,7 +459,7 @@
           "color": "#119C94",
           "type": "solid"
         }],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       }
     ]
@@ -494,7 +494,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -522,7 +522,7 @@
             "type": "solid"
           }
         ],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       },
       {
@@ -537,7 +537,7 @@
           "color": "#119C94",
           "type": "solid"
         }],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       }
     ]
@@ -565,7 +565,7 @@
           "color": "#EA7980",
           "type": "solid"
         }],
-        "frequency": "R/P1D",
+        "frequency": "day",
         "laps": "60"
       },
       {
@@ -585,7 +585,7 @@
           "color": "#DA8D03",
           "type": "solid"
         }],
-        "frequency": "R/P1D",
+        "frequency": "day",
         "laps": "60"
       },
       {
@@ -600,7 +600,7 @@
           "color": "#866EAA",
           "type": "solid"
         }],
-        "frequency": "R/P1M",
+        "frequency": "month",
         "laps": "24"
       }
     ]
@@ -635,7 +635,7 @@
           "type": "solid"
         }
       ],
-      "frequency": "R/P1M",
+      "frequency": "month",
       "laps": "24"
     },
     {
@@ -657,7 +657,7 @@
           "type": "solid"
         }
       ],
-      "frequency": "R/P1M",
+      "frequency": "month",
       "laps": "24"
     },
 
@@ -680,7 +680,7 @@
           "type": "solid"
         }
       ],
-      "frequency": "R/P1M",
+      "frequency": "month",
       "laps": "24"
     }, {
       "id": "chart_12",
@@ -694,7 +694,7 @@
         "color": "#119C94",
         "type": "solid"
       }],
-      "frequency": "R/P1Y",
+      "frequency": "year",
       "laps": "24"
     }]
   },
