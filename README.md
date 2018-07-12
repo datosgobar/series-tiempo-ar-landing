@@ -261,6 +261,8 @@ La aplicación está programada para realizar 2 solicitudes `GET`.
 * En primer instancia, busca el archivo del indicador en la ruta definida en el campo, `path_files` (se recomienda que sea una `URL` externa a la aplicación).
 * Si la primer solicitud falla, genera una nueva solicitud al archivo local, por defecto `./public/data/series`. En caso de no encontrar el archivo en ambas solicitudes, devuelve un error en la vista.
 
+**Para evitar que se rompa la experiencia web porque la API o URL externa no está disponible, se recomienda actualizar con cierta periodicidad una copia local de las series que sirve de respaldo** incluso aunque no esté constantemente actualizado.
+
 Al solicitar un archivo de indicador se espera encontrar, al menos, que estén los siguientes campos:
 
 #### Estructura
