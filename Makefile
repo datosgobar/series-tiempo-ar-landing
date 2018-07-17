@@ -14,7 +14,7 @@ setup:
 server:
 	gulp server
 
-compile:
+build:
 	gulp app_compile
 
 watch:
