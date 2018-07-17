@@ -1,6 +1,6 @@
-# [Landing de Series de Tiempo](http://datosgobar.github.io/series-tiempo-landing)
+# [Landing de Series de Tiempo](http://datosgobar.github.io/series-tiempo-ar-landing)
 
-Landing web modular y parametrizada para publicar datos y gráficos basados en bases de series de tiempo.
+Landing web modular y parametrizada para armar un dashboard de indicadores con datos y gráficos, basado en la [API de Series de Tiempo de la República Argentina](http://series-tiempo-ar-api.readthedocs.io/).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -24,7 +24,7 @@ Landing web modular y parametrizada para publicar datos y gráficos basados en b
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-Los ejemplos utilizados en este repositorio para mostrar su uso y funcionalidades están basados en el rediseño de la landing de [Información Económica al Día](https://www.minhacienda.gob.ar/secretarias/politica-economica/programacion-macroeconomica/), primer caso de uso de este proyecto.
+Los ejemplos utilizados en este repositorio para mostrar su uso y funcionalidades están basados en el rediseño de la landing del [Ministerio de Hacienda](https://www.minhacienda.gob.ar/datos/), primer caso de uso de este proyecto.
 
 El proyecto debe considerarse en **beta** y puede sufrir modificaciones sustanciales en su funcionalidad, interfaz o parámetros de configuración en el futuro.
 
@@ -130,7 +130,7 @@ Podrás crear tantas tarjetas, gráficos e indicadores como desees. El archivo c
     }]
 }]
 ```
-[Ver ejemplo completo del archivo cards.json](https://github.com/datosgobar/landing-ied/blob/master/build/data/cards.json)
+[Ver ejemplo completo del archivo cards.json](https://github.com/datosgobar/series-tiempo-ar-landing/blob/master/build/data/cards.json)
 
 #### Composición de las tarjetas (objetos `card`)
 
@@ -238,17 +238,17 @@ En la ruta `./build/data` se encuentra el archivo `params.json` que nos permite 
 
 ```bash
 {
-    "credits": "",
-    "credits_url": "",
-    "path_files": "",
-    "path_cards": "",
-    "path_datasets": ""
+  "credits": "Ministerio de Hacienda",
+  "credits_url": "https://datosgobar.github.io/series-tiempo-ar-landing/",
+  "path_files": "http://apis.datos.gob.ar/series/api/series/?ids={serie_id}&limit=1000&sort=desc",
+  "path_cards": "./public/data/cards.json",
+  "path_datasets": "./public/data/datasets.json"
 }
 ```
 
 - **credits**: Representa el texto del enlace que se muestra cuando se genera un iframe.
 - **credits_url**: Contiene la url a la que apunta en enlace del iframe.
-- **path_files**: Contiene la ruta de acceso a los archivos de indicadores (la fuente de los datos). Es importante mencionar que en la ruta de acceso, se debe reemplazar el ID del indicador por el string `{serie_id}`. Por ejemplo, `http://www.example.com/{serie_id}.json`.
+- **path_files**: Contiene la ruta de acceso a los archivos de indicadores (la fuente de los datos). Es importante mencionar que en la ruta de acceso, se debe reemplazar el ID del indicador por el string `{serie_id}`. Por ejemplo, `http://apis.datos.gob.ar/series/api/series/?ids={serie_id}&limit=1000&sort=desc`. 
 - **path_cards**: Contiene la ruta de acceso al archivo de configuración de las tarjetas.
 - **path_datasets**: Contiene la ruta de acceso al archivo de configuración de los datasets.
 
@@ -263,38 +263,96 @@ La aplicación está programada para realizar 2 solicitudes `GET`.
 
 **Para evitar que se rompa la experiencia web porque la API o URL externa no está disponible, se recomienda actualizar con cierta periodicidad una copia local de las series que sirve de respaldo** incluso aunque no esté constantemente actualizado.
 
+Una instancia de esta landing, podría consultar directamente a la [API de Series de Tiempo de la República Argentina](http://series-tiempo-ar-api.readthedocs.io/) pero también podría:
+
+* Consultar un servidor local o externo diferente que contenga una [instancia propia de la API](https://github.com/datosgobar/series-tiempo-ar-api).
+* Consultar un servidor local o externo diferente que contenga consultas cacheadas a la API.
+* Consultar un servidor local o externo diferente que contenga archivos JSON generados por otro sistema con la misma estructura que la API.
+
 Al solicitar un archivo de indicador se espera encontrar, al menos, que estén los siguientes campos:
 
 #### Estructura
 
 ```bash
 {
-    "data": [
-        ["2004-01-01T00:00:00.000Z", 49687.3421906],
-        ["2004-04-01T00:00:00.000Z", 52072.2779573],
-        ["2004-07-01T00:00:00.000Z", 53720.8162569]
-    ],
-    "metadata": {
-        "field_units": "Millones de pesos a precios de 2004"
-        "distribution_index_frequency": "trimester",
-        "field_id": "4.2_DGCP_2004_T_30",
+  "data": [
+    ["2015-12-01", 0.05],
+    ["2015-11-01", 0.05],
+    ["2015-10-01", 0.05],
+    ["2015-09-01", 0.05],
+    ["2015-08-01", 0.05],
+    ["2015-07-01", 0.05],
+    ["2015-06-01", 0.05],
+    ["2015-05-01", 0.05],
+    ["2015-04-01", 0.05],
+    ["2015-03-01", 0.05],
+    ["2015-02-01", 0.05],
+    ["2015-01-01", 0.05],
+    ["2014-12-01", 0.05],
+    ["2014-11-01", 0.05],
+    ["2014-10-01", 0.05],
+    ["2014-09-01", 0.05],
+    ["2014-08-01", 0.15],
+    ["2014-07-01", 0.15],
+    ["2014-06-01", 0.15],
+    ["2014-05-01", 0.25],
+    ["2014-04-01", 0.25],
+    ["2014-03-01", 0.25],
+    ["2014-02-01", 0.25],
+    ["2014-01-01", 0.25]
+  ],
+  "meta": [
+    {
+      "frequency": "month",
+      "start_date": "2018-06-01",
+      "end_date": "1998-12-01"
+    },
+    {
+      "catalog": {
+        "title": "Datos Programación Macroeconómica"
+      },
+      "dataset": {
+        "title": "Principales Tasas de Interés de Referencia",
+        "issued": "2017-09-28",
+        "source": "Bancos Centrales",
+        "description": "Principales Tasas de Interés de Referencia de las principales economías del mundo. Frecuencia Mensual"
+      },
+      "distribution": {
+        "title": "Principales tasas de Interés de Referencia de las principales economías del mundo. Valores mensuales",
+        "downloadURL": "http://infra.datos.gob.ar/catalog/sspm/dataset/131/distribution/131.1/download/principales-tasas-interes-referencia-principales-economias-mundo-frecuencia-mensual.csv"
+      },
+      "field": {
+        "description": "MRO (Main Refinancing Operations) - Zona Euro - Tasa",
+        "units": "Porcentaje",
+        "id": "131.1_MZT_0_0_18"
+      }
     }
+  ],
+  "params": {
+    "ids": "131.1_MZT_0_0_18",
+    "limit": "1000",
+    "sort": "desc",
+    "identifiers": [
+      {
+        "id": "131.1_MZT_0_0_18",
+        "distribution": "131.1",
+        "dataset": "131"
+      }
+    ]
+  }
 }
 ```
 
-[Ver ejemplo completo de un indicador](https://github.com/datosgobar/landing-ied/blob/master/build/data/cards.json).
+[Ver ejemplo completo de un indicador](https://github.com/datosgobar/series-tiempo-ar-landing/blob/master/build/data/series/131.1_MZT_0_0_18.json).
 
 #### Metadatos utilizados por la aplicación
 
 - **data**: Es un `array` que contiene `arrays` con el formato `[fecha, valor]`. Estos datos son utilizados para renderizar el gráfico.
-- **metadata**: Es un `array` que contiene información contextual del indicador.
-    - *field_units*: Este campo se utiliza para mostrar el tipo de unidad del indicador.
-    - *distribution_index_frequency*: Este campo se utiliza para definir la frecuencia del indicador.
-    - *field_id*: Este campo se utiliza para referenciar al indicador dentro de la aplicación.
+- **meta**: Es un `array` que contiene información contextual del indicador y de su índice de tiempo.
 
 ## Contacto
 
-Te invitamos a [crearnos un issue](https://github.com/datosgobar/landing-ied/issues/new) en caso de que encuentres algún bug o tengas feedback de alguna parte del sitio de `landing-ied`.
+Te invitamos a [crearnos un issue](https://github.com/datosgobar/series-tiempo-ar-landing/issues/new) en caso de que encuentres algún bug o tengas feedback de alguna parte del sitio de `series-tiempo-ar-landing`.
 Para todo lo demás, podés mandarnos tu comentario o consulta a [datos@modernizacion.gob.ar](mailto:datos@modernizacion.gob.ar).
 
 ## Licencia
