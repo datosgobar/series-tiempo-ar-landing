@@ -1,7 +1,7 @@
 {
   "credits": "Ministerio de Hacienda",
-  "credits_url": "https://datosgobar.github.io/landing-ied/",
-  "path_files": "http://apis-stg.datos.gob.ar/series/api/series/?ids={serie_id}&limit=1000&sort=desc",
+  "credits_url": "https://datosgobar.github.io/series-tiempo-ar-landing/",
+  "path_files": "http://apis.datos.gob.ar/series/api/series/?ids={serie_id}&limit=1000&sort=desc",
   "path_cards": "./public/data/cards.json",
   "path_datasets": "./public/data/datasets.json"
 }

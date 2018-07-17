@@ -1,3 +1,5 @@
+.PHONY: setup server build watch doctoc
+
 # para Mac con Homebrew
 setup:
 	# instala node
