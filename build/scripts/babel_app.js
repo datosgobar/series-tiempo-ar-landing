@@ -687,13 +687,7 @@ function renderChart(_chart) {
   chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], (d) => d.date));
   chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
   chartAxisX = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
-  chartAxisY = d3.axisLeft(chartScaleY).tickFormat((d) => {
-    if (_chart.units_representation === "%") {
-      return formatNumberD3(d * 100) + " %";
-    } else {
-      return d;
-    }
-  });
+  chartAxisY = d3.axisLeft(chartScaleY).tickFormat(formatNumberD3);
 
   // Generación de parámetros para el rango //////////////////////////////////
   rangeWidth = totalWidth - rangeMargin.left - rangeMargin.right;
