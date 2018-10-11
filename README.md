@@ -53,6 +53,12 @@ Iniciar el servidor:
 $ gulp server
 ```
 
+Para que los cambios se apliquen automáticamente, iniciar con:
+```bash
+$ gulp start
+```
+
+
 Para modificar el código, usar los archivos del directorio `./build/` y luego compilar con `Gulp`:
 
 ```bash
