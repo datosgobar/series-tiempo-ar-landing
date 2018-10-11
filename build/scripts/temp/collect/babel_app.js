@@ -650,7 +650,7 @@ function renderChart(_chart) {
   data = processDataLines(_chart);
   data_lines = STORAGE.charts[_chart.id]['data_lines'] = $.extend(true, [], data);
   laps = data_chart.length - _chart.laps >= 0 ? _chart.laps : data_chart.length;
-  data_range = data_range.splice(data_chart.length - _chart.laps, data_range.length - 1);
+  data_range = data_range.splice(0, laps);
 
   // Definición de los parámetros de configuración ///////////////////////////
   totalHeight = 410;
@@ -757,7 +757,7 @@ function renderChart(_chart) {
   }).style('stroke', function (d, i) {
     return _chart.indicators[i].color;
   });
-  rangeContainer.append('g').attr('class', 'range-brush').call(brush).call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
+  rangeContainer.append('g').attr('class', 'range-brush').call(brush).call(brush.move, [rangeScaleX(data_range[data_range.length - 1].date), chartWidth]);
   // se crea tooltip /////////////////////////////////////////////////////////
   var activeChart = STORAGE.cards.filter(function (_v) {
     return _v.id === STORAGE.activeCard;
