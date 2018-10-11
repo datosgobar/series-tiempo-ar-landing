@@ -658,7 +658,7 @@ function renderChart(_chart) {
   data = processDataLines(_chart);
   data_lines = STORAGE.charts[_chart.id]['data_lines'] = $.extend(true, [], data);
   laps = (data_chart.length - _chart.laps >= 0) ? (_chart.laps) : (data_chart.length);
-  data_range = data_range.splice(data_chart.length - _chart.laps, (data_range.length - 1));
+  data_range = data_range.splice(0, laps);
 
   // Definición de los parámetros de configuración ///////////////////////////
   totalHeight = 410;
@@ -800,7 +800,7 @@ function renderChart(_chart) {
   rangeContainer.append('g')
     .attr('class', 'range-brush')
     .call(brush)
-    .call(brush.move, [rangeScaleX(data_range[0].date), chartWidth]);
+    .call(brush.move, [rangeScaleX(data_range[data_range.length - 1].date), chartWidth]);
   // se crea tooltip /////////////////////////////////////////////////////////
   let activeChart = STORAGE.cards.filter((_v) => _v.id === STORAGE.activeCard)[0].charts.filter((_v) => _v.id === _chart.id)[0].indicators;
 
