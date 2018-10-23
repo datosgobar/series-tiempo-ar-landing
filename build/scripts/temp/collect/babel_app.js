@@ -429,12 +429,10 @@ function normalDatos(_data, _indicatorId) {
 }
 
 function normalDatosLine(_data, _indicatorId) {
-  var data_norm = _data
-  // .filter((d) => (d[1] !== null))
-  .map(function (d) {
+  var data_norm = _data.map(function (d) {
     return {
       date: moment(d[0]).zone('+00:00'),
-      value: d[1] !== null ? roundNumber(d[1], 3) : null
+      value: roundNumber(d[1], 3) || null
     };
   });
 
@@ -676,7 +674,9 @@ function renderChart(_chart) {
   chartWidth = totalWidth - chartMargin.left - chartMargin.right;
   chartHeight = totalHeight - chartMargin.top - chartMargin.bottom;
 
-  chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], function (d) {
+  var maxDataLine = data_lines.length > 1 && data_lines[0].length < data_lines[1].length ? data_lines[1] : data_lines[0];
+
+  chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(maxDataLine, function (d) {
     return d.date;
   }));
   chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
