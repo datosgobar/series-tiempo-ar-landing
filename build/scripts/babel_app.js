@@ -453,11 +453,10 @@ function normalDatos(_data, _indicatorId) {
 
 function normalDatosLine(_data, _indicatorId) {
   let data_norm = _data
-    // .filter((d) => (d[1] !== null))
     .map((d) => {
       return {
         date: moment(d[0]).zone('+00:00'),
-        value: (d[1] !== null) ? (roundNumber(d[1], 3)) : (null)
+        value: roundNumber(d[1], 3) || null
       };
     });
 
@@ -684,7 +683,9 @@ function renderChart(_chart) {
   chartWidth = totalWidth - chartMargin.left - chartMargin.right;
   chartHeight = totalHeight - chartMargin.top - chartMargin.bottom;
 
-  chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(data_lines[0], (d) => d.date));
+  const maxDataLine = (data_lines.length > 1 && data_lines[0].length < data_lines[1].length) ? data_lines[1] : data_lines[0];
+
+  chartScaleX = d3.scaleTime().range([0, chartWidth]).domain(d3.extent(maxDataLine, (d) => d.date));
   chartScaleY = d3.scaleLinear().range([chartHeight, 0]).domain([minValue, maxValue]);
   chartAxisX = d3.axisBottom(chartScaleX).ticks(3).tickFormat((d) => parseFormatDate(_chart.frequency, d, true));
   chartAxisY = d3.axisLeft(chartScaleY).tickFormat(formatNumberD3);
